@@ -31,6 +31,7 @@
         @include('layouts.frontend.professorMsg')
         @include('layouts.frontend.notice')
         @include('layouts.frontend.recent_pic')
+        @include('layouts.frontend.footer')
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.js"></script>

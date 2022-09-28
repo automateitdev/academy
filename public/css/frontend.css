@@ -271,3 +271,82 @@ a {
   filter: grayscale(100%);
   filter: gray;
 }
+
+#footer {
+  background-color: #f2f9fb;
+}
+#footer .footer-middle {
+  padding: 6.7rem 0 0;
+}
+#footer .footer-middle .container .row .widget {
+  margin-bottom: 4rem;
+  font-size: 14px;
+}
+#footer .footer-middle .container .row .widget a img {
+  margin-bottom: 2rem;
+  margin-top: -0.8rem;
+}
+#footer .footer-middle .container .row .widget p:last-of-type {
+  margin-bottom: 3.2rem;
+  color: #000;
+}
+#footer .footer-middle .container .row .widget .social-icon, #footer .footer-middle .container .row .widget .social-icons {
+  display: flex;
+  align-items: center;
+}
+#footer .footer-middle .container .row .widget .social-icons {
+  flex-flow: row wrap;
+}
+#footer .footer-middle .container .row .widget .social-icon {
+  justify-content: center;
+  font-size: 1.6rem;
+  width: 4rem;
+  height: 4rem;
+  color: #777;
+  margin: 0;
+  background-color: transparent;
+  border: 0.1rem solid #e1e2e6;
+  text-decoration: none;
+  opacity: 1;
+  transition: all 0.35s ease;
+}
+#footer .footer-middle .container .row .widget .widget-title {
+  color: #000;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+  margin-bottom: 1.9rem;
+  text-transform: uppercase;
+}
+#footer .footer-middle .container .row .widget .widget-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+#footer .footer-middle .container .row .widget .widget-list li:not(:last-child) {
+  margin-bottom: 0.4rem;
+}
+#footer .footer-middle .container .row .widget .widget-list li a {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: Roboto;
+  letter-spacing: 0;
+  color: #000 !important;
+  text-decoration: none;
+}
+#footer .footer-middle .container .row .widget .wpb_wrapper p {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: Roboto;
+  letter-spacing: 0;
+  color: #000 !important;
+  text-decoration: none;
+}
+#footer .footer-bottom p {
+  text-align: center;
+  padding: 12px;
+  color: #000;
+  border-top: 1px solid #777;
+  margin-bottom: 0;
+}

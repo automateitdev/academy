@@ -312,3 +312,90 @@ a{
         }
     }
 }
+
+// footer
+#footer{
+    background-color: #f2f9fb;
+    .footer-middle{
+        padding: 6.7rem 0 0;
+        .container{
+            .row{
+                .widget{
+                    margin-bottom: 4rem;
+                    font-size: 14px;
+                    a{
+                        img{
+                            margin-bottom: 2rem;
+                            margin-top: -.8rem;
+                        }
+                    }
+                    p:last-of-type {
+                        margin-bottom: 3.2rem;
+                        color: #000;
+                    }
+                    .social-icon, .social-icons {
+                        display: flex;
+                        align-items: center;
+                    }
+                    .social-icons {
+                        flex-flow: row wrap;
+                    }
+                    .social-icon {
+                        justify-content: center;
+                        font-size: 1.6rem;
+                        width: 4rem;
+                        height: 4rem;
+                        color: #777;
+                        margin: 0;
+                        background-color: transparent;
+                        border: .1rem solid #e1e2e6;
+                        text-decoration: none;
+                        opacity: 1;
+                        -webkit-transition: all .35s ease;
+                        transition: all .35s ease;
+                    }
+                    .widget-title {
+                        color: #000;
+                        font-weight: 500;
+                        font-size: 1rem;
+                        letter-spacing: -.01em;
+                        margin-top: 0;
+                        margin-bottom: 1.9rem;
+                        text-transform: uppercase;
+                    }
+                    .widget-list {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0 0 1.5rem;
+                        li:not(:last-child) {
+                            margin-bottom: .4rem;
+                        }
+                        li a {
+                            font-size: 1rem;
+                            font-weight: 400;
+                            font-family: Roboto;
+                            letter-spacing: 0;
+                            color: #000 !important;
+                            text-decoration: none;
+                        }
+                    }
+                    .wpb_wrapper p {
+                        font-size: 1rem;
+                        font-weight: 400;
+                        font-family: Roboto;
+                        letter-spacing: 0;
+                        color: #000 !important;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+    .footer-bottom p {
+        text-align: center;
+        padding: 12px;
+        color: #000;
+        border-top: 1px solid #777;
+        margin-bottom: 0;
+    }
+}
