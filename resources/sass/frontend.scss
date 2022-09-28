@@ -4,6 +4,10 @@ a{
     text-decoration: none;
     font-size: 14px;
 }
+.btn-check:focus + .btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0rem rgba(13,110,253,.25);
+}
 
 // top nav
 .top-nav-left {
@@ -73,6 +77,7 @@ a{
 #sobornojointy{
     padding-top: 50px;
     padding-bottom: 50px;
+    background-color: rgba(177, 218, 231, 0.168627451);
     .container{
         .row{
             .lksUi{
@@ -170,9 +175,11 @@ a{
 #notice{
     padding-top: 50px;
     padding-bottom: 50px;
+    background-color: #b1dae72b;
     .container{
         .divtitle{
             text-align: center;
+            margin-bottom: 50px;
             h2{
                 font-weight: 900;
             }
@@ -180,7 +187,84 @@ a{
                 border-style: solid;
                 border-top-width: 3px;
                 border-color: #2b87da;
-                width: 10%;
+                width: 15%;
+                vertical-align: middle;
+                display: inline flow-root;
+            }
+        }
+        .row{
+            .recent{
+                box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px,rgb(0 0 0 / 30%) 0px 7px 13px -3px,rgb(0 0 0 / 20%) 0px -3px 0px inset;
+                background-color: #fff;
+                height: 100%;
+                h1{
+                    padding-left: 25px;
+                    padding-top: 20px;
+                    margin-bottom: 20px;
+                }
+                .content{
+                    height: 70%;
+                    ul{
+                        list-style-type: disc;
+                        padding: 0 0 23px 2em;
+                        line-height: 26px;
+                        li{
+                            list-style: none;
+                            a{
+                                text-decoration: underline;
+                                font-size: 18px;
+                                color: #2ea3f2 !important;
+                            }
+                            .cont_date {
+                                font-size: 20px;
+                            }
+                        }
+                    }
+                }
+                .shgTr{
+                    text-align: center;
+                    padding-bottom: 20px;
+                    a{
+                        border: 1px solid #b1dae7;
+                        background-color: #b1dae7;
+                        padding: 6px 10px;
+                        border-radius: 12px;
+                    }
+                }
+            }
+            .finalBox{
+                margin-bottom: 0!important;
+            }
+            .rightBox{
+                background-color: #fff;
+                box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px,rgb(0 0 0 / 30%) 0px 7px 13px -3px,rgb(0 0 0 / 20%) 0px -3px 0px inset;
+                font-size: 15px;
+                color: #3091F2;
+                padding-top: 20px;
+                padding-right: 25px;
+                padding-bottom: 20px;
+                padding-left: 25px;
+                margin-bottom: 20px;
+                .row{
+                    img{
+                        width: 95px;
+                    }
+                    .content{
+                        h4{
+                            margin-left: 15px;
+                            color: #000;
+                        }
+                        ul{
+                            li{
+                                a{
+                                    font-size: 15px;
+                                    color: #2ea3f2 !important;
+                                    line-height: 26px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
