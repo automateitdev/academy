@@ -6,6 +6,8 @@
 
         <title>Laravel</title>
 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.css" rel="stylesheet" />
+    
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -28,7 +30,12 @@
         @include('layouts.frontend.sobornojointy')
         @include('layouts.frontend.professorMsg')
         @include('layouts.frontend.notice')
-           
+        @include('layouts.frontend.recent_pic')
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/frontend.js') }}" defer></script>
+        
     </body>
 </html>
