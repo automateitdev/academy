@@ -1,0 +1,170 @@
+a {
+  color: #000 !important;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.top-nav-left {
+  padding: 10px;
+}
+
+.login_part {
+  margin-top: 7px;
+}
+
+.nav-down {
+  background-color: #3091f2 !important;
+}
+.nav-down .bg-light {
+  background-color: #3091f2 !important;
+}
+.nav-down .navbar-expand-lg .navbar-collapse {
+  flex: 0.8 1 auto;
+}
+.nav-down .nav-link {
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 14px;
+}
+.nav-down .navbar a {
+  color: #fff !important;
+}
+
+#carouselAcademy img {
+  height: 500px;
+}
+
+.carousel-top {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 52;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: 0.8s;
+}
+.carousel-top .col_name {
+  color: #fff;
+  margin-top: -100px;
+}
+.carousel-top .his_btn {
+  border: 1px solid #4af40c;
+  border-radius: 4px;
+  background-color: #3091f2;
+}
+.carousel-top .his_btn .btn {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 8px 50px;
+}
+.carousel-top .his_btn:hover {
+  background-color: rgba(153, 28, 28, 0.5490196078);
+}
+
+#sobornojointy {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+#sobornojointy .container .row .lksUi {
+  overflow-x: auto;
+  text-align: justify;
+  font-size: 15px;
+  color: #000;
+  padding: 10px;
+  background: #F1F8E9;
+  border-radius: 3px;
+  text-align: center;
+}
+#sobornojointy .container .row .lksUi .table tbody tr td, #sobornojointy .container .row .lksUi .table tbody tr p {
+  font-size: 18px;
+  line-height: 1.42857143;
+}
+#sobornojointy .container .row .lksUi .table tbody tr h3 {
+  width: 100%;
+  text-align: center;
+  padding-top: 30px !important;
+  padding: 10px;
+  color: #966521;
+}
+#sobornojointy .container .row .lksUi .table tbody tr a {
+  color: #fff !important;
+}
+#sobornojointy .container .row .lksUi .table tbody tr td:nth-child(1) {
+  width: 33%;
+}
+#sobornojointy .container .row .lksUi .table tbody tr td:nth-child(1) p {
+  margin-top: 20px;
+}
+#sobornojointy .container .row .lksUi .table tbody tr td:nth-child(2) {
+  text-align: justify;
+  width: 34%;
+  text-align: justify;
+}
+#sobornojointy .container .row .lksUi .table tbody tr td:nth-child(2) p {
+  font-weight: 600;
+  line-height: 27px;
+}
+#sobornojointy .container .row .lksUi .table tbody tr td:nth-child(3) {
+  width: 33%;
+}
+
+#professorMsg {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+#professorMsg .container .row .wqbGt {
+  text-align: center;
+}
+#professorMsg .container .row .wqbGt .ewKuy {
+  box-shadow: 0px 2px 18px 16px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+}
+#professorMsg .container .row .wqbGt .ewKuy .d_shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+#professorMsg .container .row .wqbGt .ewKuy img {
+  min-height: 100px;
+  max-height: 466px;
+  width: auto;
+}
+#professorMsg .container .row .contentOfPr {
+  margin-top: 80px;
+  text-align: justify;
+}
+#professorMsg .container .row .contentOfPr .p_msg {
+  margin-top: 20px;
+}
+#professorMsg .container .vice {
+  margin-top: 50px;
+}
+
+#notice {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+#notice .container .divtitle {
+  text-align: center;
+}
+#notice .container .divtitle h2 {
+  font-weight: 900;
+}
+#notice .container .divtitle .borde {
+  border-style: solid;
+  border-top-width: 3px;
+  border-color: #2b87da;
+  width: 10%;
+}

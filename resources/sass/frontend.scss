@@ -1,0 +1,187 @@
+// common
+a{
+    color: #000 !important;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+// top nav
+.top-nav-left {
+    // color: #eeeeeea1;
+    padding: 10px;
+}
+.login_part {
+    margin-top: 7px;
+}
+.nav-down{
+    background-color: #3091f2 !important;
+    .bg-light {
+        background-color: #3091f2 !important;
+    }
+    .navbar-expand-lg .navbar-collapse {
+        flex: 0.8 1 auto;
+    }
+    .nav-link {
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 14px;
+    }
+    .navbar a
+    {
+        color: #fff !important;
+    }
+}
+// carousel
+#carouselAcademy{
+    img{
+        height: 500px;
+    }
+}
+.carousel-top{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 52;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: .8s;
+    .col_name{
+        color: #fff;
+        margin-top: -100px;
+    }
+    .his_btn {
+        border: 1px solid #4af40c;
+        border-radius: 4px;
+        background-color: #3091f2;
+        .btn{
+            color: #fff;
+            font-size: 20px;
+            font-weight: 900;
+            padding: 8px 50px;
+        }
+    }
+    .his_btn:hover {
+        background-color: #991c1c8c;
+    }
+}
+// sobornojointy
+#sobornojointy{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .container{
+        .row{
+            .lksUi{
+                overflow-x: auto;
+                text-align: justify;
+                font-size: 15px;
+                color: #000;
+                padding: 10px;
+                background: #F1F8E9;
+                border-radius: 3px;
+                text-align: center;
+                .table{
+                    tbody{
+                        tr{
+                            td,p{
+                                font-size: 18px;
+                                line-height: 1.42857143;
+                            }
+                            h3{
+                                width: 100%;
+                                text-align: center;
+                                padding-top: 30px !important;
+                                padding: 10px;
+                                color: #966521;
+                            }
+                            a{
+                                color: #fff !important;
+                            }
+                            td:nth-child(1) {
+                                width: 33%;
+                                p{margin-top: 20px;}
+                            }
+                            td:nth-child(2){
+                                text-align: justify;
+                                width: 34%;
+                                text-align: justify;
+                                p{
+                                    font-weight: 600;
+                                    line-height: 27px;
+                                }
+                            }
+                            td:nth-child(3) {
+                                width: 33%;
+                              }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// professorMsg
+#professorMsg{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .container{
+        .row{
+            .wqbGt{
+                text-align: center;
+                .ewKuy{
+                    box-shadow: 0px 2px 18px 16px rgba(0,0,0,0.3);
+                    display: inline-block;
+                    position: relative;
+                    max-width: 100%;
+                    .d_shadow{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 10;
+                        pointer-events: none;
+                    }
+                    img{
+                        min-height: 100px;
+                        max-height: 466px;
+                        width: auto;
+                    }
+                } 
+            }
+            .contentOfPr{
+                margin-top: 80px;
+                text-align: justify;
+                .p_msg {
+                    margin-top: 20px;
+                }
+            }
+        }
+        .vice{
+            margin-top: 50px;
+        }
+    }
+}
+// notice
+#notice{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .container{
+        .divtitle{
+            text-align: center;
+            h2{
+                font-weight: 900;
+            }
+            .borde{
+                border-style: solid;
+                border-top-width: 3px;
+                border-color: #2b87da;
+                width: 10%;
+            }
+        }
+    }
+}
