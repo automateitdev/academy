@@ -22,7 +22,7 @@ class MainController extends Controller
     }
     public function getSubCat(Request $request)
     {
-        $data = subcategory::select('subcat_name', 'id')->where('cat_id', $request->id)->take(100)->get();
+        $data = subcategory::select('subcat_name', 'subcat_link', 'id')->where('cat_id', $request->id)->take(100)->get();
         return response()->json($data);
     }
     /**

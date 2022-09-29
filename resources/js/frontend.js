@@ -16,7 +16,7 @@ $(document).ready(function(){
         console.log("data: "+data);
         // op+= '<li>';
         for(var i=0;i<data.length;i++){
-          op+='<li><a class="dropdown-item" href="/product/category/show/'+data[i].id+'">'+data[i].subcat_name+'</a></li>';
+          op+='<li><a class="dropdown-item" href="/'+data[i].subcat_link+'">'+data[i].subcat_name+'</a></li>';
           }
         // op+=   '</li>';
         
