@@ -345,11 +345,11 @@ a{
 #footer{
     background-color: #f2f9fb;
     .footer-middle{
-        padding: 6.7rem 0 0;
+        padding: 4.7rem 0 0;
         .container{
             .row{
                 .widget{
-                    margin-bottom: 4rem;
+                    margin-bottom: 1rem;
                     font-size: 14px;
                     a{
                         img{
@@ -382,17 +382,23 @@ a{
                         -webkit-transition: all .35s ease;
                         transition: all .35s ease;
                     }
+                    .social-icon:hover {
+                        background-color: #34bf20 !important;
+                        i{
+                            color: #ec2121 !important;
+                        }
+                    }
                     .widget-title {
                         color: #000;
                         font-weight: 500;
-                        font-size: 1rem;
+                        font-size: 1.3rem;
                         letter-spacing: -.01em;
                         margin-top: 0;
-                        margin-bottom: 1.9rem;
+                        margin-bottom: 0.9rem;
                         text-transform: uppercase;
                     }
                     .widget-list {
-                        list-style: none;
+                        list-style: inside;
                         padding: 0;
                         margin: 0 0 1.5rem;
                         li:not(:last-child) {
@@ -403,8 +409,8 @@ a{
                             font-weight: 400;
                             font-family: Roboto;
                             letter-spacing: 0;
-                            color: #000 !important;
-                            text-decoration: none;
+                            color: #3d25e6 !important;
+                            text-decoration: underline;
                         }
                     }
                     .wpb_wrapper p {

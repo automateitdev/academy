@@ -9,34 +9,34 @@
                 </a>
                 <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
                 <div class="social-icons">
-                  <a href="#" class="social-icon" title="Facebook"><i class="bi bi-facebook"></i></a>
-                  <a href="#" class="social-icon" title="Twitter"><i class="bi bi-twitter"></i></a>
-                  <a href="#" class="social-icon" title="Instagram"><i class="bi bi-instagram"></i></a>
-                  <a href="#" class="social-icon" title="Youtube"><i class="bi bi-youtube"></i></a>
-                  <a href="#" class="social-icon" title="Pinterest"><i class="bi bi-pinterest"></i></a>
+                  <a href="#" class="social-icon" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                  <a href="#" class="social-icon" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
+                  <a href="#" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#" class="social-icon" title="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                  <a href="#" class="social-icon" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
                 </div>
               </div>
             </div>
             <div class="col-sm-6 col-lg-3">
               <div class="widget">
-                <h4 class="widget-title">Useful Links</h4>
+                <h4 class="widget-title">RELETTED LINKS</h4>
                 <ul class="widget-list">
-                  <li><a href="">About Molla</a></li>
-                  <li><a href="#">How to shop on Molla</a></li>
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="">Contact us</a></li>
-                  <li><a href="/react/molla/demo-22/pages/login/">Log in</a></li>
+                  <li><a href="http://www.educationboardresults.gov.bd/">Education Board Result</a></li>
+                  <li><a href="http://www.moedu.gov.bd/">Ministry of Education</a></li>
+                  <li><a href="http://www.dshe.gov.bd/">DG Website</a></li>
+                  <li><a href="http://www.banbeis.gov.bd">Banbeis</a></li>
+                  <li><a href="http://www.nu.edu.bd">National University</a></li>
                 </ul>
               </div>
             </div>
             <div class="col-sm-6 col-lg-3">
               <div class="widget">
-                <h4 class="widget-title">CATEGORIES</h4>
+                <h4 class="widget-title">IMPORTANT LINKS</h4>
                 <ul class="widget-list">
-                  <li><a href="">Household Water Purifier</a></li>
-                  <li><a href="#">Industrial Water Plant</a></li>
-                  <li><a href="#">Filter Media & Chemical</a></li>
-                  <li><a href="">Commercial Water Purifier</a></li>
+                  <li><a href="https://www.bangladesh.gov.bd">National Portal</a></li>
+                  <li><a href="https://bn.wikipedia.org/wiki/">Wikipedia</a></li>
+                  <li><a href="https://10minuteschool.com">10 Minutes School</a></li>
+                  <li><a href="https://bn.khanacademy.org">Khan Academy</a></li>
                 </ul>
               </div>
             </div>
