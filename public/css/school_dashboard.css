@@ -1,0 +1,12 @@
+#menu {
+  padding-top: 50px;
+}
+#menu .container .row .tab-content .tab-pane .table_house {
+  padding-top: 40px;
+  padding-left: 50px;
+  text-align: center;
+}
+#menu .container .row .tab-content .tab-pane .form_house {
+  padding-top: 40px;
+  padding-left: 50px;
+}

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\school\frontend\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//fontend menu
+Route::get('/menu', [App\Http\Controllers\school\frontend\MenuController::class, 'index'])->name('menu');
+Route::post('/menu/category', [App\Http\Controllers\school\frontend\MenuController::class, 'store'])->name('category.store');
+Route::post('/menu/subcategory', [App\Http\Controllers\school\frontend\MenuController::class, 'substore'])->name('subcategory.store');
+
+
