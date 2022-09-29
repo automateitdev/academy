@@ -1,3 +1,39 @@
+// menu hover dropdown
+$(document).ready(function(){
+  $(document).on('click', '.ecom_cat', function(e){
+    e.preventDefault();
+
+    var cat_id = $(this).data('value');
+    console.log(cat_id);
+    var div=$(this).parent().parent();
+          var op=" ";
+
+    $.ajax({
+      type:'get',
+      url: '/getSubCat',
+      data:{'id':cat_id},
+      success: function(data){
+        console.log("data: "+data);
+        // op+= '<li>';
+        for(var i=0;i<data.length;i++){
+          op+='<li><a class="dropdown-item" href="/product/category/show/'+data[i].id+'">'+data[i].subcat_name+'</a></li>';
+          }
+        // op+=   '</li>';
+        
+
+        div.find('.subcatEcom').html(" ");
+        div.find('.subcatEcom').append(op);
+
+      },
+
+    });
+
+  });
+
+  // ///////
+  // invoice
+  
+});
 // owl carousel
 $(document).ready(function() {
     $(".owl-carousel").owlCarousel({

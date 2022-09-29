@@ -42,16 +42,17 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            @foreach($categories as $item)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link ecom_cat" data-value="{{$item->id}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{$item->name}}
+                                    </a>
+                                    <ul class="dropdown-menu subcatEcom" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#"></a></li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="#">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="#">Department</a>
-                                </li>
+                            @endforeach
                             </ul>
                         </div>
                     </div>
