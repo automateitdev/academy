@@ -16,6 +16,8 @@ a{
 }
 .login_part {
     margin-top: 7px;
+    position: relative;
+    z-index: 999;
 }
 .nav-down{
     background-color: #3091f2 !important;
