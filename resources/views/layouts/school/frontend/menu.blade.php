@@ -27,12 +27,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($subcategories as $subcat)
-                                        <tr>
-                                            <th scope="row">{{$subcat->id}}</th>
-                                            <td>{{$subcat->category->name}}</td>
-                                            <td>{{$subcat->subcat_name}}</td>
-                                        </tr>
+                                        @foreach($categories as $cat)
+                                            <tr>
+                                                <th scope="row">{{$cat->id}}</th>
+                                                <td>{{$cat->name}}</td>
+                                                <td>
+                                                @foreach($subcategories as $subcat)
+                                                    @if($cat->id == $subcat->cat_id)
+                                                        <p>{{$subcat->subcat_name}}</p>
+                                                    @endif
+                                                @endforeach
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
