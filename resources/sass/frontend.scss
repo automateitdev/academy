@@ -38,6 +38,9 @@ a{
         .dropdown-menu.subcatEcom {
             margin-left: -40px;
         }  
+        .dropdown-menu.subcatEcom.show {
+            width: 200px;
+        }
         .dropdown-menu li a {
             text-align: center;
         }

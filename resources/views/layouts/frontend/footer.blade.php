@@ -46,7 +46,7 @@
                 <div class="wpb_wrapper">
                   <p><i class="fas fa-street-view"></i> Address:<br>House-1,Road-16,Section-10,Block-C,Mirpur,Dhaka-1216<br>Dhaka, Bangladesh 1216</p>
                   <p><i class="fas fa-phone"></i> Phone: +8801701-666606, 09638-888000, 0258052342</p>
-                  <p><i class="fas fa-envelope"></i> Email: info@cleantechbd.net</p>            
+                  <p><i class="fas fa-envelope"></i> Email: tongi@gmail.com</p>            
                 </div>
               </div>
             </div>

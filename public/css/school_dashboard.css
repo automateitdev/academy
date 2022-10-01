@@ -1,3 +1,68 @@
+#app {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+#app .login {
+  text-align: center;
+  padding-top: 200px;
+}
+#app .login .container .row .left_part h1 {
+  color: #fff;
+}
+#app .login .container .row .left_part a img {
+  width: 50%;
+  height: 100%;
+  margin-bottom: 50px;
+}
+#app .login .container .row .left_part img {
+  width: 100%;
+  height: 100%;
+}
+#app .login .container .row .cards .card-headers a {
+  border: 1px solid #fff;
+  padding: 30px 13px 30px 13px;
+  border-radius: 50%;
+}
+#app .login .container .row .cards .card-headers a img {
+  width: 60px;
+  height: 60px;
+}
+#app .login .container .row .cards .card-bodys {
+  margin-top: 50px;
+  width: 650px;
+  padding-left: 90px;
+}
+#app .login .container .row .cards .card-bodys .form-check-label.remember {
+  float: left;
+  color: #fff;
+}
+#app .login .container .row .cards .card-bodys .btn.btn-link.forget {
+  float: left;
+  margin-top: -8px;
+  color: #fff;
+  text-decoration: none;
+}
+#app .login .container .row .cards .card-bodys .login_submit {
+  float: right;
+  background-color: #004a71;
+  width: 70%;
+  border: 1px solid #004a71;
+}
+#app .login .container .row .cards .card-bodys .form-control::-moz-placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+#app .login .container .row .cards .card-bodys .form-control::placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+#app .login .container .row .cards .card-bodys .form-control {
+  color: #fff;
+  background-color: #004a71;
+}
+
 #menu {
   padding-top: 50px;
 }
