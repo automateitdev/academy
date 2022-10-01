@@ -6,9 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\subcategory;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
+
+
+    public function getPerson(Request $request)
+    {
+        $categories = category::all();
+        $subcategories = subcategory::all();
+        $person = $request->person;
+        return view('person', compact('person', 'categories', 'subcategories'));
+    }
+
+
+    public function getTeachers()
+    {
+        $categories = DB::table("categories")->paginate(10);
+        $subcategories = subcategory::all();
+        $teacherList = "Here query for teacherList";
+        // return $categories;
+        return view('teachers', compact('teacherList', 'categories', 'subcategories'));
+    }
+
     /**
      * Display a listing of the resource.
      *

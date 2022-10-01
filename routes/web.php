@@ -25,10 +25,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/person/{person}', [MainController::class, 'getPerson'])->name('person');
+Route::get('/teachers', [MainController::class, 'getTeachers'])->name('teachers');
+
 //fontend menu
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/menu/category', [MenuController::class, 'store'])->name('category.store');
 Route::post('/menu/subcategory', [MenuController::class, 'substore'])->name('subcategory.store');
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
-
-

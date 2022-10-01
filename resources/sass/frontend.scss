@@ -8,6 +8,9 @@ a{
     outline: 0;
     box-shadow: 0 0 0 0rem rgba(13,110,253,.25);
 }
+.row .pagination {
+    justify-content: end;
+}
 
 // top nav
 .header{
@@ -37,10 +40,15 @@ a{
         }
         .dropdown-menu.subcatEcom {
             margin-left: -40px;
+<<<<<<< HEAD
         }  
         .dropdown-menu.subcatEcom.show {
             width: 200px;
         }
+=======
+        }
+
+>>>>>>> cfe749e (- added person.blade.php for principal, vice principal etc.)
         .dropdown-menu li a {
             text-align: center;
         }

@@ -40,23 +40,24 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required',
             'link_name' => 'nullable',
         ]);
         $categories = category::create($request->all());
-        
+
         return redirect(route('menu'));
     }
+
     public function substore(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'subcat_name' => 'required',
             'subcat_link' => 'nullable',
             'cat_id' => 'required',
         ]);
         $subcategories = subcategory::create($request->all());
-        
+
         return redirect(route('menu'));
     }
 
