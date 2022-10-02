@@ -1,7 +1,7 @@
  <!-- Brand Logo -->
  <a href="#" class="brand-link">
-      <img src="{{asset('images/com/Academy Icon.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Academy</span>
+      <img src="{{asset('images/com/Academy Logo Final.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
+      <!-- <span class="brand-text font-weight-light">Academy</span> -->
     </a>
 
     <!-- Sidebar -->
@@ -37,7 +37,16 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Frontend
+                Dashboard
+                <!-- <i class="right fas fa-angle-left"></i> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Website Maintenance
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>

@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/person/{person}', [MainController::class, 'getPerson'])->name('person');
 Route::get('/teachers', [MainController::class, 'getTeachers'])->name('teachers');
 
+///////dashboard start
 //fontend menu
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/menu/category', [MenuController::class, 'store'])->name('category.store');

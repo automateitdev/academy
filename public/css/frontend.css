@@ -9,6 +9,10 @@ a {
   box-shadow: 0 0 0 0rem rgba(13, 110, 253, 0.25);
 }
 
+.row .pagination {
+  justify-content: end;
+}
+
 .header {
   position: relative;
   z-index: 3;
