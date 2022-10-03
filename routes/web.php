@@ -25,8 +25,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/glance', [MainController::class, 'getGlance'])->name('glance');
 Route::get('/person/{person}', [MainController::class, 'getPerson'])->name('person');
 Route::get('/teachers', [MainController::class, 'getTeachers'])->name('teachers');
+Route::get('/teachers/{department}', [MainController::class, 'getTeachers'])->name('teachers');
+Route::get('/departments', [MainController::class, 'getDepartments'])->name('departments');
+Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->name('department');
 
 //fontend menu
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');

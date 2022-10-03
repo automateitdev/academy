@@ -3,9 +3,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6">
-                    <div class="top-nav-left"> <i style="color:#00bcd4;" class="fa fa-envelope" aria-hidden="true"></i>
-                        tongi@gmail.com <i style="color:#00bcd4;" class="fa fa-phone-square" aria-hidden="true"></i>
-                        01302738495 (office) </div>
+                    <div class="top-nav-left text-sm"> <i style="color:#3091f2 ;" class="fa fa-envelope"
+                            aria-hidden="true"></i>
+                        <span>tongi@gmail.com</span>&nbsp;&nbsp;
+                        <i style="color:#3091f2 ;" class="fa fa-phone-square" aria-hidden="true"></i>
+                        <span>01302738495 (office)</span>
+                    </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <ul style="float: right;" class="nav">

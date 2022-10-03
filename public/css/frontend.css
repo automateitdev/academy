@@ -1,5 +1,13 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.bangla {
+  font-family: "Noto Sans Bengali", sans-serif !important;
+}
+
 a {
-  color: #000 !important;
+  color: #000;
   text-decoration: none;
   font-size: 14px;
 }
@@ -7,6 +15,10 @@ a {
 .btn-check:focus + .btn, .btn:focus {
   outline: 0;
   box-shadow: 0 0 0 0rem rgba(13, 110, 253, 0.25);
+}
+
+.row .pagination {
+  justify-content: end;
 }
 
 .header {
@@ -32,7 +44,7 @@ a {
 }
 .header .nav-down .nav-link {
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 500;
   line-height: 14px;
 }
 .header .nav-down .dropdown-menu.subcatEcom {
@@ -41,16 +53,16 @@ a {
 .header .nav-down .dropdown-menu.subcatEcom.show {
   width: 200px;
 }
-.header .nav-down .dropdown-menu li a {
+.header .dropdown-menu li a {
   text-align: center;
 }
-.header .nav-down .dropdown-menu[data-bs-popper] {
+.header .dropdown-menu[data-bs-popper] {
   margin-top: 2rem;
 }
-.header .nav-down .collapse .navbar-nav .nav-item a {
+.header .collapse .navbar-nav .nav-item a {
   color: #fff !important;
 }
-.header .nav-down .collapse .navbar-nav .nav-item .subcatEcom li a {
+.header .collapse .navbar-nav .nav-item .subcatEcom li a {
   color: #000 !important;
 }
 

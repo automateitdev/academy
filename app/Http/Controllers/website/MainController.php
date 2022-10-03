@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 class MainController extends Controller
 {
 
-
     public function getPerson(Request $request)
     {
         $categories = category::all();
@@ -20,16 +19,53 @@ class MainController extends Controller
         return view('person', compact('person', 'categories', 'subcategories'));
     }
 
-
-    public function getTeachers()
+    public function getGlance()
     {
-        $categories = DB::table("categories")->paginate(10);
+        $categories = category::all();
         $subcategories = subcategory::all();
-        $teacherList = "Here query for teacherList";
-        // return $categories;
-        return view('teachers', compact('teacherList', 'categories', 'subcategories'));
+        $glanceData = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae autem voluptatibus, officiis harum sed quas omnis earum quia id ex, doloremque voluptate consequatur beatae cum repellat deleniti. Eos, illum voluptates.
+        Debitis iusto aliquam exercitationem quas vero impedit velit eius illum nesciunt quae doloremque libero eveniet, fugiat commodi sapiente ut similique dolorum, eum labore neque nostrum aspernatur officia! Maxime, sequi quia.
+        Aperiam saepe soluta laboriosam ullam impedit corrupti odio dolores aut asperiores eum et excepturi ut consequuntur veniam, cupiditate sapiente tempora ratione ipsum accusantium inventore quidem. Quo sit corrupti exercitationem reiciendis!
+        Cupiditate eius eaque a, eligendi id dicta obcaecati quam facilis eos neque hic est, at dolor recusandae iusto? Incidunt tempore maxime reprehenderit placeat error voluptate ratione officiis odit quae corrupti?
+        Placeat aliquid minus rem commodi, qui eum sed! Facere, eligendi ratione saepe neque velit repudiandae cumque illo commodi non, unde tempore blanditiis delectus placeat odit doloribus nesciunt architecto quis dolore.
+        Iste culpa atque dolor blanditiis perferendis aliquid consequuntur harum nostrum quaerat repellendus, at libero suscipit sed! Reiciendis consectetur voluptates similique at totam animi. Qui perferendis ducimus vero eum esse doloremque?
+        Rem doloremque, magnam debitis pariatur perspiciatis cumque voluptatibus autem velit consequatur quo rerum ab, aspernatur distinctio nam fugiat temporibus, maxime possimus et sit eum error placeat? Eveniet accusamus ducimus quia!
+        Veritatis earum fugiat quam, voluptate quisquam omnis cum ex quae quas assumenda facilis perspiciatis laudantium dolore ea officiis voluptates numquam tenetur porro alias eligendi animi ipsum iusto. Aperiam, distinctio numquam!
+        Quam fugiat minima ipsa officia, in rem odio? Voluptate sint magnam quis corrupti illum, doloremque quos reprehenderit ratione dolor possimus in debitis odit omnis non. Dolores recusandae sapiente natus? Voluptatem.
+        Tenetur libero consectetur impedit, fuga id voluptate soluta, eos expedita corrupti excepturi doloribus, iusto distinctio unde. Excepturi consequuntur quae, perspiciatis, rem ipsam quos dicta ut deleniti quasi nobis sit vel.
+        Dolores laboriosam cumque ipsa, quia ratione aliquid reprehenderit aperiam. Deserunt, veritatis sunt explicabo sint ab velit magni laudantium perferendis, doloribus excepturi accusantium quidem vel eos rem error voluptates iusto expedita!
+        Quidem, aut perferendis veritatis provident cumque excepturi vitae eum culpa fugiat enim dolores earum cupiditate ratione soluta, harum mollitia distinctio iure ad quam ipsum blanditiis quis, deserunt est? Consequatur, vel.";
+        return view('glance', compact('glanceData', 'categories', 'subcategories'));
     }
 
+    public function getTeachers(Request $request)
+    {
+        $categories = DB::table('categories')->paginate(10);
+        $subcategories = subcategory::all();
+        if (!empty($request->department)) {
+            $teacherList = "Here query for teacherList by department";
+            return view('teachers', compact('teacherList', 'categories', 'subcategories'));
+        } else {
+            $teacherList = "Here query for all teacherList";
+            return view('teachers', compact('teacherList', 'categories', 'subcategories'));
+        }
+    }
+
+    public function getDepartments()
+    {
+        $categories = category::all();
+        $subcategories = subcategory::all();
+        $departments =  ["english", "bangla", "mathematics", "physics", "chemistry", 'biology', "english", "bangla", "mathematics", "physics", "chemistry", 'biology', "english", "bangla", "mathematics", "physics", "chemistry", 'biology', "english", "bangla", "mathematics", "physics", "chemistry", 'biology']; //"Here query for Departmentlist";
+        return view('departments', compact('departments', 'categories', 'subcategories'));
+    }
+
+    public function getEachDepartment(Request $request)
+    {
+        $categories = category::all();
+        $subcategories = subcategory::all();
+        $department = "get data by department $request->name";
+        return view('per_department', compact('department', 'categories', 'subcategories'));
+    }
     /**
      * Display a listing of the resource.
      *

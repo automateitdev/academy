@@ -1,6 +1,13 @@
 // common
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.bangla{
+    font-family: 'Noto Sans Bengali', sans-serif !important;
+}
 a{
-    color: #000 !important;
+    color: #000;
     text-decoration: none;
     font-size: 14px;
 }
@@ -35,20 +42,19 @@ a{
         }
         .nav-link {
             font-size: 16px;
-            font-weight: 900;
+            font-weight: 500;
             line-height: 14px;
         }
         .dropdown-menu.subcatEcom {
             margin-left: -40px;
-<<<<<<< HEAD
+
         }  
         .dropdown-menu.subcatEcom.show {
             width: 200px;
         }
-=======
+
         }
 
->>>>>>> cfe749e (- added person.blade.php for principal, vice principal etc.)
         .dropdown-menu li a {
             text-align: center;
         }
@@ -72,7 +78,7 @@ a{
             }
         }
     }
-}
+
 
 // carousel
 #carouselAcademy{
