@@ -42,6 +42,7 @@
               </p>
             </a>
           </li>
+          <!-- Website Maintenance start -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -117,14 +118,98 @@
                   <p>Gallery</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li> -->
             </ul>
           </li>
+          <!-- Website Maintenance end -->
+          <!-- Master Setting start -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Master Setting
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <!-- Institute Setup start -->
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Institute Setup</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('startup.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Startup</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('basic.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Basic Setup</p>
+                    </a>
+                  </li>
+                  <!-- Class Setup start -->
+                  <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Class Setup</p>
+                      <i class="right fas fa-angle-left"></i>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Section Assign</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Group Assign</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Academic Year Assign</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Session Assign</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <!-- Class Setup end -->
+                </ul>
+              </li>
+              <!-- Institute Setup end -->
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Subject Setup</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User Setup</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- Master Setting end -->
+
+
+
+
+
+
           <!-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
