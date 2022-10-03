@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class StartupCategory extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'startup_category_name',
+    ];
 }
