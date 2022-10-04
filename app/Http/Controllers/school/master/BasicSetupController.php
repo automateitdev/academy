@@ -4,6 +4,7 @@ namespace App\Http\Controllers\school\master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Basic;
 
 class BasicSetupController extends Controller
 {
@@ -14,7 +15,8 @@ class BasicSetupController extends Controller
      */
     public function index()
     {
-        return view('layouts.school.master_setting.basic.index');
+        $basics = Basic::all();
+        return view('layouts.school.master_setting.basic.index', compact('basics'));
     }
 
     /**
@@ -35,7 +37,44 @@ class BasicSetupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'institute_id' => 'required',
+            'institute_title' => 'nullable',
+            'web_link' => 'nullable',
+            'google_map' => 'nullable',
+            'fb_link' => 'nullable',
+            'youtube_link' => 'nullable',
+            'twitter_link' => 'nullable',
+            'insta_link' => 'nullable',
+            'pi_link' => 'nullable',
+            'logo' => 'required',
+        ]);
+        $basics = new Basic();
+        
+        $basics->institute_id = $request->institute_id;
+        $basics->institute_title = $request->institute_title;
+        $basics->web_link = $request->web_link;
+        $basics->google_map = $request->google_map;
+        $basics->fb_link = $request->fb_link;
+        $basics->youtube_link = $request->youtube_link;
+        $basics->twitter_link = $request->twitter_link;
+        $basics->insta_link = $request->insta_link;
+        $basics->pi_link = $request->pi_link;
+
+        if($request->hasFile('logo')){
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('logos/',$filename);
+            $basics->logo = $filename;
+        }else{
+            //return $request;
+            $basics->logo = '';
+        }
+        
+        $basics->save();
+        
+        return redirect(route('basic.index'));
     }
 
     /**
@@ -57,7 +96,8 @@ class BasicSetupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $basics = Basic::find($id);
+        return view('layouts.school.master_setting.basic.edit', compact('basics'));
     }
 
     /**
@@ -69,7 +109,31 @@ class BasicSetupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $basics = Basic::find($id);        
+        // $basics->institute_id = $request->institute_id;
+        $basics->institute_title = $request->institute_title;
+        $basics->web_link = $request->web_link;
+        $basics->google_map = $request->google_map;
+        $basics->fb_link = $request->fb_link;
+        $basics->youtube_link = $request->youtube_link;
+        $basics->twitter_link = $request->twitter_link;
+        $basics->insta_link = $request->insta_link;
+        $basics->pi_link = $request->pi_link;
+
+        if($request->hasFile('logo')){
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('logos/',$filename);
+            $basics->logo = $filename;
+        }else{
+            //return $request;
+            $basics->logo = '';
+        }
+        
+        $basics->save();
+        
+        return redirect(route('basic.index'));
     }
 
     /**

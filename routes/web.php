@@ -6,6 +6,7 @@ use App\Http\Controllers\website\MainController;
 use App\Http\Controllers\school\frontend\MenuController;
 use App\Http\Controllers\school\master\StartupController;
 use App\Http\Controllers\school\master\BasicSetupController;
+use App\Http\Controllers\school\master\ClassSetupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,9 @@ Route::get('/getStartupSubCat', [StartupController::class, 'getStartupSubCat']);
 
 //Basic setup
 Route::get('/MasterSetting/InstituteSetting/basic', [BasicSetupController::class, 'index'])->name('basic.index');
+Route::post('/MasterSetting/InstituteSetting/basic/store', [BasicSetupController::class, 'store'])->name('basic.store');
+Route::get('/MasterSetting/InstituteSetting/basic/edit/{id}', [BasicSetupController::class, 'edit'])->name('basic.edit');
+Route::post('/MasterSetting/InstituteSetting/basic/update/{id}', [BasicSetupController::class, 'update'])->name('basic.update');
+
+// calss setup
+Route::get('/MasterSetting/InstituteSetting/class_setup', [ClassSetupController::class, 'index'])->name('class.index');

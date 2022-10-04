@@ -153,37 +153,11 @@
                   </li>
                   <!-- Class Setup start -->
                   <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{route('class.index')}}" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Class Setup</p>
-                      <i class="right fas fa-angle-left"></i>
+                      <!-- <i class="right fas fa-angle-left"></i> -->
                     </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Section Assign</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Group Assign</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Academic Year Assign</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Session Assign</p>
-                        </a>
-                      </li>
-                    </ul>
                   </li>
                   <!-- Class Setup end -->
                 </ul>
