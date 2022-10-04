@@ -19,17 +19,18 @@ class AdminSeeder extends Seeder
         $userData = [
             [
             'institute_id' => 'a0143',
-            'name' => 'Academy',
+            'institute_name' => 'Academy',
+            'EIIN_number' => 'E1234',
+            'institute_type' => 'govt.',
+            'edu_board' => 'Dhaka',
+            'address' => 'Dhaka',
+            'post_office' => 'Dhaka',
+            'police_station' => 'Dhaka',
+            'district' => 'Dhaka',
+            'division' => 'Dhaka',
+            'contact_no' => '01834567897',
             'email' => 'academy@gmail.com',
-            'password' => Hash::make('12345678'),
-            // 'role' => '1',
-            ],
-            [
-                'institute_id' => 'a0144',
-                'name' => 'user',
-                'email' => 'user@gmail.com',
-                'password' => Hash::make('12345678'),
-                // 'role' => '2',
+            'password' => Hash::make('12345678')
             ],
         ];
         foreach ($userData as $key => $val) {

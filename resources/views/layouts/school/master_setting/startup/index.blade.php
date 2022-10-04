@@ -27,7 +27,7 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="startup_category" class="form-label">Type</label>
-                                    <select class="form-control single startup_category" name="startup_category">
+                                    <select class="form-control single startup_category" name="startup_category_id">
                                         <option value="">Select a Type</option>
                                         @foreach($startupcats as $stcat)
                                         <option value="{{$stcat->id}}">{{$stcat->startup_category_name}}</option>

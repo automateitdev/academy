@@ -255,5 +255,22 @@
 
 #class_setup{
     padding-top: 100px;
+    .container{
+        .row{
+            .duYtr{
+                .tab-content{
+                    .tab-pane{
+                        margin-top: 50px;
+                        .select2-container{
+                            width: 100% !important;
+                        }
+                        .done{
+                            margin-top: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 // Master setting end/////

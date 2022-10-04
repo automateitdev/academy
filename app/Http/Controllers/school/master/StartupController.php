@@ -67,6 +67,7 @@ class StartupController extends Controller
         {
             $input = new Startup();
             $input->institute_id = $request->institute_id;
+            $input->startup_category_id = $request->startup_category_id;
             $input->startup_subcategory_id = $startup_subcategory_id;
             $input->save(); 
         }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStartupsTable extends Migration
+class CreateSectionAssignsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateStartupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('startups', function (Blueprint $table) {
+        Schema::create('section_assigns', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institute_id');
-            $table->bigInteger('startup_subcategory_id');
+            $table->bigInteger('class_id');
+            $table->bigInteger('section_id');
+            $table->bigInteger('shift_id');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateStartupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('startups');
+        Schema::dropIfExists('section_assigns');
     }
 }

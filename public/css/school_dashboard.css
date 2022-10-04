@@ -213,3 +213,12 @@
 #class_setup {
   padding-top: 100px;
 }
+#class_setup .container .row .duYtr .tab-content .tab-pane {
+  margin-top: 50px;
+}
+#class_setup .container .row .duYtr .tab-content .tab-pane .select2-container {
+  width: 100% !important;
+}
+#class_setup .container .row .duYtr .tab-content .tab-pane .done {
+  margin-top: 30px;
+}

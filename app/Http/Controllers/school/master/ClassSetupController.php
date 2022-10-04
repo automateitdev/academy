@@ -5,6 +5,8 @@ namespace App\Http\Controllers\school\master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Startup;
+use App\Models\SectionAssign;
+use App\Models\GroupAssign;
 
 class ClassSetupController extends Controller
 {
@@ -16,7 +18,7 @@ class ClassSetupController extends Controller
     public function index()
     {
         $startups = Startup::all();
-        return view('layouts.school.master_setting.class_setup.index');
+        return view('layouts.school.master_setting.class_setup.index', compact('startups'));
     }
 
     /**
@@ -35,9 +37,28 @@ class ClassSetupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function section_store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'institute_id' => 'required',
+            'class_id' => 'required',
+            'section_id' => 'required',
+            'shift_id' => 'required',
+        ]);
+        $sectionassigns = SectionAssign::create($request->all());
+
+        return redirect(route('class.index'));
+    }
+    public function group_store(Request $request)
+    {
+        $this->validate($request, [
+            'institute_id' => 'required',
+            'class_id' => 'required',
+            'group_id' => 'required',
+        ]);
+        $groupassigns = GroupAssign::create($request->all());
+
+        return redirect(route('class.index'));
     }
 
     /**
