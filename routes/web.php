@@ -7,6 +7,7 @@ use App\Http\Controllers\school\frontend\MenuController;
 use App\Http\Controllers\school\master\StartupController;
 use App\Http\Controllers\school\master\BasicSetupController;
 use App\Http\Controllers\school\master\ClassSetupController;
+use App\Http\Controllers\school\frontend\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,10 @@ Route::post('/MasterSetting/InstituteSetting/basic/update/{id}', [BasicSetupCont
 Route::get('/MasterSetting/InstituteSetting/class_setup', [ClassSetupController::class, 'index'])->name('class.index');
 Route::post('/MasterSetting/InstituteSetting/class_setup/section_store', [ClassSetupController::class, 'section_store'])->name('class.section_store');
 Route::post('/MasterSetting/InstituteSetting/class_setup/group_store', [ClassSetupController::class, 'group_store'])->name('class.group_store');
+
+// slidercontroller
+Route::get('/WebsiteManagement/slider', [SliderController::class, 'index'])->name('slider.index');
+Route::post('/WebsiteManagement/slider/store', [SliderController::class, 'store'])->name('slider.store');
+Route::post('/WebsiteManagement/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
+Route::post('/WebsiteManagement/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
+Route::post('/WebsiteManagement/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');

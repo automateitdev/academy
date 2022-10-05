@@ -21,7 +21,7 @@ class StartupController extends Controller
         $startups = Startup::all();
         $startupcats = StartupCategory::all();
         $startupsubcats = StartupSubcategory::all();
-        return view('layouts.school.master_setting.startup.index', compact('startups', 'startupcats', 'startupsubcats'));
+        return view('layouts.dashboard.master_setting.startup.index', compact('startups', 'startupcats', 'startupsubcats'));
     }
 
     /**

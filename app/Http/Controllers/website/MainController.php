@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\subcategory;
 use Illuminate\Support\Facades\DB;
+use App\Models\Slider;
 
 class MainController extends Controller
 {
@@ -73,9 +74,10 @@ class MainController extends Controller
      */
     public function index()
     {
+        $sliders = Slider::all();
         $categories = category::all();
         $subcategories = subcategory::all();
-        return view('frontend', compact('categories', 'subcategories'));
+        return view('frontend', compact('categories', 'subcategories', 'sliders'));
     }
     public function getSubCat(Request $request)
     {
