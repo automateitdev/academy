@@ -16,7 +16,7 @@
                         <div class="tab-content" id="nav-tabContent">
                             <!-- section -->
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <form action="">
+                                <form action="{{route('class.section_store')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-md-12">
                                         <div class="row">
@@ -76,7 +76,7 @@
                             </div>
                             <!-- group start -->
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <form action="">
+                                <form action="{{route('class.group_store')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-md-12">
                                         <div class="row">

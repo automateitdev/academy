@@ -23,9 +23,21 @@ a{
 .header{
     position: relative;
     z-index: 3;
-    .top-nav-left {
-        // color: #eeeeeea1;
-        padding: 10px;
+    .top-nav{
+        .container{
+            .row{
+                .top-nav-left {
+                    padding: 10px;
+                }
+                .nav{
+                    .nav-item{
+                        .nav-link{
+                            color: #3091f2 !important;
+                        }
+                    }
+                }
+            }
+        }
     }
     .login_part {
         margin-top: 7px;
@@ -47,20 +59,14 @@ a{
         }
         .dropdown-menu.subcatEcom {
             margin-left: -40px;
-<<<<<<< HEAD
 
-=======
->>>>>>> 6264b1aafbfbfad62a36230d4cf538458ebf7d01
         }  
         .dropdown-menu.subcatEcom.show {
             width: 200px;
         }
-<<<<<<< HEAD
 
-        }
+    }
 
-=======
->>>>>>> 6264b1aafbfbfad62a36230d4cf538458ebf7d01
         .dropdown-menu li a {
             text-align: center;
         }

@@ -25,8 +25,11 @@ a {
   position: relative;
   z-index: 3;
 }
-.header .top-nav-left {
+.header .top-nav .container .row .top-nav-left {
   padding: 10px;
+}
+.header .top-nav .container .row .nav .nav-item .nav-link {
+  color: #3091f2 !important;
 }
 .header .login_part {
   margin-top: 7px;
