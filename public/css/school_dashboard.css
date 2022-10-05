@@ -21,6 +21,14 @@
   box-shadow: 0 0 0 0rem rgba(13, 110, 253, 0.25);
 }
 
+.svgimg {
+  color: #19686d;
+}
+
+.btn.danger {
+  color: #ea2525;
+}
+
 #app {
   height: 100vh;
   background-repeat: no-repeat;
@@ -148,6 +156,40 @@
 #menu .container .row .tab-content .tab-pane .form_house {
   padding-top: 40px;
   padding-left: 50px;
+}
+
+#slider .container .row .mb-25 {
+  line-height: 36px;
+  font-size: 24px;
+  color: #444 !important;
+  font-weight: 600;
+  margin-top: 11px;
+}
+#slider .container .row .mb-25 a {
+  color: #19686d;
+}
+#slider .container .row .mb-25 .pull-right {
+  float: right;
+  padding: 10px 18px !important;
+  background-color: #fff;
+  border: 2px solid #ddd !important;
+  color: #455a64 !important;
+  border-radius: 60px !important;
+}
+#slider .container .row .mb-25 .pull-right:hover {
+  background: #fafafa;
+  border: 2px solid #19686d !important;
+  color: #19686d !important;
+}
+#slider .container .row .nav {
+  padding-top: 50px;
+}
+#slider .container .row .tab-content {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#slider .container .row .tab-content .tab-pane .insId {
+  display: none;
 }
 
 #startup .container .row .mb-25 {

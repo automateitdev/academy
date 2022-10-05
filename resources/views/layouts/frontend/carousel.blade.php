@@ -1,14 +1,12 @@
 <div id="carouselAcademy" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{{asset('images/carousel/img1.jpg')}}" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{asset('images/carousel/img2.jpg')}}" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="{{asset('images/carousel/img3.jpg')}}" class="d-block w-100" alt="...">
-    </div>
+    @foreach($sliders as $item)
+      @if($item->institute_id == Auth::user()->institute_id)
+      <div class="carousel-item active">
+        <img src="{{asset('images/carousel/'. $item->slider_img)}}" class="d-block w-100" alt="...">
+      </div>
+      @endif
+    @endforeach
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselAcademy" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

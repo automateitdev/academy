@@ -16,7 +16,7 @@ class BasicSetupController extends Controller
     public function index()
     {
         $basics = Basic::all();
-        return view('layouts.school.master_setting.basic.index', compact('basics'));
+        return view('layouts.dashboard.master_setting.basic.index', compact('basics'));
     }
 
     /**
@@ -97,7 +97,7 @@ class BasicSetupController extends Controller
     public function edit($id)
     {
         $basics = Basic::find($id);
-        return view('layouts.school.master_setting.basic.edit', compact('basics'));
+        return view('layouts.dashboard.master_setting.basic.edit', compact('basics'));
     }
 
     /**

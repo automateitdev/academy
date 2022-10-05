@@ -19,7 +19,7 @@ class MenuController extends Controller
     {
         $categories = category::all();
         $subcategories = subcategory::all();
-        return view('layouts.school.frontend.menu', compact('categories', 'subcategories'));
+        return view('layouts.dashboard.frontend.menu', compact('categories', 'subcategories'));
     }
 
     /**

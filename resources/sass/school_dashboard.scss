@@ -17,7 +17,12 @@
     outline: 0;
     box-shadow: 0 0 0 0rem rgba(13,110,253,.25);
 }
- 
+.svgimg {
+    color: #19686d;
+}
+.btn.danger {
+    color: #ea2525;
+}
 
 // login page
 #app{
@@ -179,6 +184,47 @@
     }
 }
 
+#slider{
+    .container{
+        .row{
+            .mb-25{
+                line-height: 36px;
+                font-size: 24px;
+                color: #444 !important;
+                font-weight: 600;
+                margin-top: 11px;
+                a{
+                    color: #19686d;
+                }
+                .pull-right {
+                    float: right;
+                    padding: 10px 18px !important;
+                    background-color: #fff;
+                    border: 2px solid #ddd !important;
+                    color: #455a64 !important;
+                    border-radius: 60px !important;
+                }
+                .pull-right:hover {
+                    background: #fafafa;
+                    border: 2px solid #19686d !important;
+                    color: #19686d !important;
+                }
+            }
+            .nav{
+                padding-top: 50px;
+            }
+            .tab-content{
+                padding-top: 30px;
+                padding-bottom: 30px;
+                .tab-pane{
+                    .insId{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
 ////// front end end///////
 // Master setting start////
 #startup{

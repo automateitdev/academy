@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\school\master;
+namespace App\Http\Controllers\school\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Startup;
-use App\Models\SectionAssign;
-use App\Models\GroupAssign;
+use App\Models\Slider;
 
-class ClassSetupController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,8 @@ class ClassSetupController extends Controller
      */
     public function index()
     {
-        $startups = Startup::all();
-        return view('layouts.dashboard.master_setting.class_setup.index', compact('startups'));
+        $sliders = Slider::all();
+        return view('layouts.dashboard.frontend.slider.index', compact('sliders'));
     }
 
     /**
@@ -37,28 +35,36 @@ class ClassSetupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function section_store(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'institute_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'shift_id' => 'required',
+            'slider_img' => 'required',
+            'slider_pos' => 'required',
+            'title' => 'nullable',
+            'description' => 'nullable',
         ]);
-        $sectionassigns = SectionAssign::create($request->all());
+        $sliders = new Slider();
+        
+        $sliders->institute_id = $request->institute_id;
+        $sliders->slider_pos = $request->slider_pos;
+        $sliders->title = $request->title;
+        $sliders->description = $request->description;
 
-        return redirect(route('class.index'));
-    }
-    public function group_store(Request $request)
-    {
-        $this->validate($request, [
-            'institute_id' => 'required',
-            'class_id' => 'required',
-            'group_id' => 'required',
-        ]);
-        $groupassigns = GroupAssign::create($request->all());
+        if($request->hasFile('slider_img')){
+            $file = $request->file('slider_img');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/carousel/',$filename);
+            $sliders->slider_img = $filename;
+        }else{
+            //return $request;
+            $sliders->lslider_img = '';
+        }
+        
+        $sliders->save();
 
-        return redirect(route('class.index'));
+        return redirect(route('slider.index'));
     }
 
     /**
