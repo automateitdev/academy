@@ -73,4 +73,6 @@ Route::post('/WebsiteManagement/slider/delete/{id}', [SliderController::class, '
 //speechController
 Route::get('/WebsiteManagement/speech', [SpeechController::class, 'index'])->name('speech.index');
 Route::post('/WebsiteManagement/speech/store', [SpeechController::class, 'store'])->name('speech.store');
+Route::get('/WebsiteManagement/speech/edit/{id}', [SpeechController::class, 'edit'])->name('speech.edit');
+Route::post('/WebsiteManagement/speech/update/{id}', [SpeechController::class, 'update'])->name('speech.update');
 

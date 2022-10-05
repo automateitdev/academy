@@ -90,7 +90,8 @@ class SpeechController extends Controller
      */
     public function edit($id)
     {
-        //
+        $speeches = Speech::find($id);
+        return view('layouts.dashboard.frontend.speech.edit', compact('speeches'));
     }
 
     /**
@@ -102,7 +103,25 @@ class SpeechController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $speeches = Speech::find($id);
+        
+        $speeches->name = $request->name;
+        $speeches->message = $request->message;
+
+        if($request->hasFile('pro_img')){
+            $file = $request->file('pro_img');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/speech/',$filename);
+            $speeches->pro_img = $filename;
+        }else{
+            $speeches->pro_img = '';
+        }
+        
+        $speeches->save();
+
+        return redirect(route('speech.index'));
     }
 
     /**

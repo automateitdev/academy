@@ -26,6 +26,9 @@
 .insId{
     display: none;
 }
+.table td, .table th{
+    text-align: center;
+}
 // login page
 #app{
     // background-image: url("{{asset('images/com/Homapage/1900901.jpg')}}");
