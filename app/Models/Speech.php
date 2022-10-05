@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SectionAssign extends Model
+class Speech extends Model
 {
     use HasFactory;
     protected $fillable = [
         'institute_id',
-        'class_id',
-        'section_id',
-        'shift_id'
+        'name',
+        'designation_id',
+        'message',
+        'pro_img'
     ];
 
-    public function startup()
+    public function designation()
     {
-        return $this->belongsTo(Startup::class, "institute_id");
+        return $this->belongsTo(Designation::class, "designation_id");
     }
 }

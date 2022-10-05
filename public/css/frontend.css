@@ -177,9 +177,8 @@ a {
   pointer-events: none;
 }
 #professorMsg .container .row .wqbGt .ewKuy img {
-  min-height: 100px;
   max-height: 466px;
-  width: auto;
+  width: 375px;
 }
 #professorMsg .container .row .contentOfPr {
   margin-top: 80px;

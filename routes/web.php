@@ -8,6 +8,7 @@ use App\Http\Controllers\school\master\StartupController;
 use App\Http\Controllers\school\master\BasicSetupController;
 use App\Http\Controllers\school\master\ClassSetupController;
 use App\Http\Controllers\school\frontend\SliderController;
+use App\Http\Controllers\school\frontend\SpeechController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,3 +69,8 @@ Route::post('/WebsiteManagement/slider/store', [SliderController::class, 'store'
 Route::post('/WebsiteManagement/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
 Route::post('/WebsiteManagement/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
 Route::post('/WebsiteManagement/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
+
+//speechController
+Route::get('/WebsiteManagement/speech', [SpeechController::class, 'index'])->name('speech.index');
+Route::post('/WebsiteManagement/speech/store', [SpeechController::class, 'store'])->name('speech.store');
+

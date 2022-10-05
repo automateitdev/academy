@@ -8,6 +8,7 @@ use App\Models\category;
 use App\Models\subcategory;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
+use App\Models\Speech;
 
 class MainController extends Controller
 {
@@ -74,10 +75,11 @@ class MainController extends Controller
      */
     public function index()
     {
+        $speeches = Speech::all();
         $sliders = Slider::all();
         $categories = category::all();
         $subcategories = subcategory::all();
-        return view('frontend', compact('categories', 'subcategories', 'sliders'));
+        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches'));
     }
     public function getSubCat(Request $request)
     {

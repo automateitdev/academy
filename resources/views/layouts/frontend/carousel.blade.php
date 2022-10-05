@@ -1,7 +1,7 @@
 <div id="carouselAcademy" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     @foreach($sliders as $item)
-      @if($item->institute_id == Auth::user()->institute_id)
+      @if($item->institute_id == "a0143")
       <div class="carousel-item active">
         <img src="{{asset('images/carousel/'. $item->slider_img)}}" class="d-block w-100" alt="...">
       </div>

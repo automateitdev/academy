@@ -5,31 +5,47 @@
                 <div class="wqbGt">
                     <span class="ewKuy">
                         <div class="d_shadow"></div>
-                        <img src="{{asset('images/pro.png')}}" alt="">
+                        @foreach($speeches as $spech)
+                            @if($spech->institute_id == "a0143" && $spech->id =="1")
+                            <img src="{{asset('images/speech/'. $spech->pro_img)}}" alt="" width="375px">
+                            @endif
+                        @endforeach
                     </span>
                 </div>
             </div>
             <div class="col-sm-6 col-md-6">
                 <div class="contentOfPr">
-                    <h1 class="p_name">Professor Abdul Hamid</h1>
-                    <h4 class="p_title">Principal</h4>
-                    <p class="p_msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, id. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dicta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero optio vitae fugit aliquid, excepturi ratione atque dolor eaque saepe quam recusandae repellat omnis illo itaque assumenda magnam nemo, ipsam reprehenderit sed reiciendis provident error! Assumenda consectetur deleniti deserunt incidunt iure!</p>
+                    @foreach($speeches as $spech)
+                        @if($spech->institute_id == "a0143" && $spech->id =="1")
+                        <h1 class="p_name">{{$spech->name}}</h1>
+                        <h4 class="p_title">{{$spech->designation->designation}}</h4>
+                        <p class="p_msg">{{$spech->message}}</p>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
         <div class="row vice">
             <div class="col-sm-6 col-md-6">
                 <div class="contentOfPr">
-                    <h1 class="p_name">Professor Abdul Hamid</h1>
-                    <h4 class="p_title">Vice Principal</h4>
-                    <p class="p_msg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum, id. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, dicta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero optio vitae fugit aliquid, excepturi ratione atque dolor eaque saepe quam recusandae repellat omnis illo itaque assumenda magnam nemo, ipsam reprehenderit sed reiciendis provident error! Assumenda consectetur deleniti deserunt incidunt iure!</p>
+                    @foreach($speeches as $spech)
+                        @if($spech->institute_id == "a0143" && $spech->id =="2")
+                        <h1 class="p_name">{{$spech->name}}</h1>
+                        <h4 class="p_title">{{$spech->designation->designation}}</h4>
+                        <p class="p_msg">{{$spech->message}}</p>
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="col-sm-6 col-md-6">
                 <div class="wqbGt">
                     <span class="ewKuy">
                         <div class="d_shadow"></div>
-                        <img src="{{asset('images/pro.png')}}" alt="">
+                        @foreach($speeches as $spech)
+                            @if($spech->institute_id == "a0143" && $spech->id =="2")
+                            <img src="{{asset('images/speech/'. $spech->pro_img)}}" alt="" width="375px">
+                            @endif
+                        @endforeach
                     </span>
                 </div>
             </div>

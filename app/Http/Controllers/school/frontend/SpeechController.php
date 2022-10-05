@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\school\master;
+namespace App\Http\Controllers\school\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Startup;
-use App\Models\SectionAssign;
-use App\Models\GroupAssign;
+use App\Models\Designation;
+use App\Models\Speech;
 
-class ClassSetupController extends Controller
+
+class SpeechController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,9 @@ class ClassSetupController extends Controller
      */
     public function index()
     {
-        $startups = Startup::all();
-        $sectionassigns = SectionAssign::all();
-        $groupassigns = GroupAssign::all();
-        return view('layouts.dashboard.master_setting.class_setup.index', compact('startups', 'sectionassigns', 'groupassigns'));
+        $speeches = Speech::all();
+        $designations = Designation::all();
+        return  view('layouts.dashboard.frontend.speech.index', compact('designations', 'speeches'));
     }
 
     /**
@@ -39,28 +38,37 @@ class ClassSetupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function section_store(Request $request)
+    public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'institute_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'shift_id' => 'required',
+            'name' => 'required',
+            'designation_id' => 'required',
+            'message' => 'required',
+            'pro_img' => 'required',
         ]);
-        $sectionassigns = SectionAssign::create($request->all());
 
-        return redirect(route('class.index'));
-    }
-    public function group_store(Request $request)
-    {
-        $this->validate($request, [
-            'institute_id' => 'required',
-            'class_id' => 'required',
-            'group_id' => 'required',
-        ]);
-        $groupassigns = GroupAssign::create($request->all());
+        $speeches = new Speech();
+        
+        $speeches->institute_id = $request->institute_id;
+        $speeches->name = $request->name;
+        $speeches->designation_id = $request->designation_id;
+        $speeches->message = $request->message;
 
-        return redirect(route('class.index'));
+        if($request->hasFile('pro_img')){
+            $file = $request->file('pro_img');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/speech/',$filename);
+            $speeches->pro_img = $filename;
+        }else{
+            $speeches->pro_img = '';
+        }
+        
+        $speeches->save();
+
+        return redirect(route('speech.index'));
     }
 
     /**
