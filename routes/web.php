@@ -9,6 +9,7 @@ use App\Http\Controllers\school\master\BasicSetupController;
 use App\Http\Controllers\school\master\ClassSetupController;
 use App\Http\Controllers\school\frontend\SliderController;
 use App\Http\Controllers\school\frontend\SpeechController;
+use App\Http\Controllers\school\frontend\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +44,9 @@ Route::get('/{id}', [MainController::class, 'allAbout']);
 
 ///////dashboard start
 //fontend menu
-Route::get('/menu', [MenuController::class, 'index'])->name('menu');
-Route::post('/menu/category', [MenuController::class, 'store'])->name('category.store');
-Route::post('/menu/subcategory', [MenuController::class, 'substore'])->name('subcategory.store');
+Route::get('/WebsiteManagement/menu', [MenuController::class, 'index'])->name('menu');
+Route::post('/WebsiteManagement/menu/category', [MenuController::class, 'store'])->name('category.store');
+Route::post('/WebsiteManagement/menu/subcategory', [MenuController::class, 'substore'])->name('subcategory.store');
 
 
 // startup
@@ -80,3 +81,7 @@ Route::post('/WebsiteManagement/speech/store', [SpeechController::class, 'store'
 Route::get('/WebsiteManagement/speech/edit/{id}', [SpeechController::class, 'edit'])->name('speech.edit');
 Route::post('/WebsiteManagement/speech/update/{id}', [SpeechController::class, 'update'])->name('speech.update');
 
+//about controller
+
+Route::get('/WebsiteManagement/about', [AboutController::class, 'index'])->name('about.index');
+Route::post('/WebsiteManagement/about/store', [AboutController::class, 'store'])->name('about.store');

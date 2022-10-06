@@ -92,6 +92,12 @@
                       <p>Speech Info</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('about.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>About</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>

@@ -9,6 +9,7 @@ use App\Models\subcategory;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\Speech;
+use App\Models\About;
 
 class MainController extends Controller
 {
@@ -89,9 +90,10 @@ class MainController extends Controller
 
     public function allAbout(Request $request)
     {
+        $abouts = About::where('subcat_id', $request->id)->take(100)->get();
         $categories = category::all();
         $subcategories = subcategory::all();
-        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories'));
+        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts'));
     }
     /**
      * Show the form for creating a new resource.

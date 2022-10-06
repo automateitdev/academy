@@ -227,6 +227,33 @@
   margin-top: 50px;
 }
 
+#about .container .row .mb-25 {
+  line-height: 36px;
+  font-size: 24px;
+  color: #444 !important;
+  font-weight: 600;
+  margin-top: 11px;
+}
+#about .container .row .mb-25 a {
+  color: #19686d;
+}
+#about .container .row .mb-25 .pull-right {
+  float: right;
+  padding: 10px 18px !important;
+  background-color: #fff;
+  border: 2px solid #ddd !important;
+  color: #455a64 !important;
+  border-radius: 60px !important;
+}
+#about .container .row .mb-25 .pull-right:hover {
+  background: #fafafa;
+  border: 2px solid #19686d !important;
+  color: #19686d !important;
+}
+#about .container .row .data_part {
+  padding-top: 50px;
+}
+
 #startup .container .row .mb-25 {
   line-height: 36px;
   font-size: 24px;

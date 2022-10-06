@@ -14,13 +14,13 @@ $(document).ready(function () {
         // console.log("data: " + data);
         // op+= '<li>';
 
-        if (data.length == 0) {
-          var dataValue = e.target.getAttribute("data-value")
-          div.find('.type_' + dataValue).remove()
-        }
+        // if (data.length == 0) {
+        //   var dataValue = e.target.getAttribute("data-value")
+        //   div.find('.type_' + dataValue).remove()
+        // }
 
         for (var i = 0; i < data.length; i++) {
-          op += '<li><a class="dropdown-item" href="/' + data[i].subcat_link + '">' + data[i].subcat_name + '</a></li>';
+          op += '<li><a class="dropdown-item" href="/' + data[i].id + '">' + data[i].subcat_name + '</a></li>';
         }
 
         // op+=   '</li>';
