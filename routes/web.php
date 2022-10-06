@@ -37,12 +37,16 @@ Route::get('/teachers/{department}', [MainController::class, 'getTeachers'])->na
 Route::get('/departments', [MainController::class, 'getDepartments'])->name('departments');
 Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->name('department');
 
+
+Route::get('/getSubCat', [MainController::class, 'getSubCat']);
+Route::get('/{id}', [MainController::class, 'allAbout']);
+
 ///////dashboard start
 //fontend menu
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/menu/category', [MenuController::class, 'store'])->name('category.store');
 Route::post('/menu/subcategory', [MenuController::class, 'substore'])->name('subcategory.store');
-Route::get('/getSubCat', [MainController::class, 'getSubCat']);
+
 
 // startup
 Route::get('/MasterSetting/InstituteSetting/startup', [StartupController::class, 'index'])->name('startup.index');

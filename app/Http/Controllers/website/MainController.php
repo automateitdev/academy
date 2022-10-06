@@ -86,6 +86,13 @@ class MainController extends Controller
         $data = subcategory::select('subcat_name', 'subcat_link', 'id')->where('cat_id', $request->id)->take(100)->get();
         return response()->json($data);
     }
+
+    public function allAbout(Request $request)
+    {
+        $categories = category::all();
+        $subcategories = subcategory::all();
+        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories'));
+    }
     /**
      * Show the form for creating a new resource.
      *
