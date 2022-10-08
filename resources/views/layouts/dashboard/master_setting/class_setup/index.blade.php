@@ -101,9 +101,24 @@
                                                     @endforeach
                                                 @endif
                                             @endforeach
-                                            <td>{{$section->section_id}}</td>
-                                            <td>{{$section->shift_id}}</td>
-                                            </tr></td>
+                                            @foreach($startups as $item)
+                                                @if($section->section_id == $item->id)
+                                                    @foreach($startupsubcategories as $i)
+                                                        @if($item->startup_subcategory_id == $i->id)
+                                                            <td>{{$i->startup_subcategory_name}}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            @foreach($startups as $item)
+                                                @if($section->shift_id == $item->id)
+                                                    @foreach($startupsubcategories as $i)
+                                                        @if($item->startup_subcategory_id == $i->id)
+                                                            <td>{{$i->startup_subcategory_name}}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
                                         </tr>
                                         @endif
                                         @endforeach
@@ -173,9 +188,24 @@
                                         @if($group->institute_id == Auth::user()->institute_id)
                                         <tr>
                                             <th scope="row">{{$group->id}}</th>
-                                            <td>{{$group->class_id}}</td>
-                                            <td>{{$group->group_id}}</td>
-                                            </tr></td>
+                                            @foreach($startups as $item)
+                                                @if($group->class_id == $item->id)
+                                                    @foreach($startupsubcategories as $i)
+                                                        @if($item->startup_subcategory_id == $i->id)
+                                                            <td>{{$i->startup_subcategory_name}}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            @foreach($startups as $item)
+                                                @if($group->group_id == $item->id)
+                                                    @foreach($startupsubcategories as $i)
+                                                        @if($item->startup_subcategory_id == $i->id)
+                                                            <td>{{$i->startup_subcategory_name}}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
                                         </tr>
                                         @endif
                                         @endforeach
