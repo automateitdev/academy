@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\school\master;
+namespace App\Http\Controllers\school\stdManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Student;
 use App\Models\Startup;
-use App\Models\SectionAssign;
-use App\Models\GroupAssign;
-use App\Models\StartupCategory;
-use App\Models\StartupSubcategory;
+use App\Models\Gender;
+use App\Models\Religion;
 
-class ClassSetupController extends Controller
+class RegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +18,10 @@ class ClassSetupController extends Controller
      */
     public function index()
     {
+        $genders = Gender::all();
+        $religions = Religion::all();
         $startups = Startup::all();
-        $sectionassigns = SectionAssign::all();
-        $groupassigns = GroupAssign::all();
-        $startupsubcategories = StartupSubcategory::all();
-        return view('layouts.dashboard.master_setting.class_setup.index', compact('startups', 'sectionassigns', 'groupassigns','startupsubcategories'));
+        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions'));
     }
 
     /**
@@ -42,28 +40,29 @@ class ClassSetupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function section_store(Request $request)
+    public function store(Request $request)
     {
-        $this->validate($request, [
-            'institute_id' => 'required',
-            'class_id' => 'required',
-            'section_id' => 'required',
-            'shift_id' => 'required',
-        ]);
-        $sectionassigns = SectionAssign::create($request->all());
-
-        return redirect(route('class.index'));
-    }
-    public function group_store(Request $request)
-    {
-        $this->validate($request, [
-            'institute_id' => 'required',
-            'class_id' => 'required',
-            'group_id' => 'required',
-        ]);
-        $groupassigns = GroupAssign::create($request->all());
-
-        return redirect(route('class.index'));
+        dd($request->all());
+        foreach($request->roll as $key => $roll)
+        {
+            $input = new Student();
+            $input->institute_id = $request->institute_id;
+            $input->std_id = $request->std_id[$key];
+            $input->academic_year_id = $request->academic_year_id;
+            $input->session_id = $request->session_id;
+            $input->section_id = $request->section_id;
+            $input->std_category_id = $request->std_category_id;
+            $input->group_id = $request->group_id;
+            $input->roll = $roll;
+            $input->name = $request->name[$key]; 
+            $input->gender = $request->gender_id[$key]; 
+            $input->religion = $request->religion_id[$key]; 
+            $input->father_name = $request->father_name[$key]; 
+            $input->mother_name = $request->mother_name[$key]; 
+            $input->mobile_no = $request->mobile_no[$key]; 
+            $input->save(); 
+        }
+        return redirect(route('enrollment.auto.index'));
     }
 
     /**

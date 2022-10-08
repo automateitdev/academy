@@ -23,4 +23,5 @@ class Startup extends Model
     {
         return $this->belongsTo(StartupSubcategory::class, "startup_subcategory_id");
     }
+
 }

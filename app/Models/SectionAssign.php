@@ -15,8 +15,9 @@ class SectionAssign extends Model
         'shift_id'
     ];
 
-    public function startup()
+    public function startupClass()
     {
-        return $this->belongsTo(Startup::class, "institute_id");
+        return $this->belongsTo(Startup::class, 'id', 'class_id');
     }
+
 }

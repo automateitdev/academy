@@ -10,6 +10,7 @@ use App\Http\Controllers\school\master\ClassSetupController;
 use App\Http\Controllers\school\frontend\SliderController;
 use App\Http\Controllers\school\frontend\SpeechController;
 use App\Http\Controllers\school\frontend\AboutController;
+use App\Http\Controllers\school\stdManagement\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,7 @@ Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->
 
 
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
-Route::get('/{id}', [MainController::class, 'allAbout']);
+// Route::get('/{id}', [MainController::class, 'allAbout']);
 
 ///////dashboard start
 //fontend menu
@@ -85,3 +86,10 @@ Route::post('/WebsiteManagement/speech/update/{id}', [SpeechController::class, '
 
 Route::get('/WebsiteManagement/about', [AboutController::class, 'index'])->name('about.index');
 Route::post('/WebsiteManagement/about/store', [AboutController::class, 'store'])->name('about.store');
+
+//student management
+Route::get('/StudentManagement/enrollment/auto_id', [RegistrationController::class, 'index'])->name('enrollment.auto.index');
+Route::post('/StudentManagement/enrollment/auto_id/store', [RegistrationController::class, 'store'])->name('enrollment.auto.store');
+
+
+

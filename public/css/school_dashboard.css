@@ -37,6 +37,15 @@
   text-align: center;
 }
 
+.addstudentRow, .addstudentRow:hover {
+  text-decoration: none;
+  border: 1px solid #19686d;
+  padding: 4px 6px;
+  border-radius: 5px;
+  background-color: #19686d;
+  color: #fff;
+}
+
 #app {
   height: 100vh;
   background-repeat: no-repeat;
@@ -325,4 +334,37 @@
 }
 #class_setup .container .row .duYtr .tab-content .tab-pane .done {
   margin-top: 30px;
+}
+
+#enrollment_auto .container .row .mb-25 {
+  line-height: 36px;
+  font-size: 24px;
+  color: #444 !important;
+  font-weight: 600;
+  margin-top: 11px;
+}
+#enrollment_auto .container .row .mb-25 a {
+  color: #19686d;
+}
+#enrollment_auto .container .row .mb-25 .pull-right {
+  float: right;
+  padding: 10px 18px !important;
+  background-color: #fff;
+  border: 2px solid #ddd !important;
+  color: #455a64 !important;
+  border-radius: 60px !important;
+}
+#enrollment_auto .container .row .mb-25 .pull-right:hover {
+  background: #fafafa;
+  border: 2px solid #19686d !important;
+  color: #19686d !important;
+}
+#enrollment_auto .container .row .student_table .add {
+  margin-bottom: 10px;
+}
+#enrollment_auto .container .row .student_table .above_part {
+  margin-top: 20px;
+}
+#enrollment_auto .container .row .student_table .label_part {
+  margin-top: 50px;
 }

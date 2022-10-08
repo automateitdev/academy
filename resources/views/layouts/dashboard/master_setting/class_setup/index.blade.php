@@ -92,7 +92,15 @@
                                         @if($section->institute_id == Auth::user()->institute_id)
                                         <tr>
                                             <th scope="row">{{$section->id}}</th>
-                                            <td>{{$section->class_id}}</td>
+                                            @foreach($startups as $item)
+                                                @if($section->class_id == $item->id)
+                                                    @foreach($startupsubcategories as $i)
+                                                        @if($item->startup_subcategory_id == $i->id)
+                                                            <td>{{$i->startup_subcategory_name}}</td>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
                                             <td>{{$section->section_id}}</td>
                                             <td>{{$section->shift_id}}</td>
                                             </tr></td>

@@ -12,7 +12,7 @@ $(document).ready(function(){
         url: '/getStartupSubCat',
         data:{'id':startup_cat_id},
         success: function(data){
-            console.log(data);
+            console.log("dd: "+data);
           op+='<option value="0" selected disabled>Choose</option>';
                     for(var i=0;i<data.length;i++){
                       op+='<option value="'+data[i].id+'">'+data[i].startup_subcategory_name+'</option>';

@@ -29,6 +29,15 @@
 .table td, .table th{
     text-align: center;
 }
+.addstudentRow, .addstudentRow:hover {
+    text-decoration: none;
+    border: 1px solid #19686d;
+    padding: 4px 6px;
+    border-radius: 5px;
+    background-color: #19686d;
+    color: #fff;
+}
+
 // login page
 #app{
     // background-image: url("{{asset('images/com/Homapage/1900901.jpg')}}");
@@ -390,3 +399,46 @@
     }
 }
 // Master setting end/////
+
+//student management start
+
+#enrollment_auto{
+    .container{
+        .row{
+            .mb-25{
+                line-height: 36px;
+                font-size: 24px;
+                color: #444 !important;
+                font-weight: 600;
+                margin-top: 11px;
+                a{
+                    color: #19686d;
+                }
+                .pull-right {
+                    float: right;
+                    padding: 10px 18px !important;
+                    background-color: #fff;
+                    border: 2px solid #ddd !important;
+                    color: #455a64 !important;
+                    border-radius: 60px !important;
+                }
+                .pull-right:hover {
+                    background: #fafafa;
+                    border: 2px solid #19686d !important;
+                    color: #19686d !important;
+                }
+            }
+            .student_table{
+                .add{
+                    margin-bottom: 10px;
+                }
+                .above_part{
+                    margin-top: 20px;
+                }
+                .label_part{
+                    margin-top: 50px;
+                }
+            }
+        }
+    }
+}
