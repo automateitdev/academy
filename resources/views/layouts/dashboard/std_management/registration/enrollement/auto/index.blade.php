@@ -23,7 +23,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="academic_year_id" class="form-label">Academic Year</label>
-                                            <select class="form-control " name="academic_year_id">
+                                            <select class="form-control single" name="academic_year_id">
                                                 <option value=" ">Choose One</option>
                                                 @foreach($startups as $startup)
                                                     @if($startup->institute_id == Auth::user()->institute_id)
@@ -38,7 +38,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="session_id" class="form-label">Academic Session</label>
-                                            <select class="form-control " name="session_id">
+                                            <select class="form-control single" name="session_id">
                                                 <option value=" ">Choose One</option>
                                                 @foreach($startups as $startup)
                                                     @if($startup->institute_id == Auth::user()->institute_id)
@@ -53,13 +53,25 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="section_id" class="form-label">Section</label>
-                                            <select class="form-control " name="section_id">
+                                            <select class="form-control single" name="section_id">
                                                 <option value=" ">Choose One</option>
-                                                @foreach($startups as $startup)
-                                                    @if($startup->institute_id == Auth::user()->institute_id)
-                                                        @if($startup->startup_category_id == "6")
-                                                        <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                        @endif
+                                                @foreach($sectionAssignes as $item)
+                                                    @if($item->institute_id == Auth::user()->institute_id)
+
+                                                    @php
+                                                        $startup_data = $startups->where('id', $item->class_id);
+                                                        $startup_data2 = $startups->where('id', $item->section_id);
+                                                        $startup_data3 = $startups->where('id', $item->shift_id);
+                                                    @endphp
+                                                        @foreach($startup_data as $strData)
+                                                            @foreach($startup_data2 as $strData2)
+                                                                @foreach($startup_data3 as $strData3)
+                                                                <option value="{{$item->id}}">
+                                                                    {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
+                                                                </option>
+                                                                @endforeach
+                                                            @endforeach
+                                                        @endforeach
                                                     @endif
                                                 @endforeach
                                             </select>
@@ -70,7 +82,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="std_category_id" class="form-label">Student Category</label>
-                                            <select class="form-control " name="std_category_id">
+                                            <select class="form-control single" name="std_category_id">
                                                 <option value=" ">Choose One</option>
                                                 @foreach($startups as $startup)
                                                     @if($startup->institute_id == Auth::user()->institute_id)
@@ -85,7 +97,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="group_id" class="form-label">Group</label>
-                                            <select class="form-control " name="group_id">
+                                            <select class="form-control single" name="group_id">
                                                 <option value=" ">Choose One</option>
                                                 @foreach($startups as $startup)
                                                     @if($startup->institute_id == Auth::user()->institute_id)

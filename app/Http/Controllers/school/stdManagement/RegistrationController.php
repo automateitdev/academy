@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Startup;
 use App\Models\Gender;
 use App\Models\Religion;
+use App\Models\SectionAssign;
 
 class RegistrationController extends Controller
 {
@@ -21,7 +22,8 @@ class RegistrationController extends Controller
         $genders = Gender::all();
         $religions = Religion::all();
         $startups = Startup::all();
-        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions'));
+        $sectionAssignes = SectionAssign::all();
+        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions','sectionAssignes'));
     }
 
     /**
@@ -42,7 +44,7 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         foreach($request->roll as $key => $roll)
         {
             $input = new Student();
@@ -55,8 +57,8 @@ class RegistrationController extends Controller
             $input->group_id = $request->group_id;
             $input->roll = $roll;
             $input->name = $request->name[$key]; 
-            $input->gender = $request->gender_id[$key]; 
-            $input->religion = $request->religion_id[$key]; 
+            $input->gender_id = $request->gender_id[$key]; 
+            $input->religion_id = $request->religion_id[$key]; 
             $input->father_name = $request->father_name[$key]; 
             $input->mother_name = $request->mother_name[$key]; 
             $input->mobile_no = $request->mobile_no[$key]; 

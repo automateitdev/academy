@@ -60,25 +60,10 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{route('enrollment.auto.index')}}" class="nav-link active">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Enrollment Form</p>
-                      <i class="right fas fa-angle-left"></i>
                     </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="{{route('enrollment.auto.index')}}" class="nav-link active">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Auto ID</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Custom ID</p>
-                        </a>
-                      </li>
-                    </ul>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link active">
