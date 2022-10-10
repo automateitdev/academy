@@ -9,6 +9,10 @@ use App\Models\Startup;
 use App\Models\Gender;
 use App\Models\Religion;
 use App\Models\SectionAssign;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentExport;
+use App\Imports\StudentImport;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class RegistrationController extends Controller
 {
@@ -24,6 +28,15 @@ class RegistrationController extends Controller
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
         return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions','sectionAssignes'));
+    }
+
+    public function excel_index()
+    {
+        $genders = Gender::all();
+        $religions = Religion::all();
+        $startups = Startup::all();
+        $sectionAssignes = SectionAssign::all();
+        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups','genders','religions','sectionAssignes'));
     }
 
     /**
@@ -65,6 +78,24 @@ class RegistrationController extends Controller
             $input->save(); 
         }
         return redirect(route('enrollment.auto.index'));
+    }
+
+    public function excel_store(Request $request)
+    {
+        $file = $request->file('file');
+        $extension = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extension;
+        $file->move(public_path() .'/storage',$filename);
+
+        $path = storage_path('app/public/' . $filename);
+
+        Excel::import(new StudentImport($request->institute_id,$request->academic_year_id,
+            $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $path);
+
+        // Excel::import(new StudentImport($request), $request->file('file'));
+
+        return redirect(route('enrollment.excel.index'));
+        
     }
 
     /**

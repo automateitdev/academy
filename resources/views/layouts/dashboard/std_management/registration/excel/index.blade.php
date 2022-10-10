@@ -2,19 +2,19 @@
 
 @section('content')
 
-    <div id="enrollment_auto">
+<div id="enrollment_auto">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <h2 class="mb-25">
-                        <a href="#">Student Enrollment Form</a> 
+                        <a href="#">Student Enrollment Form (Excel)</a> 
                         <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#basicsModal">+ Add Information</button> -->
                     </h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12">
-                    <form action="{{route('enrollment.auto.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('enrollment.excel.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="student_table">
                             <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
@@ -111,91 +111,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row label_part">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label"> Student ID</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="group_id" class="form-label">Roll</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="group_id" class="form-label">Name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                <div class="mb-3">
-                                    <label for="group_id" class="form-label">Gender</label>
-                                </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="group_id" class="form-label">Religion</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="group_id" class="form-label">Father Name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="group_id" class="form-label">Mother Name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="group_id" class="form-label">Mobile No</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row add">
-                                <div class="col">
-                                    <input type="text" class="form-control" id="std_id" name="std_id[]" placeholder="Student ID" required>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control roll" name="roll[]" placeholder="Roll">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control name" name="name[]" placeholder="name">
-                                </div>
-                                <div class="col">
-                                    <select class="form-control gender" name="gender_id[]">
-                                        <option value="">Choose Gender</option>
-                                        @foreach($genders as $gender)
-                                            <option value="{{$gender->id}}">{{$gender->g_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="form-control religion" name="religion_id[]">
-                                        <option value="">Choose Religion</option>
-                                        @foreach($religions as $religion)
-                                            <option value="{{$religion->id}}">{{$religion->r_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" name="father_name[]" placeholder="father_name">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" name="mother_name[]" placeholder="mother_name">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" name="mobile_no[]" placeholder="mobile_no">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Excel File</label>
+                                <input type="file" name="file" class="form-control">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
-                        <a href="javascript:void(0)" class="addstudentRow" style="float:inline-end"><i class="fas fa-plus-circle"></i> Add Student</a>
+                        <!-- <a href="javascript:void(0)" class="addstudentRow" style="float:inline-end"><i class="fas fa-plus-circle"></i> Add Student</a> -->
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

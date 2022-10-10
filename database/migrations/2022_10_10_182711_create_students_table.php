@@ -24,11 +24,13 @@ class CreateStudentsTable extends Migration
             $table->integer('group_id');
             $table->string('roll');
             $table->string('name');
-            $table->integer('gender_id');
-            $table->integer('religion_id');
+            $table->bigInteger('gender_id')->unsigned();
+            $table->bigInteger('religion_id')->unsigned();
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('mobile_no');
+            $table->foreign("gender_id")->references("id")->on("Gender");
+            $table->foreign("religion_id")->references("id")->on("Religion");
             $table->timestamps();
         });
     }
