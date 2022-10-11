@@ -11,6 +11,8 @@ use App\Http\Controllers\school\frontend\SliderController;
 use App\Http\Controllers\school\frontend\SpeechController;
 use App\Http\Controllers\school\frontend\AboutController;
 use App\Http\Controllers\school\stdManagement\RegistrationController;
+use App\Http\Controllers\school\fee_management\FeeStartupController;
+use App\Http\Controllers\school\fee_management\FeeMapingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,5 +95,25 @@ Route::post('/StudentManagement/enrollment/auto_id/store', [RegistrationControll
 Route::get('/StudentManagement/enrollment/excel', [RegistrationController::class, 'excel_index'])->name('enrollment.excel.index');
 Route::post('/StudentManagement/enrollment/excel/store', [RegistrationController::class, 'excel_store'])->name('enrollment.excel.store');
 
+// Fees Management
 
+Route::get('/FeesManagement/startup/index', [FeeStartupController::class, 'index'])->name('fee.startup.index');
+Route::post('/FeesManagement/startup/head/store', [FeeStartupController::class, 'headstore'])->name('fee.startup.headstore');
+Route::delete('/FeesManagement/startup/head/{id}',[FeeStartupController::class,'destroy'])->name('fee.startup.headstore.delete');
+
+Route::post('/FeesManagement/startup/subhead/store', [FeeStartupController::class, 'subheadstore'])->name('fee.startup.subheadstore');
+Route::delete('/FeesManagement/startup/subhead/{id}',[FeeStartupController::class,'subhead_destroy'])->name('fee.startup.subheadstore.delete');
+
+Route::post('/FeesManagement/startup/waiver/store', [FeeStartupController::class, 'waiverstore'])->name('fee.startup.waiverstore');
+Route::delete('/FeesManagement/startup/waiver/{id}',[FeeStartupController::class,'waiver_destroy'])->name('fee.startup.waiverstore.delete');
+
+Route::post('/FeesManagement/startup/fund/store', [FeeStartupController::class, 'fundstore'])->name('fee.startup.fundstore');
+Route::delete('/FeesManagement/startup/fund/{id}',[FeeStartupController::class,'fund_destroy'])->name('fee.startup.fundstore.delete');
+
+Route::get('/getAccountCategory', [FeeStartupController::class, 'getAccountCategory']);
+Route::post('/FeesManagement/startup/ledger/store', [FeeStartupController::class, 'ledgerstore'])->name('fee.startup.ledgerstore');
+Route::delete('/FeesManagement/startup/ledger/{id}',[FeeStartupController::class,'ledger_destroy'])->name('fee.startup.ledger.delete');
+
+//fee maping
+Route::get('/FeesManagement/mapping/index', [FeeMapingController::class, 'index'])->name('fee.maping.index');
 

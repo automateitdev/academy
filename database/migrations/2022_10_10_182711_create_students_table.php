@@ -29,8 +29,8 @@ class CreateStudentsTable extends Migration
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('mobile_no');
-            $table->foreign("gender_id")->references("id")->on("Gender");
-            $table->foreign("religion_id")->references("id")->on("Religion");
+            // $table->foreign("gender_id")->references("id")->on("Gender");
+            // $table->foreign("religion_id")->references("id")->on("Religion");
             $table->timestamps();
         });
     }

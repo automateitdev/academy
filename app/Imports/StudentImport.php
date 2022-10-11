@@ -33,16 +33,17 @@ class StudentImport implements ToModel,WithHeadingRow
 
     public function model(array $row)
     {
+        // dd($row);
         return new Student([
             
-            'std_id'=> $row[1],
-            'roll' => $row[2],
-            'name' => $row[3],
-            'gender_id' => $row[4],
-            'religion_id' => $row[5],
-            'father_name' => $row[6],
-            'mother_name' => $row[7],
-            'mobile_no' => $row[8],
+            'std_id'=> @$row[0],
+            'roll' => @$row[1],
+            'name' => @$row[2],
+            'gender_id' => @$row[3],
+            'religion_id' => @$row[4],
+            'father_name' => @$row[5],
+            'mother_name' => @$row[6],
+            'mobile_no' => @$row[7],
             'institute_id' => $this->institute_id,
             'academic_year_id' => $this->academic_year_id,
             'session_id' => $this->session_id,

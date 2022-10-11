@@ -43,7 +43,7 @@
             </a>
           </li>
           <!-- student management start -->
-          <li class="nav-item menu-open">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -78,7 +78,7 @@
           <!-- student management end -->
 
           <!-- Fees management start -->
-          <li class="nav-item menu-open">
+          <li class="nav-item ">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -86,12 +86,84 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('fee.startup.index')}}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fee Startup</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('fee.maping.index')}}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fee Mapping</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Amount Set</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Date Setup</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Weaver Set</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fee Remove</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fee Collection</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payslip</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Delete</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Report</p>
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </a>
+              </li>
+            </ul>
           </li>
           <!-- Fees management end -->
 
 
           <!-- Website Maintenance start -->
-          <li class="nav-item menu-open">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -152,7 +224,7 @@
           </li>
           <!-- Website Maintenance end -->
           <!-- Master Setting start -->
-          <li class="nav-item menu-open">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>

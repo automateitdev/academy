@@ -28,3 +28,33 @@ $(document).ready(function(){
     });
 });
 //startup end
+
+// ledger start
+$(document).ready(function(){
+  $(document).on('change', '.account_category', function(){
+    var account_id=$(this).val();
+    console.log(account_id);
+    var div=$(this).parent().parent().parent();
+          var op=" ";
+
+    $.ajax({
+      type:'get',
+      url: '/getAccountCategory',
+      data:{'id':account_id},
+      success: function(data){
+          console.log("dd: "+data);
+        op+='<option value="0" selected disabled>Choose</option>';
+                  for(var i=0;i<data.length;i++){
+                    op+='<option value="'+data[i].id+'">'+data[i].account_group+'</option>';
+        }
+
+        div.find('.acount_group').html(" ");
+        div.find('.acount_group').append(op);
+
+      },
+
+    });
+
+  });
+});
+//ledger end

@@ -82,15 +82,15 @@ class RegistrationController extends Controller
 
     public function excel_store(Request $request)
     {
-        $file = $request->file('file');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time().'.'.$extension;
-        $file->move(public_path() .'/storage',$filename);
+        // $file = $request->file('file');
+        // $extension = $file->getClientOriginalExtension();
+        // $filename = time().'.'.$extension;
+        // $file->move(public_path() .'/storage',$filename);
 
-        $path = storage_path('app/public/' . $filename);
+        // $path = storage_path('app/public/' . $filename);
 
         Excel::import(new StudentImport($request->institute_id,$request->academic_year_id,
-            $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $path);
+            $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $request->file('file'));
 
         // Excel::import(new StudentImport($request), $request->file('file'));
 
