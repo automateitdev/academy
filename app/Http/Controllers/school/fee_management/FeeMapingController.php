@@ -4,6 +4,11 @@ namespace App\Http\Controllers\school\fee_management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\FeeHead;
+use App\Models\Feesubhead;
+use App\Models\Ledger;
+use App\Models\Fund;
+use App\Models\FeeMaping;
 
 class FeeMapingController extends Controller
 {
@@ -14,7 +19,11 @@ class FeeMapingController extends Controller
      */
     public function index()
     {
-        return view('layouts.dashboard.fee_management.mapping.index');
+        $feeheads = FeeHead::all();
+        $feesubheads = Feesubhead::all();
+        $ledgers = Ledger::all();
+        $funds = Fund::all();
+        return view('layouts.dashboard.fee_management.mapping.index', compact('feeheads','feesubheads','ledgers','funds'));
     }
 
     /**
@@ -35,7 +44,17 @@ class FeeMapingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach((array)$request->feesubhead_id as $key => $feesubhead_id)
+        {
+            $input = new FeeMaping();
+            $input->institute_id = $request->institute_id;
+            $input->feehead_id = $request->feehead_id;
+            $input->feesubhead_id = $feesubhead_id;
+            $input->ledger_id = $request->ledger_id;
+            $input->fund_id = $request->fund_id;
+            $input->save(); 
+        }
+        return redirect(route('fee.maping.index'));
     }
 
     /**

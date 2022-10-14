@@ -82,6 +82,7 @@ class RegistrationController extends Controller
 
     public function excel_store(Request $request)
     {
+        // dd($request->all());
         // $file = $request->file('file');
         // $extension = $file->getClientOriginalExtension();
         // $filename = time().'.'.$extension;
