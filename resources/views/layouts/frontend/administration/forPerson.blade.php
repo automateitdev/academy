@@ -1,3 +1,7 @@
+@extends('header.person')
+
+@section('content')
+
 <div class="container">
     <section class="section-page">
         <div class="container">
@@ -98,3 +102,5 @@
         </div>
     </section>
 </div>
+
+@endsection

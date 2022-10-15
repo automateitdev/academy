@@ -84,7 +84,7 @@ class MainController extends Controller
     }
     public function getSubCat(Request $request)
     {
-        $data = subcategory::select('subcat_name', 'subcat_link', 'id')->where('cat_id', $request->id)->take(100)->get();
+        $data = subcategory::select('cat_id','subcat_name', 'subcat_link', 'id')->where('cat_id', $request->id)->take(100)->get();
         return response()->json($data);
     }
 
@@ -93,7 +93,16 @@ class MainController extends Controller
         $abouts = About::where('subcat_id', $request->id)->take(100)->get();
         $categories = category::all();
         $subcategories = subcategory::all();
+        $subcategories = subcategory::all();
         return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts'));
+    }
+    public function administration(Request $request)
+    {
+        $abouts = About::where('subcat_id', $request->id)->take(100)->get();
+        $categories = category::all();
+        $subcategories = subcategory::all();
+        $subcategories = subcategory::all();
+        return view('layouts.frontend.administration.forPerson', compact('categories', 'subcategories', 'abouts'));
     }
     /**
      * Show the form for creating a new resource.

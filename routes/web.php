@@ -44,7 +44,8 @@ Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->
 
 
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
-Route::get('/about/{id}', [MainController::class, 'allAbout']);
+Route::get('/about/{subcat_link}/{id}', [MainController::class, 'allAbout']);
+Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'administration']);
 
 ///////dashboard start
 

@@ -20,7 +20,14 @@ $(document).ready(function () {
         // }
 
         for (var i = 0; i < data.length; i++) {
-          op += '<li><a class="dropdown-item" href="/about/' + data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          if(data[i].cat_id == "2"){
+            op += '<li><a class="dropdown-item" href="/about/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
+          if(data[i].cat_id == "3")
+          {
+            op += '<li><a class="dropdown-item" href="/administration/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
+
         }
 
         // op+=   '</li>';
@@ -36,6 +43,8 @@ $(document).ready(function () {
   // invoice
 
 });
+
+
 // owl carousel
 $(document).ready(function () {
   $(".owl-carousel").owlCarousel({

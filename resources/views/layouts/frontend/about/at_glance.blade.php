@@ -1,4 +1,4 @@
-@extends('about')
+@extends('header.about')
 
 @section('content')
 

@@ -411,7 +411,7 @@
 
 <body class="antialiased">
     @include('layouts.frontend.header')
-    @include('layouts.frontend.forPerson')
+    @yield('content')
     @include('layouts.frontend.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -111,6 +111,7 @@ class AboutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        About::find($id)->delete();
+        return redirect()->back();
     }
 }
