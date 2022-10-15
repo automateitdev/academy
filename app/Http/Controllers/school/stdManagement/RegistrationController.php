@@ -28,7 +28,7 @@ class RegistrationController extends Controller
         $religions = Religion::all();
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
-        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions','sectionAssignes'));
+        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups', 'genders', 'religions', 'sectionAssignes'));
     }
 
     public function excel_index()
@@ -37,7 +37,7 @@ class RegistrationController extends Controller
         $religions = Religion::all();
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
-        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups','genders','religions','sectionAssignes'));
+        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups', 'genders', 'religions', 'sectionAssignes'));
     }
 
     /**
@@ -59,8 +59,7 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        foreach($request->roll as $key => $roll)
-        {
+        foreach ($request->roll as $key => $roll) {
             $input = new Student();
             $input->institute_id = $request->institute_id;
             $input->std_id = $request->std_id[$key];
@@ -70,13 +69,13 @@ class RegistrationController extends Controller
             $input->std_category_id = $request->std_category_id;
             $input->group_id = $request->group_id;
             $input->roll = $roll;
-            $input->name = $request->name[$key]; 
-            $input->gender_id = $request->gender_id[$key]; 
-            $input->religion_id = $request->religion_id[$key]; 
-            $input->father_name = $request->father_name[$key]; 
-            $input->mother_name = $request->mother_name[$key]; 
-            $input->mobile_no = $request->mobile_no[$key]; 
-            $input->save(); 
+            $input->name = $request->name[$key];
+            $input->gender_id = $request->gender_id[$key];
+            $input->religion_id = $request->religion_id[$key];
+            $input->father_name = $request->father_name[$key];
+            $input->mother_name = $request->mother_name[$key];
+            $input->mobile_no = $request->mobile_no[$key];
+            $input->save();
         }
         return redirect(route('enrollment.auto.index'));
     }
@@ -86,29 +85,28 @@ class RegistrationController extends Controller
         // $var = 
         // Excel::import(ToArray(), new StudentImport($request->institute_id,$request->academic_year_id,
         //     $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $request->file('file'));
-        
+
         // Excel::import(new UsersImport, storage_path('users.xlsx'));
         // Excel::toArray(new StudentImport($request->institute_id,$request->academic_year_id,
         //      $request->session_id,$request->section_id,$request->std_category_id,$request->group_id),$request->file('file'));
 
-        // $import = new StudentImport(
-        //     $request->institute_id,
-        //     $request->academic_year_id,
-        //     $request->session_id,
-        //     $request->section_id,
-        //     $request->std_category_id,
-        //     $request->group_id
-        // );
-        
+        $import = new StudentImport(
+            $request->institute_id,
+            $request->academic_year_id,
+            $request->session_id,
+            $request->section_id,
+            $request->std_category_id,
+            $request->group_id
+        );
+
         // Excel::toCollection($import, $request->file('file'));
 
-        Excel::toCollection(new StudentImport, $request->file('file'));
+        Excel::import($import, $request->file('file'));
 
 
-               // return redirect(route('enrollment.excel.index'));
-        
+        return redirect(route('enrollment.excel.index'));
     }
-    
+
 
     /**
      * Display the specified resource.

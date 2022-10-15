@@ -11,56 +11,71 @@ use Maatwebsite\Excel\Concerns\ToArray;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class StudentImport implements  ToCollection
+class StudentImport implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    // private $institute_id;
-    // private $academic_year_id;
-    // private $session_id;
-    // private $section_id;
-    // private $std_category_id;
-    // private $group_id;
-    // public function __construct(  $institute_id) 
-    // {
-    //     $this->institute_id = $institute_id;
-    // }
-    // public function __construct(  $institute_id,   $academic_year_id
-    // ,   $session_id,   $section_id,  $std_category_id,   $group_id) 
-    // {
-    //     $this->institute_id = $institute_id;
-    //     $this->academic_year_id = $academic_year_id;
-    //     $this->session_id = $session_id;
-    //     $this->section_id = $section_id;
-    //     $this->std_category_id= $std_category_id;
-    //     $this->group_id = $group_id;
-    
-    // }
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    private $institute_id;
+    private $academic_year_id;
+    private $session_id;
+    private $section_id;
+    private $std_category_id;
+    private $group_id;
+
+    public function __construct(
+        $institute_id,
+        $academic_year_id,
+        $session_id,
+        $section_id,
+        $std_category_id,
+        $group_id
+    ) {
+        $this->institute_id = $institute_id;
+        $this->academic_year_id = $academic_year_id;
+        $this->session_id = $session_id;
+        $this->section_id = $section_id;
+        $this->std_category_id = $std_category_id;
+        $this->group_id = $group_id;
+    }
 
 
-    public function collection(Collection $rows)
+    public function headingRow(): int
     {
-        var_dump($rows);
-        die();
+        return 2;
+    }
 
-        return new Student([
-            // 'std_id'=> $row['std_id'],
-            // 'roll' => $row['Roll'],
-            // 'name' => $row['Name'],
-            // 'gender_id' => $row['Gender'],
-            // 'religion_id' => $row['Religion'],
-            // 'father_name' => $row['Father Name'],
-            // 'mother_name' => $row['Mother Name'],
-            // 'mobile_no' => $row['Mobile No'],
-            // 'institute_id' => $this->institute_id,
-            // 'academic_year_id' => $this->academic_year_id,
-            // 'session_id' => $this->session_id,
-            // 'section_id' => $this->section_id,
-            // 'std_category_id' => $this->std_category_id,
-            // 'group_id' => $this->group_id,
-        ]);
+    public function model(array $rows)
+    {
+
+        if (
+            !empty($rows['std_id']) &&
+            !empty($rows['roll']) &&
+            !empty($rows['name']) &&
+            !empty($rows['gender_id']) &&
+            !empty($rows['religion_id']) &&
+            !empty($rows['father_name']) &&
+            !empty($rows['mother_name']) &&
+            !empty($rows['mobile_no'])
+        ) {
+            return new Student([
+                'std_id' => $rows['std_id'],
+                'roll' => $rows['roll'],
+                'name' => $rows['name'],
+                'gender_id' => $rows['gender_id'],
+                'religion_id' => $rows['religion_id'],
+                'father_name' => $rows['father_name'],
+                'mother_name' => $rows['mother_name'],
+                'mobile_no' => $rows['mobile_no'],
+                'institute_id' => $this->institute_id,
+                'academic_year_id' => $this->academic_year_id,
+                'session_id' => $this->session_id,
+                'section_id' => $this->section_id,
+                'std_category_id' => $this->std_category_id,
+                'group_id' => $this->group_id,
+            ]);
+        }
     }
 }
