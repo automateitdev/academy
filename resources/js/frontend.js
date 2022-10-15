@@ -20,7 +20,7 @@ $(document).ready(function () {
         // }
 
         for (var i = 0; i < data.length; i++) {
-          op += '<li><a class="dropdown-item" href="/' + data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          op += '<li><a class="dropdown-item" href="/about/' + data[i].id + '">' + data[i].subcat_name + '</a></li>';
         }
 
         // op+=   '</li>';

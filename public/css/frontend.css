@@ -32,9 +32,12 @@ a {
   color: #3091f2 !important;
 }
 .header .login_part {
-  margin-top: 7px;
+  margin-top: 4px;
   position: relative;
   z-index: 999;
+}
+.header .login_part a {
+  color: #3091f2;
 }
 .header .nav-down {
   background-color: #3091f2 !important;

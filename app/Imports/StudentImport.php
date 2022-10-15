@@ -5,51 +5,62 @@ namespace App\Imports;
 use App\Models\Student;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ToArray;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class StudentImport implements ToModel,WithHeadingRow
+class StudentImport implements  ToCollection
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    protected $institute_id;
-    protected $academic_year_id;
-    protected $session_id;
-    protected $section_id;
-    protected $std_category_id;
-    protected $group_id;
+    // private $institute_id;
+    // private $academic_year_id;
+    // private $session_id;
+    // private $section_id;
+    // private $std_category_id;
+    // private $group_id;
+    // public function __construct(  $institute_id) 
+    // {
+    //     $this->institute_id = $institute_id;
+    // }
+    // public function __construct(  $institute_id,   $academic_year_id
+    // ,   $session_id,   $section_id,  $std_category_id,   $group_id) 
+    // {
+    //     $this->institute_id = $institute_id;
+    //     $this->academic_year_id = $academic_year_id;
+    //     $this->session_id = $session_id;
+    //     $this->section_id = $section_id;
+    //     $this->std_category_id= $std_category_id;
+    //     $this->group_id = $group_id;
+    
+    // }
 
-    public function __construct(  $institute_id,   $academic_year_id
-    ,   $session_id,   $section_id,  $std_category_id,   $group_id) 
-    {
-        $this->institute_id = $institute_id;
-        $this->academic_year_id = $academic_year_id;
-        $this->session_id = $session_id;
-        $this->section_id = $section_id;
-        $this->std_category_id= $std_category_id;
-        $this->group_id = $group_id;
-    }
 
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        // dd($row);
+        var_dump($rows);
+        die();
+
         return new Student([
-            
-            'std_id'=> @$row[0],
-            'roll' => @$row[1],
-            'name' => @$row[2],
-            'gender_id' => @$row[3],
-            'religion_id' => @$row[4],
-            'father_name' => @$row[5],
-            'mother_name' => @$row[6],
-            'mobile_no' => @$row[7],
-            'institute_id' => $this->institute_id,
-            'academic_year_id' => $this->academic_year_id,
-            'session_id' => $this->session_id,
-            'section_id' => $this->section_id,
-            'std_category_id' => $this->std_category_id,
-            'group_id' => $this->group_id,
+            // 'std_id'=> $row['std_id'],
+            // 'roll' => $row['Roll'],
+            // 'name' => $row['Name'],
+            // 'gender_id' => $row['Gender'],
+            // 'religion_id' => $row['Religion'],
+            // 'father_name' => $row['Father Name'],
+            // 'mother_name' => $row['Mother Name'],
+            // 'mobile_no' => $row['Mobile No'],
+            // 'institute_id' => $this->institute_id,
+            // 'academic_year_id' => $this->academic_year_id,
+            // 'session_id' => $this->session_id,
+            // 'section_id' => $this->section_id,
+            // 'std_category_id' => $this->std_category_id,
+            // 'group_id' => $this->group_id,
         ]);
     }
 }

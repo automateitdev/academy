@@ -12,6 +12,7 @@ use App\Models\SectionAssign;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentExport;
 use App\Imports\StudentImport;
+use Maatwebsite\Excel\Concerns\ToArray;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class RegistrationController extends Controller
@@ -82,22 +83,32 @@ class RegistrationController extends Controller
 
     public function excel_store(Request $request)
     {
-        // dd($request->all());
-        // $file = $request->file('file');
-        // $extension = $file->getClientOriginalExtension();
-        // $filename = time().'.'.$extension;
-        // $file->move(public_path() .'/storage',$filename);
+        // $var = 
+        // Excel::import(ToArray(), new StudentImport($request->institute_id,$request->academic_year_id,
+        //     $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $request->file('file'));
+        
+        // Excel::import(new UsersImport, storage_path('users.xlsx'));
+        // Excel::toArray(new StudentImport($request->institute_id,$request->academic_year_id,
+        //      $request->session_id,$request->section_id,$request->std_category_id,$request->group_id),$request->file('file'));
 
-        // $path = storage_path('app/public/' . $filename);
+        // $import = new StudentImport(
+        //     $request->institute_id,
+        //     $request->academic_year_id,
+        //     $request->session_id,
+        //     $request->section_id,
+        //     $request->std_category_id,
+        //     $request->group_id
+        // );
+        
+        // Excel::toCollection($import, $request->file('file'));
 
-        Excel::import(new StudentImport($request->institute_id,$request->academic_year_id,
-            $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $request->file('file'));
+        Excel::toCollection(new StudentImport, $request->file('file'));
 
-        // Excel::import(new StudentImport($request), $request->file('file'));
 
-        return redirect(route('enrollment.excel.index'));
+               // return redirect(route('enrollment.excel.index'));
         
     }
+    
 
     /**
      * Display the specified resource.

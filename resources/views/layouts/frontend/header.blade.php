@@ -56,6 +56,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <!-- <li class="nav-item"><a href="{{route('landingpage')}}">Home</a> </li> -->
                                 @foreach ($categories as $item)
                                     <li class="nav-item dropdown">
                                         <a class="nav-link ecom_cat" data-value="{{ $item->id }}" href="#"

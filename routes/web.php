@@ -13,6 +13,7 @@ use App\Http\Controllers\school\frontend\AboutController;
 use App\Http\Controllers\school\stdManagement\RegistrationController;
 use App\Http\Controllers\school\fee_management\FeeStartupController;
 use App\Http\Controllers\school\fee_management\FeeMapingController;
+use App\Http\Controllers\school\frontend\AdministrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ use App\Http\Controllers\school\fee_management\FeeMapingController;
 // Route::get('/', function () {
 //     return view('frontend');
 // });
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('landingpage');
 
 Auth::routes();
 
@@ -43,14 +44,39 @@ Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->
 
 
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
-// Route::get('/{id}', [MainController::class, 'allAbout']);
+Route::get('/about/{id}', [MainController::class, 'allAbout']);
 
 ///////dashboard start
-//fontend menu
+
+//////////////////////////Website Managemenet Start /////////////////////////
+//menu
 Route::get('/WebsiteManagement/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/WebsiteManagement/menu/category', [MenuController::class, 'store'])->name('category.store');
 Route::post('/WebsiteManagement/menu/subcategory', [MenuController::class, 'substore'])->name('subcategory.store');
+// slidercontroller
+Route::get('/WebsiteManagement/slider', [SliderController::class, 'index'])->name('slider.index');
+Route::post('/WebsiteManagement/slider/store', [SliderController::class, 'store'])->name('slider.store');
+Route::post('/WebsiteManagement/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
+Route::post('/WebsiteManagement/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
+Route::post('/WebsiteManagement/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
 
+//speechController
+Route::get('/WebsiteManagement/speech', [SpeechController::class, 'index'])->name('speech.index');
+Route::post('/WebsiteManagement/speech/store', [SpeechController::class, 'store'])->name('speech.store');
+Route::get('/WebsiteManagement/speech/edit/{id}', [SpeechController::class, 'edit'])->name('speech.edit');
+Route::post('/WebsiteManagement/speech/update/{id}', [SpeechController::class, 'update'])->name('speech.update');
+
+//about controller
+
+Route::get('/WebsiteManagement/about', [AboutController::class, 'index'])->name('about.index');
+Route::post('/WebsiteManagement/about/store', [AboutController::class, 'store'])->name('about.store');
+Route::get('/WebsiteManagement/about/edit/{id}', [AboutController::class, 'edit'])->name('about.edit');
+Route::post('/WebsiteManagement/about/update/{id}', [AboutController::class, 'update'])->name('about.update');
+Route::post('/WebsiteManagement/about/delete/{id}', [AboutController::class, 'destroy'])->name('about.delete');
+
+//administration
+
+// ////////////////////////Website Management end /////////////////////////////
 
 // startup
 Route::get('/MasterSetting/InstituteSetting/startup', [StartupController::class, 'index'])->name('startup.index');
@@ -71,23 +97,7 @@ Route::get('/MasterSetting/InstituteSetting/class_setup', [ClassSetupController:
 Route::post('/MasterSetting/InstituteSetting/class_setup/section_store', [ClassSetupController::class, 'section_store'])->name('class.section_store');
 Route::post('/MasterSetting/InstituteSetting/class_setup/group_store', [ClassSetupController::class, 'group_store'])->name('class.group_store');
 
-// slidercontroller
-Route::get('/WebsiteManagement/slider', [SliderController::class, 'index'])->name('slider.index');
-Route::post('/WebsiteManagement/slider/store', [SliderController::class, 'store'])->name('slider.store');
-Route::post('/WebsiteManagement/slider/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
-Route::post('/WebsiteManagement/slider/update/{id}', [SliderController::class, 'update'])->name('slider.update');
-Route::post('/WebsiteManagement/slider/delete/{id}', [SliderController::class, 'destroy'])->name('slider.delete');
 
-//speechController
-Route::get('/WebsiteManagement/speech', [SpeechController::class, 'index'])->name('speech.index');
-Route::post('/WebsiteManagement/speech/store', [SpeechController::class, 'store'])->name('speech.store');
-Route::get('/WebsiteManagement/speech/edit/{id}', [SpeechController::class, 'edit'])->name('speech.edit');
-Route::post('/WebsiteManagement/speech/update/{id}', [SpeechController::class, 'update'])->name('speech.update');
-
-//about controller
-
-Route::get('/WebsiteManagement/about', [AboutController::class, 'index'])->name('about.index');
-Route::post('/WebsiteManagement/about/store', [AboutController::class, 'store'])->name('about.store');
 
 //student management
 Route::get('/StudentManagement/enrollment/auto_id', [RegistrationController::class, 'index'])->name('enrollment.auto.index');
