@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Designation;
 use App\Models\Speech;
+use App\Models\User;
 
 
 class SpeechController extends Controller
@@ -19,7 +20,8 @@ class SpeechController extends Controller
     {
         $speeches = Speech::all();
         $designations = Designation::all();
-        return  view('layouts.dashboard.frontend.speech.index', compact('designations', 'speeches'));
+        $users = User::all();
+        return  view('layouts.dashboard.frontend.speech.index', compact('designations', 'speeches','users'));
     }
 
     /**
@@ -91,7 +93,8 @@ class SpeechController extends Controller
     public function edit($id)
     {
         $speeches = Speech::find($id);
-        return view('layouts.dashboard.frontend.speech.edit', compact('speeches'));
+        $users = User::all();
+        return view('layouts.dashboard.frontend.speech.edit', compact('speeches','users'));
     }
 
     /**

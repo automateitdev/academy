@@ -5,6 +5,7 @@ namespace App\Http\Controllers\school\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use App\Models\User;
 
 class SliderController extends Controller
 {
@@ -16,7 +17,8 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = Slider::all();
-        return view('layouts.dashboard.frontend.slider.index', compact('sliders'));
+        $users = User::all();
+        return view('layouts.dashboard.frontend.slider.index', compact('sliders','users'));
     }
 
     /**

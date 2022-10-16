@@ -9,6 +9,7 @@ use App\Models\SectionAssign;
 use App\Models\GroupAssign;
 use App\Models\StartupCategory;
 use App\Models\StartupSubcategory;
+use App\Models\User;
 
 class ClassSetupController extends Controller
 {
@@ -23,7 +24,8 @@ class ClassSetupController extends Controller
         $sectionassigns = SectionAssign::all();
         $groupassigns = GroupAssign::all();
         $startupsubcategories = StartupSubcategory::all();
-        return view('layouts.dashboard.master_setting.class_setup.index', compact('startups', 'sectionassigns', 'groupassigns','startupsubcategories'));
+        $users = User::all();
+        return view('layouts.dashboard.master_setting.class_setup.index', compact('startups', 'sectionassigns', 'groupassigns','startupsubcategories','users'));
     }
 
     /**

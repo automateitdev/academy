@@ -3,21 +3,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6">
-                    <div class="top-nav-left text-sm"> <i style="color:#3091f2 ;" class="fa fa-envelope"
+                    <div class="top-nav-left text-sm"> 
+                        @foreach($users as $item)
+                        <span>EIIN No. {{$item->EIIN_number}}</span>
+                        <i style="color:#3091f2 ;" class="fa fa-envelope"
                             aria-hidden="true"></i>
-                        <span>tongi@gmail.com</span>&nbsp;&nbsp;
+                        <span>{{$item->email}}</span>&nbsp;&nbsp;
                         <i style="color:#3091f2 ;" class="fa fa-phone-square" aria-hidden="true"></i>
-                        <span>01302738495 (office)</span>
+                        <span>{{$item->contact_no}}</span>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <ul style="float: right;" class="nav">
                         <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link active" href="contact.php">
                                 Contact </a> </li>
-                        <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link active" href="../e-result">
-                                e-Result</a> </li>
-                        <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link" href="webmail">Web Mail</a>
-                        </li>
                         <li class="nav-item">
                             @if (Route::has('login'))
                                 <div class="login_part">
@@ -45,10 +45,15 @@
             <div class="col-md-12 col-sm-12">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
-                            <img src="{{ asset('images/logo.png') }}" alt="" width="100" height="60"
+                        <a class="navbar-brand" href="{{route('landingpage')}}">
+                            @foreach($basics as $item)
+                            <img src="{{ asset('logos/'. $item->logo) }}" alt="" width="100" height="60"
                                 class="d-inline-block align-text-top">
+                            @endforeach
                         </a>
+                        @foreach($users as $item)
+                        <a href="{{route('landingpage')}}" class="clg_name">{{$item->institute_name}}</a>
+                        @endforeach
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">

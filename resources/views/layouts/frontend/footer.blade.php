@@ -44,9 +44,11 @@
               <div class="widget">
                 <h4 class="widget-title">CONTACT US</h4>
                 <div class="wpb_wrapper">
-                  <p><i class="fas fa-street-view"></i> Address:<br>House-1,Road-16,Section-10,Block-C,Mirpur,Dhaka-1216<br>Dhaka, Bangladesh 1216</p>
-                  <p><i class="fas fa-phone"></i> Phone: +8801701-666606, 09638-888000, 0258052342</p>
-                  <p><i class="fas fa-envelope"></i> Email: tongi@gmail.com</p>            
+                @foreach($users as $item)
+                  <p><i class="fas fa-street-view"></i> Address: {{$item->address}}</p>
+                  <p><i class="fas fa-phone"></i> Phone: {{$item->contact_no}}</p>
+                  <p><i class="fas fa-envelope"></i> Email: {{$item->email}}</p>  
+                @endforeach          
                 </div>
               </div>
             </div>
@@ -55,7 +57,9 @@
       </div>
       <div class="footer-bottom">
         <div class="container">
-          <p>Copyright ©️ 2022 All right reserved - Tongi Govt. College || Developed By Academy</p>
+        @foreach($users as $item)
+          <p>Copyright© {{$item->institute_name}} 2022, Design & Developed by Automate IT Limited.</p>
+        @endforeach 
         </div>
       </div>
     </footer>

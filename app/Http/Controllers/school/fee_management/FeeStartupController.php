@@ -11,6 +11,7 @@ use App\Models\Fund;
 use App\Models\AccountCategory;
 use App\Models\AccountGroup;
 use App\Models\Ledger;
+use App\Models\User;
 
 class FeeStartupController extends Controller
 {
@@ -28,8 +29,9 @@ class FeeStartupController extends Controller
         $accountcategories = AccountCategory::all();
         $accountgroups = AccountGroup::all();
         $ledgers = Ledger::all();
+        $users = User::all();
         return view('layouts.dashboard.fee_management.startup.index',
-         compact('feeheads','feesubheads','waivers','funds','accountcategories','accountgroups','ledgers'));
+         compact('feeheads','feesubheads','waivers','funds','accountcategories','accountgroups','ledgers','users'));
     }
 
     /**

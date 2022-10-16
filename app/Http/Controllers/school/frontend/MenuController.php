@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\subcategory;
+use App\Models\User;
 
 
 class MenuController extends Controller
@@ -19,7 +20,8 @@ class MenuController extends Controller
     {
         $categories = category::all();
         $subcategories = subcategory::all();
-        return view('layouts.dashboard.frontend.menu', compact('categories', 'subcategories'));
+        $users = User::all();
+        return view('layouts.dashboard.frontend.menu', compact('users','categories', 'subcategories'));
     }
 
     /**

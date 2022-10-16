@@ -6,7 +6,7 @@
                     <span class="ewKuy">
                         <div class="d_shadow"></div>
                         @foreach($speeches as $spech)
-                            @if($spech->institute_id == "a0143" && $spech->id =="1")
+                            @if($spech->id =="1")
                             <img src="{{asset('images/speech/'. $spech->pro_img)}}" alt="" width="375px">
                             @endif
                         @endforeach
@@ -16,7 +16,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="contentOfPr">
                     @foreach($speeches as $spech)
-                        @if($spech->institute_id == "a0143" && $spech->id =="1")
+                        @if($spech->id =="1")
                         <h1 class="p_name">{{$spech->name}}</h1>
                         <h4 class="p_title">{{$spech->designation->designation}}</h4>
                         <p class="p_msg">{{$spech->message}}</p>
@@ -29,7 +29,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="contentOfPr">
                     @foreach($speeches as $spech)
-                        @if($spech->institute_id == "a0143" && $spech->id =="2")
+                        @if($spech->id =="2")
                         <h1 class="p_name">{{$spech->name}}</h1>
                         <h4 class="p_title">{{$spech->designation->designation}}</h4>
                         <p class="p_msg">{{$spech->message}}</p>
@@ -42,7 +42,7 @@
                     <span class="ewKuy">
                         <div class="d_shadow"></div>
                         @foreach($speeches as $spech)
-                            @if($spech->institute_id == "a0143" && $spech->id =="2")
+                            @if($spech->id =="2")
                             <img src="{{asset('images/speech/'. $spech->pro_img)}}" alt="" width="375px">
                             @endif
                         @endforeach

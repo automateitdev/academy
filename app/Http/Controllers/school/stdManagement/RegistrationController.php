@@ -9,6 +9,7 @@ use App\Models\Startup;
 use App\Models\Gender;
 use App\Models\Religion;
 use App\Models\SectionAssign;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentExport;
 use App\Imports\StudentImport;
@@ -28,7 +29,8 @@ class RegistrationController extends Controller
         $religions = Religion::all();
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
-        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions','sectionAssignes'));
+        $users = User::all();
+        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions','sectionAssignes', 'users'));
     }
 
     public function excel_index()
@@ -37,7 +39,8 @@ class RegistrationController extends Controller
         $religions = Religion::all();
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
-        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups','genders','religions','sectionAssignes'));
+        $users = User::all();
+        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups','genders','religions','sectionAssignes', 'users'));
     }
 
     /**

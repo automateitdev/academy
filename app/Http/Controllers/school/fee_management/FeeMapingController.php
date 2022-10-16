@@ -9,6 +9,7 @@ use App\Models\Feesubhead;
 use App\Models\Ledger;
 use App\Models\Fund;
 use App\Models\FeeMaping;
+use App\Models\User;
 
 class FeeMapingController extends Controller
 {
@@ -23,7 +24,8 @@ class FeeMapingController extends Controller
         $feesubheads = Feesubhead::all();
         $ledgers = Ledger::all();
         $funds = Fund::all();
-        return view('layouts.dashboard.fee_management.mapping.index', compact('feeheads','feesubheads','ledgers','funds'));
+        $users = User::all();
+        return view('layouts.dashboard.fee_management.mapping.index', compact('feeheads','feesubheads','ledgers','funds','users'));
     }
 
     /**

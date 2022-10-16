@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\subcategory;
 use App\Models\category;
 use App\Models\About;
+use App\Models\User;
 
 class AboutController extends Controller
 {
@@ -20,7 +21,8 @@ class AboutController extends Controller
         $categories = category::all();
         $subcategories = subcategory::all();
         $abouts = About::all();
-        return view('layouts.dashboard.frontend.about.index', compact('categories','subcategories','abouts'));
+        $users = User::all();
+        return view('layouts.dashboard.frontend.about.index', compact('users','categories','subcategories','abouts'));
     }
 
     /**

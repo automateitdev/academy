@@ -76,6 +76,15 @@ Route::post('/WebsiteManagement/about/update/{id}', [AboutController::class, 'up
 Route::post('/WebsiteManagement/about/delete/{id}', [AboutController::class, 'destroy'])->name('about.delete');
 
 //administration
+Route::get('/WebsiteManagement/administration', [AdministrationController::class, 'index'])->name('admns.index');
+Route::get('/WebsiteManagement/administration/create', [AdministrationController::class, 'create'])->name('admns.create');
+Route::post('/WebsiteManagement/administration/store', [AdministrationController::class, 'store'])->name('admns.store');
+Route::get('/WebsiteManagement/administration/edit/{id}', [AdministrationController::class, 'edit'])->name('admns.edit');
+Route::post('/WebsiteManagement/administration/update/{id}', [AdministrationController::class, 'update'])->name('admns.update');
+Route::delete('/WebsiteManagement/administration/delete/{id}', [AdministrationController::class, 'destroy'])->name('admns.delete');
+
+
+
 
 // ////////////////////////Website Management end /////////////////////////////
 

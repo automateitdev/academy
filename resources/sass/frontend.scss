@@ -67,6 +67,12 @@ a{
         .dropdown-menu.subcatEcom.show {
             width: 200px;
         }
+        .clg_name {
+            color: #fff;
+            text-decoration: none;
+            font-size: 30px;
+            font-weight: 700;
+        }
 
     }
 
@@ -468,5 +474,9 @@ a{
 
 // about
 #about{
+    padding-bottom: 50px;
+}
+
+#admins{
     padding-bottom: 50px;
 }

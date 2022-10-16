@@ -8,7 +8,7 @@
                     <div class="col">
                         <h2 class="mb-25">
                             <a href="#">Speech Info</a> 
-                            <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#speechModal">+ Add Speech</button>
+                            <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#speechModal">+ Add Speech</button> -->
                         </h2>
                     </div>
             </div>

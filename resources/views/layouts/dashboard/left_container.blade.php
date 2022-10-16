@@ -161,74 +161,6 @@
           </li>
           <!-- Fees management end -->
 
-
-          <!-- Website Maintenance start -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Website Management
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Configuration</p>
-                  <i class="right fas fa-angle-left"></i>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Basic Setting</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('menu')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Menu</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Content Management</p>
-                  <i class="right fas fa-angle-left"></i>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('slider.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Slider</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('speech.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Speech Info</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('about.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>About</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('about.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Administration</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <!-- Website Maintenance end -->
           <!-- Master Setting start -->
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -287,7 +219,73 @@
           </li>
           <!-- Master Setting end -->
 
-
+<!-- Website Maintenance start -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Website Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Configuration</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('menu')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Menu</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Content Management</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('slider.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Slider</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('speech.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Speech Info</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('about.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>About</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admns.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Administration</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admns.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Gallery</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <!-- Website Maintenance end -->
 
 
 

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\Speech;
 use App\Models\About;
+use App\Models\User;
+use App\Models\Administration;
+use App\Models\Basic;
 
 class MainController extends Controller
 {
@@ -80,7 +83,9 @@ class MainController extends Controller
         $sliders = Slider::all();
         $categories = category::all();
         $subcategories = subcategory::all();
-        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches'));
+        $users = User::all();
+        $basics = Basic::all();
+        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics'));
     }
     public function getSubCat(Request $request)
     {
@@ -94,15 +99,18 @@ class MainController extends Controller
         $categories = category::all();
         $subcategories = subcategory::all();
         $subcategories = subcategory::all();
-        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts'));
+        $users = User::all();
+        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts','users'));
     }
     public function administration(Request $request)
     {
-        $abouts = About::where('subcat_id', $request->id)->take(100)->get();
+        $administrations = Administration::where('subcat_id', $request->id)->take(100)->get();
         $categories = category::all();
         $subcategories = subcategory::all();
         $subcategories = subcategory::all();
-        return view('layouts.frontend.administration.forPerson', compact('categories', 'subcategories', 'abouts'));
+        $users = User::all();
+        // $administrations = Administration::all();
+        return view('layouts.frontend.administration.forPerson', compact('categories', 'subcategories','users','administrations'));
     }
     /**
      * Show the form for creating a new resource.

@@ -59,6 +59,12 @@ a {
 .header .nav-down .dropdown-menu.subcatEcom.show {
   width: 200px;
 }
+.header .nav-down .clg_name {
+  color: #fff;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 700;
+}
 .header .dropdown-menu li a {
   text-align: center;
 }
@@ -394,5 +400,9 @@ a {
 }
 
 #about {
+  padding-bottom: 50px;
+}
+
+#admins {
   padding-bottom: 50px;
 }

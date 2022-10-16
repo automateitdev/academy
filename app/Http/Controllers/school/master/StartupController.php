@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Startup;
 use App\Models\StartupCategory;
 use App\Models\StartupSubcategory;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class StartupController extends Controller
@@ -21,7 +22,8 @@ class StartupController extends Controller
         $startups = Startup::all();
         $startupcats = StartupCategory::all();
         $startupsubcats = StartupSubcategory::all();
-        return view('layouts.dashboard.master_setting.startup.index', compact('startups', 'startupcats', 'startupsubcats'));
+        $users = User::all();
+        return view('layouts.dashboard.master_setting.startup.index', compact('startups', 'startupcats', 'startupsubcats','users'));
     }
 
     /**

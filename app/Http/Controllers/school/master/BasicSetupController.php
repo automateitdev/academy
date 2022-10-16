@@ -5,6 +5,7 @@ namespace App\Http\Controllers\school\master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Basic;
+use App\Models\User;
 
 class BasicSetupController extends Controller
 {
@@ -16,7 +17,8 @@ class BasicSetupController extends Controller
     public function index()
     {
         $basics = Basic::all();
-        return view('layouts.dashboard.master_setting.basic.index', compact('basics'));
+        $users = User::all();
+        return view('layouts.dashboard.master_setting.basic.index', compact('basics','users'));
     }
 
     /**
@@ -97,7 +99,8 @@ class BasicSetupController extends Controller
     public function edit($id)
     {
         $basics = Basic::find($id);
-        return view('layouts.dashboard.master_setting.basic.edit', compact('basics'));
+        $users = User::all();
+        return view('layouts.dashboard.master_setting.basic.edit', compact('basics','users'));
     }
 
     /**
