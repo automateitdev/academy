@@ -13,8 +13,6 @@ use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentExport;
 use App\Imports\StudentImport;
-use Maatwebsite\Excel\Concerns\ToArray;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class RegistrationController extends Controller
 {

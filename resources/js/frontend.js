@@ -14,10 +14,10 @@ $(document).ready(function () {
         // console.log("data: " + data);
         // op+= '<li>';
 
-        // if (data.length == 0) {
-        //   var dataValue = e.target.getAttribute("data-value")
-        //   div.find('.type_' + dataValue).remove()
-        // }
+        if (data.length == 0) {
+          var dataValue = e.target.getAttribute("data-value")
+          div.find('.type_' + dataValue).remove()
+        }
 
         for (var i = 0; i < data.length; i++) {
           if(data[i].cat_id == "2"){

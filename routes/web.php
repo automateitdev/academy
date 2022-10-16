@@ -14,6 +14,7 @@ use App\Http\Controllers\school\stdManagement\RegistrationController;
 use App\Http\Controllers\school\fee_management\FeeStartupController;
 use App\Http\Controllers\school\fee_management\FeeMapingController;
 use App\Http\Controllers\school\frontend\AdministrationController;
+use App\Http\Controllers\school\frontend\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,10 @@ Route::get('/WebsiteManagement/administration/edit/{id}', [AdministrationControl
 Route::post('/WebsiteManagement/administration/update/{id}', [AdministrationController::class, 'update'])->name('admns.update');
 Route::delete('/WebsiteManagement/administration/delete/{id}', [AdministrationController::class, 'destroy'])->name('admns.delete');
 
+//gallery
+Route::get('/WebsiteManagement/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+Route::post('/WebsiteManagement/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+Route::delete('/WebsiteManagement/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.delete');
 
 
 

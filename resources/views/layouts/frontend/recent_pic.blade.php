@@ -5,33 +5,11 @@
         </div>
         <div class="imag">
           <div class="owl-carousel owl-theme">
+            @foreach($galleries as $item)
             <div class="item">
-              <img src="{{asset('images/recent/1.jpg')}}" alt="">
+              <img src="{{asset('images/gallery/'.$item->photo)}}" alt="">
             </div>
-            <div class="item">
-              <img src="{{asset('images/recent/2.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/3.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/4.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/5.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/6.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/7.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/8.jpg')}}" alt="">
-            </div>
-            <div class="item">
-              <img src="{{asset('images/recent/9.jpg')}}" alt="">
-            </div>
+            @endforeach
           </div>
         </div>
     </div>

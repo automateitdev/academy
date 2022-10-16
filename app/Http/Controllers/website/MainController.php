@@ -13,6 +13,7 @@ use App\Models\About;
 use App\Models\User;
 use App\Models\Administration;
 use App\Models\Basic;
+use App\Models\Gallery;
 
 class MainController extends Controller
 {
@@ -85,7 +86,8 @@ class MainController extends Controller
         $subcategories = subcategory::all();
         $users = User::all();
         $basics = Basic::all();
-        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics'));
+        $galleries = Gallery::all();
+        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
     }
     public function getSubCat(Request $request)
     {
@@ -100,7 +102,8 @@ class MainController extends Controller
         $subcategories = subcategory::all();
         $subcategories = subcategory::all();
         $users = User::all();
-        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts','users'));
+        $basics = Basic::all();
+        return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts','users','basics'));
     }
     public function administration(Request $request)
     {
@@ -109,8 +112,9 @@ class MainController extends Controller
         $subcategories = subcategory::all();
         $subcategories = subcategory::all();
         $users = User::all();
+        $basics = Basic::all();
         // $administrations = Administration::all();
-        return view('layouts.frontend.administration.forPerson', compact('categories', 'subcategories','users','administrations'));
+        return view('layouts.frontend.administration.forPerson', compact('categories', 'subcategories','users','administrations','basics'));
     }
     /**
      * Show the form for creating a new resource.

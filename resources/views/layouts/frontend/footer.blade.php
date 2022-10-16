@@ -4,17 +4,21 @@
           <div class="row">
             <div class="col-sm-6 col-lg-3">
               <div class="widget widget-about">
-                <a href="">
-                  <img src="{{asset('images/logo.png')}}" class="footer-logo" alt="Footer Logo" width="100" height="60">
+                @foreach($basics as $item)
+                <a href="{{route('landingpage')}}">
+                  <img src="{{ asset('logos/'. $item->logo) }}" class="footer-logo" alt="Footer Logo" width="100" height="60">
                 </a>
-                <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+                
+                <p>{{$item->institute_title}}</p>
+                
                 <div class="social-icons">
-                  <a href="#" class="social-icon" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                  <a href="#" class="social-icon" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
-                  <a href="#" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="#" class="social-icon" title="Youtube"><i class="fa-brands fa-youtube"></i></a>
-                  <a href="#" class="social-icon" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                  <a href="{{$item->fb_link}}" class="social-icon" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                  <a href="{{$item->twitter_link}}" class="social-icon" title="Twitter"><i class="fa-brands fa-square-twitter"></i></a>
+                  <a href="{{$item->insta_link}}" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="{{$item->youtube_link}}" class="social-icon" title="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                  <a href="{{$item->pi_link}}" class="social-icon" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
                 </div>
+                @endforeach
               </div>
             </div>
             <div class="col-sm-6 col-lg-3">

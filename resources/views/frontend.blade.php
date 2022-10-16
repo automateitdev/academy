@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>College</title>
-
+        @foreach($users as $item)
+        <title>{{$item->institute_name}}</title>
+        @endforeach
         <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.css" rel="stylesheet" />
     
         <!-- Fonts -->
