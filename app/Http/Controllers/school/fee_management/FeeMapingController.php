@@ -25,7 +25,8 @@ class FeeMapingController extends Controller
         $ledgers = Ledger::all();
         $funds = Fund::all();
         $users = User::all();
-        return view('layouts.dashboard.fee_management.mapping.index', compact('feeheads','feesubheads','ledgers','funds','users'));
+        $feemappings = FeeMaping::all();
+        return view('layouts.dashboard.fee_management.mapping.index', compact('feeheads','feesubheads','ledgers','funds','users','feemappings'));
     }
 
     /**
@@ -46,14 +47,16 @@ class FeeMapingController extends Controller
      */
     public function store(Request $request)
     {
-        foreach((array)$request->feesubhead_id as $key => $feesubhead_id)
+        // dd($request->all());
+        // dd($request->institute_id);
+        foreach($request->feesubhead_id as $key => $feesubhead_id)
         {
             $input = new FeeMaping();
             $input->institute_id = $request->institute_id;
-            $input->feehead_id = $request->feehead_id;
+            $input->feehead_id = $request->feehead_id[0];
             $input->feesubhead_id = $feesubhead_id;
-            $input->ledger_id = $request->ledger_id;
-            $input->fund_id = $request->fund_id;
+            $input->ledger_id = $request->ledger_id[0];
+            $input->fund_id = $request->fund_id[$key];
             $input->save(); 
         }
         return redirect(route('fee.maping.index'));

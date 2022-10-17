@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-md-6 offset-md-1">
+                <div class="col-sm-10 col-md-10 offset-md-1">
                     <div class="plJhy">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -24,7 +24,7 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="fee-mapping" role="tabpanel" aria-labelledby="fee-mapping-tab">
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-4 col-md-4">
                                         <h4>Fee Map</h4>
                                         <div class="wdfGh">
                                             <form action="{{route('fee.maping.store')}}" method="POST" enctype="multipart/form-data">
@@ -78,7 +78,28 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-6"></div>
+                                    <div class="col-sm-8 col-md-8">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                <!-- <th scope="col">#</th> -->
+                                                <th scope="col">Fee Head</th>
+                                                <th scope="col">Ledger</th>
+                                                <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($feemappings->unique('feehead_id') as $item)
+                                                <tr>
+                                                    <!-- <th scope="row">{{$item->id}}</th> -->
+                                                    <td>{{$item->feehead->head_name}}</td>
+                                                    <td>{{$item->ledger->ledger_name}}</td>
+                                                    <td></td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="fine-mapping" role="tabpanel" aria-labelledby="fine-mapping-tab">Fine</div>

@@ -15,4 +15,17 @@ class FeeMaping extends Model
         'ledger_id',
         'fund_id'
     ];
+
+    public function feehead()
+    {
+        return $this->belongsTo(FeeHead::class, "feehead_id");
+    }
+    public function feesubhead()
+    {
+        return $this->belongsTo(Feesubhead::class, "feesubhead_id");
+    }
+    public function ledger()
+    {
+        return $this->belongsTo(Ledger::class, "ledger_id");
+    }
 }
