@@ -58,3 +58,35 @@ $(document).ready(function(){
   });
 });
 //ledger end
+
+// fee amount start
+$(document).ready(function(){
+  $(document).on('change', '.feehead_amount', function(){
+    var feehead_id=$(this).val();
+    console.log(feehead_id);
+    var op=$(this).parent().parent().parent().parent();
+          var op=" ";
+
+    $.ajax({
+      type:'get',
+      url: '/getFeeheadToFund',
+      data:{'id':feehead_id},
+      dataType:'json',
+      success: function(data){
+        
+        console.log("dd: "+data);
+        
+        for(var i=0;i<data.length;i++){ 
+          op+='<tr><td style="width: 300px;">'+data[i].fund_id+'</td><td style="width: 100px;"><input type="text" class="form-control" name="fun_amount"></td></tr>'
+      }
+
+        div.find('.fund_of_amount tr').html(" ");
+        div.find('.fund_of_amount tr').append(op);
+
+      },
+
+    });
+
+  });
+});
+// fee amount end

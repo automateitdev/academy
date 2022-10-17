@@ -90,6 +90,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($feemappings->unique('feehead_id') as $item)
+                                            @if($item->institute_id == Auth::user()->institute_id)
                                                 <tr>
                                                     <!-- <th scope="row">{{$item->id}}</th> -->
                                                     <td>{{$item->feehead->head_name}}</td>
@@ -114,6 +115,7 @@
                                                             </button>
                                                     </td>
                                                 </tr>
+                                            @endif
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -179,6 +181,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($feefinemappings->unique('feehead_id') as $item)
+                                            @if($item->institute_id == Auth::user()->institute_id)
                                                 <tr>
                                                     <!-- <th scope="row">{{$item->id}}</th> -->
                                                     <td>{{$item->feehead->head_name}}</td>
@@ -204,6 +207,7 @@
                                                             </button>
                                                     </td>
                                                 </tr>
+                                            @endif
                                             @endforeach
                                             </tbody>
                                         </table>

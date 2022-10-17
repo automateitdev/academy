@@ -15,6 +15,7 @@ use App\Http\Controllers\school\fee_management\FeeStartupController;
 use App\Http\Controllers\school\fee_management\FeeMapingController;
 use App\Http\Controllers\school\frontend\AdministrationController;
 use App\Http\Controllers\school\frontend\GalleryController;
+use App\Http\Controllers\school\fee_management\AmountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,7 +144,14 @@ Route::delete('/FeesManagement/startup/ledger/{id}',[FeeStartupController::class
 Route::get('/FeesManagement/mapping/index', [FeeMapingController::class, 'index'])->name('fee.maping.index');
 Route::post('/FeesManagement/mapping/store', [FeeMapingController::class, 'store'])->name('fee.maping.store');
 Route::post('/FeesManagement/mapping/fine/store', [FeeMapingController::class, 'fine_store'])->name('fine.maping.store');
-
 Route::delete('/FeesManagement/mapping/fee/{id}',[FeeMapingController::class,'destroy'])->name('fee.maping.delete');
 Route::delete('/FeesManagement/mapping/fine/{id}',[FeeMapingController::class,'fine_destroy'])->name('fine.maping.delete');
+
+//fee amount
+Route::get('/FeesManagement/amount/index', [AmountController::class, 'index'])->name('amount.index');
+Route::post('/FeesManagement/amount/feeamount/store', [AmountController::class, 'store'])->name('fee.amount.store');
+Route::get('/FeesManagement/amount/feeamount/eit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
+
+Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
+
 
