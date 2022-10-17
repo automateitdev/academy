@@ -142,4 +142,8 @@ Route::delete('/FeesManagement/startup/ledger/{id}',[FeeStartupController::class
 //fee maping
 Route::get('/FeesManagement/mapping/index', [FeeMapingController::class, 'index'])->name('fee.maping.index');
 Route::post('/FeesManagement/mapping/store', [FeeMapingController::class, 'store'])->name('fee.maping.store');
+Route::post('/FeesManagement/mapping/fine/store', [FeeMapingController::class, 'fine_store'])->name('fine.maping.store');
+
+Route::delete('/FeesManagement/mapping/fee/{id}',[FeeMapingController::class,'destroy'])->name('fee.maping.delete');
+Route::delete('/FeesManagement/mapping/fine/{id}',[FeeMapingController::class,'fine_destroy'])->name('fine.maping.delete');
 
