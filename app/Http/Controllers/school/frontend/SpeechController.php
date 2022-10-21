@@ -106,6 +106,13 @@ class SpeechController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'institute_id' => 'nullable',
+            'name' => 'nullable',
+            'designation_id' => 'nullable',
+            'message' => 'nullable',
+            'pro_img' => 'nullable',
+        ]);
 
         $speeches = Speech::find($id);
         

@@ -15,6 +15,7 @@ class CreateFundsTable extends Migration
     {
         Schema::create('funds', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreignId('fee_head_id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('institute_id');
             $table->string('fund_name');
             $table->timestamps();

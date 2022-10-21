@@ -15,4 +15,9 @@ class Ledger extends Model
         'ledger_name',
         'note'
     ];
+
+    public function feehead()
+    {
+        return $this->belongsTo(FeeHead::class);
+    }
 }

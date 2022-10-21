@@ -107,18 +107,23 @@
                                                 <div class="row">
                                                     <div class="col-md-10">
                                                         <div class="mb-3" >
-                                                            <table class="fund_of_amount">
-                                                                <colgroup>
-                                                                <col>
-                                                                <col>
-                                                                </colgroup>
-                                                                <tr>
-                                                                    <td style="width: 300px;">Fund Name</td>
-                                                                    <td style="width: 100px;">
-                                                                    <input type="text" class="form-control" name="fun_amount">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                                            <div class="rkj">
+                                                                
+                                                                <table class="fund_of_amount">
+                                                                    <colgroup>
+                                                                    <col>
+                                                                    <col>
+                                                                    </colgroup>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style="width: 300px;">Fund Name</td>
+                                                                            <td style="width: 100px;">
+                                                                            <input type="text" class="form-control" name="fun_amount">
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

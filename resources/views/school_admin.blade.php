@@ -32,6 +32,7 @@
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+@if(isset(Auth::user()->email))
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -113,6 +114,9 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
+@else
+<script>window.location = "/login";</script>
+@endif
 <!-- ./wrapper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- jQuery -->

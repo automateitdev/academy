@@ -22,7 +22,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Message</label>
-                            <input type="text" class="form-control" id="message" name="message" value="{{$speeches->message}}">
+                            <textarea type="text" class="form-control" id="message" aria-label="With textarea" name="message" value="{{$speeches->message}}"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="pro_img" class="form-label">Photo</label>

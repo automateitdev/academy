@@ -120,6 +120,7 @@ Route::get('/StudentManagement/enrollment/auto_id', [RegistrationController::cla
 Route::post('/StudentManagement/enrollment/auto_id/store', [RegistrationController::class, 'store'])->name('enrollment.auto.store');
 Route::get('/StudentManagement/enrollment/excel', [RegistrationController::class, 'excel_index'])->name('enrollment.excel.index');
 Route::post('/StudentManagement/enrollment/excel/store', [RegistrationController::class, 'excel_store'])->name('enrollment.excel.store');
+Route::get('/download/excel', [RegistrationController::class, 'download'])->name('excel.download');
 
 // Fees Management
 

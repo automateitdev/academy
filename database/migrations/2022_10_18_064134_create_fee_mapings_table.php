@@ -16,7 +16,7 @@ class CreateFeeMapingsTable extends Migration
         Schema::create('fee_mapings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institute_id');
-            $table->bigInteger('feehead_id');
+            $table->bigInteger('feehead_id')->unique();
             $table->bigInteger('feesubhead_id');
             $table->bigInteger('ledger_id');
             $table->bigInteger('fund_id');

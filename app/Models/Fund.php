@@ -13,4 +13,9 @@ class Fund extends Model
         'institute_id',
         'fund_name'
     ];
+
+    public function feehead()
+    {
+        return $this->belongsTo(FeeHead::class);
+    }
 }

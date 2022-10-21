@@ -27,6 +27,26 @@ $(document).ready(function () {
           {
             op += '<li><a class="dropdown-item" href="/administration/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
           }
+          if(data[i].cat_id == "4")
+          {
+            op += '<li><a class="dropdown-item" href="/academic/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
+          if(data[i].cat_id == "5")
+          {
+            op += '<li><a class="dropdown-item" href="/result/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
+          if(data[i].cat_id == "6")
+          {
+            op += '<li><a class="dropdown-item" href="/co-curricular/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
+          if(data[i].cat_id == "7")
+          {
+            op += '<li><a class="dropdown-item" href="/media/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
+          if(data[i].cat_id == "8")
+          {
+            op += '<li><a class="dropdown-item" href="/more/'+data[i].subcat_link+'/'+ data[i].id + '">' + data[i].subcat_name + '</a></li>';
+          }
 
         }
 

@@ -18,8 +18,8 @@ class CreateSpeechesTable extends Migration
             $table->string('institute_id');
             $table->string('name');
             $table->integer('designation_id');
-            $table->string('message');
-            $table->mediumText('pro_img');
+            $table->longText('message')->nullable();
+            $table->mediumText('pro_img')->nullable();
             $table->timestamps();
         });
     }

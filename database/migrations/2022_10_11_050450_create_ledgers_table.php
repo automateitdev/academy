@@ -15,6 +15,7 @@ class CreateLedgersTable extends Migration
     {
         Schema::create('ledgers', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreignId('fee_head_id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('institute_id');
             $table->bigInteger('account_subcat_id');
             $table->string('ledger_name');

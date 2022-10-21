@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Gender;
 use App\Models\Student;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -46,24 +47,27 @@ class StudentImport implements ToModel, WithHeadingRow
     {
 
         if (
-            !empty($rows['std_id']) &&
-            !empty($rows['roll']) &&
-            !empty($rows['name']) &&
-            !empty($rows['gender_id']) &&
-            !empty($rows['religion_id']) &&
-            !empty($rows['father_name']) &&
-            !empty($rows['mother_name']) &&
-            !empty($rows['mobile_no'])
+            !empty($rows['Student ID']) &&
+            !empty($rows['Roll']) &&
+            !empty($rows['Name']) &&
+            !empty($rows['Gender']) &&
+            !empty($rows['Religion']) &&
+            !empty($rows['Father Name']) &&
+            !empty($rows['Mother Name']) &&
+            !empty($rows['Mobile No'])
         ) {
+            echo "aschi";
+            $gender = Gender::where('g_name', $rows['Gender'])->get();
+            
             return new Student([
-                'std_id' => $rows['std_id'],
-                'roll' => $rows['roll'],
-                'name' => $rows['name'],
-                'gender_id' => $rows['gender_id'],
-                'religion_id' => $rows['religion_id'],
-                'father_name' => $rows['father_name'],
-                'mother_name' => $rows['mother_name'],
-                'mobile_no' => $rows['mobile_no'],
+                'std_id' => $rows['Student ID'],
+                'roll' => $rows['Roll'],
+                'name' => $rows['Name'],
+                'gender_id' => $gender->id,
+                'religion_id' => $rows['Religion'],
+                'father_name' => $rows['Father Name'],
+                'mother_name' => $rows['Mother Name'],
+                'mobile_no' => $rows['Mobile No'],
                 'institute_id' => $this->institute_id,
                 'academic_year_id' => $this->academic_year_id,
                 'session_id' => $this->session_id,

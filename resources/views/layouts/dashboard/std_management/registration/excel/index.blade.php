@@ -113,13 +113,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Excel File</label>
-                                <input type="file" name="file" class="form-control">
+                            <div class="col-md-10 offset-md-1">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Excel File</label>
+                                            <input type="file" name="file" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <a class="excel" href="{{route('excel.download')}}"><img src="{{asset('images/excel_img.png')}}" alt=""> <br> Custom File Download</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
-                        <!-- <a href="javascript:void(0)" class="addstudentRow" style="float:inline-end"><i class="fas fa-plus-circle"></i> Add Student</a> -->
+                        <div class="row">
+                            <div class="col-md-6 offset-md-1">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

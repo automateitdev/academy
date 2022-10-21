@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Startup;
 use App\Models\StartupSubcategory;
 use App\Models\Feeamount;
+use Illuminate\Support\Facades\DB;
 
 class AmountController extends Controller
 {
@@ -50,7 +51,7 @@ class AmountController extends Controller
 
     public function getFeeheadToFund(Request $request)
     {
-        $data = FeeMaping::select('feehead_id','fund_id', 'id')->where('feehead_id',$request->id)->first();
+        $data = FeeMaping::with('fund')->select('feehead_id','fund_id', 'id')->where('feehead_id',$request->id)->take(100)->get();
     	return response()->json($data);
     }
 

@@ -28,4 +28,8 @@ class FeeMaping extends Model
     {
         return $this->belongsTo(Ledger::class, "ledger_id");
     }
+    public function fund()
+    {
+        return $this->belongsTo(Fund::class, "fund_id");
+    }
 }

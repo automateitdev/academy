@@ -29,10 +29,10 @@
                                         <div class="wdfGh">
                                             <form action="{{route('fee.maping.store')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
+                                                <!-- <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id"> -->
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Fee Head</label>
-                                                    <select class="form-control account_category" name="feehead_id">
+                                                    <select class="form-control account_category" name="fee_head_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($feeheads as $item)
                                                         @if($item->institute_id == Auth::user()->institute_id)

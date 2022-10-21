@@ -429,6 +429,15 @@
 #enrollment_auto .container .row .student_table .label_part {
   margin-top: 50px;
 }
+#enrollment_auto .container .row .excel {
+  text-decoration: none;
+  color: #19686d;
+}
+#enrollment_auto .container .row .excel img {
+  border: 1px solid #19686d;
+  padding: 48px;
+  border-radius: 5px;
+}
 
 #fee_startup .container .row nav {
   padding-top: 50px;

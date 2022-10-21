@@ -19,7 +19,7 @@
                         @if($spech->id =="1")
                         <h1 class="p_name">{{$spech->name}}</h1>
                         <h4 class="p_title">{{$spech->designation->designation}}</h4>
-                        <p class="p_msg">{{$spech->message}}</p>
+                        <p class="p_msg">{{Str::words($spech->message),50}}</p>
                         @endif
                     @endforeach
                 </div>

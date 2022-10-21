@@ -15,6 +15,7 @@ class CreateFeesubheadsTable extends Migration
     {
         Schema::create('feesubheads', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreignId('fee_head_id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('institute_id');
             $table->string('subhead_name');
             $table->timestamps();

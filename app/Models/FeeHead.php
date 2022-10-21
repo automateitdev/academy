@@ -13,4 +13,17 @@ class FeeHead extends Model
         'institute_id',
         'head_name'
     ];
+
+    public function feesubheads()
+    {
+        return $this->hasMany(Feesubhead::class);
+    }
+    public function ledger()
+    {
+        return $this->hasOne(Ledger::class);
+    }
+    public function funds()
+    {
+        return $this->hasMany(Fund::class);
+    }
 }

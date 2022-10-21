@@ -83,14 +83,6 @@ class RegistrationController extends Controller
 
     public function excel_store(Request $request)
     {
-        // $var = 
-        // Excel::import(ToArray(), new StudentImport($request->institute_id,$request->academic_year_id,
-        //     $request->session_id,$request->section_id,$request->std_category_id,$request->group_id), $request->file('file'));
-
-        // Excel::import(new UsersImport, storage_path('users.xlsx'));
-        // Excel::toArray(new StudentImport($request->institute_id,$request->academic_year_id,
-        //      $request->session_id,$request->section_id,$request->std_category_id,$request->group_id),$request->file('file'));
-
         $import = new StudentImport(
             $request->institute_id,
             $request->academic_year_id,
@@ -100,15 +92,18 @@ class RegistrationController extends Controller
             $request->group_id
         );
 
-        // Excel::toCollection($import, $request->file('file'));
-
         Excel::import($import, $request->file('file'));
 
-
-        return redirect(route('enrollment.excel.index'));
+        
+        // return redirect(route('enrollment.excel.index'));
     }
 
 
+    public function download()
+    {
+        $file_path = public_path('excel_form.xlsx');
+        return response()->download( $file_path);
+    }
     /**
      * Display the specified resource.
      *

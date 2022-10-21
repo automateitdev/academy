@@ -16,6 +16,7 @@ class Feeamount extends Model
         'feehead_id',
         'feeamount',
         'fineamount',
+        'fund_id',
         'fund_amount'
     ];
 
@@ -23,4 +24,9 @@ class Feeamount extends Model
     {
         return $this->belongsTo(FeeHead::class, "feehead_id");
     }
+    public function fund()
+    {
+        return $this->belongsTo(Fund::class, "fund_id");
+    }
+    
 }

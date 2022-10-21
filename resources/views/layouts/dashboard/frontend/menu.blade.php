@@ -53,7 +53,7 @@
                                         <div class="col-sm-6 col-md-6">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Title</label>
-                                                <input type="text" class="form-control" id="name" name="name" aria-describedby="name" required>
+                                                <input type="text" class="form-control" id="name" name="name" disabled aria-describedby="name" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="link_name" class="form-label">External Link</label>
@@ -67,6 +67,16 @@
                         </div>
                         <!-- Sub Category -->
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                             <form action="{{route('subcategory.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form_house">
@@ -82,7 +92,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="cat_id" class="form-label">Parent Menu</label>
-                                                <select class="form-control" name="cat_id">
+                                                <select class="form-control" name="cat_id" required>
                                                     <option value="">Select a Menu</option>
                                                         @foreach($categories as $item)
                                                         <option value="{{$item->id}}">{{$item->name}}</option>
