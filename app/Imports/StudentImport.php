@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Gender;
+use App\Models\Religion;
 use App\Models\Student;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -58,13 +59,14 @@ class StudentImport implements ToModel, WithHeadingRow
         ) {
             echo "aschi";
             $gender = Gender::where('g_name', $rows['Gender'])->get();
+            $religion = Religion::where('r_name', $rows['Religion'])->get();
             
             return new Student([
                 'std_id' => $rows['Student ID'],
                 'roll' => $rows['Roll'],
                 'name' => $rows['Name'],
                 'gender_id' => $gender->id,
-                'religion_id' => $rows['Religion'],
+                'religion_id' => $religion->id,
                 'father_name' => $rows['Father Name'],
                 'mother_name' => $rows['Mother Name'],
                 'mobile_no' => $rows['Mobile No'],
