@@ -167,7 +167,7 @@
                                     <select class="form-control gender" name="gender_id[]">
                                         <option value="">Choose Gender</option>
                                         @foreach($genders as $gender)
-                                            <option value="{{$gender->g_name}}">{{$gender->g_name}}</option>
+                                            <option value="{{$gender->id}}">{{$gender->g_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

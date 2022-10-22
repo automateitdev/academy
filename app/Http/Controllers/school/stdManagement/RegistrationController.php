@@ -13,6 +13,9 @@ use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentExport;
 use App\Imports\StudentImport;
+// use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 
 class RegistrationController extends Controller
 {
@@ -83,6 +86,7 @@ class RegistrationController extends Controller
 
     public function excel_store(Request $request)
     {
+       
         $import = new StudentImport(
             $request->institute_id,
             $request->academic_year_id,
@@ -92,10 +96,14 @@ class RegistrationController extends Controller
             $request->group_id
         );
 
-        Excel::import($import, $request->file('file'));
+        // Excel::import($import, $request->file('file'));
 
-        
-        // return redirect(route('enrollment.excel.index'));
+        try {
+            Excel::import($import, $request->file('file'));
+        } catch (NoTypeDetectedException $e) {
+            return redirect(route('enrollment.excel.index'))->with('message', 'Please, Only Upload Excel Sheet');
+        }
+        return redirect(route('enrollment.excel.index'))->with('message', 'Data Upload Successfully');
     }
 
 

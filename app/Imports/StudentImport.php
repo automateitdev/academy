@@ -39,37 +39,39 @@ class StudentImport implements ToModel, WithHeadingRow
     }
 
 
-    public function headingRow(): int
-    {
-        return 2;
-    }
+    // public function headingRow(): int
+    // {
+    //     return 2;
+    // }
 
     public function model(array $rows)
     {
+        // dd($rows);
 
         if (
-            !empty($rows['Student ID']) &&
-            !empty($rows['Roll']) &&
-            !empty($rows['Name']) &&
-            !empty($rows['Gender']) &&
-            !empty($rows['Religion']) &&
-            !empty($rows['Father Name']) &&
-            !empty($rows['Mother Name']) &&
-            !empty($rows['Mobile No'])
+            !empty($rows['student_id']) &&
+            !empty($rows['roll']) &&
+            !empty($rows['name']) &&
+            !empty($rows['gender']) &&
+            !empty($rows['religion']) &&
+            !empty($rows['father_name']) &&
+            !empty($rows['mother_name']) &&
+            !empty($rows['mobile_no'])
         ) {
-            echo "aschi";
-            $gender = Gender::where('g_name', $rows['Gender'])->get();
-            $religion = Religion::where('r_name', $rows['Religion'])->get();
+            // echo "aschi";
+            $gender = Gender::where('g_name', $rows['gender'])->first();
+            // dd($gender);
+            $religion = Religion::where('r_name', $rows['religion'])->first();
             
             return new Student([
-                'std_id' => $rows['Student ID'],
-                'roll' => $rows['Roll'],
-                'name' => $rows['Name'],
+                'std_id' => $rows['student_id'],
+                'roll' => $rows['roll'],
+                'name' => $rows['name'],
                 'gender_id' => $gender->id,
                 'religion_id' => $religion->id,
-                'father_name' => $rows['Father Name'],
-                'mother_name' => $rows['Mother Name'],
-                'mobile_no' => $rows['Mobile No'],
+                'father_name' => $rows['father_name'],
+                'mother_name' => $rows['mother_name'],
+                'mobile_no' => $rows['mobile_no'],
                 'institute_id' => $this->institute_id,
                 'academic_year_id' => $this->academic_year_id,
                 'session_id' => $this->session_id,

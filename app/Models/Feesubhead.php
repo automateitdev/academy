@@ -16,6 +16,7 @@ class Feesubhead extends Model
 
     public function feehead()
     {
-        return $this->belongsTo(FeeHead::class);
+        return $this->belongsTo(FeeHead::class, 'fee_head_id', 'id');
     }
+    
 }

@@ -23,7 +23,7 @@ class FeeMapingController extends Controller
     public function index()
     {
         $feeheads = FeeHead::all();
-        $feesubheads = Feesubhead::all();
+        $feesubheads = Feesubhead::with('feehead')->has('feehead')->get();
         $ledgers = Ledger::all();
         $funds = Fund::all();
         $users = User::all();
@@ -50,22 +50,10 @@ class FeeMapingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-    //  dd($request->all());  
-        
-        
+    { 
         foreach($request->feesubhead_id as $key => $feesubhead_id)
         {
-            // $input = new Feesubhead();
-            // $input->institute_id = Auth::user()->institute_id;
-            // $input->feehead_id = $request->feehead_id[0];
-            // $input->feesubhead_id = $feesubhead_id;
-            // $input->ledger_id = $request->ledger_id[0];
-            // $input->fund_id = $request->fund_id[$key];
-
             $response = Feesubhead::where('id', $feesubhead_id)->update($request->only('fee_head_id'));
-            // $input->feehead_id->where('id', $feesubhead_id)->values($request->feehead_id[0]);
-            // $input->save();
         }
         if($response){
             foreach ($request->fund_id as $key => $fund_id) {
@@ -80,27 +68,9 @@ class FeeMapingController extends Controller
         if($response){
             echo "All data Updated";
         }
-        // $feeheads = FeeHead::all();
-        // foreach($feeheads as $feehead){
-        //     $feehead->with('feesubheads', 'ledger', 'funds')->get();
-        //     echo "<pre>";
-        //     print_r($feehead);
-        //     echo "</pre>";
-        //     echo "<br>";
-        // }
 
-        
-
-        // $feehead = FeeHead::find(1);
-        // $values = $feehead->feesubheads;
-        // foreach($values as $value){
-        //     echo $value;
-        // }
-        // dd($values);
-
-        // return redirect(route('fee.maping.index'));
-
-        }
+        return redirect(route('fee.maping.index'));
+    }
 
     public function fine_store(Request $request)
     {

@@ -26,4 +26,5 @@ class FeeHead extends Model
     {
         return $this->hasMany(Fund::class);
     }
+
 }
