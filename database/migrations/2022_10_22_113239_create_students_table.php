@@ -16,7 +16,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institute_id');
-            $table->string('std_id');
+            $table->string('std_id')->unique();
             $table->integer('academic_year_id');
             $table->integer('session_id');
             $table->integer('section_id');
@@ -29,8 +29,6 @@ class CreateStudentsTable extends Migration
             $table->string('father_name');
             $table->string('mother_name');
             $table->string('mobile_no');
-            // $table->foreign("gender_id")->references("id")->on("Gender");
-            // $table->foreign("religion_id")->references("id")->on("Religion");
             $table->timestamps();
         });
     }

@@ -11,11 +11,9 @@ use App\Models\Religion;
 use App\Models\SectionAssign;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\StudentExport;
 use App\Imports\StudentImport;
-// use Illuminate\Validation\Validator;
-use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class RegistrationController extends Controller
 {
@@ -81,12 +79,16 @@ class RegistrationController extends Controller
             $input->mobile_no = $request->mobile_no[$key];
             $input->save();
         }
-        return redirect(route('enrollment.auto.index'));
+        return redirect(route('enrollment.auto.index'))->with('message', 'Data Upload Successfully');
     }
 
     public function excel_store(Request $request)
     {
-       
+        $request->validate(
+            ['file' => ['required', 'file', 'mimes:xlsx']],
+            ['file.required' => 'Please upload the file']
+        );
+        
         $import = new StudentImport(
             $request->institute_id,
             $request->academic_year_id,
@@ -100,7 +102,7 @@ class RegistrationController extends Controller
 
         try {
             Excel::import($import, $request->file('file'));
-        } catch (NoTypeDetectedException $e) {
+        } catch ( NoTypeDetectedException $e) {
             return redirect(route('enrollment.excel.index'))->with('message', 'Please, Only Upload Excel Sheet');
         }
         return redirect(route('enrollment.excel.index'))->with('message', 'Data Upload Successfully');

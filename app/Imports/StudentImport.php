@@ -5,8 +5,10 @@ namespace App\Imports;
 use App\Models\Gender;
 use App\Models\Religion;
 use App\Models\Student;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
 class StudentImport implements ToModel, WithHeadingRow
 {
@@ -46,8 +48,7 @@ class StudentImport implements ToModel, WithHeadingRow
 
     public function model(array $rows)
     {
-        // dd($rows);
-
+        
         if (
             !empty($rows['student_id']) &&
             !empty($rows['roll']) &&
@@ -58,9 +59,9 @@ class StudentImport implements ToModel, WithHeadingRow
             !empty($rows['mother_name']) &&
             !empty($rows['mobile_no'])
         ) {
-            // echo "aschi";
+            // $duplicates = Student::where('std_id', $rows['student_id'])->first();
+            // dd($duplicates);
             $gender = Gender::where('g_name', $rows['gender'])->first();
-            // dd($gender);
             $religion = Religion::where('r_name', $rows['religion'])->first();
             
             return new Student([
@@ -81,4 +82,21 @@ class StudentImport implements ToModel, WithHeadingRow
             ]);
         }
     }
+
+    // public function rules(): array
+    // {
+    //     return [
+    //         'std_id' => Rule::unique('students', 'std_id'),
+    //     ];
+    // }
+
+    // /**
+    //  * @return array
+    //  */
+    // public function customValidationMessages()
+    // {
+    //     return [
+    //         'std_in.unique' => 'Duplicate Data',
+    //     ];
+    // }
 }

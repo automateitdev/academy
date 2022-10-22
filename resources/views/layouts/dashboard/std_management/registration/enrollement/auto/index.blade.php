@@ -14,6 +14,22 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{session('errors')->first('error');}}</li>
+                                <!-- <li>{{ $error }}</li> -->
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                     <form action="{{route('enrollment.auto.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="student_table">
