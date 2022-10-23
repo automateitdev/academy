@@ -28,5 +28,9 @@ class Feeamount extends Model
     {
         return $this->belongsTo(Fund::class, "fund_id");
     }
+    public function startupsubcategory()
+    {
+        return $this->belongsTo(StartupSubcategory::class, 'class_id');
+    }
     
 }

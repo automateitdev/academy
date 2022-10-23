@@ -63,8 +63,6 @@ $(document).ready(function(){
 $(document).ready(function(){
   $(document).on('change', '.feehead_amount', function(){
     var feehead_id=$(this).val();
-    console.log(feehead_id);
-    // var op=$(this).parent().parent().parent().parent();
           var op=" ";
 
     $.ajax({
@@ -73,10 +71,9 @@ $(document).ready(function(){
       data:{'id':feehead_id},
       success: function(data){
         
-        console.log("dd: "+data);
         $('.fund_of_amount>tbody').html(" ");
         for(var i=0;i<data.length;i++){ 
-          op+='<tr><td style="width: 300px;">'+data[i].fund.fund_name+'</td><td style="width: 100px;"><input type="text" class="form-control" name="fun_amount"></td></tr>';
+          op+='<tr><td style="width: 300px;"><input type="text" class="insId" value="'+data[i].id+'" name="fund_id[]">'+data[i].fund_name+'</td><td style="width: 100px;"><input type="text" class="form-control fun_amount" name="fund_amount[]"></td></tr>';
         }
 
         $('.fund_of_amount>tbody').append(op);
@@ -88,3 +85,24 @@ $(document).ready(function(){
   });
 });
 // fee amount end
+
+// fee amount check total
+$(document).on("keyup change mouseup mousedown mouseout keydown", ".feeamount", function() {
+  $('.saveBtn').prop('disabled', true);
+  $(document).on("keyup change mouseup mousedown mouseout keydown", ".fun_amount", function() {
+  var sum = 0.00;
+  $(".fun_amount").each(function(){
+      sum += +$(this).val();
+  });
+
+  var mainAmount = $(".feeamount").val();
+
+  if(mainAmount != sum)
+  {
+    $('.saveBtn').prop('disabled', true);
+  }
+  else{
+    $('.saveBtn').prop('disabled', false);
+  }
+});
+});

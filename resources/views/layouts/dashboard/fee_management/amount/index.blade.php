@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div id="fee_mapping">
+    <div id="fee_amount">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -25,6 +25,21 @@
                             <div class="tab-pane fade show active" id="fee-mapping" role="tabpanel" aria-labelledby="fee-mapping-tab">
                                 <div class="row">
                                     <div class="col-sm-10 col-md-10">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @if(session()->has('message'))
+                                        <div class="alert alert-success">
+                                            {{ session()->get('message') }}
+                                        </div>
+                                    @endif
                                         <h4>Configure Fee Amount</h4>
                                         <div class="wdfGh">
                                             <form action="{{route('fee.amount.store')}}" method="POST" enctype="multipart/form-data">
@@ -94,7 +109,7 @@
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Fee Amount</label>
-                                                            <input type="text" class="form-control" name="feeamount">
+                                                            <input type="text" class="form-control feeamount" name="feeamount">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -108,7 +123,7 @@
                                                     <div class="col-md-10">
                                                         <div class="mb-3" >
                                                             <div class="rkj">
-                                                                
+                                                                <p>Fund Amount Distribution</p>
                                                                 <table class="fund_of_amount">
                                                                     <colgroup>
                                                                     <col>
@@ -127,7 +142,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary"> <i class="fas fa-plus-circle"></i> Save</button>
+                                                <button type="submit" class="btn btn-primary saveBtn"> <i class="fas fa-plus-circle"></i> Save</button>
                                             </form>
                                         </div>
                                     </div>
@@ -148,7 +163,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($feeamounts as $item)
+                                            @foreach($feeamounts->unique('class_id') as $item)
                                             @if($item->institute_id == Auth::user()->institute_id)
                                                 <tr>
                                                     <!-- <th scope="row">{{$item->id}}</th> -->
@@ -331,7 +346,103 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form action="{{route('fee.amount.update')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <!-- <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id"> -->
+                        <!-- <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Class</label>
+                                        @foreach($feeamounts->unique('class_id') as $item)
+                                            @if($item->institute_id ==  Auth::user()->institute_id)
+                                                <p>{{$item->startupsubcategory->startup_subcategory_name}}</p>
+                                            @endif
+                                        @endforeach
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Group</label>
+                                    <select class="form-control" name="group_id">
+                                        <option value="">Select a Group</option>
+                                        @foreach($startups as $item)
+                                            @if($item->institute_id ==  Auth::user()->institute_id)
+                                                @if($item->startup_category_id == 5)
+                                                    <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Student Category</label>
+                                    <select class="form-control" name="stdcategory_id">
+                                        <option value="">Select a Group</option>
+                                        @foreach($startups as $item)
+                                            @if($item->institute_id ==  Auth::user()->institute_id)
+                                                @if($item->startup_category_id == 7)
+                                                    <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Fee Head</label>
+                                    <select class="form-control feehead_amount" name="feehead_id">
+                                        <option value=" ">Choose One</option>
+                                        @foreach($feeheads as $item)
+                                        @if($item->institute_id == Auth::user()->institute_id)
+                                        <option value="{{$item->id}}">{{$item->head_name}}</option>
+                                        @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Fee Amount</label>
+                                    <input type="text" class="form-control feeamount" name="feeamount">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Fine Amount</label>
+                                    <input type="text" class="form-control" name="fineamount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="mb-3" >
+                                    <div class="rkj">
+                                        <p>Fund Amount Distribution</p>
+                                        <table class="fund_of_amount">
+                                            <colgroup>
+                                            <col>
+                                            <col>
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 300px;">Fund Name</td>
+                                                    <td style="width: 100px;">
+                                                    <input type="text" class="form-control" name="fun_amount">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary saveBtn"> <i class="fas fa-plus-circle"></i> Save</button>
+                    </form>
                 </div>
             </div>
         </div>

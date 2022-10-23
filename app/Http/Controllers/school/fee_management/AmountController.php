@@ -15,6 +15,7 @@ use App\Models\Startup;
 use App\Models\StartupSubcategory;
 use App\Models\Feeamount;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AmountController extends Controller
 {
@@ -51,7 +52,7 @@ class AmountController extends Controller
 
     public function getFeeheadToFund(Request $request)
     {
-        $data = FeeMaping::with('fund')->select('feehead_id','fund_id', 'id')->where('feehead_id',$request->id)->take(100)->get();
+        $data = Fund::select('fund_name', 'id')->where('fee_head_id',$request->id)->take(100)->get();
     	return response()->json($data);
     }
 
@@ -63,6 +64,8 @@ class AmountController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+
         $this->validate($request,[
             'institute_id'=> 'required',
             'class_id'=> 'required',
@@ -70,21 +73,26 @@ class AmountController extends Controller
             'stdcategory_id'=> 'required',
             'feehead_id'=> 'required',
             'feeamount'=> 'required',
-            'fineamount'=> 'required',
+            'fineamount'=> 'nullable',
+            'fund_id'=>'required',
             'fund_amount'=>'required',
         ]);
+        foreach ($request->fund_amount as $key => $fund_amount) {
+            
             $input = new Feeamount();
-            $input->institute_id = $request->institute_id;
+            $input->institute_id = Auth::user()->institute_id;
             $input->class_id = $request->class_id;
             $input->group_id = $request->group_id;
             $input->stdcategory_id = $request->stdcategory_id;
             $input->feehead_id = $request->feehead_id;
             $input->feeamount = $request->feeamount;
             $input->fineamount = $request->fineamount;
-            $input->fund_amount = $request->fund_amount;
+            $input->fund_id = $request->fund_id[$key];
+            $input->fund_amount = $fund_amount;
             $input->save(); 
+        }
         
-        return redirect(route('amount.index'));
+        return redirect(route('amount.index'))->with('message', 'Data Upload Successfully');
     }
 
     /**
@@ -118,7 +126,33 @@ class AmountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'institute_id'=> 'required',
+            'class_id'=> 'required',
+            'group_id'=> 'required',
+            'stdcategory_id'=> 'required',
+            'feehead_id'=> 'required',
+            'feeamount'=> 'required',
+            'fineamount'=> 'nullable',
+            'fund_id'=>'required',
+            'fund_amount'=>'required',
+        ]);
+        foreach ($request->fund_amount as $key => $fund_amount) {
+            
+            $input = Feeamount::find($id);
+            $input->institute_id = Auth::user()->institute_id;
+            $input->class_id = $request->class_id;
+            $input->group_id = $request->group_id;
+            $input->stdcategory_id = $request->stdcategory_id;
+            $input->feehead_id = $request->feehead_id;
+            $input->feeamount = $request->feeamount;
+            $input->fineamount = $request->fineamount;
+            $input->fund_id = $request->fund_id[$key];
+            $input->fund_amount = $fund_amount;
+            $input->save(); 
+        }
+        
+        return redirect(route('amount.index'))->with('message', 'Data Update Successfully');
     }
 
     /**

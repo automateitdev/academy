@@ -266,7 +266,8 @@
                                     <div class="col-sm-6 col-md-6">
                                         <form action="{{route('fee.startup.ledgerstore')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
+                                            <!-- <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id"> -->
+                                            <!-- <input type="text" class="form-control insId" id="institute_id" value="0" name="fee_head_id"> -->
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label for="" class="form-label">Account Category</label>

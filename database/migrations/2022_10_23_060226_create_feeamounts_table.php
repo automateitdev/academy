@@ -21,7 +21,8 @@ class CreateFeeamountsTable extends Migration
             $table->bigInteger('stdcategory_id');
             $table->bigInteger('feehead_id');
             $table->double('feeamount');
-            $table->double('fineamount');
+            $table->double('fineamount')->nullable();
+            $table->bigInteger('fund_id');
             $table->double('fund_amount');
             $table->timestamps();
         });

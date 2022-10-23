@@ -12,6 +12,7 @@ use App\Models\AccountCategory;
 use App\Models\AccountGroup;
 use App\Models\Ledger;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FeeStartupController extends Controller
 {
@@ -102,11 +103,18 @@ class FeeStartupController extends Controller
     {
         $this->validate($request,[
             'institute_id' => 'required',
+            'fee_head_id' => 'nullable',
             'account_subcat_id' => 'required',
             'ledger_name' => 'required',
             'note' => 'nullable',
         ]);
-        $ledgers = Ledger::create($request->all());
+        $input = new Ledger();
+        $input->institute_id = Auth::user()->institute_id;
+        $input->fee_head_id = '0';
+        $input->account_subcat_id = $request->account_subcat_id;
+        $input->ledger_name = $request->ledger_name;
+        $input->note = '0';
+        $input->save(); 
         
         return redirect(route('fee.startup.index'));
     }

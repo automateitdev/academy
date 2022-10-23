@@ -152,6 +152,7 @@ Route::delete('/FeesManagement/mapping/fine/{id}',[FeeMapingController::class,'f
 Route::get('/FeesManagement/amount/index', [AmountController::class, 'index'])->name('amount.index');
 Route::post('/FeesManagement/amount/feeamount/store', [AmountController::class, 'store'])->name('fee.amount.store');
 Route::get('/FeesManagement/amount/feeamount/eit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
+Route::post('/FeesManagement/amount/feeamount/update', [AmountController::class, 'update'])->name('fee.amount.update');
 
 Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
 

@@ -29,24 +29,30 @@
                                         <div class="wdfGh">
                                             <form action="{{route('fee.maping.store')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <!-- <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id"> -->
+
+                                                @php( $feesubheadsItem = \App\Models\Feesubhead::all())
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Fee Head</label>
                                                     <select class="form-control account_category" name="fee_head_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($feeheads as $item)
                                                         @if($item->institute_id == Auth::user()->institute_id)
-                                                            @foreach($feesubheads )
-                                                        <option value="{{$item->id}}">{{$item->head_name}}</option>
+                                                            @foreach($feesubheads as $f)
+                                                            @if($item->id != $f->fee_head_id)
+                                                            <option value="{{$item->id}}">{{$item->head_name}}</option>
+                                                            @endif
+                                                            @endforeach
                                                         @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                
+                                            
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Fee Sub Head</label>
                                                     <select class="form-control single account_category" multiple="multiple" name="feesubhead_id[]">
                                                         <option value=" ">Choose One</option>
-                                                        @foreach($feesubheads as $item)
+                                                        @foreach($feesubheadsItem as $item)
                                                         @if($item->institute_id == Auth::user()->institute_id)
                                                         <option value="{{$item->id}}">{{$item->subhead_name}}</option>
                                                         @endif
