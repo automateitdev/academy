@@ -5,6 +5,7 @@ namespace App\Http\Controllers\school\fee_management;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Startup;
 
 class WaiverController extends Controller
 {
@@ -16,7 +17,8 @@ class WaiverController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('layouts.dashboard.fee_management.waiver.index', compact('users'));
+        $startups = Startup::all();
+        return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups'));
     }
 
     /**

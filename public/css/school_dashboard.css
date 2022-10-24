@@ -517,3 +517,65 @@
   margin-bottom: 20px;
   float: right;
 }
+
+#waiver_config .container .row .tab-content {
+  margin-top: 30px;
+}
+#waiver_config .container .row .tab-content .rkj {
+  border: 1px solid #19686d;
+  padding: 35px;
+  padding-bottom: 65px;
+  border-radius: 6px;
+}
+#waiver_config .container .row .tab-content .rkj p {
+  margin-top: -10px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  color: #19686d;
+}
+#waiver_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default.select2-container--focus, #waiver_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default {
+  width: 236px !important;
+}
+#waiver_config .container .row .tab-content .rkj .date_assign_table {
+  width: 100%;
+  text-align: inherit;
+}
+#waiver_config .container .row .tab-content .rkj .date_assign_table tbody tr {
+  padding: 10px !important;
+  display: flex;
+}
+#waiver_config .container .row .tab-content .rkj .date_assign_table tbody tr td {
+  width: 33.3%;
+}
+#waiver_config .container .row .tab-content .rkj .dBtn {
+  float: right;
+  margin-top: 15px;
+}
+#waiver_config .container .row .tab-content .searchBtn {
+  margin-bottom: 20px;
+  float: right;
+}
+#waiver_config .container .row .tab-content .down {
+  margin-top: 100px;
+}
+#waiver_config .container .row .tab-content .down table {
+  width: 100%;
+}
+#waiver_config .container .row .tab-content .down table th, #waiver_config .container .row .tab-content .down table td {
+  padding: 10px;
+}
+#waiver_config .container .row .tab-content .down .searchBtn {
+  margin-top: 10px;
+}
+#waiver_config .modal .select2.select2-container.select2-container--default.select2-container--focus, #waiver_config .modal .select2.select2-container.select2-container--default {
+  width: 225px !important;
+}
+#waiver_config .modal .select2-dropdown.select2-dropdown--below {
+  position: relative;
+  z-index: 9999;
+}
+
+.select2-container.select2-container--default.select2-container--open {
+  z-index: 9999;
+}

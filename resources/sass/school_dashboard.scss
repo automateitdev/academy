@@ -628,4 +628,75 @@
         }
     }
 }
+#waiver_config{
+    .container{
+        .row{
+            .tab-content{
+                margin-top: 30px;
+                .rkj{
+                    border: 1px solid #19686d;
+                    padding: 35px;
+                    padding-bottom: 65px;
+                    border-radius: 6px;
+                    p{
+                        margin-top: -10px;
+                        margin-bottom: 1rem;
+                        font-size: 20px;
+                        font-weight: 500;
+                        color: #19686d
+                    }
+                    .select2.select2-container.select2-container--default.select2-container--focus, .select2.select2-container.select2-container--default {
+                        width: 236px !important;
+                    }
+                    .date_assign_table{
+                        width: 100%;
+                        text-align: inherit;
+                        tbody{
+                            tr{
+                                padding: 10px !important;
+                                display: flex;
+                                td{
+                                    width: 33.3%;
+                                }
+                            }
+                        }
+                    }
+                    .dBtn{
+                        float: right;
+                        margin-top: 15px;
+                    }
+                }
+                .searchBtn{
+                    margin-bottom: 20px;
+                    float: right;
+                }
+                .down{
+                    margin-top: 100px;
+                    table{
+                        width: 100%;
+                        th,td{
+                            padding: 10px;
+                        }
+                    }
+                    .searchBtn{
+                        margin-top: 10px;
+                    }
+                }
+            } 
+        }
+    }
+    .modal{
+        .select2.select2-container.select2-container--default.select2-container--focus, .select2.select2-container.select2-container--default {
+            width: 225px !important;
+        }
+        .select2-dropdown.select2-dropdown--below {
+            position: relative;
+            z-index: 9999;
+          }
+    }
+}
+.select2-container.select2-container--default.select2-container--open
+    {
+        z-index: 9999;
+    }
 //fee managemenet end
