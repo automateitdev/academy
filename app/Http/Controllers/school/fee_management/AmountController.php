@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Startup;
 use App\Models\StartupSubcategory;
 use App\Models\Feeamount;
+use App\Models\Feefineamount;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,8 +37,9 @@ class AmountController extends Controller
         $startups = Startup::all();
         $startupsubcategories = StartupSubcategory::all();
         $feeamounts = Feeamount::all();
+        $feefinemaounts = Feefineamount::all();
         return view('layouts.dashboard.fee_management.amount.index',
-         compact('feeheads','feesubheads','ledgers','funds','users','feemappings','feefinemappings','startups','startupsubcategories','feeamounts'));
+         compact('feeheads','feesubheads','ledgers','funds','users','feemappings','feefinemappings','startups','startupsubcategories','feeamounts','feefinemaounts'));
     }
 
     /**
@@ -90,6 +92,33 @@ class AmountController extends Controller
             $input->fund_id = $request->fund_id[$key];
             $input->fund_amount = $fund_amount;
             $input->save(); 
+        }
+        
+        return redirect(route('amount.index'))->with('message', 'Data Upload Successfully');
+    }
+
+    public function fineStore(Request $request)
+    {
+        $this->validate($request,[
+            'institute_id'=> 'required', 
+            'class_id'=> 'required',
+            'period_id'=> 'required',
+            'amount'=>'required',
+        ]);
+        
+        foreach ($request->class_id as $key => $class_id) {
+            $input = [ 
+            'institute_id' => Auth::user()->institute_id,
+            'class_id' => $class_id,
+            'amount' => $request->amount,
+            'period_id' => null,
+            ];
+            
+            foreach($request->period_id as $period)
+            {
+                $input['period_id'] = $period;
+                $data = Feefineamount::create($input);
+            }   
         }
         
         return redirect(route('amount.index'))->with('message', 'Data Upload Successfully');

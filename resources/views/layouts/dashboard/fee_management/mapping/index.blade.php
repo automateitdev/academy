@@ -30,19 +30,22 @@
                                             <form action="{{route('fee.maping.store')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
 
-                                                @php( $feesubheadsItem = \App\Models\Feesubhead::all())
+                                                        @php
+                                                        $feesubheadsItem = \App\Models\Feesubhead::all();
+                                                        
+                                                        
+                                                        @endphp
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Fee Head</label>
                                                     <select class="form-control account_category" name="fee_head_id">
                                                         <option value=" ">Choose One</option>
-                                                        @foreach($feeheads as $item)
-                                                        @if($item->institute_id == Auth::user()->institute_id)
-                                                            @foreach($feesubheads as $f)
-                                                            @if($item->id != $f->fee_head_id)
-                                                            <option value="{{$item->id}}">{{$item->head_name}}</option>
-                                                            @endif
+                                                        @foreach($feeheads as $feehead)
+                                                            @foreach($feesubheadsItem as $item)
+                                                            
+                                                                @if($item->fee_head_id != $feehead->id)
+                                                                    <option value="">{{$feehead->head_name}}</option>
+                                                                @endif
                                                             @endforeach
-                                                        @endif
                                                         @endforeach
                                                     </select>
                                                 </div>

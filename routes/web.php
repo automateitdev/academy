@@ -154,6 +154,8 @@ Route::post('/FeesManagement/amount/feeamount/store', [AmountController::class, 
 Route::get('/FeesManagement/amount/feeamount/eit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
 Route::post('/FeesManagement/amount/feeamount/update', [AmountController::class, 'update'])->name('fee.amount.update');
 
+Route::post('/FeesManagement/amount/fineamount/store', [AmountController::class, 'fineStore'])->name('fine.amount.store');
+
 Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
 
 
