@@ -240,7 +240,7 @@
                             <!-- Fine -->
                             <div class="tab-pane fade" id="fine-mapping" role="tabpanel" aria-labelledby="fine-mapping-tab">
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6">
+                                    <div class="col-sm-4 col-md-4">
                                         <h4>Fee Fine Map</h4>
                                         <div class="wdfGh">
                                             <form action="{{route('fine.amount.store')}}" method="POST" enctype="multipart/form-data">

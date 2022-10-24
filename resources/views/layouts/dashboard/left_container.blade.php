@@ -109,16 +109,16 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{route('date.index')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Date Setup</p>
                   <!-- <i class="right fas fa-angle-left"></i> -->
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{route('waiver.index')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Weaver Set</p>
+                  <p>Waiver Setup</p>
                   <!-- <i class="right fas fa-angle-left"></i> -->
                 </a>
               </li>

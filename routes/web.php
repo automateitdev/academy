@@ -16,6 +16,8 @@ use App\Http\Controllers\school\fee_management\FeeMapingController;
 use App\Http\Controllers\school\frontend\AdministrationController;
 use App\Http\Controllers\school\frontend\GalleryController;
 use App\Http\Controllers\school\fee_management\AmountController;
+use App\Http\Controllers\school\fee_management\DateSetupController;
+use App\Http\Controllers\school\fee_management\WaiverController;
 
 /*
 |--------------------------------------------------------------------------
@@ -158,4 +160,9 @@ Route::post('/FeesManagement/amount/fineamount/store', [AmountController::class,
 
 Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
 
+//date config
+Route::get('/FeesManagement/datesetup/index', [DateSetupController::class, 'index'])->name('date.index');
 
+
+//waiver config
+Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');

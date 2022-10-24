@@ -81,12 +81,8 @@
   margin: 0;
 }
 
-.select2.select2-container.select2-container--default.select2-container--focus {
+.select2.select2-container.select2-container--default.select2-container--focus, .select2.select2-container.select2-container--default {
   width: 306px !important;
-}
-
-.form-control.single.select2-hidden-accessible {
-  width: 70% !important;
 }
 
 #app {
@@ -481,4 +477,43 @@
 }
 #fee_amount .container .row .plJhy .tab-content .saveBtn {
   margin-bottom: 50px;
+}
+
+#date_config .container .row .tab-content {
+  margin-top: 30px;
+}
+#date_config .container .row .tab-content .rkj {
+  border: 1px solid #19686d;
+  padding: 35px;
+  padding-bottom: 65px;
+  border-radius: 6px;
+}
+#date_config .container .row .tab-content .rkj p {
+  margin-top: -10px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  color: #19686d;
+}
+#date_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default.select2-container--focus, #date_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default {
+  width: 236px !important;
+}
+#date_config .container .row .tab-content .rkj .date_assign_table {
+  width: 100%;
+  text-align: inherit;
+}
+#date_config .container .row .tab-content .rkj .date_assign_table tbody tr {
+  padding: 10px !important;
+  display: flex;
+}
+#date_config .container .row .tab-content .rkj .date_assign_table tbody tr td {
+  width: 33.3%;
+}
+#date_config .container .row .tab-content .rkj .dBtn {
+  float: right;
+  margin-top: 15px;
+}
+#date_config .container .row .tab-content .searchBtn {
+  margin-bottom: 20px;
+  float: right;
 }

@@ -69,11 +69,8 @@
         margin: 0;
     }
 }
-.select2.select2-container.select2-container--default.select2-container--focus {
+.select2.select2-container.select2-container--default.select2-container--focus, .select2.select2-container.select2-container--default {
     width: 306px !important;
-}
-.form-control.single.select2-hidden-accessible {
-    width: 70% !important;
 }
 
 
@@ -582,6 +579,52 @@
                     }
                 }
             }
+        }
+    }
+}
+#date_config{
+    .container{
+        .row{
+            .tab-content{
+                margin-top: 30px;
+                .rkj{
+                    border: 1px solid #19686d;
+                    padding: 35px;
+                    padding-bottom: 65px;
+                    border-radius: 6px;
+                    p{
+                        margin-top: -10px;
+                        margin-bottom: 1rem;
+                        font-size: 20px;
+                        font-weight: 500;
+                        color: #19686d
+                    }
+                    .select2.select2-container.select2-container--default.select2-container--focus, .select2.select2-container.select2-container--default {
+                        width: 236px !important;
+                    }
+                    .date_assign_table{
+                        width: 100%;
+                        text-align: inherit;
+                        tbody{
+                            tr{
+                                padding: 10px !important;
+                                display: flex;
+                                td{
+                                    width: 33.3%;
+                                }
+                            }
+                        }
+                    }
+                    .dBtn{
+                        float: right;
+                        margin-top: 15px;
+                    }
+                }
+                .searchBtn{
+                    margin-bottom: 20px;
+                    float: right;
+                }
+            } 
         }
     }
 }

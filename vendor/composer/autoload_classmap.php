@@ -48,6 +48,7 @@ return array(
     'App\\Models\\Administration' => $baseDir . '/app/Models/Administration.php',
     'App\\Models\\Basic' => $baseDir . '/app/Models/Basic.php',
     'App\\Models\\Blood' => $baseDir . '/app/Models/Blood.php',
+    'App\\Models\\Datesetup' => $baseDir . '/app/Models/Datesetup.php',
     'App\\Models\\Designation' => $baseDir . '/app/Models/Designation.php',
     'App\\Models\\FeeFineMaping' => $baseDir . '/app/Models/FeeFineMaping.php',
     'App\\Models\\FeeHead' => $baseDir . '/app/Models/FeeHead.php',
