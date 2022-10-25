@@ -1,3 +1,4 @@
+@import url(https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css);
 .btn-primary {
   color: #fff;
   background-color: #19686d;
@@ -355,6 +356,9 @@
   border: 2px solid #19686d !important;
   color: #19686d !important;
 }
+#startup .container .row .select2.select2-container.select2-container--default.select2-container--focus, #startup .container .row .select2.select2-container.select2-container--default {
+  width: 236px !important;
+}
 
 #basic {
   padding-bottom: 100px;
@@ -513,6 +517,17 @@
   float: right;
   margin-top: 15px;
 }
+#date_config .container .row .tab-content .rkj ul {
+  display: flex;
+}
+#date_config .container .row .tab-content .rkj ul li {
+  list-style: none;
+  width: 33.3%;
+}
+#date_config .container .row .tab-content .rkj .date_assign_table .feesubheadname {
+  border: none;
+  background-color: #f4f6f9;
+}
 #date_config .container .row .tab-content .searchBtn {
   margin-bottom: 20px;
   float: right;
@@ -578,4 +593,37 @@
 
 .select2-container.select2-container--default.select2-container--open {
   z-index: 9999;
+}
+
+#quick_collection .container .row .tab-content {
+  margin-top: 30px;
+}
+#quick_collection .container .row .tab-content .rkj {
+  border: 1px solid #19686d;
+  padding: 35px;
+  padding-bottom: 65px;
+  border-radius: 6px;
+}
+#quick_collection .container .row .tab-content .select2.select2-container.select2-container--default.select2-container--focus, #quick_collection .container .row .tab-content .select2.select2-container.select2-container--default {
+  width: 236px !important;
+}
+#quick_collection .container .row .tab-content .row .dju {
+  margin-top: 50px;
+  border: 1px solid #19686d;
+}
+#quick_collection .container .row .tab-content .row .dju p {
+  font-size: 16px;
+  padding-left: 10px;
+  padding-top: 10px;
+  background-color: #79a7aa;
+  padding-bottom: 10px;
+}
+#quick_collection .container .row .tab-content .row .dju ul {
+  display: flex;
+}
+#quick_collection .container .row .tab-content .row .dju ul :nth-child(1), #quick_collection .container .row .tab-content .row .dju ul :nth-child(2) {
+  width: 10%;
+}
+#quick_collection .container .row .tab-content .row .dju ul li {
+  list-style: none;
 }

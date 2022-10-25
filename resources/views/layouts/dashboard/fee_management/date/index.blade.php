@@ -37,12 +37,12 @@
                     @endif
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-assign" role="tabpanel" aria-labelledby="nav-assign-tab">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="rkj">
-                                        <p>Date Config Form</p>
-                                        <form action="" method="POST" enctype="multipart/form-data">
-                                            @csrf
+                            <form action="{{route('date.store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="rkj">
+                                            <p>Date Config Form</p>
                                             <div class="mb-3">
                                                 <label for="academic_year_id" class="form-label">Academic Year</label>
                                                 <select class="form-control single" name="academic_year_id">
@@ -57,8 +57,21 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="" class="form-label">Class</label>
+                                                <select class="form-control single" multiple name="class_id">
+                                                    <option value="">Select a Class</option>
+                                                    @foreach($startups as $item)
+                                                        @if($item->institute_id ==  Auth::user()->institute_id)
+                                                            @if($item->startup_category_id == 4)
+                                                                <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="" class="form-label">Fee Head</label>
-                                                <select class="form-control feehead_amount" name="feehead_id">
+                                                <select class="form-control feehead_for_date" name="feehead_id">
                                                     <option value=" ">Choose One</option>
                                                     @foreach($feeheads as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
@@ -67,37 +80,38 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-primary searchBtn"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
-                                        </form>
+                                            <!-- <button type="" class="btn btn-primary searchBtn"> <i class="fa-solid fa-magnifying-glass"></i> Search</button> -->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="rkj">
-                                        <p>Assign Fee Payable & Fine Active Date</p>
-                                        <table class="date_assign_table table-bordered">
-                                            <colgroup>
-                                            <col>
-                                            <col>
-                                            <col>
-                                            </colgroup>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Fee Sub Head</td>
-                                                    <td>Fee Payable Date</td>
-                                                    <td>Fine Active Date</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>April</td>
-                                                    <td><input type="date"></td>
-                                                    <td><input type="date"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="col-md-8">
+                                        <div class="rkj">
+                                            <p>Assign Fee Payable & Fine Active Date</p>
+                                            <ul>
+                                                <li>Fee Sub Head</li>
+                                                <li>Fee Payable Date</li>
+                                                <li>Fine Active Date</li>
+                                            </ul>
+                                            <table class="date_assign_table table-bordered">
+                                                <colgroup>
+                                                <col>
+                                                <col>
+                                                <col>
+                                                </colgroup>
+                                                <tbody>
+                                                    
+                                                    <tr>
+                                                        <td><input type="text" class="form-control feesubheadname" value="Select Fee Head" name="feesubhead_id"></td>
+                                                        <td><input type="date" class="form-control" name="payable_date"></td>
+                                                        <td><input type="date" class="form-control" name="fineactive_date"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                                        <button type="submit" class="btn btn-primary dBtn"> <i class="fa-solid fa-magnifying-glass"></i> Save</button>
+                                            <button type="submit" class="btn btn-primary dBtn"> <i class="fa-solid fa-magnifying-glass"></i> Save</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
 

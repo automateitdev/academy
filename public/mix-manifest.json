@@ -3,7 +3,7 @@
     "/js/frontend.js": "/js/frontend.js",
     "/js/dashboard.js": "/js/dashboard.js",
     "/js/student.js": "/js/student.js",
-    "/css/app.css": "/css/app.css",
     "/css/school_dashboard.css": "/css/school_dashboard.css",
+    "/css/app.css": "/css/app.css",
     "/css/frontend.css": "/css/frontend.css"
 }

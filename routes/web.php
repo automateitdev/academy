@@ -18,6 +18,7 @@ use App\Http\Controllers\school\frontend\GalleryController;
 use App\Http\Controllers\school\fee_management\AmountController;
 use App\Http\Controllers\school\fee_management\DateSetupController;
 use App\Http\Controllers\school\fee_management\WaiverController;
+use App\Http\Controllers\school\fee_management\FeeCollectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,7 +163,12 @@ Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
 
 //date config
 Route::get('/FeesManagement/datesetup/index', [DateSetupController::class, 'index'])->name('date.index');
-
+Route::post('/FeesManagement/datesetup/store', [DateSetupController::class, 'store'])->name('date.store');
+Route::get('/getFeesubheadfromFeehead', [DateSetupController::class, 'getFeesubheadfromFeehead']);
 
 //waiver config
 Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');
+
+//////////////  Fee Collection Controller ////////////////////
+Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
+Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);

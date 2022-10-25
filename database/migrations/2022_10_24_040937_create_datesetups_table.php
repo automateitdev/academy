@@ -14,7 +14,14 @@ class CreateDatesetupsTable extends Migration
     public function up()
     {
         Schema::create('datesetups', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('institute_id');
+            $table->bigInteger('academic_year_id');
+            $table->bigInteger('class_id');
+            $table->bigInteger('feehead_id');
+            $table->bigInteger('feesubhead_id');
+            $table->date('payable_date');
+            $table->date('fineactive_date');
             $table->timestamps();
         });
     }
