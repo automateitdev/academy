@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\SectionAssign;
 use App\Models\Startup;
 use App\Models\Student;
+use App\Models\Quickcollection;
+use Illuminate\Support\Facades\DB;
 
 class FeeCollectionController extends Controller
 {
@@ -37,7 +39,11 @@ class FeeCollectionController extends Controller
 
     public function getStudentdata(Request $request)
     {
+        $merge = DB::table('startup_categories')
+                ->join('startups', 'startups.startup_subcategory_id', '=', 'startup_categories.id')
+                ->select('startups.startup_subcategory_id', 'startup_categories.startup_category_name')->get();
         $data = Student::select('std_id', 'roll', 'name', 'group_id', 'std_category_id', 'id')->where('section_id', $request->id)->take(100)->get();
+        // $data = Student::with('startups')->with('startupsubcat')->select('std_id', 'roll', 'name', 'group_id', 'std_category_id', 'id')->where('section_id', $request->id)->take(100)->get();
         return response()->json($data);
     }
     /**
@@ -59,7 +65,9 @@ class FeeCollectionController extends Controller
      */
     public function show($id)
     {
-        //
+        $students = Student::find($id);
+        $users = User::all();
+        return view('layouts.dashboard.fee_management.feecollection.quick.view', compact('students','users'));
     }
 
     /**

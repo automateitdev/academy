@@ -28,7 +28,7 @@
                                         <div class="mb-3">
                                             <label for="section_id" class="form-label">Section</label>
                                             <select class="form-control single quick_student" name="section_id">
-                                                <option value=" ">Choose One</option>
+                                                <option value=" " selected>Choose One</option>
                                                 @foreach($sectionAssignes as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
 
@@ -83,7 +83,7 @@
                                                     <td>Imtiaz maruf</td>
                                                     <td>Science</td>
                                                     <td>General</td>
-                                                    <td><i class="bi bi-yelp"></i></td>
+                                                    <td><a href="#"><button class="btn btn-primary">view</button></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -4,11 +4,15 @@
           <div class="row">
             <div class="col-sm-6 col-lg-3">
               <div class="widget widget-about">
-                @foreach($basics as $item)
+              @php
+                  $heee = DB::table('basics')->latest('id')->first();
+              @endphp
+                @if($heee->logo)
                 <a href="{{route('landingpage')}}">
-                  <img src="{{ asset('logos/'. $item->logo) }}" class="footer-logo" alt="Footer Logo" width="100" height="60">
+                  <img src="{{ asset('images/logo/'. $heee->logo) }}" class="footer-logo" alt="Footer Logo" width="100" height="60">
                 </a>
-                
+                @endif
+                @foreach($basics as $item)
                 <p>{{$item->institute_title}}</p>
                 
                 <div class="social-icons">

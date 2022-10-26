@@ -67,7 +67,7 @@ class BasicSetupController extends Controller
             $file = $request->file('logo');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $file->move('logos/',$filename);
+            $file->move('images/logo/',$filename);
             $basics->logo = $filename;
         }else{
             //return $request;

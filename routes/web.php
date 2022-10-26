@@ -154,7 +154,7 @@ Route::delete('/FeesManagement/mapping/fine/{id}',[FeeMapingController::class,'f
 //fee amount
 Route::get('/FeesManagement/amount/index', [AmountController::class, 'index'])->name('amount.index');
 Route::post('/FeesManagement/amount/feeamount/store', [AmountController::class, 'store'])->name('fee.amount.store');
-Route::get('/FeesManagement/amount/feeamount/eit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
+Route::get('/FeesManagement/amount/feeamount/edit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
 Route::post('/FeesManagement/amount/feeamount/update', [AmountController::class, 'update'])->name('fee.amount.update');
 
 Route::post('/FeesManagement/amount/fineamount/store', [AmountController::class, 'fineStore'])->name('fine.amount.store');
@@ -171,4 +171,5 @@ Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->
 
 //////////////  Fee Collection Controller ////////////////////
 Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
+Route::get('/FeesManagement/feecollection/view/{id}', [FeeCollectionController::class, 'show'])->name('feecollection.view');
 Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);

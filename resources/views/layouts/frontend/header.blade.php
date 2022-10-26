@@ -46,10 +46,13 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="{{route('landingpage')}}">
-                            @foreach($basics as $item)
-                            <img src="{{ asset('logos/'. $item->logo) }}" alt="" width="100" height="60"
+                        @php
+                            $heee = DB::table('basics')->latest('id')->first();
+                        @endphp
+                            @if($heee->logo)
+                            <img src="{{ asset('images/logo/'. $heee->logo) }}" alt="" width="100" height="60"
                                 class="d-inline-block align-text-top">
-                            @endforeach
+                            @endif
                         </a>
                         @foreach($users as $item)
                         <a href="{{route('landingpage')}}" class="clg_name">{{$item->institute_name}}</a>
