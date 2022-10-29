@@ -69,7 +69,7 @@ class FeeMapingController extends Controller
             echo "All data Updated";
         }
 
-        return redirect(route('fee.maping.index'));
+        return redirect(route('fee.maping.index'))->with('message', 'Data Upload Successfully');
     }
 
     public function fine_store(Request $request)

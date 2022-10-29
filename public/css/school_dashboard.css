@@ -108,6 +108,12 @@
   width: 100%;
   height: 100%;
 }
+#app .login .container .row .s-title {
+  margin-top: 10px;
+  font-size: 25px;
+  color: #fff;
+  font-weight: 900;
+}
 #app .login .container .row .cards .card-headers a {
   border: 1px solid #fff;
   padding: 30px 13px 30px 13px;

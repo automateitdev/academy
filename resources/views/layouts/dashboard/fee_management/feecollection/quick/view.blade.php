@@ -75,7 +75,7 @@
                                     <th>Waiver</th>
                                     <th>Fine</th>
                                     <th>Total Payable</th>
-                                    <th>Payed</th>
+                                    <th>Paid</th>
                                     <th>Due</th>
                                 </tr>
                             </thead>

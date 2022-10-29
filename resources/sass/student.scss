@@ -1,0 +1,28 @@
+
+
+.std_portal{
+    padding-top: 100px;
+
+    .payment{
+        .container{
+            .lkjhy{
+                .grandul{
+                    display: flex;
+                    li{
+                        list-style: none;
+                    }
+                    :nth-child(2)
+                    {
+                        float: right;
+                        margin-left: 100px;
+                    }
+                }
+                .btn-sm{
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+// <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>

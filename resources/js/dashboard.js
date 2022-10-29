@@ -1,4 +1,5 @@
-const { isEmpty } = require("lodash");
+const { colors } = require("laravel-mix/src/Log");
+const { isEmpty, isNumber, add } = require("lodash");
 
 //startup start
 $(document).ready(function(){
@@ -165,3 +166,32 @@ $(document).ready(function(){
 });
 
 //quick collection end
+
+
+// Student dashboard start
+$(document).on('click', '#v-pills-payment-tab', function(){
+  var payable;
+  var fine;
+  var waiver;
+  var sum = 0;
+  var paytotal;
+  var grand = 0;
+
+  $(".pay-table tr td").each(function(index) {
+    payable = $('.payable').eq(index).text();
+    fine = $('.fine').eq(index).text();
+    waiver = $('.waiver').eq(index).text();
+    var pyfine = parseFloat(payable) + parseFloat(fine);
+    $('.pay_total').eq(index).html(pyfine - waiver);   
+  });
+
+  $('.pay_total').each(function(index){
+    // paytotal = ;
+    grand += parseInt($('.pay_total').eq(index).text()); 
+    
+  });
+  $('.grandTotal').html(grand);
+  console.log(grand);
+});
+
+// stdent dashboard end

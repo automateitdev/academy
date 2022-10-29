@@ -67,7 +67,12 @@ class FeeStartupController extends Controller
             'institute_id' => 'required',
             'subhead_name' => 'required',
         ]);
-        $feesubheads = Feesubhead::create($request->all());
+
+        $input = new Feesubhead();
+        $input->fee_head_id = '0';
+        $input->institute_id = Auth::user()->institute_id;
+        $input->subhead_name = $request->subhead_name;
+        $input->save(); 
         
         return redirect(route('fee.startup.index'));
     }

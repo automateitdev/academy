@@ -46,7 +46,7 @@
                                             <div class="mb-3">
                                                 <label for="academic_year_id" class="form-label">Academic Year</label>
                                                 <select class="form-control single" name="academic_year_id">
-                                                    <option value=" ">Choose One</option>
+                                                    <option value=" " selected>Choose One</option>
                                                     @foreach($startups as $startup)
                                                         @if($startup->institute_id == Auth::user()->institute_id)
                                                             @if($startup->startup_category_id == "1")
@@ -58,8 +58,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Class</label>
-                                                <select class="form-control single" multiple name="class_id">
-                                                    <option value="">Select a Class</option>
+                                                <select class="form-control single" multiple name="class_id[]">
+                                                    <option value="" selected>Select a Class</option>
                                                     @foreach($startups as $item)
                                                         @if($item->institute_id ==  Auth::user()->institute_id)
                                                             @if($item->startup_category_id == 4)

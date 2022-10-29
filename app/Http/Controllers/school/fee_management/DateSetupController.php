@@ -49,7 +49,7 @@ class DateSetupController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        // dd($request->class_id);
         $this->validate($request,[
             'academic_year_id' => 'required',
             'class_id' => 'nullable',
@@ -70,13 +70,15 @@ class DateSetupController extends Controller
         'fineactive_date' => null,
         ];
         
-        foreach($request->feesubhead_id as $feesubhead_id)
+        foreach($request->feesubhead_id as $key => $feesubhead_id)
         {
             $input['feesubhead_id'] = $feesubhead_id;
-            $input['payable_date'] = $request->payable_date;
-            $input['fineactive_date'] = $request->fineactive_date;
-            // $data = Datesetup::create($input);
-        }   
+            $input['payable_date'] = $request->payable_date[$key];
+            $input['fineactive_date'] = $request->fineactive_date[$key];
+            $data = Datesetup::insert($input);
+        } 
+         
+          
        
     }
         return redirect(route('date.index'))->with('message', 'Data Upload Successfully');

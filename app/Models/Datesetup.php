@@ -17,4 +17,13 @@ class Datesetup extends Model
         'payable_date',
         'fineactive_date'
     ];
+
+    public function feehead()
+    {
+        return $this->belongsTo(FeeHead::class);
+    }
+    public function feesubhead()
+    {
+        return $this->belongsTo(Feesubhead::class);
+    }
 }

@@ -24,6 +24,21 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="fee-mapping" role="tabpanel" aria-labelledby="fee-mapping-tab">
                                 <div class="row">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
                                     <div class="col-sm-4 col-md-4">
                                         <h4>Fee Map</h4>
                                         <div class="wdfGh">
@@ -40,12 +55,7 @@
                                                     <select class="form-control account_category" name="fee_head_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($feeheads as $feehead)
-                                                            @foreach($feesubheadsItem as $item)
-                                                            
-                                                                @if($item->fee_head_id != $feehead->id)
-                                                                    <option value="">{{$feehead->head_name}}</option>
-                                                                @endif
-                                                            @endforeach
+                                                                    <option value="{{$feehead->id}}">{{$feehead->head_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

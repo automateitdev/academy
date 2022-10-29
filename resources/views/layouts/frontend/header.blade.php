@@ -16,6 +16,8 @@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <ul style="float: right;" class="nav">
+                        <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link active" href="{{route('student.auth.index')}}">
+                                Payment </a> </li>
                         <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link active" href="contact.php">
                                 Contact </a> </li>
                         <li class="nav-item">

@@ -34,8 +34,8 @@ final class TranslationPushCommand extends Command
 {
     use TranslationTrait;
 
-    private $providers;
-    private $reader;
+    private TranslationProviderCollection $providers;
+    private TranslationReaderInterface $reader;
     private array $transPaths;
     private array $enabledLocales;
 

@@ -1,0 +1,16 @@
+.std_portal {
+  padding-top: 100px;
+}
+.std_portal .payment .container .lkjhy .grandul {
+  display: flex;
+}
+.std_portal .payment .container .lkjhy .grandul li {
+  list-style: none;
+}
+.std_portal .payment .container .lkjhy .grandul :nth-child(2) {
+  float: right;
+  margin-left: 100px;
+}
+.std_portal .payment .container .lkjhy .btn-sm {
+  float: right;
+}

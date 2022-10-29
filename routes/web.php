@@ -20,6 +20,8 @@ use App\Http\Controllers\school\fee_management\DateSetupController;
 use App\Http\Controllers\school\fee_management\WaiverController;
 use App\Http\Controllers\school\fee_management\FeeCollectionController;
 
+use App\Http\Controllers\student\StudentAuthController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -173,3 +175,18 @@ Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->
 Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
 Route::get('/FeesManagement/feecollection/view/{id}', [FeeCollectionController::class, 'show'])->name('feecollection.view');
 Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
+
+
+
+
+
+
+// ///////////////////// Student Portal ////////////////////////////
+Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
+
+Route::post('/Student_Portal', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
+Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
+
+
+
+
