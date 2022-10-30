@@ -41,39 +41,37 @@ class StudentAuthController extends Controller
         $datesetups = Datesetup::all();
 
 
-        foreach($students as $std){
+        foreach ($students as $std) {
 
-            if($std->institute_id == $ins_id && $std->std_id == $std_id)
-            {
-                return view('layouts.student.dashboard',compact('students', 'datesetups'))
-                ->with('std_id', $std_id)
-                ->with('ins_id', $ins_id);
-            }
-            else{
-                return back()->with('message','Wrong Login Details');
+            if ($std->institute_id == $ins_id && $std->std_id == $std_id) {
+                return view('layouts.student.dashboard', compact('students', 'datesetups'))
+                    ->with('std_id', $std_id)
+                    ->with('ins_id', $ins_id);
+            } else {
+                return back()->with('message', 'Wrong Login Details');
             }
         }
-
     }
 
     public function makepayment()
     {
-        $headers = [ 'Content-Type' => 'application/json', 
-            'Authorization' => 'Basic ZHVVc2VyMjAxNDpkdVVzZXJQYXltZW50MjAxNA==', ]; 
-        $client = new GuzzleClient(); 
-        $body = '{ "AccessUser":{
-            "userName":"duUser2014",
-            "password":"duUserPayment2014" },
-            "invoiceNo":"INV155422121443", "amount":"400", "invoiceDate":"2019-02-26", "accounts": [
-            {
-            "crAccount": "0002634313655", "crAmount": 200
-            }, {
-            "crAccount": "0002634313651", "crAmount": 200
-            } ]
-            }'; 
-        $r = $this->$client->request('POST', 'https://spgapi.sblesheba.com:6314/api/v2/SpgService/GetAccessToken', ['headers' => $headers, 'body' => $body ]); 
-        $response = $r->getBody()->getContents();
-        dd($response);
+        $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
+       // $client->setHttpClient($client);
+        $headers = [
+            // 'Access-Control-Allow-Origin' => 'http://127.0.0.1:8000',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Basic ZHVVc2VyMjAxNDpkdVVzZXJQYXltZW50MjAxNA==',
+        ];
+
+        $data = "{'AccessUser':{'userName':'duUser2014','password':'duUserPayment2014'},'invoiceNo':'INV155422121443','amount':'400','invoiceDate':'2019-02-26','accounts':[{'crAccount':'0002634313655','crAmount':200},{'crAccount':'0002634313651','crAmount':200}]}";
+
+        $res = $client->request(
+            'POST',
+            'https://spgapi.sblesheba.com:6314/api/v2/SpgService/GetAccessToken',
+            ['headers' => $headers, 'body' => $data]
+        );
+        echo $res->getStatusCode(); // 200
+        echo $res->getBody(); //
     }
     /**
      * Show the form for creating a new resource.
