@@ -31,30 +31,48 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
-                                                        <label for="academic_year_id" class="form-label">Section</label>
-                                                        <select class="form-control single" name="academic_year_id">
-                                                            <option value=" ">Choose One</option>
-                                                            @foreach($startups as $startup)
-                                                                @if($startup->institute_id == Auth::user()->institute_id)
-                                                                    @if($startup->startup_category_id == "1")
-                                                                    <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                                    @endif
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
+                                                    <label for="section_id" class="form-label">Section</label>
+                                                    <select class="form-control single waiver_section" name="section_id">
+                                                        <option value=" ">Choose One</option>
+                                                        @foreach($sectionAssignes as $item)
+                                                            @if($item->institute_id == Auth::user()->institute_id)
+
+                                                            @php
+                                                                $startup_data = $startups->where('id', $item->class_id);
+                                                                $startup_data2 = $startups->where('id', $item->section_id);
+                                                                $startup_data3 = $startups->where('id', $item->shift_id);
+                                                            @endphp
+                                                                @foreach($startup_data as $strData)
+                                                                    @foreach($startup_data2 as $strData2)
+                                                                        @foreach($startup_data3 as $strData3)
+                                                                        <option value="{{$item->id}}">
+                                                                            {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
+                                                                        </option>
+                                                                        @endforeach
+                                                                    @endforeach
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
-                                                        <label for="academic_year_id" class="form-label">Group</label>
-                                                        <select class="form-control single" name="academic_year_id">
+                                                        <label for="group_id" class="form-label">Group</label>
+                                                        <select class="form-control single waiver_group" name="group_id">
                                                             <option value=" ">Choose One</option>
-                                                            @foreach($startups as $startup)
-                                                                @if($startup->institute_id == Auth::user()->institute_id)
-                                                                    @if($startup->startup_category_id == "1")
-                                                                    <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                            @foreach($groupassigns as $groupassign)
+                                                                @foreach($sectionAssignes as $sectionAssigne)
+                                                                    @if($sectionAssigne->class_id == $groupassign->class_id)
+                                                                        @foreach($startups as $startup)
+                                                                            @if($startup->institute_id == Auth::user()->institute_id)
+                                                                                @if($startup->startup_category_id == "5")
+                                                                                <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                                                @endif
+                                                                            @endif
+                                                                        @endforeach
                                                                     @endif
-                                                                @endif
+                                                                @endforeach
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -63,8 +81,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
-                                                        <label for="academic_year_id" class="form-label">Category</label>
-                                                        <select class="form-control single" name="academic_year_id">
+                                                        <label for="category_id" class="form-label">Category</label>
+                                                        <select class="form-control single" name="category_id">
                                                             <option value=" ">Choose One</option>
                                                             @foreach($startups as $startup)
                                                                 @if($startup->institute_id == Auth::user()->institute_id)

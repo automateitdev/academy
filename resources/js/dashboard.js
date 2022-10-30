@@ -168,7 +168,9 @@ $(document).ready(function(){
 //quick collection end
 
 
-// Student dashboard start
+// ////////////////////////Student dashboard start
+//payment
+
 $(document).on('click', '#v-pills-payment-tab', function(){
   var payable;
   var fine;
@@ -194,4 +196,36 @@ $(document).on('click', '#v-pills-payment-tab', function(){
   console.log(grand);
 });
 
-// stdent dashboard end
+// ////////////////////Stdent dashboard end
+
+////////////// Waiver start
+
+$(document).ready(function(){
+  $(document).on('change', '.waiver_section', function(){
+    var section_id = $(this).val();
+    console.log(startup_cat_id);
+    var div=$(this).parent().parent().parent();
+          var op=" ";
+
+    $.ajax({
+      type:'get',
+      url: '/getSectionForWaiver',
+      data:{'id':section_id},
+      success: function(data){
+          console.log("dd: "+data);
+        op+='<option value="0" selected disabled>Choose</option>';
+                  for(var i=0;i<data.length;i++){
+                    op+='<option value="'+data[i].id+'">'+data[i].startup_subcategory_name+'</option>';
+        }
+
+        div.find('.startup_subcategory').html(" ");
+        div.find('.startup_subcategory').append(op);
+
+      },
+
+    });
+
+  });
+});
+
+///////////// Waiver end

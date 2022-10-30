@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Startup;
+use App\Models\SectionAssign;
+use App\Models\GroupAssign;
 
 class WaiverController extends Controller
 {
@@ -18,9 +20,16 @@ class WaiverController extends Controller
     {
         $users = User::all();
         $startups = Startup::all();
-        return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups'));
+        $sectionAssignes = SectionAssign::all();
+        $groupassigns = GroupAssign::all();
+        return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns'));
     }
 
+    public function getSectionForWaiver(Request $request)
+    {
+        // $data = AccountGroup::select('account_group', 'id')->where('account_category_id', $request->id)->take(100)->get();
+        // return response()->json($data);
+    }
     /**
      * Show the form for creating a new resource.
      *

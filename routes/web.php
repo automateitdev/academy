@@ -170,6 +170,8 @@ Route::get('/getFeesubheadfromFeehead', [DateSetupController::class, 'getFeesubh
 
 //waiver config
 Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');
+Route::get('/getSectionForWaiver', [WaiverController::class, 'getSectionForWaiver']);
+
 
 //////////////  Fee Collection Controller ////////////////////
 Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
