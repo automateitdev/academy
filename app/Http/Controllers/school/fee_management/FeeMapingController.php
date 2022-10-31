@@ -51,22 +51,36 @@ class FeeMapingController extends Controller
      */
     public function store(Request $request)
     { 
-        foreach($request->feesubhead_id as $key => $feesubhead_id)
-        {
-            $response = Feesubhead::where('id', $feesubhead_id)->update($request->only('fee_head_id'));
-        }
-        if($response){
-            foreach ($request->fund_id as $key => $fund_id) {
-                $response = Fund::where('id', $fund_id)->update($request->only('fee_head_id'));
-            }
-        }
+        // foreach($request->feesubhead_id as $key => $feesubhead_id)
+        // {
+        //     $response = Feesubhead::where('id', $feesubhead_id)->update($request->only('fee_head_id'));
+        // }
+        // if($response){
+        //     foreach ($request->fund_id as $key => $fund_id) {
+        //         $response = Fund::where('id', $fund_id)->update($request->only('fee_head_id'));
+        //     }
+        // }
 
-        if($response){
-            $response = Ledger::where('id', $request->ledger_id)->update($request->only('fee_head_id'));
-        }
+        // if($response){
+        //     $response = Ledger::where('id', $request->ledger_id)->update($request->only('fee_head_id'));
+        // }
+        // $input
 
-        if($response){
-            echo "All data Updated";
+        foreach ($request->feesubhead_id as $key => $feesubhead_id) {
+            $input = [ 
+            'institute_id' => Auth::user()->institute_id,
+            'feehead_id' => $request->feehead_id,
+            'feesubhead_id' => $feesubhead_id,
+            'ledger_id' => $request->ledger_id,
+            'fund_id' => null,
+            ];
+            
+            foreach($request->fund_id as $key => $fund_id)
+            {
+                $input['fund_id'] = $fund_id;
+                $data = FeeMaping::insert($input);
+            } 
+               
         }
 
         return redirect(route('fee.maping.index'))->with('message', 'Data Upload Successfully');

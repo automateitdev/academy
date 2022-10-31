@@ -61,18 +61,12 @@
                                                         <label for="group_id" class="form-label">Group</label>
                                                         <select class="form-control single waiver_group" name="group_id">
                                                             <option value=" ">Choose One</option>
-                                                            @foreach($groupassigns as $groupassign)
-                                                                @foreach($sectionAssignes as $sectionAssigne)
-                                                                    @if($sectionAssigne->class_id == $groupassign->class_id)
-                                                                        @foreach($startups as $startup)
-                                                                            @if($startup->institute_id == Auth::user()->institute_id)
-                                                                                @if($startup->startup_category_id == "5")
-                                                                                <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                                                @endif
-                                                                            @endif
-                                                                        @endforeach
+                                                            @foreach($startups as $startup)
+                                                                @if($startup->institute_id == Auth::user()->institute_id)
+                                                                    @if($startup->startup_category_id == "5")
+                                                                    <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
                                                                     @endif
-                                                                @endforeach
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -82,11 +76,11 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="category_id" class="form-label">Category</label>
-                                                        <select class="form-control single" name="category_id">
+                                                        <select class="form-control single" name="stdcategory_id">
                                                             <option value=" ">Choose One</option>
                                                             @foreach($startups as $startup)
                                                                 @if($startup->institute_id == Auth::user()->institute_id)
-                                                                    @if($startup->startup_category_id == "1")
+                                                                    @if($startup->startup_category_id == "7")
                                                                     <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
                                                                     @endif
                                                                 @endif

@@ -4,7 +4,7 @@
     $day = \Carbon\Carbon::now()->day;
     $section_assigns = App\Models\SectionAssign::all();
     $feeamounts = App\Models\Feeamount::all();
-    
+    $grand = [];
 @endphp
 
 <div class="payment">
@@ -41,13 +41,19 @@
                                                             <td>{{ $datesetup->feesubhead->subhead_name }}</td>
                                                             <td class="payable">{{ $feeam->feeamount }}</td>
                                                             @if ($pa_day > $day)
-                                                                <td class="fine">0</td>
+                                                                <td class="fine">{{ $feeam->fineamount=0 }}</td>
                                                             @else
                                                                 <td class="fine">{{ $feeam->fineamount }}</td>
                                                             @endif
                                                             <td class="waiver">0</td>
                                                             <td class="pay_total"></td>
-                                                        </tr>
+                                                          </tr>
+                                                        @php
+                                                        $payable = $feeam->feeamount;
+                                                        $fine = $feeam->fineamount;
+                                                        $total = $payable + $fine;
+                                                        array_push($grand, $total);
+                                                        @endphp
                                                     @endif
                                                 @endif
                                             @endforeach
@@ -70,8 +76,14 @@
                 </div>
             </div>
             <div class="">
-                <form action="{{ route('makepayment') }}" method="POST">
+                    @php
+                        $erp = array_sum($grand);
+                    @endphp
+                <form action="{{ route('makepayment',["erp"=>$erp]) }}" method="POST">
                     @csrf
+                    
+                    <input type="hidden" value="{{$std_id}}" name="std_id">
+                    <input type="hidden" value="{{$ins_id}}" name="ins_id">
                     <button class="btn-success btn-sm pull-right">Pay Now</button>
                 </form>
             </div>

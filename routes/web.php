@@ -186,8 +186,9 @@ Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']
 // ///////////////////// Student Portal ////////////////////////////
 Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
 
-Route::post('/Student_Portal', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
+Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
 Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
+Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name('confirmation');
 
 
 

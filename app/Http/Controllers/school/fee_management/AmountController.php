@@ -54,8 +54,10 @@ class AmountController extends Controller
 
     public function getFeeheadToFund(Request $request)
     {
-        $data = Fund::select('fund_name', 'id')->where('fee_head_id',$request->id)->take(100)->get();
-    	return response()->json($data);
+        $data = FeeMaping::with('fund')->select('fund_id', 'id')->where('feehead_id',$request->id)->get();
+        $alldata = $data->unique('fund_id');
+        $alldata->values()->all();
+    	return response()->json($alldata);
     }
 
     /**

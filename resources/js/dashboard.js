@@ -72,10 +72,12 @@ $(document).ready(function(){
       url: '/getFeeheadToFund',
       data:{'id':feehead_id},
       success: function(data){
-        
+        console.log(data);
         $('.fund_of_amount>tbody').html(" ");
+
         for(var i=0;i<data.length;i++){ 
-          op+='<tr><td style="width: 300px;"><input type="text" class="insId" value="'+data[i].id+'" name="fund_id[]">'+data[i].fund_name+'</td><td style="width: 100px;"><input type="text" class="form-control fun_amount" name="fund_amount[]"></td></tr>';
+
+          op+='<tr><td style="width: 300px;"><input type="text" class="insId" value="'+data[i].fund.id+'" name="fund_id[]">'+data[i].fund.fund_name+'</td><td style="width: 100px;"><input type="text" class="form-control fun_amount" name="fund_amount[]"></td></tr>';
         }
 
         $('.fund_of_amount>tbody').append(op);
@@ -120,11 +122,34 @@ $(document).ready(function(){
       url: '/getFeesubheadfromFeehead',
       data:{'id':feehead_id},
       success: function(data){
-        
+
+        // var info =  $.makeArray(data);
+        console.log(data);
         $('.date_assign_table>tbody').html(" ");
-        for(var i=0;i<data.length;i++){ 
-          op+='<tr><td><input type="text" class="form-control insId feesubheadname" value="'+data[i].id+'" name="feesubhead_id[]">'+data[i].subhead_name+'</td><td><input type="date" class="form-control" name="payable_date[]"></td><td><input type="date" class="form-control" name="fineactive_date[]"></td></tr>'
+
+        for(var i=0; i < data.length; i++){ 
+          console.log(data);
+          // $.each(data, function(){
+            // $.each(this, function(k, v){
+              // console.log(k);
+              // if(!isEmpty(v.subhead_name)){
+                // console.log(v.subhead_name);
+                op+='<tr><td><input type="text" class="form-control insId feesubheadname" value="'+data[i].feesubhead.id+'" name="feesubhead_id[]">'+data[i].feesubhead.subhead_name+'</td><td><input type="date" class="form-control" name="payable_date[]"></td><td><input type="date" class="form-control" name="fineactive_date[]"></td></tr>';
+              // }
+              
+            // });
+          // });
+          
         }
+
+
+
+        // $.each(data, function() {
+        //   // $.each(this, function(k, v) {
+        //     console.log(data.id);
+        //     // op+='<tr><td><input type="text" class="form-control insId feesubheadname" value="'+v.id+'" name="feesubhead_id[]">'+v.subhead_name+'</td><td><input type="date" class="form-control" name="payable_date[]"></td><td><input type="date" class="form-control" name="fineactive_date[]"></td></tr>';
+        //   // });
+        // });
 
         $('.date_assign_table>tbody').append(op);
 
@@ -140,7 +165,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   $(document).on('change', '.quick_student', function(){
     var section_id=$(this).val();
-    console.log(section_id);
+    
           var op=" ";
           var url;
 
@@ -149,7 +174,7 @@ $(document).ready(function(){
       url: '/getStudentdata',
       data:{'id':section_id},
       success: function(data){
-        console.log(data);
+       
         $('.quickCollection>tbody').html(" ");
         for(var i=0;i<data.length;i++){ 
           // url = "{{route('feecollection.view',"+data[i].id+")}}";
@@ -193,6 +218,7 @@ $(document).on('click', '#v-pills-payment-tab', function(){
     
   });
   $('.grandTotal').html(grand);
+  $('.grandpass').val(grand);
   console.log(grand);
 });
 

@@ -9,6 +9,7 @@ use App\Models\Startup;
 use App\Models\FeeHead;
 use App\Models\Feesubhead;
 use App\Models\Datesetup;
+use App\Models\FeeMaping;
 use Illuminate\Support\Facades\Auth;
 
 class DateSetupController extends Controller
@@ -38,8 +39,10 @@ class DateSetupController extends Controller
 
     public function getFeesubheadfromFeehead(Request $request)
     {
-        $data = Feesubhead::select('subhead_name', 'id')->where('fee_head_id', $request->id)->take(100)->get();
-        return response()->json($data);
+        $data = FeeMaping::with('feesubhead')->select('feesubhead_id', 'id')->where('feehead_id', $request->id)->get();
+        $alldata = $data->unique('feesubhead_id');
+        $alldata = $alldata->values()->all();
+    	return response()->json($alldata);
     }
     /**
      * Store a newly created resource in storage.
@@ -77,9 +80,7 @@ class DateSetupController extends Controller
             $input['fineactive_date'] = $request->fineactive_date[$key];
             $data = Datesetup::insert($input);
         } 
-         
-          
-       
+           
     }
         return redirect(route('date.index'))->with('message', 'Data Upload Successfully');
     }

@@ -93,7 +93,12 @@ class FeeStartupController extends Controller
             'institute_id' => 'required',
             'fund_name' => 'required',
         ]);
-        $funds = Fund::create($request->all());
+        $input = new Fund();
+        $input->institute_id = Auth::user()->institute_id;
+        $input->fee_head_id = '0';
+        $input->fund_name = $request->fund_name;
+        $input->save();
+        // $funds = Fund::create($request->all());
         
         return redirect(route('fee.startup.index'));
     }

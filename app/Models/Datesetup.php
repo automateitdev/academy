@@ -20,7 +20,7 @@ class Datesetup extends Model
 
     public function feehead()
     {
-        return $this->belongsTo(FeeHead::class);
+        return $this->belongsTo(FeeHead::class, 'feehead_id');
     }
     public function feesubhead()
     {

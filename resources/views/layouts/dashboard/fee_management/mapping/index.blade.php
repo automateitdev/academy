@@ -48,11 +48,10 @@
                                                         @php
                                                         $feesubheadsItem = \App\Models\Feesubhead::all();
                                                         
-                                                        
                                                         @endphp
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Fee Head</label>
-                                                    <select class="form-control account_category" name="fee_head_id">
+                                                    <select class="form-control account_category" name="feehead_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($feeheads as $feehead)
                                                                     <option value="{{$feehead->id}}">{{$feehead->head_name}}</option>
@@ -109,19 +108,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($feesubheads->unique('fee_head_id') as $item)
-                                            @if($item->institute_id == Auth::user()->institute_id)
-                                                <tr>
-                                                    <!-- <th scope="row">{{$item->id}}</th> -->
-                                                    <td>{{$item->feehead->head_name}}</td>
-                                                    @foreach($ledgers as $ledger)
-                                                        @if($item->fee_head_id == $ledger->fee_head_id)
-                                                        <td>{{$ledger->ledger_name}}</td>
-                                                        @endif
-                                                    @endforeach
-                                                </tr>
-                                            @endif
-                                            @endforeach
+                                                @foreach($feemappings->unique('feehead_id') as $feemapping)
+                                                    @if($feemapping->institute_id == Auth::user()->institute_id)
+                                                        <tr>
+                                                            <td>{{$feemapping->feehead->head_name}}</td>
+                                                            <td>{{$feemapping->ledger->ledger_name}}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
