@@ -24,6 +24,8 @@ a{
     position: relative;
     z-index: 3;
     .top-nav{
+        background-color: #19686d;
+        color: #fff;
         .container{
             .row{
                 .top-nav-left {
@@ -32,7 +34,12 @@ a{
                 .nav{
                     .nav-item{
                         .nav-link{
-                            color: #3091f2 !important;
+                            color: #fff !important;
+                        }
+                        .login_part{
+                            a{
+                                color: #fff !important;
+                            }
                         }
                     }
                 }
@@ -48,17 +55,51 @@ a{
         }
     }
     .nav-down{
-        background-color: #3091f2 !important;
+        background-color: #fff !important;
+        height: 130px;
+        .left_logo, .right_logo {
+            text-align: center;
+            margin-top: 22px;
+        }
+        .left_logo{
+            display: flex;
+            float: right;
+        }
+        .right_logo{
+            display: flex;
+            float: left;
+        }
+
+        h1{
+            margin-top: 22px;
+            font-size: 35px;
+            color: #19686d;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+        p{
+            margin: 0;
+            font-size: 20px;
+            color: #19686d;
+        }
+    }
+    .menu{
+        background-color: #19686d;
+        color: #fff;
+        height: 40px;
         .bg-light {
-            background-color: #3091f2 !important;
+            background-color: #19686d !important;
         }
         .navbar-expand-lg .navbar-collapse {
             flex: 0.8 1 auto;
         }
         .nav-link {
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 700;
             line-height: 14px;
+        }
+        .nav-item.dropdown:hover {
+            border-bottom: 1px solid #fff;
         }
         .dropdown-menu.subcatEcom {
             margin-left: -40px;
@@ -73,37 +114,56 @@ a{
             font-size: 30px;
             font-weight: 700;
         }
-
-    }
-
-    .dropdown-menu li a {
-        text-align: center;
-    }
-    .dropdown-menu[data-bs-popper] {
-        margin-top: 2rem;
-    }
-    .collapse{
-        .navbar-nav{
-            .nav-item{
-                a{
-                    color: #fff !important;
-                }
-                .subcatEcom{
-                    li{
-                        a{
-                            color: #000 !important;
+        .dropdown-menu li a {
+            text-align: center;
+        }
+        .dropdown-menu[data-bs-popper] {
+            margin-top: 2rem;
+        }
+        .collapse{
+            .navbar-nav{
+                .nav-item{
+                    a{
+                        color: #fff !important;
+                    }
+                    .subcatEcom{
+                        li{
+                            a{
+                                color: #000 !important;
+                            }
                         }
                     }
                 }
             }
         }
+        .navbar-expand-lg .navbar-nav {
+            flex-direction: row;
+            position: absolute;
+            display: flex;
+            float: left;
+            margin-top: 18px;
+        }
     }
-    .navbar-expand-lg .navbar-nav {
-        flex-direction: row;
-        position: absolute;
-        right: 35px;
-        margin-right: 20px;
+    .news{
+        .container-fluid{
+            .dfr{
+                background-color: #34cfdf;
+                p{
+                    font-size: 20px;
+                    margin: 0;
+                    font-weight: 500;
+                    color: #fff;
+                }
+            }
+            .marquee{
+                -webkit-animation: righttoleft 4s linear;
+                color: #19686d;
+                font-weight: 700;
+                font-size: 20px;
+            }
+        }
     }
+    
     }
 
 
@@ -226,8 +286,7 @@ a{
                     }
                     img{
                         // min-height: 100px;
-                        height: 250px;
-                        width: 375px;
+                        height: 450px;
                     }
                 } 
             }
@@ -388,7 +447,7 @@ a{
 
 // footer
 #footer{
-    background-color: #f2f9fb;
+    background-color: #19686d;
     .footer-middle{
         padding: 4.7rem 0 0;
         .container{
@@ -400,11 +459,12 @@ a{
                         img{
                             margin-bottom: 2rem;
                             margin-top: -.8rem;
+                            height: 80px;
                         }
                     }
                     p:last-of-type {
                         margin-bottom: 3.2rem;
-                        color: #000;
+                        color: #fff;
                     }
                     .social-icon, .social-icons {
                         display: flex;
@@ -418,7 +478,7 @@ a{
                         font-size: 1.6rem;
                         width: 4rem;
                         height: 4rem;
-                        color: #777;
+                        color: #fff;
                         margin: 0;
                         background-color: transparent;
                         border: .1rem solid #e1e2e6;
@@ -434,7 +494,7 @@ a{
                         }
                     }
                     .widget-title {
-                        color: #000;
+                        color: #fff;
                         font-weight: 500;
                         font-size: 1.3rem;
                         letter-spacing: -.01em;
@@ -454,7 +514,7 @@ a{
                             font-weight: 400;
                             font-family: Roboto;
                             letter-spacing: 0;
-                            color: #3d25e6 !important;
+                            color: #fff !important;
                             text-decoration: underline;
                         }
                     }
@@ -463,7 +523,7 @@ a{
                         font-weight: 400;
                         font-family: Roboto;
                         letter-spacing: 0;
-                        color: #000 !important;
+                        color: #fff !important;
                         text-decoration: none;
                     }
                 }
@@ -473,7 +533,7 @@ a{
     .footer-bottom p {
         text-align: center;
         padding: 12px;
-        color: #000;
+        color: #fff;
         border-top: 1px solid #777;
         margin-bottom: 0;
     }
@@ -486,4 +546,22 @@ a{
 
 #admins{
     padding-bottom: 50px;
+}
+
+#corner{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .container{
+        .row{
+            table{
+                tbody{
+                    tr{
+                        td{
+                            width: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

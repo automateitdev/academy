@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Datesetup;
+use App\Models\Paymentupdate;
+use App\Models\Accountinfo;
 use GuzzleHttp\Client as GuzzleClient;
 
 use function Ramsey\Uuid\v1;
@@ -51,16 +53,40 @@ class StudentAuthController extends Controller
         }
     }
 
+    // AE-institute_id-invoicedate-student_id-year-serial_no
+
     public function makepayment(Request $request)
     {
+        $std_id = $request->std_id;
+        $ins_id = $request->ins_id;
+        $year = $request->year;
+        $day = $request->day;
+        $invoice = 'AE'.$ins_id.''.$day.''.$std_id.''.$year.'';
+
+        $amount = $request->erp;
+        $invoicedate = $request->date;
+        $accountInfo = Accountinfo::where('institute_id', $ins_id)->first();
+        $applicantName = Student::where('institute_id', $ins_id)->where('std_id', $std_id)->first();
+        // dd($applicantName['name']);
+
+        
+
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic YTJpQHBtbzpzYlBheW1lbnQwMDAy',
         ];
 
-        $data = "{'AccessUser':{'userName':'a2i@pmo','password':'sbPayment0002'},'invoiceNo':'INV155422121443','amount':'400','invoiceDate':'2019-02-26','accounts':[{'crAccount':'0002601020871','crAmount':400}]}";
+        $data = '{"AccessUser":
+            {"userName":"a2i@pmo",
+            "password":"sbPayment0002"
+            },
+            "invoiceNo":"'.$invoice.'",
+            "amount":"'.$amount.'",
+            "invoiceDate":"'.$invoicedate.'",
+            "accounts":[{"crAccount":"'.$accountInfo['crAccount'].'","crAmount":'.$amount.'}]}';
 
+            // dd($data);
         // API 1
         $res = $client->request(
             'POST',
@@ -68,19 +94,29 @@ class StudentAuthController extends Controller
             ['headers' => $headers, 'body' => $data]
         );
         $token = json_decode($res->getBody(), true);
-        
-        $data_two = 
-        '{ "authentication":{
-        "apiAccessUserId": "a2i@pmo",
-        "apiAccessToken": "'.$token['access_token'].'"
-        },
-        "referenceInfo": {
-        "InvoiceNo": "INV155422121443", "invoiceDate": "2019-02-26", "returnUrl": "demo.academyims.com", "totalAmount": "400", "applicentName": "Md. Hasan Monsur", "applicentContactNo": "01710563521", "extraRefNo": "2132"
-        }, "creditInformations": [
-        {
-        "slno": "1",
-        "crAccount": "0002601020871", "crAmount": "400", "tranMode": "TRN"}]}';
-        
+
+        $data_two =
+            '{ "authentication":{
+                "apiAccessUserId": "a2i@pmo",
+                "apiAccessToken": "' . $token['access_token'] . '"
+            },
+            "referenceInfo": {
+                "InvoiceNo": "'.$invoice.'", 
+                "invoiceDate": "'.$invoicedate.'", 
+                "returnUrl": "http://127.0.0.2:8002/confirmation", 
+                "totalAmount": "'.$amount.'", 
+                "applicentName": "'.$applicantName['name'].'", 
+                "applicentContactNo": "'.$applicantName['mobile_no'].'", 
+                "extraRefNo": "'.$accountInfo['extraRefNo'].'"
+            }, 
+            "creditInformations": [
+            {
+                "slno": "1",
+                "crAccount": "'.$accountInfo['crAccount'].'", 
+                "crAmount": "'.$amount.'", 
+                "tranMode": "'.$accountInfo['tranMode'].'"}]}';
+
+            dd($data_two);
         //API 2
         $res_two = $client->request(
             'POST',
@@ -105,8 +141,8 @@ class StudentAuthController extends Controller
             'Authorization' => 'Basic YTJpQHBtbzpzYlBheW1lbnQwMDAy',
         ];
 
-        $data = '{"session_Token": "'.$request->session_token.'"}';
-        
+        $data = '{"session_Token": "' . $request->session_token . '"}';
+
         // API 3
         $res = $client->request(
             'POST',
@@ -114,43 +150,52 @@ class StudentAuthController extends Controller
             ['headers' => $headers, 'body' => $data]
         );
         $result = json_decode($res->getBody(), true);
-        
+
+
+        $input = new Paymentupdate();
+        $input->session_token = $request->session_token;
+        $input->status = $result['status'];
+        $input->msg = $result['msg'];
+        $input->transaction_id = $result['TransactionId'];
+        $input->transaction_date = $result['TransactionDate'];
+        $input->invoice_no = $result['InvoiceNo'];
+        $input->invoice_date = $result['InvoiceDate'];
+        $input->br_code = $result['BrCode'];
+        $input->applicant_name = $result['ApplicantName'];;
+        $input->applicant_no = $result['ApplicantContactNo'];
+        $input->total_amount = $result['TotalAmount'];
+        $input->pay_status = $result['PaymentStatus'];
+        $input->pay_mode = $result['PayMode'];
+        $input->pay_amount = $result['PayAmount'];
+        $input->vat = $result['Vat'];
+        $input->comission = $result['Commission'];
+        $input->scroll_no = $result['ScrollNo'];
+        $input->save();
+
+
         $finalheaders = [
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic YTJpQHBtbzpzYlBheW1lbnQwMDAy',
         ];
 
-        $final_data = '{ "Credentials": {
-            "userName":"a2i@pmo", 
-            "password":"sbPayment0002"
-            }, 
+        $final_data = '{ 
             "data": {
-                "session_Token": "'.$request->session_token.'" ,
-                "TransactionId": "'.$result['TransactionId'].'", 
-                "TransactionDate": "'.$result['TransactionDate'].'", 
-                "InvoiceNo": "'.$result['InvoiceNo'].'", 
-                "InvoiceDate": "'.$result['InvoiceDate'].'",
-                "BrCode": "'.$result['BrCode'].'",
-                "ApplicantName": "'.$result['ApplicantName'].'", 
-                "ApplicantContactNo": "'.$result['ApplicantContactNo'].'", 
-                "TotalAmount": "'.$result['TotalAmount'].'", 
-                "PaymentStatus": "'.$result['PaymentStatus'].'",
-                "PayMode": "'.$result['PayMode'].'",
-                "PayAmount": "'.$result['PayAmount'].'",
-                "Vat": "'.$result['Vat'].'",
-                "Commission": "'.$result['Commission'].'",
-                "ScrollNo": "'.$result['ScrollNo'].'"
+                "auth_code": "Basic YTJpQHBtbzpzYlBheW1lbnQwMDAy",
+                "trax_id": "' . $result['TransactionId'] . '",
+                "invoice_no": "' . $result['InvoiceNo'] . '",
+                "session_token": "' . $request->session_token . '"
                 } 
             }';
 
-            
+        // dd($final_data);
+
         $final = $client->request(
             'POST',
-            'demo.academyims.com/api/DataUpdate',
+            'http://127.0.0.1:8002/api/dataupdate',
             ['headers' => $finalheaders, 'body' => $final_data]
         );
-        dd($final);
-        
+
+
         // return redirect();
         // return view('layouts.student.confirmation', compact('receive_token','status'));
     }
@@ -160,16 +205,13 @@ class StudentAuthController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function dataupdate(Request $request)
-     {
-        // dd($request);
-        return $request;
-     }
+
 
     public function create()
     {
         //
-       // https://spg.sblesheba.com:6313/Sbl/ConfirmAccountPayment/demo.academyims.com?session_token=86585c3599c8fe86045b506f36fdbd5ec4d7f5e8357&status=success
+        // https://spg.sblesheba.com:6313/Sbl/ConfirmAccountPayment/demo.academyims.com?session_token=86585c3599c8fe86045b506f36fdbd5ec4d7f5e8357&status=success
+        //https://spg.sblesheba.com:6313/Sbl/ConfirmAccountPayment/23eb9514a7fb35d8917ad4a19c1e641a0dec62ac689
     }
 
 

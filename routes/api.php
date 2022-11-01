@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\api\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\student\StudentAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,8 @@ use App\Http\Controllers\student\StudentAuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('/DataUpdate', [StudentAuthController::class, 'dataupdate']);
+Route::post('/dataupdate', [ApiController::class, 'dataupdate']);

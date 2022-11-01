@@ -16,9 +16,9 @@
   </button>
 </div>
 
-<div class="carousel-top">
+<!-- <div class="carousel-top">
     <h1 class="col_name">Tongi Govt. College, Gazipur</h1>
     <a href="#" class="his_btn">
         <button class="btn">History</button>
     </a>
-</div>
+</div> -->

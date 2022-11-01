@@ -9,7 +9,7 @@
                                 <td>
                                     <h3> স্বাধীনতার সুবর্ণজয়ন্তী কর্নার</h3>
                                     <p>বাংলাদেশের স্বাধীনতা ও বিজয় অর্জনের ৫০ বছর পূর্তি </p>    <br>
-                                    <a href="#" class="btn btn-danger" style="background:#e91e63">সুবর্ণজয়ন্তী কর্নার</a>
+                                    <a href="{{route('corner')}}" class="btn btn-danger" style="background:#e91e63">সুবর্ণজয়ন্তী কর্নার</a>
                                 </td>
                                 <td>
                                     <br>

@@ -1,5 +1,7 @@
 @php
+    $in_date = \Carbon\Carbon::now()->format('d-m-Y');
     $todate = \Carbon\Carbon::now()->format('Y-m-d');
+    $year = \Carbon\Carbon::now()->year;
     $month = \Carbon\Carbon::now()->month;
     $day = \Carbon\Carbon::now()->day;
     $section_assigns = App\Models\SectionAssign::all();
@@ -26,16 +28,16 @@
                         @if ($student->std_id == $std_id && $student->institute_id == $ins_id)
                             @foreach ($section_assigns as $section_assign)
                                 @if ($section_assign->id == $student->section_id)
-                                    @foreach ($feeamounts as $feeam)
+                                    @foreach ($feeamounts->unique('class_id') as $feeam)
                                         @if ($student->std_category_id == $feeam->stdcategory_id && $section_assign->class_id == $feeam->class_id)
                                             @foreach ($datesetups as $datesetup)
                                                 @if ($datesetup->class_id == $feeam->class_id && $student->academic_year_id == $datesetup->academic_year_id)
                                                     @php
-                                                        $pa_date = \Carbon\Carbon::parse($datesetup->payable_date)->format('m');
+                                                        $pa_month = \Carbon\Carbon::parse($datesetup->payable_date)->format('m');
                                                         $pa_day = \Carbon\Carbon::parse($datesetup->payable_date)->format('d');
                                                         
                                                     @endphp
-                                                    @if ($todate >= $datesetup->payable_date || $pa_date == $month)
+                                                    @if ($todate >= $datesetup->payable_date || $pa_month == $month)
                                                         <tr>
                                                             <td>{{ $datesetup->feehead->head_name }}</td>
                                                             <td>{{ $datesetup->feesubhead->subhead_name }}</td>
@@ -84,6 +86,9 @@
                     
                     <input type="hidden" value="{{$std_id}}" name="std_id">
                     <input type="hidden" value="{{$ins_id}}" name="ins_id">
+                    <input type="hidden" value="{{$day}}" name="day">
+                    <input type="hidden" value="{{$year}}" name="year">
+                    <input type="hidden" value="{{$in_date}}" name="date">
                     <button class="btn-success btn-sm pull-right">Pay Now</button>
                 </form>
             </div>

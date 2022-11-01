@@ -48,6 +48,7 @@ Route::get('/teachers', [MainController::class, 'getTeachers'])->name('teachers'
 Route::get('/teachers/{department}', [MainController::class, 'getTeachers'])->name('teachers');
 Route::get('/departments', [MainController::class, 'getDepartments'])->name('departments');
 Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->name('department');
+Route::get('/sobornojointy', [MainController::class, 'corner'])->name('corner');
 
 
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
@@ -170,7 +171,9 @@ Route::get('/getFeesubheadfromFeehead', [DateSetupController::class, 'getFeesubh
 
 //waiver config
 Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');
+// Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'search'])->name('waiver.search');
 Route::get('/getSectionForWaiver', [WaiverController::class, 'getSectionForWaiver']);
+
 
 
 //////////////  Fee Collection Controller ////////////////////

@@ -73,6 +73,14 @@ class MainController extends Controller
         $department = "get data by department $request->name";
         return view('per_department', compact('department', 'categories', 'subcategories'));
     }
+    public function corner()
+    {
+        $basics = Basic::all();
+        $users = User::all();
+        $categories = category::all();
+        $subcategories = subcategory::all();
+        return view('layouts.frontend.corner', compact('users', 'categories', 'subcategories', 'basics'));
+    }
     /**
      * Display a listing of the resource.
      *

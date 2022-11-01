@@ -200,8 +200,6 @@ $(document).on('click', '#v-pills-payment-tab', function(){
   var payable;
   var fine;
   var waiver;
-  var sum = 0;
-  var paytotal;
   var grand = 0;
 
   $(".pay-table tr td").each(function(index) {
@@ -209,7 +207,7 @@ $(document).on('click', '#v-pills-payment-tab', function(){
     fine = $('.fine').eq(index).text();
     waiver = $('.waiver').eq(index).text();
     var pyfine = parseFloat(payable) + parseFloat(fine);
-    $('.pay_total').eq(index).html(pyfine - waiver);   
+    $('.pay_total').eq(index).html(pyfine - waiver);  
   });
 
   $('.pay_total').each(function(index){
@@ -219,7 +217,6 @@ $(document).on('click', '#v-pills-payment-tab', function(){
   });
   $('.grandTotal').html(grand);
   $('.grandpass').val(grand);
-  console.log(grand);
 });
 
 // ////////////////////Stdent dashboard end
@@ -227,9 +224,13 @@ $(document).on('click', '#v-pills-payment-tab', function(){
 ////////////// Waiver start
 
 $(document).ready(function(){
-  $(document).on('change', '.waiver_section', function(){
-    var section_id = $(this).val();
-    console.log(startup_cat_id);
+  $(document).on('change', '.searchwaiver', function(){
+    var section_id = $('.waiver_section').val();
+    var group_id = $('.waiver_group').val();
+    var stdcategory_id = $('.waiver_cat').val();
+    var academic_yr_id = $('.waiver_y').val();
+    console.log("dfg");
+    console.log(startup_cat_id, group_id, stdcategory_id, academic_yr_id);
     var div=$(this).parent().parent().parent();
           var op=" ";
 
@@ -255,3 +256,5 @@ $(document).ready(function(){
 });
 
 ///////////// Waiver end
+
+

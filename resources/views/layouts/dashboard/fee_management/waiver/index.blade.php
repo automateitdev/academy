@@ -26,7 +26,7 @@
                                 <div class="col-md-7 offset-md-2">
                                     <div class="rkj">
                                         <p>Waiver Assign Form</p>
-                                        <form action="">
+                                        <form action="{{route('waiver.search')}}" method="get">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -76,7 +76,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="category_id" class="form-label">Category</label>
-                                                        <select class="form-control single" name="stdcategory_id">
+                                                        <select class="form-control single waiver_cat" name="stdcategory_id">
                                                             <option value=" ">Choose One</option>
                                                             @foreach($startups as $startup)
                                                                 @if($startup->institute_id == Auth::user()->institute_id)
@@ -91,7 +91,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label for="academic_year_id" class="form-label">Academic Year</label>
-                                                        <select class="form-control single" name="academic_year_id">
+                                                        <select class="form-control single waiver_yr" name="academic_year_id">
                                                             <option value=" ">Choose One</option>
                                                             @foreach($startups as $startup)
                                                                 @if($startup->institute_id == Auth::user()->institute_id)
@@ -104,7 +104,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary searchBtn"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                                            <button type="submit" class="btn btn-primary searchwaiver"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
                                         </form>
                                     </div>
                                 </div>

@@ -1,17 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\school\fee_management;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Startup;
-use App\Models\SectionAssign;
-use App\Models\GroupAssign;
-use App\Models\Student;
+use App\Models\Paymentupdate;
 
-class WaiverController extends Controller
+class ApiController extends Controller
 {
+    public function dataupdate(Request $request)
+     {
+        dd($request);
+        $paymentupdates = Paymentupdate::where('transaction_id', $request->TransactionId)->get();
+
+        foreach($paymentupdates as $pay)
+        {
+            // dd($request);
+            if($pay->session_token == $request->session_Token 
+                && $pay->transaction_id == $request->TransactionId
+                && $pay->invoice_no == $request->InvoiceNo
+                && $pay->applicant_no == $request->ApplicantContactNo
+                && $pay->total_amount == $request->TotalAmount
+                && $pay->pay_status == $request->PaymentStatus
+             )
+             {
+                echo "success";
+             }
+             else{
+                echo "fail";
+             }
+        }
+        return $request;
+     }
     /**
      * Display a listing of the resource.
      *
@@ -19,29 +39,9 @@ class WaiverController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $startups = Startup::all();
-        $sectionAssignes = SectionAssign::all();
-        $groupassigns = GroupAssign::all();
-        return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns'));
+        //
     }
 
-    public function getSectionForWaiver(Request $request)
-    {
-        // $data = AccountGroup::select('account_group', 'id')->where('account_category_id', $request->id)->take(100)->get();
-        // return response()->json($data);
-    }
-    public function search(Request $request)
-    {
-        $search_text = $_GET['section_id'];
-
-        $students = Student::where('section_id','LIKE','%'.$search_text.'%')
-                    ->orWhere('group_id','LIKE','%'.$search_text.'%')
-                    ->orWhere('academic_yr_id','LIKE','%'.$search_text.'%')
-                    ->orWhere('std_category_id','LIKE','%'.$search_text.'%')
-                    ->paginate(120);
-        dd($students);
-    }
     /**
      * Show the form for creating a new resource.
      *
