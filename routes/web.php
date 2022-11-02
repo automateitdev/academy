@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\website\MainController;
 use App\Http\Controllers\school\frontend\MenuController;
 use App\Http\Controllers\school\master\StartupController;
@@ -40,7 +42,12 @@ Route::get('/', [MainController::class, 'index'])->name('landingpage');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', [AuthController::class,'index'])->name('login');
+Route::post('/login', [AuthController::class,'authenticate'])->name('login');
+Route::get('login', [AuthController::class,'index'])->name('loginFail');
+Route::get('logout', [AuthController::class,'logout'])->name('logout');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/glance', [MainController::class, 'getGlance'])->name('glance');
 Route::get('/person/{person}', [MainController::class, 'getPerson'])->name('person');
