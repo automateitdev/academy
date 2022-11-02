@@ -27,6 +27,7 @@
                         </thead>
                         <tbody>
                             @foreach($administrations as $item)
+                            @if($item->institute_id == Auth::user()->institute_id)
                             <tr>
                                 <th scope="row">{{$item->id}}</th>
                                 <td>{{$item->name}}</td>
@@ -58,6 +59,7 @@
                                     </button>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                         </table>

@@ -104,7 +104,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
       @foreach($users as $item)
+        @if($item->institute_id == Auth::user()->institute_id)
           <p>Copyright© {{$item->institute_name}} 2022, Design & Developed by Automate IT Limited.</p>
+        @endif
       @endforeach
   </footer>
 

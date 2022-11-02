@@ -28,17 +28,19 @@
                                     </thead>
                                     <tbody>
                                         @foreach($categories as $cat)
-                                            <tr>
-                                                <th scope="row">{{$cat->id}}</th>
-                                                <td>{{$cat->name}}</td>
-                                                <td>
-                                                @foreach($subcategories as $subcat)
-                                                    @if($cat->id == $subcat->cat_id)
-                                                        <p>{{$subcat->subcat_name}}</p>
-                                                    @endif
-                                                @endforeach
-                                                </td>
-                                            </tr>
+                                            @if($cat->institute_id == Auth::user()->institute_id)
+                                                <tr>
+                                                    <th scope="row">{{$cat->id}}</th>
+                                                    <td>{{$cat->name}}</td>
+                                                    <td>
+                                                    @foreach($subcategories as $subcat)
+                                                        @if($cat->id == $subcat->cat_id)
+                                                            <p>{{$subcat->subcat_name}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
