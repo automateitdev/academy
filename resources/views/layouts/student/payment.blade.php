@@ -12,7 +12,7 @@
 <div class="payment">
     <div class="container">
         <div class="lkjhy">
-            <table class="table table-bordered pay-table">
+            <table class="table table-bordered table-responsive table-striped pay-table">
                 <thead>
                     <tr>
                         <th>Fee Head</th>
@@ -43,18 +43,18 @@
                                                             <td>{{ $datesetup->feesubhead->subhead_name }}</td>
                                                             <td class="payable">{{ $feeam->feeamount }}</td>
                                                             @if ($pa_day > $day)
-                                                                <td class="fine">{{ $feeam->fineamount=0 }}</td>
+                                                                <td class="fine">{{ $feeam->fineamount = 0 }}</td>
                                                             @else
                                                                 <td class="fine">{{ $feeam->fineamount }}</td>
                                                             @endif
                                                             <td class="waiver">0</td>
                                                             <td class="pay_total"></td>
-                                                          </tr>
+                                                        </tr>
                                                         @php
-                                                        $payable = $feeam->feeamount;
-                                                        $fine = $feeam->fineamount;
-                                                        $total = $payable + $fine;
-                                                        array_push($grand, $total);
+                                                            $payable = $feeam->feeamount;
+                                                            $fine = $feeam->fineamount;
+                                                            $total = $payable + $fine;
+                                                            array_push($grand, $total);
                                                         @endphp
                                                     @endif
                                                 @endif
@@ -68,28 +68,27 @@
                 </tbody>
             </table>
             <div class="row">
-                <div class="col-md-6"></div>
                 <!-- <div class="col-md-4"></div> -->
-                <div class="col-md-6">
-                    <ul class="grandul">
+                <div class="col-md-3 offset-9">
+                    <ul class="grandul pull-right">
                         <li>Grand Total</li>
                         <li class="grandTotal"></li>
                     </ul>
                 </div>
             </div>
             <div class="">
-                    @php
-                        $erp = array_sum($grand);
-                    @endphp
-                <form action="{{ route('makepayment',["erp"=>$erp]) }}" method="POST">
+                @php
+                    $erp = array_sum($grand);
+                @endphp
+                <form action="{{ route('makepayment', ['erp' => $erp]) }}" method="POST">
                     @csrf
-                    
-                    <input type="hidden" value="{{$std_id}}" name="std_id">
-                    <input type="hidden" value="{{$ins_id}}" name="ins_id">
-                    <input type="hidden" value="{{$day}}" name="day">
-                    <input type="hidden" value="{{$year}}" name="year">
-                    <input type="hidden" value="{{$in_date}}" name="date">
-                    <button class="btn-success btn-sm pull-right">Pay Now</button>
+
+                    <input type="hidden" value="{{ $std_id }}" name="std_id">
+                    <input type="hidden" value="{{ $ins_id }}" name="ins_id">
+                    <input type="hidden" value="{{ $day }}" name="day">
+                    <input type="hidden" value="{{ $year }}" name="year">
+                    <input type="hidden" value="{{ $in_date }}" name="date">
+                    <button class="btn btn-success btn-sm pull-right">Pay Now</button>
                 </form>
             </div>
         </div>

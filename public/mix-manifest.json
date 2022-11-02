@@ -5,7 +5,7 @@
     "/js/student.js": "/js/student.js",
     "/js/payment.js": "/js/payment.js",
     "/css/school_dashboard.css": "/css/school_dashboard.css",
-    "/css/app.css": "/css/app.css",
     "/css/student.css": "/css/student.css",
-    "/css/frontend.css": "/css/frontend.css"
+    "/css/frontend.css": "/css/frontend.css",
+    "/css/app.css": "/css/app.css"
 }
