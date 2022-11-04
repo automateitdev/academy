@@ -54,7 +54,9 @@
                                                     <select class="form-control account_category" name="feehead_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($feeheads as $feehead)
-                                                                    <option value="{{$feehead->id}}">{{$feehead->head_name}}</option>
+                                                            @if($feehead->institute_id == Auth::user()->institute_id)
+                                                            <option value="{{$feehead->id}}">{{$feehead->head_name}}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                 </div>

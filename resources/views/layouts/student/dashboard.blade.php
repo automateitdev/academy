@@ -28,8 +28,8 @@
                         @foreach ($students as $student)
                             @if ($student->std_id == $std_id)
                                 <li class="text-lg">Name : {{ $student->name }}</li>
-                                <li class="text-lg">Name : {{ $student->name }}</li>
-                                <li class="text-lg">Name : {{ $student->name }}</li>
+                                <li class="text-lg">Student ID : {{ $student->std_id }}</li>
+                                <li class="text-lg">Institute ID : {{ $student->institute_id }}</li>
                             @endif
                         @endforeach
                     </ul>

@@ -20,60 +20,60 @@
         </div>
         <div class="col-md-4">
             <div class="row">
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-bullhorn fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Notice</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Notice</a>
                     </div>
                 </div>
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-square-poll-horizontal fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Results</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Results</a>
                     </div>
                 </div>
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-table fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Routine</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Routine</a>
                     </div>
                 </div>
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-landmark fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Departments</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Departments</a>
                     </div>
                 </div>
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-person-chalkboard fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Teachers</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Teachers</a>
                     </div>
                 </div>
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-people-group fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Students</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Students</a>
                     </div>
                 </div>
-                <div class="card col-md-6 p-2 "
-                    style="background-color:#F1F8E9; border:10px solid #fff; border-radius:5px; color:#19686d">
+                <div class="card col-md-4 p-2 "
+                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-money-check fa-2xl"></i>
                         <br>
-                        <a href="" class="text-lg text-uppercase m-2" style="font-weight: 700">Payment</a>
+                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Payment</a>
                     </div>
                 </div>
 

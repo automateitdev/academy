@@ -129,27 +129,8 @@ $(document).ready(function(){
 
         for(var i=0; i < data.length; i++){ 
           console.log(data);
-          // $.each(data, function(){
-            // $.each(this, function(k, v){
-              // console.log(k);
-              // if(!isEmpty(v.subhead_name)){
-                // console.log(v.subhead_name);
-                op+='<tr><td><input type="text" class="form-control insId feesubheadname" value="'+data[i].feesubhead.id+'" name="feesubhead_id[]">'+data[i].feesubhead.subhead_name+'</td><td><input type="date" class="form-control" name="payable_date[]"></td><td><input type="date" class="form-control" name="fineactive_date[]"></td></tr>';
-              // }
-              
-            // });
-          // });
-          
+          op+='<tr><td><input type="text" class="form-control insId feesubheadname" value="'+data[i].feesubhead.id+'" name="feesubhead_id[]">'+data[i].feesubhead.subhead_name+'</td><td><input type="date" class="form-control" name="payable_date[]"></td><td><input type="date" class="form-control" name="fineactive_date[]"></td></tr>';
         }
-
-
-
-        // $.each(data, function() {
-        //   // $.each(this, function(k, v) {
-        //     console.log(data.id);
-        //     // op+='<tr><td><input type="text" class="form-control insId feesubheadname" value="'+v.id+'" name="feesubhead_id[]">'+v.subhead_name+'</td><td><input type="date" class="form-control" name="payable_date[]"></td><td><input type="date" class="form-control" name="fineactive_date[]"></td></tr>';
-        //   // });
-        // });
 
         $('.date_assign_table>tbody').append(op);
 
@@ -215,7 +196,11 @@ $(document).on('click', '#v-pills-payment-tab', function(){
     grand += parseInt($('.pay_total').eq(index).text()); 
     
   });
-  $('.grandTotal').html(grand);
+  var waiverAmount = $('#waiverAmount').val();
+  var FinalGrandtotal = grand - waiverAmount;
+
+  $('.grandTotal').html(FinalGrandtotal);
+  
   $('.grandpass').val(grand);
 });
 
@@ -223,37 +208,24 @@ $(document).on('click', '#v-pills-payment-tab', function(){
 
 ////////////// Waiver start
 
-$(document).ready(function(){
-  $(document).on('change', '.searchwaiver', function(){
-    var section_id = $('.waiver_section').val();
-    var group_id = $('.waiver_group').val();
-    var stdcategory_id = $('.waiver_cat').val();
-    var academic_yr_id = $('.waiver_y').val();
-    console.log("dfg");
-    console.log(startup_cat_id, group_id, stdcategory_id, academic_yr_id);
-    var div=$(this).parent().parent().parent();
-          var op=" ";
+// $("#searchwaiver").click(function(e){
+//   e.preventDefault();
+//   $waiver_section = $("#waiver_section").val();
+//   $waiver_group = $("#waiver_group").val();
+//   $waiver_cat = $("#waiver_cat").val();
+//   $waiver_yr = $("#waiver_yr").val();
 
-    $.ajax({
-      type:'get',
-      url: '/getSectionForWaiver',
-      data:{'id':section_id},
-      success: function(data){
-          console.log("dd: "+data);
-        op+='<option value="0" selected disabled>Choose</option>';
-                  for(var i=0;i<data.length;i++){
-                    op+='<option value="'+data[i].id+'">'+data[i].startup_subcategory_name+'</option>';
-        }
-
-        div.find('.startup_subcategory').html(" ");
-        div.find('.startup_subcategory').append(op);
-
-      },
-
-    });
-
-  });
-});
+//   if($waiver_section != 0 && $waiver_group != 0 && $waiver_cat != 0 && $waiver_yr != 0)
+//   {
+//     $("#des").hide();
+//     $("#s_table").show();
+//   }else{
+//     $("#des").show();
+//     $("#s_table").hide();
+//     $("#s_table").val('');
+//   }
+//   console.log("dd");
+// });
 
 ///////////// Waiver end
 

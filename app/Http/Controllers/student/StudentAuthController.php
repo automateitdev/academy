@@ -8,9 +8,9 @@ use App\Models\Student;
 use App\Models\Datesetup;
 use App\Models\Paymentupdate;
 use App\Models\Accountinfo;
+use App\Models\Payapply;
+use App\Models\Waivermapping;
 use GuzzleHttp\Client as GuzzleClient;
-
-use function Ramsey\Uuid\v1;
 
 class StudentAuthController extends Controller
 {
@@ -39,12 +39,15 @@ class StudentAuthController extends Controller
 
         $students = Student::where('std_id', $std_id)->get();
         $datesetups = Datesetup::all();
+        $waivermappings = Waivermapping::where('student_id', $std_id)
+                                    ->where('institute_id', $ins_id)->get();
+        
 
 
         foreach ($students as $std) {
             // dd($std->std_id == $request->std_id);
             if ($std->institute_id == $request->ins_id && $std->std_id == $request->std_id) {
-                return view('layouts.student.dashboard', compact('students', 'datesetups'))
+                return view('layouts.student.dashboard', compact('students', 'datesetups', 'waivermappings'))
                     ->with('std_id', $std_id)
                     ->with('ins_id', $ins_id);
             } else {
@@ -62,6 +65,27 @@ class StudentAuthController extends Controller
         $year = $request->year;
         $day = $request->day;
         $invoice = 'AE'.$ins_id.''.$day.''.$std_id.''.$year.'';
+        // dd($ins_id );
+
+    $tableData = json_decode($request->tableData,true);
+    // dd($tableData);
+       
+
+        
+    foreach($tableData as $t_key => $data)
+    {
+        $payapply = new Payapply();
+        foreach ($data as $key => $value) {
+
+            $payapply->institute_id = $request->ins_id;
+            $payapply->student_id = $request->std_id;
+            $payapply->invoice = $invoice;
+            $payapply->$key = $value;
+        }
+        $payapply->save();  
+    
+    }  
+
 
         $amount = $request->erp;
         $invoicedate = $request->date;
@@ -103,7 +127,7 @@ class StudentAuthController extends Controller
             "referenceInfo": {
                 "InvoiceNo": "'.$invoice.'", 
                 "invoiceDate": "'.$invoicedate.'", 
-                "returnUrl": "http://127.0.0.2:8002/confirmation", 
+                "returnUrl": "http://127.0.0.2:8000/confirmation", 
                 "totalAmount": "'.$amount.'", 
                 "applicentName": "'.$applicantName['name'].'", 
                 "applicentContactNo": "'.$applicantName['mobile_no'].'", 
@@ -116,7 +140,7 @@ class StudentAuthController extends Controller
                 "crAmount": "'.$amount.'", 
                 "tranMode": "'.$accountInfo['tranMode'].'"}]}';
 
-            dd($data_two);
+            // dd($data_two);
         //API 2
         $res_two = $client->request(
             'POST',
@@ -125,6 +149,8 @@ class StudentAuthController extends Controller
         );
 
         $sessiontoken = json_decode($res_two->getBody(), true);
+
+        // dd($sessiontoken);
 
         return view('layouts.student.spg_paymentform', compact('sessiontoken'));
     }
@@ -181,9 +207,9 @@ class StudentAuthController extends Controller
         $final_data = '{ 
             "data": {
                 "auth_code": "Basic YTJpQHBtbzpzYlBheW1lbnQwMDAy",
-                "trax_id": "' . $result['TransactionId'] . '",
-                "invoice_no": "' . $result['InvoiceNo'] . '",
-                "session_token": "' . $request->session_token . '"
+                "session_Token": "e683e362c42b13293a3e1c75d41b65535f043706122",
+                "trax_id": "1902269000004016",
+                "invoice_no": "INV155422121443"
                 } 
             }';
 
@@ -191,12 +217,15 @@ class StudentAuthController extends Controller
 
         $final = $client->request(
             'POST',
-            'http://127.0.0.1:8002/api/dataupdate',
+            'http://127.0.0.1:8000/api/dataupdate',
             ['headers' => $finalheaders, 'body' => $final_data]
         );
 
 
         // return redirect();
+                // "trax_id": "' . $result['TransactionId'] . '",
+                // "invoice_no": "' . $result['InvoiceNo'] . '",
+                // "session_token": "' . $request->session_token . '"
         // return view('layouts.student.confirmation', compact('receive_token','status'));
     }
     /**

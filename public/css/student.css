@@ -2,6 +2,10 @@
 .std_portal {
   padding-top: 5%;
 }
+.std_portal .payment .container .lkjhy .waiver-list {
+  display: flex;
+  font-weight: 800;
+}
 .std_portal .payment .container .lkjhy .grandul {
   display: flex;
 }

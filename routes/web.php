@@ -23,6 +23,7 @@ use App\Http\Controllers\school\fee_management\WaiverController;
 use App\Http\Controllers\school\fee_management\FeeCollectionController;
 
 use App\Http\Controllers\student\StudentAuthController;
+use App\Http\Controllers\student\CopyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +45,8 @@ Auth::routes();
 
 Route::get('/login', [AuthController::class,'index'])->name('login');
 Route::post('/login', [AuthController::class,'authenticate'])->name('login');
-Route::get('login', [AuthController::class,'index'])->name('loginFail');
-Route::get('logout', [AuthController::class,'logout'])->name('logout');
+Route::get('/login', [AuthController::class,'index'])->name('loginFail');
+Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -178,7 +179,7 @@ Route::get('/getFeesubheadfromFeehead', [DateSetupController::class, 'getFeesubh
 
 //waiver config
 Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');
-// Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'search'])->name('waiver.search');
+Route::get('/FeesManagement/waiver/index/query', [WaiverController::class, 'search'])->name('waiver.search');
 Route::get('/getSectionForWaiver', [WaiverController::class, 'getSectionForWaiver']);
 
 
@@ -194,11 +195,17 @@ Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']
 
 
 // ///////////////////// Student Portal ////////////////////////////
-Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
+// Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
 
-Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
-Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
-Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name('confirmation');
+// Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
+// Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
+// Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name('confirmation');
+
+Route::get('/Student_Portal', [CopyController::class, 'index'])->name('student.auth.index');
+
+Route::post('/Student_Portal/payment', [CopyController::class, 'authentication'])->name('student.auth.submit');
+Route::post('/makepayment', [CopyController::class, 'makepayment'])->name('makepayment');
+Route::get('/confirmation',[CopyController::class, 'confirmation'])->name('confirmation');
 
 
 

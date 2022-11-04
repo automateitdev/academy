@@ -581,8 +581,16 @@
 #waiver_config .container .row .tab-content .down {
   margin-top: 100px;
 }
+#waiver_config .container .row .tab-content .down #des {
+  text-align: center;
+  font-size: 30px;
+}
+#waiver_config .container .row .tab-content .down #s_table {
+  display: none;
+}
 #waiver_config .container .row .tab-content .down table {
   width: 100%;
+  margin-bottom: 30px;
 }
 #waiver_config .container .row .tab-content .down table th, #waiver_config .container .row .tab-content .down table td {
   padding: 10px;

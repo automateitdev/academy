@@ -111,6 +111,7 @@ class FeeStartupController extends Controller
 
     public function ledgerstore(Request $request)
     {
+        // dd(Auth::user()->institute_id);
         $this->validate($request,[
             'institute_id' => 'required',
             'fee_head_id' => 'nullable',

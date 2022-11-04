@@ -12,4 +12,9 @@ class Waiver extends Model
         'institute_id',
         'waiver_name',
     ];
+
+    public function waivermappings()
+    {
+        return $this->hasMany(Waivermapping::class);
+    }
 }

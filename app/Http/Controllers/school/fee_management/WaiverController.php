@@ -33,14 +33,16 @@ class WaiverController extends Controller
     }
     public function search(Request $request)
     {
-        $search_text = $_GET['section_id'];
-
-        $students = Student::where('section_id','LIKE','%'.$search_text.'%')
-                    ->orWhere('group_id','LIKE','%'.$search_text.'%')
-                    ->orWhere('academic_yr_id','LIKE','%'.$search_text.'%')
-                    ->orWhere('std_category_id','LIKE','%'.$search_text.'%')
+        $users = User::all();
+        $startups = Startup::all();
+        $sectionAssignes = SectionAssign::all();
+        $groupassigns = GroupAssign::all();
+        $students = Student::where('section_id','LIKE','%'.$request->section_id.'%')
+                    ->where('group_id','LIKE','%'.$request->group_id.'%')
+                    ->where('academic_year_id','LIKE','%'.$request->academic_year_id.'%')
+                    ->where('std_category_id','LIKE','%'.$request->stdcategory_id.'%')
                     ->paginate(120);
-        dd($students);
+        return view('layouts.dashboard.fee_management.waiver.query', compact('users', 'startups', 'sectionAssignes', 'groupassigns','students'));
     }
     /**
      * Show the form for creating a new resource.

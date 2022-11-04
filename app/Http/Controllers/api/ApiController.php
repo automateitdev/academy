@@ -10,26 +10,26 @@ class ApiController extends Controller
 {
     public function dataupdate(Request $request)
      {
-        dd($request);
-        $paymentupdates = Paymentupdate::where('transaction_id', $request->TransactionId)->get();
+        // dd($request);
+        // $paymentupdates = Paymentupdate::where('transaction_id', $request->TransactionId)->get();
 
-        foreach($paymentupdates as $pay)
-        {
-            // dd($request);
-            if($pay->session_token == $request->session_Token 
-                && $pay->transaction_id == $request->TransactionId
-                && $pay->invoice_no == $request->InvoiceNo
-                && $pay->applicant_no == $request->ApplicantContactNo
-                && $pay->total_amount == $request->TotalAmount
-                && $pay->pay_status == $request->PaymentStatus
-             )
-             {
-                echo "success";
-             }
-             else{
-                echo "fail";
-             }
-        }
+        // foreach($paymentupdates as $pay)
+        // {
+        //     // dd($request);
+        //     if($pay->session_token == $request->session_Token 
+        //         && $pay->transaction_id == $request->TransactionId
+        //         && $pay->invoice_no == $request->InvoiceNo
+        //         && $pay->applicant_no == $request->ApplicantContactNo
+        //         && $pay->total_amount == $request->TotalAmount
+        //         && $pay->pay_status == $request->PaymentStatus
+        //      )
+        //      {
+        //         echo "success";
+        //      }
+        //      else{
+        //         echo "fail";
+        //      }
+        // }
         return $request;
      }
     /**
