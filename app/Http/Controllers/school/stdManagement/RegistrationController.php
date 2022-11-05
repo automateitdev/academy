@@ -111,7 +111,7 @@ class RegistrationController extends Controller
 
     public function download()
     {
-        $file_path = public_path('excel_form.xlsx');
+        $file_path = storage_path('excel_form.xlsx');
         return response()->download( $file_path);
     }
     /**

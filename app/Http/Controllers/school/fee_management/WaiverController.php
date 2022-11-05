@@ -38,12 +38,12 @@ class WaiverController extends Controller
     }
     public function search(Request $request)
     {
-        $this->validate($request,[
-            'section_id' => 'required',
-            'group_id' => 'required',
-            'academic_year_id' => 'required',
-            'stdcategory_id' => 'required',
-        ]);
+        // $this->validate($request,[
+        //     'section_id' => 'required',
+        //     'group_id' => 'required',
+        //     'academic_year_id' => 'required',
+        //     'stdcategory_id' => 'required',
+        // ]);
         $users = User::all();
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
@@ -121,7 +121,7 @@ class WaiverController extends Controller
     public function getfeeheadForWaiver(Request $request)
     {
         $data = Feeamount::distinct()->select('feeamount')->where('feehead_id', $request->id)->get();
-        $alldata = $data;
+        $alldata = $data->values();
         return response()->json($alldata);
     }
     /**

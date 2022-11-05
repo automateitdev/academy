@@ -1,5 +1,5 @@
 const { colors } = require("laravel-mix/src/Log");
-const { isEmpty, isNumber, add, forEach } = require("lodash");
+const { isEmpty, isNumber, add, forEach, isSet } = require("lodash");
 
 //startup start
 $(document).ready(function(){
@@ -208,17 +208,25 @@ $(document).on('click', '#v-pills-payment-tab', function(){
 $(document).ready(function(){
   $(document).on('change', '.waiver_feehead', function(){
     var feehead_id = $(this).val();
-
     var a=$(this).parent().parent();
-
     $.ajax({
       type:'get',
       url: '/getfeeheadForWaiver',
       data:{'id':feehead_id},
       success: function(data){
+
+        if(isEmpty(data))
+        {
+          console.log("empty");
+          $('#waiver_amount').val(0);
+        }
         $.each(data, function() {
           $.each(this, function(k, v) {
-            $('.waiver_amount').val(v);
+          
+            if(!isEmpty(k))
+            {
+              $('#waiver_amount').val(v);
+            }
           });
         });
         

@@ -585,9 +585,6 @@
   text-align: center;
   font-size: 30px;
 }
-#waiver_config .container .row .tab-content .down #s_table {
-  display: none;
-}
 #waiver_config .container .row .tab-content .down table {
   width: 100%;
   margin-bottom: 30px;

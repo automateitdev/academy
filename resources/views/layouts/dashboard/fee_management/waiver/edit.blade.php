@@ -70,7 +70,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Amount</label>
-                                    <input type="text" class="w_am waiver_amount" value="0">
+                                    <input type="text" class="w_am" id="waiver_amount" value="0">
                                 </div>
                             </div>
                             <div class="col-md-6">
