@@ -181,6 +181,9 @@ Route::get('/getFeesubheadfromFeehead', [DateSetupController::class, 'getFeesubh
 Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');
 Route::get('/FeesManagement/waiver/index/query', [WaiverController::class, 'search'])->name('waiver.search');
 Route::get('/getSectionForWaiver', [WaiverController::class, 'getSectionForWaiver']);
+Route::get('/FeesManagement/waiver/edit/{id}', [WaiverController::class, 'edit'])->name('waiver.edit');
+Route::post('/FeesManagement/waiver/store/{id}', [WaiverController::class, 'store'])->name('waiver.store');
+Route::get('/getfeeheadForWaiver', [WaiverController::class, 'getfeeheadForWaiver']);
 
 
 

@@ -112,7 +112,36 @@
                             <div class="row down">
                                 <div class="col-md-12">
                                     <p id="des">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
-                                    
+                                    <table class="table table-bordered" id="s_table">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Roll No.</th>
+                            <th>Name</th>
+                            <th>Group</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(isset($students))
+                            @foreach($students as $student)
+                                @if($student->institute_id == Auth::user()->institute_id)
+                                <tr>
+                                    <td>{{$student->std_id}}</td>
+                                    <td>{{$student->roll}}</td>
+                                    <td>{{$student->name}}</td>
+                                    <td>{{$student->group_id}}</td>
+                                    <td>{{$student->std_category_id}}</td>
+                                    <td><a href="{{route('waiver.edit', $student->id)}}">
+                                        Process
+                                    </a></td>
+                                </tr>
+                                @endif
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
                                     <!-- <button type="submit" class="btn btn-primary "> <i class="fa-solid fa-magnifying-glass"></i> Process</button> -->
                                     <!-- <button type="button" class="btn btn-primary searchBtn" data-bs-toggle="modal" data-bs-target="#waiverassignModel">Process</button> -->
                                 </div>

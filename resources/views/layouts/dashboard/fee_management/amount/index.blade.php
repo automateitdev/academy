@@ -163,7 +163,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($feeamounts->unique('class_id') as $item)
+                                            @foreach($feeamounts->unique('feehead_id') as $item)
                                             @if($item->institute_id == Auth::user()->institute_id)
                                                 <tr>
                                                     <!-- <th scope="row">{{$item->id}}</th> -->

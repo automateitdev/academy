@@ -34,4 +34,6 @@ class Student extends Model
     {
         return $this->belongsTo(StartupSubcategory::class);
     }
+    
+    
 }

@@ -22,6 +22,7 @@ $waiver_amount = null;
                         <th>Fee Sub Head</th>
                         <th>Payable</th>
                         <th>Fine</th>
+                        <th>Waiver</th>
                         <th>Total Payable</th>
                     </tr>
                 </thead>
@@ -50,6 +51,14 @@ $waiver_amount = null;
                         @else
                         <td class="fine">{{ $feeam->fineamount }}</td>
                         @endif
+
+                        @foreach($waivermappings as $waiver_data)
+                            @if($waiver_data->institute_id != $ins_id && $waiver_data->student_id != $std_id)
+                                <td class="waiver">{{$waiver_data->amount = 0}}</td>
+                            @elseif($waiver_data->institute_id == $ins_id && $waiver_data->student_id == $std_id)
+                                <td class="waiver">{{$waiver_data->amount}}</td>
+                            @endif
+                        @endforeach
                         <td class="pay_total"></td>
                     </tr>
                     @php
@@ -92,20 +101,6 @@ $waiver_amount = null;
             <div class="row">
                 <!-- <div class="col-md-4"></div> -->
                 <div class="col-md-3 offset-9">
-                    <ul>
-                        <li class="waiver-list">Waiver</li>
-                        @foreach($waivermappings as $item)
-                            @if($item->institute_id == $ins_id && $item->student_id == $std_id)
-                                <li>{{$item->waiver->waiver_name}} : {{$item->amount}}</li>
-
-                                @php
-
-                                $waiver_amount += $item->amount;
-                                @endphp
-                            @endif
-                        @endforeach
-                        <input type="hidden" id="waiverAmount" value="{{$waiver_amount}}">
-                    </ul>
                     <ul class="grandul pull-right">
                         <li>Grand Total :</li>
                         <li class="grandTotal"></li>

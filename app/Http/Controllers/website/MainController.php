@@ -95,8 +95,8 @@ class MainController extends Controller
         $users = User::all();
         $basics = Basic::all();
         $galleries = Gallery::all();
-        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
-        // return view('auth.login', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
+        // return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
+        return view('auth.login', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
     }
     public function getSubCat(Request $request)
     {

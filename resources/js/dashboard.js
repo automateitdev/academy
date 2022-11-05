@@ -1,5 +1,5 @@
 const { colors } = require("laravel-mix/src/Log");
-const { isEmpty, isNumber, add } = require("lodash");
+const { isEmpty, isNumber, add, forEach } = require("lodash");
 
 //startup start
 $(document).ready(function(){
@@ -35,7 +35,6 @@ $(document).ready(function(){
 $(document).ready(function(){
   $(document).on('change', '.account_category', function(){
     var account_id=$(this).val();
-    console.log(account_id);
     var div=$(this).parent().parent().parent();
           var op=" ";
 
@@ -123,7 +122,6 @@ $(document).ready(function(){
       data:{'id':feehead_id},
       success: function(data){
 
-        // var info =  $.makeArray(data);
         console.log(data);
         $('.date_assign_table>tbody').html(" ");
 
@@ -158,7 +156,6 @@ $(document).ready(function(){
        
         $('.quickCollection>tbody').html(" ");
         for(var i=0;i<data.length;i++){ 
-          // url = "{{route('feecollection.view',"+data[i].id+")}}";
           op+='<tr><td>'+data[i].std_id+'</td><td>'+data[i].roll+'</td><td>'+data[i].name+'</td><td>'+data[i].group_id+'</td><td>'+data[i].std_category_id+'</td><td><a href="/FeesManagement/feecollection/view/'+data[i].id+'"><button class="btn btn-primary">view</button></a></td></tr>'
         }
 
@@ -199,7 +196,7 @@ $(document).on('click', '#v-pills-payment-tab', function(){
   var waiverAmount = $('#waiverAmount').val();
   var FinalGrandtotal = grand - waiverAmount;
 
-  $('.grandTotal').html(FinalGrandtotal);
+  $('.grandTotal').html(grand);
   
   $('.grandpass').val(grand);
 });
@@ -208,24 +205,49 @@ $(document).on('click', '#v-pills-payment-tab', function(){
 
 ////////////// Waiver start
 
-// $("#searchwaiver").click(function(e){
-//   e.preventDefault();
-//   $waiver_section = $("#waiver_section").val();
-//   $waiver_group = $("#waiver_group").val();
-//   $waiver_cat = $("#waiver_cat").val();
-//   $waiver_yr = $("#waiver_yr").val();
+$(document).ready(function(){
+  $(document).on('change', '.waiver_feehead', function(){
+    var feehead_id = $(this).val();
 
-//   if($waiver_section != 0 && $waiver_group != 0 && $waiver_cat != 0 && $waiver_yr != 0)
-//   {
-//     $("#des").hide();
-//     $("#s_table").show();
-//   }else{
-//     $("#des").show();
-//     $("#s_table").hide();
-//     $("#s_table").val('');
-//   }
-//   console.log("dd");
-// });
+    var a=$(this).parent().parent();
+
+    $.ajax({
+      type:'get',
+      url: '/getfeeheadForWaiver',
+      data:{'id':feehead_id},
+      success: function(data){
+        $.each(data, function() {
+          $.each(this, function(k, v) {
+            $('.waiver_amount').val(v);
+          });
+        });
+        
+
+      },
+
+    });
+
+  });
+});
+
+// $("#searchwaiver").click(function(e){
+//     e.preventDefault();
+//     $waiver_section = $("#waiver_section").val();
+//     $waiver_group = $("#waiver_group").val();
+//     $waiver_cat = $("#waiver_cat").val();
+//     $waiver_yr = $("#waiver_yr").val();
+  
+//     if($waiver_section != 0 && $waiver_group != 0 && $waiver_cat != 0 && $waiver_yr != 0)
+//     {
+//       $("#des").hide();
+//       $("#s_table").show();
+//     }else{
+//       $("#des").show();
+//       $("#s_table").hide();
+//       $("#s_table").val('');
+//     }
+//     console.log("dd");
+//   });
 
 ///////////// Waiver end
 

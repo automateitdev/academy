@@ -720,6 +720,26 @@
                     }
                 }
             } 
+            .edit_ul{
+                li{
+                    list-style: none;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+            .lkoi{
+                border: 1px solid #19686d;
+                padding: 25px;
+                border-radius: 5px;
+                label:not(.form-check-label):not(.custom-file-label) {
+                    font-weight: 700;
+                    display: block;
+                }
+                .w_am {
+                    pointer-events: none;
+                    border: none;
+                }
+            }
         }
     }
     .modal{

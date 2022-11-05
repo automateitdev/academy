@@ -598,6 +598,24 @@
 #waiver_config .container .row .tab-content .down .searchBtn {
   margin-top: 10px;
 }
+#waiver_config .container .row .edit_ul li {
+  list-style: none;
+  font-size: 20px;
+  font-weight: 500;
+}
+#waiver_config .container .row .lkoi {
+  border: 1px solid #19686d;
+  padding: 25px;
+  border-radius: 5px;
+}
+#waiver_config .container .row .lkoi label:not(.form-check-label):not(.custom-file-label) {
+  font-weight: 700;
+  display: block;
+}
+#waiver_config .container .row .lkoi .w_am {
+  pointer-events: none;
+  border: none;
+}
 #waiver_config .modal .select2.select2-container.select2-container--default.select2-container--focus, #waiver_config .modal .select2.select2-container.select2-container--default {
   width: 225px !important;
 }
