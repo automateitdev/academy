@@ -18,6 +18,15 @@ a {
   justify-content: end;
 }
 
+.dropdown, .dropend, .dropstart, .dropup {
+  position: relative;
+  font-weight: 900;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff;
+}
+
 .header {
   position: relative;
 }
@@ -147,10 +156,55 @@ a {
   margin-top: 80px;
 }
 
-#notice {
+#about_ins {
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: rgba(177, 218, 231, 0.168627451);
+}
+#about_ins .container .row .lksUi {
+  text-align: justify;
+  font-size: 15px;
+  color: #000;
+  padding: 10px;
+  background: #F1F8E9;
+  border-radius: 3px;
+  text-align: center;
+}
+#about_ins .container .row .lksUi .title {
+  font-size: 30px;
+  color: #19686d;
+  font-weight: 900;
+  text-align: left;
+}
+#about_ins .container .row .lksUi .borde {
+  border-style: solid;
+  border-top-width: 3px;
+  border-color: #19686d;
+  width: 15%;
+  vertical-align: middle;
+  display: block;
+  margin: 0;
+  height: 0;
+}
+#about_ins .container .row .lksUi .pragraph {
+  text-align: justify;
+}
+
+#calender .container .row .accordion .accordion-button:not(.collapsed) {
+  background-color: #f1f8e9;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+#calender .container .row .accordion .accordion-button:focus {
+  box-shadow: 0 0 0 0rem rgba(13, 110, 253, 0.25);
+}
+#calender .container .row .accordion .accordion-button::after {
+  color: #fff;
+}
+
+#notice {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #fff;
 }
 #notice .container .divtitle {
   text-align: center;
@@ -162,14 +216,14 @@ a {
 #notice .container .divtitle .borde {
   border-style: solid;
   border-top-width: 3px;
-  border-color: #2b87da;
+  border-color: #19686d;
   width: 15%;
   vertical-align: middle;
   display: inline flow-root;
 }
 #notice .container .row .recent {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  background-color: #fff;
+  background-color: #f1f8e9;
   height: 100%;
 }
 #notice .container .row .recent h1 {
@@ -210,7 +264,7 @@ a {
   margin-bottom: 0 !important;
 }
 #notice .container .row .rightBox {
-  background-color: #fff;
+  background-color: #f1f8e9;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   font-size: 15px;
   color: #3091F2;
@@ -236,6 +290,7 @@ a {
 #recent_pic {
   padding-top: 50px;
   padding-bottom: 50px;
+  background-color: rgba(177, 218, 231, 0.168627451);
 }
 #recent_pic .container .dJuyt h2 {
   color: #333;

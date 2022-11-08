@@ -6,15 +6,15 @@
                     <div class="nav-item text-sm">
                         <ul class="nav text-sm">
                             @foreach ($users as $item)
-                                <li class="nav-link" style="color:#ffffffd6"><span>EIIN No.
+                                <li class="nav-link" style="color:#ffffff"><span>EIIN No.
                                         {{ $item->EIIN_number }}</span>
                                 </li>
-                                <li class="nav-link" style="color:#ffffffd6">
-                                    <i style="color:#ffffffd6 ;" class="fa fa-envelope" aria-hidden="true"></i>
+                                <li class="nav-link" style="color:#ffffff">
+                                    <i style="color:#ffffff ;" class="fa fa-envelope" aria-hidden="true"></i>
                                     <span>{{ $item->email }}</span>&nbsp;&nbsp;
                                 </li>
-                                <li class="nav-link" style="color:#ffffffd6">
-                                    <i style="color:#ffffffd6 ;" class="fa fa-phone-square" aria-hidden="true"></i>
+                                <li class="nav-link" style="color:#ffffff">
+                                    <i style="color:#ffffff ;" class="fa fa-phone-square" aria-hidden="true"></i>
                                     <span>{{ $item->contact_no }}</span>
                                 </li>
                             @endforeach
@@ -23,17 +23,17 @@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <ul style="float: right;" class="nav">
-                        <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link "
+                        <li class="nav-item"> <a style="color:#ffffff;" class="nav-link "
                                 href="{{ route('student.auth.index') }}">
                                 Payment </a> </li>
-                        <li class="nav-item"> <a style="color:#ffffffd6;" class="nav-link " href="contact.php">
+                        <li class="nav-item"> <a style="color:#ffffff;" class="nav-link " href="contact.php">
                                 Contact </a> </li>
                         <li class="nav-item">
                             @if (Route::has('login'))
                                 @auth
-                                    <a href="{{ route('home') }}" class="nav-link " style="color:#ffffffd6;">Dashboard</a>
+                                    <a href="{{ route('home') }}" class="nav-link " style="color:#ffffff;">Dashboard</a>
                                 @else
-                                    <a href="{{ route('login') }}" class="nav-link " style="color:#ffffffd6;">Log
+                                    <a href="{{ route('login') }}" class="nav-link " style="color:#ffffff;">Log
                                         in</a>
 
                                     @if (Route::has('register'))
@@ -97,20 +97,20 @@
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($categories as $item)
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link ecom_cat text-lg" data-value="{{ $item->id }}"
+                                        <a class="nav-link text-lg" data-value="{{ $item->id }}"
                                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             {{ $item->name }}
                                         </a>
                                         
-                                        @if(!($item->subcategories)->isEmpty())
+                                        @if(!empty($item->subcategories))
                                         <ul class="dropdown-menu"
                                             aria-labelledby="navbarDropdown">
                                             @foreach($item->subcategories as $subcat)
                                             @php 
                                             $link = strtolower('/'.$item->name.'/'. $subcat->subcat_link.'/'.$subcat->id);
                                             @endphp
-                                            <li><a class="dropdown-item text-lg" href="{{route($link)}}">{{$subcat->subcat_name}}</a></li>
+                                            <li><a class="dropdown-item text-lg" href="{{$link}}">{{$subcat->subcat_name}}</a></li>
                                             @endforeach
                                         </ul>
                                         @endif
@@ -127,7 +127,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-2 py-2 text-center" style="background-color: #b1dae7">
-                    Latest News
+                    Latest Notice
                 </div>
 
                 <marquee behavior="alternate" class="col-md-10 py-2" style="background-color: #F1F8E9"><span

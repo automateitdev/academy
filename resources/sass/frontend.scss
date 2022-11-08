@@ -17,11 +17,17 @@ a{
 .row .pagination {
     justify-content: end;
 }
-
+.dropdown, .dropend, .dropstart, .dropup {
+    position: relative;
+    font-weight: 900;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
 // top nav
 .header{
     position: relative;
-    }
+}
 
 
 // carousel
@@ -165,11 +171,70 @@ a{
         }
     }
 }
+
+//about institute
+#about_ins{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: rgba(177, 218, 231, 0.168627451);
+    .container{
+        .row{
+            .lksUi{
+                text-align: justify;
+                font-size: 15px;
+                color: #000;
+                padding: 10px;
+                background: #F1F8E9;
+                border-radius: 3px;
+                text-align: center;
+                .title {
+                    font-size: 30px;
+                    color: #19686d;
+                    font-weight: 900;
+                    text-align: left;
+                }
+                .borde{
+                    border-style: solid;
+                    border-top-width: 3px;
+                    border-color: #19686d;
+                    width: 15%;
+                    vertical-align: middle;
+                    display: block;
+                    margin: 0;
+                    height: 0;
+                }
+                .pragraph{
+                    text-align: justify;
+                }
+            }
+        }
+    }
+}
+//calender
+#calender{
+    .container{
+        .row{
+            .accordion{
+                .accordion-button:not(.collapsed) {
+                    
+                    background-color: #f1f8e9;
+                    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+                }
+                .accordion-button:focus {
+                    box-shadow: 0 0 0 0rem rgba(13,110,253,.25);
+                }
+                .accordion-button::after{
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
 // notice
 #notice{
     padding-top: 50px;
     padding-bottom: 50px;
-    background-color: #b1dae72b;
+    background-color: #fff;
     .container{
         .divtitle{
             text-align: center;
@@ -180,7 +245,7 @@ a{
             .borde{
                 border-style: solid;
                 border-top-width: 3px;
-                border-color: #2b87da;
+                border-color: #19686d;
                 width: 15%;
                 vertical-align: middle;
                 display: inline flow-root;
@@ -189,7 +254,7 @@ a{
         .row{
             .recent{
                 box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px,rgb(0 0 0 / 30%) 0px 7px 13px -3px,rgb(0 0 0 / 20%) 0px -3px 0px inset;
-                background-color: #fff;
+                background-color: #f1f8e9;
                 height: 100%;
                 h1{
                     padding-left: 25px;
@@ -230,7 +295,7 @@ a{
                 margin-bottom: 0!important;
             }
             .rightBox{
-                background-color: #fff;
+                background-color: #f1f8e9;
                 box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px,rgb(0 0 0 / 30%) 0px 7px 13px -3px,rgb(0 0 0 / 20%) 0px -3px 0px inset;
                 font-size: 15px;
                 color: #3091F2;
@@ -268,6 +333,7 @@ a{
 #recent_pic{
     padding-top: 50px;
     padding-bottom: 50px;
+    background-color: #b1dae72b;
     .container{
         .dJuyt{
             h2{

@@ -8,13 +8,13 @@
             <div class="col">
                 <h2 class="mb-25">
                     <a href="#">Make Institute</a>
-                    <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#userModal">+ Add User</button>
+                    <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#userModal">+ Add Institute</button>
                 </h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-10 offset-md-1">
-                <div class="shkoi">
+                <div class="shkoi mt-5">
                     <table class="table table-bordered">
                         <thead>
                             <tr>

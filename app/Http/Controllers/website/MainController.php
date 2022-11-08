@@ -94,6 +94,14 @@ class MainController extends Controller
      */
     public function index()
     {
+        // $users = User::all();
+ 
+        // foreach($users as $user){
+        //     foreach ($user->roles as $role) {
+                
+        //     }
+        // }
+
         $currentDomain = request()->getHttpHost();
         $domainlist = new Domainlist();
         $url = $domainlist->where('url', $currentDomain)->first();

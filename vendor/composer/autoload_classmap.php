@@ -76,6 +76,7 @@ return array(
     'App\\Models\\Paymentupdate' => $baseDir . '/app/Models/Paymentupdate.php',
     'App\\Models\\Quickcollection' => $baseDir . '/app/Models/Quickcollection.php',
     'App\\Models\\Religion' => $baseDir . '/app/Models/Religion.php',
+    'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
     'App\\Models\\SectionAssign' => $baseDir . '/app/Models/SectionAssign.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\Speech' => $baseDir . '/app/Models/Speech.php',

@@ -622,6 +622,7 @@ class ComposerStaticInit24d18988517d99d30abef7167ebb39dc
         'App\\Models\\Paymentupdate' => __DIR__ . '/../..' . '/app/Models/Paymentupdate.php',
         'App\\Models\\Quickcollection' => __DIR__ . '/../..' . '/app/Models/Quickcollection.php',
         'App\\Models\\Religion' => __DIR__ . '/../..' . '/app/Models/Religion.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\SectionAssign' => __DIR__ . '/../..' . '/app/Models/SectionAssign.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Speech' => __DIR__ . '/../..' . '/app/Models/Speech.php',
