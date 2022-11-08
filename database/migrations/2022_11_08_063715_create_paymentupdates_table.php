@@ -15,6 +15,8 @@ class CreatePaymentupdatesTable extends Migration
     {
         Schema::create('paymentupdates', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('student_id');
+            $table->string('institute_id');
             $table->string('session_token');
             $table->string('ststus');
             $table->string('msg');

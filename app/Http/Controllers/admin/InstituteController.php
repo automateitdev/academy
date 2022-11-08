@@ -1,47 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class AuthController extends Controller
+class InstituteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view('auth.login');
-    }
-
-    public function authenticate(Request $request)
+    public function index()
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('home'));
-        }
-        else{
-          return back()->with('message','Wrong Login Details');
-        }
-
-        return redirect('loginFail')->with('message', 'Oppes! You have entered invalid credentials');
-    }
-   
-    public function logout()
-    {
-      Auth::logout();
-
-      return redirect(route('login'));
-    // return view('auth.login');
+        $users =  User::all();
+        return view('layouts.admin.institute.index', compact('users'));
     }
 
     /**
@@ -62,7 +37,21 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'institute_id' => 'required',
+            'institute_name' => 'required',
+            'EIIN_number' => 'required',
+            'institute_type' => 'required',
+            'edu_board' => 'required',
+            'address' => 'required',
+            'post_office' => 'required',
+            'police_station' => 'required',
+            'district' => 'required',
+            'division' => 'required',
+            'contact_no' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
     }
 
     /**

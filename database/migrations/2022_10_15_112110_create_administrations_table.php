@@ -15,6 +15,7 @@ class CreateAdministrationsTable extends Migration
     {
         Schema::create('administrations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('institute_id');
             $table->bigInteger('subcat_id');
             $table->string('id_no')->nullable();
             $table->bigInteger('nid')->uniqid;

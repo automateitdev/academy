@@ -10,7 +10,6 @@
 <body onload='document.forms[0].submit()'>
     <form name='PostForm' method='GET' action='https://spg.sblesheba.com:6313/SpgLanding/SpgLanding/{{$sessiontoken['session_token']}}'/'>
         @csrf
-        
     </form>
 
 </body>

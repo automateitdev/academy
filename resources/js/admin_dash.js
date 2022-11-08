@@ -175,6 +175,7 @@ $(document).ready(function(){
 //payment
 
 $(document).on('click', '#v-pills-payment-tab', function(){
+  console.log("click click");
   var payable;
   var fine;
   var waiver;
@@ -185,7 +186,8 @@ $(document).on('click', '#v-pills-payment-tab', function(){
     fine = $('.fine').eq(index).text();
     waiver = $('.waiver').eq(index).text();
     var pyfine = parseFloat(payable) + parseFloat(fine);
-    $('.pay_total').eq(index).html(pyfine - waiver);  
+    $('.pay_total').eq(index).html(pyfine - waiver); 
+    
   });
 
   $('.pay_total').each(function(index){
@@ -215,6 +217,7 @@ $(document).ready(function(){
       data:{'id':feehead_id},
       success: function(data){
 
+        // a.find('#waiver_amount').val(data.feeamount);
         if(isEmpty(data))
         {
           console.log("empty");
@@ -232,30 +235,16 @@ $(document).ready(function(){
         
 
       },
+      
+      error: function (textStatus, errorThrown) {
+        console.log("sdsdsds");
+    }
 
     });
 
   });
 });
 
-// $("#searchwaiver").click(function(e){
-//     e.preventDefault();
-//     $waiver_section = $("#waiver_section").val();
-//     $waiver_group = $("#waiver_group").val();
-//     $waiver_cat = $("#waiver_cat").val();
-//     $waiver_yr = $("#waiver_yr").val();
-  
-//     if($waiver_section != 0 && $waiver_group != 0 && $waiver_cat != 0 && $waiver_yr != 0)
-//     {
-//       $("#des").hide();
-//       $("#s_table").show();
-//     }else{
-//       $("#des").show();
-//       $("#s_table").hide();
-//       $("#s_table").val('');
-//     }
-//     console.log("dd");
-//   });
 
 ///////////// Waiver end
 

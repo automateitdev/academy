@@ -313,7 +313,60 @@
               </p>
             </a>
           </li> -->
-          <!-- <li class="nav-header">EXAMPLES</li> -->
+          <li class="nav-header">Maintenance</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Global Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Institute</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('institute.view')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Users</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Domain Data</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Global Field</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Enrollment Form</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Excel Form</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

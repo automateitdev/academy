@@ -9,6 +9,8 @@ class Paymentupdate extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'institute_id',
+        'student_id',
         'session_token',
         'status',
         'msg',

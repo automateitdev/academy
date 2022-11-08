@@ -59,7 +59,7 @@
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Class</label>
                                                 <select class="form-control single" multiple name="class_id[]">
-                                                    <option value="" selected>Select a Class</option>
+                                                    <option selected>Select a Class</option>
                                                     @foreach($startups as $item)
                                                         @if($item->institute_id ==  Auth::user()->institute_id)
                                                             @if($item->startup_category_id == 4)

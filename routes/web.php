@@ -25,6 +25,9 @@ use App\Http\Controllers\school\fee_management\FeeCollectionController;
 use App\Http\Controllers\student\StudentAuthController;
 use App\Http\Controllers\student\CopyController;
 
+//admin
+use App\Http\Controllers\admin\InstituteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +67,23 @@ Route::get('/about/{subcat_link}/{id}', [MainController::class, 'allAbout']);
 Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'administration']);
 
 ///////dashboard start
+
+
+
+//////////////////// Admin Part Start/////////////////////////////////////////
+
+Route::get('/institute', [InstituteController::class, 'index'])->name('institute.view');
+
+
+
+
+
+
+
+//////////////////// Admin Part End/////////////////////////////////////////
+
+
+
 
 //////////////////////////Website Managemenet Start /////////////////////////
 //menu

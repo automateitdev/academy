@@ -10,6 +10,7 @@ use App\Models\Paymentupdate;
 use App\Models\Accountinfo;
 use App\Models\Payapply;
 use App\Models\Waivermapping;
+use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client as GuzzleClient;
 
 class CopyController extends Controller
@@ -60,8 +61,10 @@ class CopyController extends Controller
 
     public function makepayment(Request $request)
     {
-    //     $std_id = $request->std_id;
-    //     $ins_id = $request->ins_id;
+        $std_id = $request->std_id;
+        $ins_id = $request->ins_id;
+        Session::put('ins_id', $ins_id);
+        Session::put('std_id', $std_id);
     //     $year = $request->year;
     //     $day = $request->day;
     //     $invoice = 'AE'.$ins_id.''.$day.''.$std_id.''.$year.'';
@@ -104,9 +107,9 @@ class CopyController extends Controller
         $data = '{ "AccessUser":{
             "userName":"a2i@pmo",
             "password":"sbPayment0002" },
-            "invoiceNo":"INV155422121443", "amount":"400", "invoiceDate":"2019-02-26", "accounts": [
+            "invoiceNo":"INV155422121443", "amount":"80", "invoiceDate":"2022-11-08", "accounts": [
             {
-            "crAccount": "0002601020871", "crAmount": 400
+            "crAccount": "0002601020871", "crAmount": 80
             }]
             }';
 
@@ -125,11 +128,11 @@ class CopyController extends Controller
                 "apiAccessToken": "' . $token['access_token'] . '"
                 },
                 "referenceInfo": {
-                "InvoiceNo": "INV155422121443", "invoiceDate": "2019-02-26", "returnUrl": "http://127.0.0.2:8000/confirmation", "totalAmount": "400", "applicentName": "Md. Hasan Monsur", "applicentContactNo": "01710563521", "extraRefNo": "2132"
+                "InvoiceNo": "INV155422121443", "invoiceDate": "2022-11-08", "returnUrl": "http://127.0.0.2:8000/confirmation", "totalAmount": "80", "applicentName": "Md. Hasan Monsur", "applicentContactNo": "01710563521", "extraRefNo": "2132"
                 }, "creditInformations": [
                 {
                 "slno": "1",
-                "crAccount": "0002601020871", "crAmount": "400", "tranMode": "TRN"
+                "crAccount": "0002601020871", "crAmount": "80", "tranMode": "TRN"
                 }]
                 }';
 
@@ -153,6 +156,10 @@ class CopyController extends Controller
     {
         $receive_token = $request->session_token;
         $status = $request->status;
+        $ins_id= Session::get('ins_id');
+        $std_id= Session::get('std_id');
+        // dd($std_id);
+        // $ins_id = $request->ins_id;
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
@@ -161,7 +168,7 @@ class CopyController extends Controller
         ];
 
         $data = '{
-            "session_Token": "' . $request->session_token . '"
+            "session_Token": "' . $request->session_token . '",
             }';
 
         // API 3
@@ -172,6 +179,28 @@ class CopyController extends Controller
         );
         $result = json_decode($res->getBody(), true);
 
+        $input = new Paymentupdate();
+        $input->institute_id =  $ins_id;
+        $input->student_id = $std_id;
+        $input->session_token = $request->session_token;
+        $input->status = $result['status'];
+        $input->msg = $result['msg'];
+        $input->transaction_id = $result['TransactionId'];
+        $input->transaction_date = $result['TransactionDate'];
+        $input->invoice_no = $result['InvoiceNo'];
+        $input->invoice_date = $result['InvoiceDate'];
+        $input->br_code = $result['BrCode'];
+        $input->applicant_name = $result['ApplicantName'];;
+        $input->applicant_no = $result['ApplicantContactNo'];
+        $input->total_amount = $result['TotalAmount'];
+        $input->pay_status = $result['PaymentStatus'];
+        $input->pay_mode = $result['PayMode'];
+        $input->pay_amount = $result['PayAmount'];
+        $input->vat = $result['Vat'];
+        $input->comission = $result['Commission'];
+        $input->scroll_no = $result['ScrollNo'];
+        dd($input);
+        $input->save();
 
         $finalheaders = [
             'Content-Type' => 'application/json',
@@ -187,7 +216,7 @@ class CopyController extends Controller
                 } 
             }';
 
-         dd($final_data);
+         
 
         $final = $client->request(
             'POST',

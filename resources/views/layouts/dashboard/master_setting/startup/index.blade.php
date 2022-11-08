@@ -20,10 +20,7 @@
                     <form action="{{route('startup.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                                 <div class="mb-3">
-                                    <!-- <label for="institute_id" class="form-label">Startup Category</label> -->
-                                    <input type="text" class="form-control" id="institute_id" value="{{ Auth::user()->institute_id}}" name="institute_id" placeholder="Startup Category" required style="visibility: hidden;">
-                                </div>
+                                
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="startup_category" class="form-label">Type</label>

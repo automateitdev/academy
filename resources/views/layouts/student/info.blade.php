@@ -6,7 +6,7 @@
         </div>
 
         @foreach ($students as $student)
-            @if ($student->std_id == $std_id)
+            @if ($student->std_id == $std_id && $student->institute_id == $ins_id)
                 <p>Name : {{ $student->name }}</p>
             @endif
         @endforeach

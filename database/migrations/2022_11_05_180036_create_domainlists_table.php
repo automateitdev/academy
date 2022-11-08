@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDesignationsTable extends Migration
+class CreateDomainlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDesignationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('designations', function (Blueprint $table) {
+        Schema::create('domainlists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institute_id');
-            $table->String('designation');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateDesignationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('designations');
+        Schema::dropIfExists('domainlists');
     }
 }

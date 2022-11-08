@@ -46,7 +46,12 @@ class MenuController extends Controller
             'name' => 'required',
             'link_name' => 'nullable',
         ]);
-        $categories = category::create($request->all());
+        $input = new category();
+        $input->institute_id = $request->Auth::user()->institute_id;
+        $input->name = $request->name;
+        $input->link_name = $request->link_name;
+        $input->save();
+        // $categories = category::create($request->all());
 
         return redirect(route('menu'));
     }
@@ -58,7 +63,15 @@ class MenuController extends Controller
             'subcat_link' => 'nullable',
             'cat_id' => 'required',
         ]);
-        $subcategories = subcategory::create($request->all());
+
+        $input = new subcategory();
+        $input->institute_id = $request->Auth::user()->institute_id;
+        $input->subcat_name = $request->subcat_name;
+        $input->subcat_link = $request->subcat_link;
+        $input->cat_id = $request->cat_id;
+        $input->save();
+
+        // $subcategories = subcategory::create($request->all());
 
         return redirect(route('menu'));
     }

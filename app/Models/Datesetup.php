@@ -24,6 +24,6 @@ class Datesetup extends Model
     }
     public function feesubhead()
     {
-        return $this->belongsTo(Feesubhead::class);
+        return $this->belongsTo(Feesubhead::class, 'feesubhead_id');
     }
 }

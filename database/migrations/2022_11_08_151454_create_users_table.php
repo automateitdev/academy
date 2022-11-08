@@ -25,10 +25,11 @@ class CreateUsersTable extends Migration
             $table->string('police_station')->nullable();
             $table->string('district')->nullable();
             $table->string('division')->nullable();
-            $table->integer('contact_no')->nullable();
+            $table->string('contact_no')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger('role')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

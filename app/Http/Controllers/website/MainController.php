@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Administration;
 use App\Models\Basic;
 use App\Models\Gallery;
+use App\Models\Domainlist;
 
 class MainController extends Controller
 {
@@ -75,10 +76,15 @@ class MainController extends Controller
     }
     public function corner()
     {
-        $basics = Basic::all();
-        $users = User::all();
-        $categories = category::all();
-        $subcategories = subcategory::all();
+        $currentDomain = request()->getHttpHost();
+        $domainlist = new Domainlist();
+        $url = $domainlist->where('url', $currentDomain)->first();
+        $ins_id = $url->institute_id;
+
+        $basics = Basic::where('institute_id', $ins_id)->get();
+        $users = User::where('institute_id', $ins_id)->get();
+        $categories = category::where('institute_id', $ins_id)->get();
+        $subcategories = subcategory::where('institute_id', $ins_id)->get();
         return view('layouts.frontend.corner', compact('users', 'categories', 'subcategories', 'basics'));
     }
     /**
@@ -88,15 +94,23 @@ class MainController extends Controller
      */
     public function index()
     {
-        $speeches = Speech::all();
-        $sliders = Slider::all();
-        $categories = category::all();
-        $subcategories = subcategory::all();
-        $users = User::all();
-        $basics = Basic::all();
-        $galleries = Gallery::all();
-        // return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
-        return view('auth.login', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
+        $currentDomain = request()->getHttpHost();
+        $domainlist = new Domainlist();
+        $url = $domainlist->where('url', $currentDomain)->first();
+        $ins_id = $url->institute_id;
+
+        // $this->index($ins_id);
+
+
+        $speeches = Speech::where('institute_id', $ins_id)->get();
+        $sliders = Slider::where('institute_id', $ins_id)->get();
+        $categories = category::where('institute_id', $ins_id)->get();
+        $subcategories = subcategory::where('institute_id', $ins_id)->get();
+        $users = User::where('institute_id', $ins_id)->get();
+        $basics = Basic::where('institute_id', $ins_id)->get();
+        $galleries = Gallery::where('institute_id', $ins_id)->get();
+        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
+        // return view('auth.login', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
     }
     public function getSubCat(Request $request)
     {
@@ -106,22 +120,32 @@ class MainController extends Controller
 
     public function allAbout(Request $request)
     {
-        $abouts = About::where('subcat_id', $request->id)->take(100)->get();
-        $categories = category::all();
-        $subcategories = subcategory::all();
-        $subcategories = subcategory::all();
-        $users = User::all();
-        $basics = Basic::all();
+        $currentDomain = request()->getHttpHost();
+        $domainlist = new Domainlist();
+        $url = $domainlist->where('url', $currentDomain)->first();
+        $ins_id = $url->institute_id;
+
+        $abouts = About::where('subcat_id', $request->id)->where('institute_id', $ins_id)->get();
+        $categories = category::where('institute_id', $ins_id)->get();
+        $subcategories = subcategory::where('institute_id', $ins_id)->get();
+        $subcategories = subcategory::where('institute_id', $ins_id)->get();
+        $users = User::where('institute_id', $ins_id)->get();
+        $basics = Basic::where('institute_id', $ins_id)->get();
         return view('layouts.frontend.about.at_glance', compact('categories', 'subcategories', 'abouts','users','basics'));
     }
     public function administration(Request $request)
     {
-        $administrations = Administration::where('subcat_id', $request->id)->take(100)->get();
-        $categories = category::all();
-        $subcategories = subcategory::all();
-        $subcategories = subcategory::all();
-        $users = User::all();
-        $basics = Basic::all();
+        $currentDomain = request()->getHttpHost();
+        $domainlist = new Domainlist();
+        $url = $domainlist->where('url', $currentDomain)->first();
+        $ins_id = $url->institute_id;
+
+        $administrations = Administration::where('subcat_id', $request->id)->where('institute_id', $ins_id)->get();
+        $categories = category::where('institute_id', $ins_id)->get();
+        $subcategories = subcategory::where('institute_id', $ins_id)->get();
+        $subcategories = subcategory::where('institute_id', $ins_id)->get();
+        $users = User::where('institute_id', $ins_id)->get();
+        $basics = Basic::where('institute_id', $ins_id)->get();
         // $administrations = Administration::all();
         return view('layouts.frontend.administration.forPerson', compact('categories', 'subcategories','users','administrations','basics'));
     }

@@ -8,7 +8,7 @@ use App\Models\Startup;
 use App\Models\StartupCategory;
 use App\Models\StartupSubcategory;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class StartupController extends Controller
 {
@@ -68,7 +68,7 @@ class StartupController extends Controller
         foreach((array)$request->startup_subcategory_id as $key => $startup_subcategory_id)
         {
             $input = new Startup();
-            $input->institute_id = $request->institute_id;
+            $input->institute_id = Auth::user()->institute_id;
             $input->startup_category_id = $request->startup_category_id;
             $input->startup_subcategory_id = $startup_subcategory_id;
             $input->save(); 

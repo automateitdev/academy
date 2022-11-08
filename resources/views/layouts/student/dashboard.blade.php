@@ -26,7 +26,7 @@
                 <div class="my-2 col-md-10 d-flex justify-content-between">
                     <ul>
                         @foreach ($students as $student)
-                            @if ($student->std_id == $std_id)
+                            @if ($student->std_id == $std_id && $student->institute_id == $ins_id)
                                 <li class="text-lg">Name : {{ $student->name }}</li>
                                 <li class="text-lg">Student ID : {{ $student->std_id }}</li>
                                 <li class="text-lg">Institute ID : {{ $student->institute_id }}</li>
@@ -90,7 +90,7 @@
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="{{ asset('js/dashboard.js') }}"></script>
+<script src="{{ asset('js/admin_dash.js') }}"></script>
 <script src="{{ asset('js/payment.js') }}"></script>
 
 </html>

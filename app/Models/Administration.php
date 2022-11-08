@@ -10,6 +10,7 @@ class Administration extends Model
     use HasFactory;
 
     protected $fillable = [
+        'institute_id',
         'subcat_id',
         'id_no',
         'nid',

@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="container-fluid pt-2 pb-5 d-sm-none d-md-block" style="background-color: #FBFBFB">
+    <div class="container-fluid pt-4 pb-4 d-sm-none d-md-block" style="background-color: #FBFBFB">
         <div class="d-flex justify-content-around text-center align-items-end">
             <a class="" href="{{ route('landingpage') }}">
                 @php
@@ -76,8 +76,8 @@
                         ->first();
                 @endphp
                 @if ($heee->logo)
-                    <img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100"
-                        class="d-inline-block align-text-top">
+                    <!-- <img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100" -->
+                        <!-- class="d-inline-block align-text-top"> -->
                 @endif
             </a>
         </div>
@@ -102,10 +102,18 @@
                                             aria-expanded="false">
                                             {{ $item->name }}
                                         </a>
-                                        <ul class="dropdown-menu subcatEcom  type_{{ $item->id }}"
+                                        
+                                        @if(!($item->subcategories)->isEmpty())
+                                        <ul class="dropdown-menu"
                                             aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item text-lg" href="#"></a></li>
+                                            @foreach($item->subcategories as $subcat)
+                                            @php 
+                                            $link = strtolower('/'.$item->name.'/'. $subcat->subcat_link.'/'.$subcat->id);
+                                            @endphp
+                                            <li><a class="dropdown-item text-lg" href="{{route($link)}}">{{$subcat->subcat_name}}</a></li>
+                                            @endforeach
                                         </ul>
+                                        @endif
                                     </li>
                                 @endforeach
                             </ul>
@@ -123,8 +131,7 @@
                 </div>
 
                 <marquee behavior="alternate" class="col-md-10 py-2" style="background-color: #F1F8E9"><span
-                        class="marquee">This
-                        is a marquee!</span>
+                        class="marquee">এইচএসসি ও সমমানের পরীক্ষায় বসছে ১২ লাখ পরীক্ষার্থী</span>
                 </marquee>
 
             </div>

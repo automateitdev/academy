@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -44,7 +45,7 @@ class GalleryController extends Controller
         ]);
 
         $inputs = new Gallery();
-
+        $inputs->institute_id = Auth::user()->institue_id;
         if($request->hasFile('photo')){
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension();

@@ -8,7 +8,7 @@ use App\Models\Administration;
 use App\Models\subcategory;
 use App\Models\User;
 use App\Models\Blood;
-
+use Illuminate\Support\Facades\Auth;
 
 class AdministrationController extends Controller
 {
@@ -68,7 +68,7 @@ class AdministrationController extends Controller
         ]);
 
         $inputs = new Administration();
-
+        $inputs->institute_id = Auth::user()->institue_id;
         $inputs->subcat_id = $request->subcat_id;
         $inputs->id_no = $request->id_no;
         $inputs->nid = $request->nid;
@@ -160,7 +160,7 @@ class AdministrationController extends Controller
         ]);
 
         $inputs = Administration::find($id);
-
+        $inputs->institute_id = Auth::user()->institue_id;
         $inputs->subcat_id = $request->subcat_id;
         $inputs->id_no = $request->id_no;
         $inputs->nid = $request->nid;
