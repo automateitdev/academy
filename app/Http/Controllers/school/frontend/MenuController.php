@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\subcategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class MenuController extends Controller
@@ -60,12 +61,12 @@ class MenuController extends Controller
     {
         $this->validate($request, [
             'subcat_name' => 'required',
-            'subcat_link' => 'nullable',
+            'subcat_link' => 'required',
             'cat_id' => 'required',
         ]);
 
         $input = new subcategory();
-        $input->institute_id = $request->Auth::user()->institute_id;
+        $input->institute_id = Auth::user()->institute_id;
         $input->subcat_name = $request->subcat_name;
         $input->subcat_link = $request->subcat_link;
         $input->cat_id = $request->cat_id;

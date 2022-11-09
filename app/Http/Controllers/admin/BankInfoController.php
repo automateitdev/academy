@@ -5,8 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Bankinfo;
 
-class InstituteController extends Controller
+class BankInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,8 @@ class InstituteController extends Controller
     public function index()
     {
         $users =  User::all();
-        return view('layouts.admin.institute.index', compact('users'));
+        $baninfos = Bankinfo::all();
+        return view('layouts.admin.bank.index', compact('users', 'baninfos'));
     }
 
     /**
@@ -40,34 +42,20 @@ class InstituteController extends Controller
         $request->validate([
             'institute_id' => 'required',
             'institute_name' => 'required',
-            'EIIN_number' => 'required',
-            'institute_type' => 'required',
-            'edu_board' => 'required',
-            'address' => 'required',
-            'post_office' => 'required',
-            'police_station' => 'required',
-            'district' => 'required',
-            'division' => 'required',
-            'contact_no' => 'required',
+            'account' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'mobile' => 'required',
         ]);
 
-        $input = new User();
+        $input = new Bankinfo();
         $input->institute_id = $request->institute_id;
         $input->institute_name = $request->institute_name;
-        $input->EIIN_number = $request->EIIN_number;
-        $input->institute_type = $request->institute_type;
-        $input->edu_board = $request->edu_board;
-        $input->address = $request->address;
-        $input->post_office = $request->post_office;
-        $input->police_station = $request->police_station;
-        $input->district = $request->district;
-        $input->division = $request->division;
-        $input->contact_no = $request->contact_no;
+        $input->account = $request->account;
         $input->email = $request->email;
-        $input->password = $request->password;
+        $input->mobile = $request->mobile;
         $input->save();
+
+        return redirect(route('bankinfo.view'))->with('message', 'Data Upload Successfully')->withErrors('message', 'Data Upload Successfully');
     }
 
     /**

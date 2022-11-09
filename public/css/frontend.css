@@ -190,17 +190,6 @@ a {
   text-align: justify;
 }
 
-#calender .container .row .accordion .accordion-button:not(.collapsed) {
-  background-color: #f1f8e9;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
-}
-#calender .container .row .accordion .accordion-button:focus {
-  box-shadow: 0 0 0 0rem rgba(13, 110, 253, 0.25);
-}
-#calender .container .row .accordion .accordion-button::after {
-  color: #fff;
-}
-
 #notice {
   padding-top: 50px;
   padding-bottom: 50px;
@@ -314,6 +303,23 @@ a {
 #recent_pic .container .imag .owl-carousel .item:hover {
   filter: grayscale(100%);
   filter: gray;
+}
+
+#calender .container .row .title {
+  font-size: 30px;
+  color: #19686d;
+  font-weight: 900;
+  text-align: center;
+}
+#calender .container .row .accordion .accordion-button:not(.collapsed) {
+  background-color: #f1f8e9;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+#calender .container .row .accordion .accordion-button:focus {
+  box-shadow: 0 0 0 0rem rgba(13, 110, 253, 0.25);
+}
+#calender .container .row .accordion .accordion-button::after {
+  color: #fff;
 }
 
 #footer {

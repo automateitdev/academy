@@ -26,6 +26,6 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('school_admin',compact('users'));
+        return view('layouts.dashboard.dash.index',compact('users'));
     }
 }

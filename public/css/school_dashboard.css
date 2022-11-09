@@ -209,6 +209,29 @@
   width: 95%;
 }
 
+.dash {
+  padding-top: 50px;
+  padding-left: 10px;
+  padding-bottom: 50px;
+}
+.dash .container .row .jkuy {
+  border: 1px solid #19686d;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: rgba(25, 104, 109, 0.7882352941);
+  color: #fff;
+}
+.dash .container .row .jkuy .ins_name {
+  margin: 0;
+  margin-top: 10px;
+  font-size: 30px;
+}
+.dash .container .row .jkuy .add {
+  margin: 0;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
 #menu {
   padding-top: 50px;
 }

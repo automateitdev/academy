@@ -221,6 +221,37 @@
         }
     }
 }
+//dashbaord start
+
+.dash {
+    padding-top: 50px;
+    padding-left: 10px;
+    padding-bottom: 50px;
+
+    .container {
+        .row {
+            .jkuy {
+                border: 1px solid #19686d;
+                padding: 8px;
+                border-radius: 6px;
+                background-color: #19686dc9;
+                color: #fff;
+                .ins_name {
+                    margin: 0;
+                    margin-top: 10px;
+                    font-size: 30px;
+                }
+                .add {
+                    margin: 0;
+                    margin-top: 10px;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+//dasbaord end
 /////// font end start /////
 
 // menu

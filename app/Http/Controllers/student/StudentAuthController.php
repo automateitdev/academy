@@ -65,33 +65,32 @@ class StudentAuthController extends Controller
         $year = $request->year;
         $day = $request->day;
         $invoice = 'AE'.$ins_id.''.$day.''.$std_id.''.$year.'';
-        // dd($ins_id );
 
-    $tableData = json_decode($request->tableData,true);
-    // dd($tableData);
-       
-
+        $tableData = json_decode($request->tableData,true);
+// dd($tableData);
+        foreach($tableData as $key => $data)
+        {
+            $payapply = new Payapply();
+            // foreach ($data as $key => $value) {
+                $payapply->institute_id = $request->ins_id;
+                $payapply->student_id = $request->std_id;
+                $payapply->invoice = $invoice;
+                $payapply->$key = $data;
+            // }
+            var_dump($data);
+                echo $key .'\n';
+                echo $data;
+                echo "<br>";
+            // $payapply->save();  
         
-    foreach($tableData as $t_key => $data)
-    {
-        $payapply = new Payapply();
-        foreach ($data as $key => $value) {
-
-            $payapply->institute_id = $request->ins_id;
-            $payapply->student_id = $request->std_id;
-            $payapply->invoice = $invoice;
-            $payapply->$key = $value;
-        }
-        $payapply->save();  
-    
-    }  
+        }  
 
 
         $amount = $request->erp;
         $invoicedate = $request->date;
         $accountInfo = Accountinfo::where('institute_id', $ins_id)->first();
         $applicantName = Student::where('institute_id', $ins_id)->where('std_id', $std_id)->first();
-        // dd($applicantName['name']);
+        dd($applicantName['name']);
 
         
 

@@ -4,12 +4,14 @@ $todate = \Carbon\Carbon::now()->format('Y-m-d');
 $year = \Carbon\Carbon::now()->year;
 $month = \Carbon\Carbon::now()->month;
 $today = \Carbon\Carbon::now();
+$day = \Carbon\Carbon::now()->day;
 $section_assigns = App\Models\SectionAssign::all();
 $feeamounts = App\Models\Feeamount::all();
 $waivermappings = App\Models\Waivermapping::all();
 $grand = [];
 $tableData = [];
-$waiver_amount = null;
+$waiver = null;
+$tmp_data = [];
 @endphp
 
 <div class="payment">
@@ -55,6 +57,15 @@ $waiver_amount = null;
                                                                 @foreach($waivermappings as $waiver_data)
                                                                     @if($student->std_id == $waiver_data->student_id)
                                                                         @if($datesetup->feehead_id == $waiver_data->feehead_id)
+
+                                                                            @php 
+                                                                                $waiver = $waiver_data->amount;
+                                                                                $tmp_data['$waiver_id'] = isset($tmp_data['$waiver_id']) ? $tmp_data['$waiver_id'] : '';
+                                                                                $tmp_data['$waiver_id'] = $waiver_data->waiver_category_id;
+                                                                                
+                                                                                $tmp_data['$waiver_amount'] = isset($tmp_data['$waiver_amount']) ? $tmp_data['$waiver_amount'] : '';
+                                                                                $tmp_data['$waiver_amount'] = $waiver_data->amount;
+                                                                            @endphp
                                                                             <td class="waiver">{{$waiver_data->amount}}</td>
                                                                             @else
                                                                             <td class="waiver">0</td>
@@ -63,6 +74,29 @@ $waiver_amount = null;
                                                                 @endforeach
                                                                 <td class="pay_total"></td>
                                                             </tr>
+                                                            @php
+
+                                                                $payable = $feeamount->feeamount;
+                                                                $fine = $feeamount->fineamount;
+                                                                $total = $payable + $fine - $waiver;
+                                                                array_push($grand, $total);
+                                                    
+
+                                                                
+                                                                $tmp_data['feehead_id'] = isset($tmp_data['feehead_id']) ? $tmp_data['feehead_id'] : '';
+                                                                $tmp_data['feehead_id'] = $datesetup->feehead_id;
+
+                                                                $tmp_data['feesubhead_id'] = isset($tmp_data['feesubhead_id']) ? $tmp_data['feesubhead_id'] : '';
+                                                                $tmp_data['feesubhead_id'] = $datesetup->feesubhead_id;
+
+                                                                $tmp_data['payable'] = isset($tmp_data['payable']) ? $tmp_data['payable'] : '';
+                                                                $tmp_data['payable'] = $feeamount->feeamount;
+
+                                                                $tmp_data['fine'] = isset($tmp_data['fine']) ? $tmp_data['fine'] : '';
+                                                                $tmp_data['fine'] = $feeamount->fineamount;
+
+                                                                array_push($tableData, $tmp_data);
+                                                            @endphp
                                                         @endif
                                                     @endif
                                                 @endif
@@ -86,14 +120,14 @@ $waiver_amount = null;
             </div>
             <div class="">
                 @php
-                $erp = array_sum($grand) - $waiver_amount;
+                $erp = array_sum($grand);
                 $tableData = json_encode($tableData);
                 @endphp
                 <form action="{{ route('makepayment', ['erp' => $erp, 'tableData'=>$tableData])}}" method="POST">
                     @csrf
                     <input type="hidden" value="{{ $ins_id }}" name="ins_id">
                     <input type="hidden" value="{{ $std_id }}" name="std_id">
-                    <input type="hidden" value="{{ $today }}" name="day">
+                    <input type="hidden" value="{{ $day }}" name="day">
                     <input type="hidden" value="{{ $year }}" name="year">
                     <input type="hidden" value="{{ $in_date }}" name="date">
                     <button class="btn btn-success btn-sm pull-right">Pay Now</button>

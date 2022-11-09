@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\school\home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class InstituteController extends Controller
+
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class InstituteController extends Controller
      */
     public function index()
     {
-        $users =  User::all();
-        return view('layouts.admin.institute.index', compact('users'));
+        $users = User::all();
+        return view('layouts.dashboard.dash.index', compact('users'));
     }
 
     /**
@@ -37,37 +38,7 @@ class InstituteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'institute_id' => 'required',
-            'institute_name' => 'required',
-            'EIIN_number' => 'required',
-            'institute_type' => 'required',
-            'edu_board' => 'required',
-            'address' => 'required',
-            'post_office' => 'required',
-            'police_station' => 'required',
-            'district' => 'required',
-            'division' => 'required',
-            'contact_no' => 'required',
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        $input = new User();
-        $input->institute_id = $request->institute_id;
-        $input->institute_name = $request->institute_name;
-        $input->EIIN_number = $request->EIIN_number;
-        $input->institute_type = $request->institute_type;
-        $input->edu_board = $request->edu_board;
-        $input->address = $request->address;
-        $input->post_office = $request->post_office;
-        $input->police_station = $request->police_station;
-        $input->district = $request->district;
-        $input->division = $request->division;
-        $input->contact_no = $request->contact_no;
-        $input->email = $request->email;
-        $input->password = $request->password;
-        $input->save();
+        //
     }
 
     /**

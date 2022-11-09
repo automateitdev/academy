@@ -107,8 +107,6 @@ class MainController extends Controller
         $url = $domainlist->where('url', $currentDomain)->first();
         $ins_id = $url->institute_id;
 
-        // $this->index($ins_id);
-
 
         $speeches = Speech::where('institute_id', $ins_id)->get();
         $sliders = Slider::where('institute_id', $ins_id)->get();

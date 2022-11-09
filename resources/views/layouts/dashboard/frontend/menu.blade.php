@@ -97,7 +97,9 @@
                                                 <select class="form-control" name="cat_id" required>
                                                     <option value="">Select a Menu</option>
                                                         @foreach($categories as $item)
-                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                            @if($item->institute_id == Auth::user()->institute_id)
+                                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                            @endif
                                                         @endforeach
                                                 </select>
                                             </div>
