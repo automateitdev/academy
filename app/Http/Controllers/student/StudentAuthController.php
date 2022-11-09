@@ -12,6 +12,8 @@ use App\Models\Payapply;
 use App\Models\Waivermapping;
 use GuzzleHttp\Client as GuzzleClient;
 
+use function PHPSTORM_META\type;
+
 class StudentAuthController extends Controller
 {
     /**
@@ -40,8 +42,8 @@ class StudentAuthController extends Controller
         $students = Student::where('std_id', $std_id)->get();
         $datesetups = Datesetup::all();
         $waivermappings = Waivermapping::where('student_id', $std_id)
-                                    ->where('institute_id', $ins_id)->get();
-        
+            ->where('institute_id', $ins_id)->get();
+
 
 
         foreach ($students as $std) {
@@ -64,26 +66,20 @@ class StudentAuthController extends Controller
         $ins_id = $request->ins_id;
         $year = $request->year;
         $day = $request->day;
-        $invoice = 'AE'.$ins_id.''.$day.''.$std_id.''.$year.'';
+        $invoice = 'AE' . $ins_id . '' . $day . '' . $std_id . '' . $year . '';
 
-        $tableData = json_decode($request->tableData,true);
-// dd($tableData);
-        foreach($tableData as $key => $data)
-        {
+        $tableData = json_decode($request->tableData, true);
+
+        foreach ($tableData as $key => $data) {
             $payapply = new Payapply();
-            // foreach ($data as $key => $value) {
+            foreach ($data as $key => $value) {
                 $payapply->institute_id = $request->ins_id;
                 $payapply->student_id = $request->std_id;
                 $payapply->invoice = $invoice;
-                $payapply->$key = $data;
-            // }
-            var_dump($data);
-                echo $key .'\n';
-                echo $data;
-                echo "<br>";
-            // $payapply->save();  
-        
-        }  
+                $payapply->$key = $value;
+            }
+            $payapply->save();
+        }
 
 
         $amount = $request->erp;
@@ -92,7 +88,7 @@ class StudentAuthController extends Controller
         $applicantName = Student::where('institute_id', $ins_id)->where('std_id', $std_id)->first();
         dd($applicantName['name']);
 
-        
+
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
@@ -104,12 +100,12 @@ class StudentAuthController extends Controller
             {"userName":"a2i@pmo",
             "password":"sbPayment0002"
             },
-            "invoiceNo":"'.$invoice.'",
-            "amount":"'.$amount.'",
-            "invoiceDate":"'.$invoicedate.'",
-            "accounts":[{"crAccount":"'.$accountInfo['crAccount'].'","crAmount":'.$amount.'}]}';
+            "invoiceNo":"' . $invoice . '",
+            "amount":"' . $amount . '",
+            "invoiceDate":"' . $invoicedate . '",
+            "accounts":[{"crAccount":"' . $accountInfo['crAccount'] . '","crAmount":' . $amount . '}]}';
 
-            // dd($data);
+        // dd($data);
         // API 1
         $res = $client->request(
             'POST',
@@ -124,22 +120,22 @@ class StudentAuthController extends Controller
                 "apiAccessToken": "' . $token['access_token'] . '"
             },
             "referenceInfo": {
-                "InvoiceNo": "'.$invoice.'", 
-                "invoiceDate": "'.$invoicedate.'", 
+                "InvoiceNo": "' . $invoice . '", 
+                "invoiceDate": "' . $invoicedate . '", 
                 "returnUrl": "http://127.0.0.2:8000/confirmation", 
-                "totalAmount": "'.$amount.'", 
-                "applicentName": "'.$applicantName['name'].'", 
-                "applicentContactNo": "'.$applicantName['mobile_no'].'", 
-                "extraRefNo": "'.$accountInfo['extraRefNo'].'"
+                "totalAmount": "' . $amount . '", 
+                "applicentName": "' . $applicantName['name'] . '", 
+                "applicentContactNo": "' . $applicantName['mobile_no'] . '", 
+                "extraRefNo": "' . $accountInfo['extraRefNo'] . '"
             }, 
             "creditInformations": [
             {
                 "slno": "1",
-                "crAccount": "'.$accountInfo['crAccount'].'", 
-                "crAmount": "'.$amount.'", 
-                "tranMode": "'.$accountInfo['tranMode'].'"}]}';
+                "crAccount": "' . $accountInfo['crAccount'] . '", 
+                "crAmount": "' . $amount . '", 
+                "tranMode": "' . $accountInfo['tranMode'] . '"}]}';
 
-            // dd($data_two);
+        // dd($data_two);
         //API 2
         $res_two = $client->request(
             'POST',
@@ -222,9 +218,9 @@ class StudentAuthController extends Controller
 
 
         // return redirect();
-                // "trax_id": "' . $result['TransactionId'] . '",
-                // "invoice_no": "' . $result['InvoiceNo'] . '",
-                // "session_token": "' . $request->session_token . '"
+        // "trax_id": "' . $result['TransactionId'] . '",
+        // "invoice_no": "' . $result['InvoiceNo'] . '",
+        // "session_token": "' . $request->session_token . '"
         // return view('layouts.student.confirmation', compact('receive_token','status'));
     }
     /**

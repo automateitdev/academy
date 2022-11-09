@@ -19,3 +19,11 @@
 .std_portal .payment .container .lkjhy .btn-sm {
   float: right;
 }
+.std_portal .std_tab {
+  background-color: #eee;
+  margin-left: 2px;
+  color: #19686d;
+}
+.std_portal .std_tab.active {
+  background-color: #19686d;
+}

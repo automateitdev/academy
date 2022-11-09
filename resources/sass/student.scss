@@ -27,6 +27,14 @@
             }
         }
     }
+    .std_tab{
+        background-color: #eee;
+        margin-left: 2px;
+        color: #19686d;
+    }
+    .std_tab.active{
+        background-color:#19686d;
+    }
 }
 
 // <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>

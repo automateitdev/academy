@@ -18,24 +18,28 @@
 <body>
     <div class="std_portal" style="min-height:100vh; background-color:#b1dae7">
         <div class="container pt-2 px-5" style="color:#fff; border-radius:5px 5px 0 0; background-color: #19686d">
-            <div class="row align-items-baseline">
+            <div class="row align-items-center">
                 <div class="my-2 col-md-2">
-                    <img src="{{ asset('images/avatar.png') }}" alt="" class="img-fluid rounded"
-                        style="max-width: 200px">
+                    <img src="{{ asset('images/avatar.png') }}" alt="" class="img-fluid rounded">
                 </div>
-                <div class="my-2 col-md-10 d-flex justify-content-between">
-                    <ul>
+                <div class="my-2 col-md-10 d-flex justify-content-between align-items-center">
+                    <ul class="d-block m-0 ml-2" style="list-style: none">
                         @foreach ($students as $student)
                             @if ($student->std_id == $std_id && $student->institute_id == $ins_id)
-                                <li class="text-lg">Name : {{ $student->name }}</li>
-                                <li class="text-lg">Student ID : {{ $student->std_id }}</li>
-                                <li class="text-lg">Institute ID : {{ $student->institute_id }}</li>
+                                <li>
+                                    <span class="text-warning" style="font-weight:bold">Name: </span>
+                                    {{ $student->name }}
+                                </li>
+                                <li class="text-lg"><span class="text-warning" style="font-weight:bold">Student ID:
+                                    </span> {{ $student->std_id }}</li>
+                                <li class="text-lg"><span class="text-warning" style="font-weight:bold">Institute ID:
+                                    </span> {{ $student->institute_id }}</li>
                             @endif
                         @endforeach
                     </ul>
-                    <div>
-                        <button class="btn btn-warning">Logout</button>
-                    </div>
+
+                    <button class="btn btn-warning">Logout</button>
+
 
                 </div>
             </div>
@@ -45,16 +49,16 @@
 
                 <div class="col-md-12 pb-2">
                     <div class="nav nav-pills m-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button class="nav-link active" id="v-pills-info-tab" data-bs-toggle="pill"
+                        <button class="nav-link std_tab active" id="v-pills-info-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-info" type="button" role="tab" aria-controls="v-pills-info"
                             aria-selected="true">Information</button>
-                        <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill"
+                        <button class="nav-link std_tab" id="v-pills-payment-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-payment" type="button" role="tab"
                             aria-controls="v-pills-payment" aria-selected="false">Payment</button>
-                        <button class="nav-link" id="v-pills-report-tab" data-bs-toggle="pill"
+                        <button class="nav-link std_tab" id="v-pills-report-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-report" type="button" role="tab"
                             aria-controls="v-pills-report" aria-selected="false">Report</button>
-                        <button class="nav-link" id="v-pills-result-tab" data-bs-toggle="pill"
+                        <button class="nav-link std_tab" id="v-pills-result-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-result" type="button" role="tab"
                             aria-controls="v-pills-result" aria-selected="false">Result</button>
                     </div>
