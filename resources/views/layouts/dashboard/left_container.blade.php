@@ -329,9 +329,9 @@
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="" class="nav-link active">
+                          <a href="{{route('domain.view')}}" class="nav-link active">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Domain Data</p>
+                            <p>Domain Assign</p>
                           </a>
                         </li>
                       </ul>
@@ -346,13 +346,13 @@
                         <li class="nav-item">
                           <a href="" class="nav-link active">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Enrollment Form</p>
+                            <p>Field One</p>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a href="" class="nav-link active">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Excel Form</p>
+                            <p>Field Two</p>
                           </a>
                         </li>
                       </ul>

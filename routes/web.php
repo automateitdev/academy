@@ -30,6 +30,7 @@ use App\Http\Controllers\school\home\DashboardController;
 use App\Http\Controllers\admin\InstituteController;
 use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
+use App\Http\Controllers\admin\DomainAssignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,7 @@ Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'admini
 //////////////////// Admin Part Start/////////////////////////////////////////
 
 Route::get('/institute', [InstituteController::class, 'index'])->name('institute.view');
+Route::post('/institute/store', [InstituteController::class, 'store'])->name('institute.store');
 
 //bank
 Route::get('/bank-info', [BankInfoController::class, 'index'])->name('bankinfo.view');
@@ -84,6 +86,13 @@ Route::post('/bank-info/store', [BankInfoController::class, 'store'])->name('ban
 //role assign
 Route::get('/role-assign', [RoleAssignController::class, 'index'])->name('role.view');
 Route::post('/role-assign/store', [RoleAssignController::class, 'store'])->name('role.store');
+
+//domain assign
+Route::get('/domain-assign', [DomainAssignController::class, 'index'])->name('domain.view');
+Route::post('/domain-assign/store', [DomainAssignController::class, 'store'])->name('domain.store');
+
+
+
 
 
 //////////////////// Admin Part End/////////////////////////////////////////

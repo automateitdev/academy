@@ -15,7 +15,7 @@ class CreateDomainlistsTable extends Migration
     {
         Schema::create('domainlists', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('institute_id');
+            $table->string('institute_id')->unique();
             $table->string('url');
             $table->timestamps();
         });

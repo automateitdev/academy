@@ -5,10 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Role;
-use App\Models\RoleUser;
+use App\Models\Domainlist;
 
-class RoleAssignController extends Controller
+class DomainAssignController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class RoleAssignController extends Controller
     public function index()
     {
         $users =  User::all();
-        $roles = Role::all();
-        return view('layouts.admin.role.index', compact('users', 'roles'));
+        $domainlists = Domainlist::all();
+        return view('layouts.admin.domain.index', compact('users','domainlists'));
     }
 
     /**
@@ -41,17 +40,17 @@ class RoleAssignController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
-            'role_id' => 'required'
+            'institute_id' => 'required',
+            'url' => 'required'
         ]);
 
-        $input = new RoleUser();
-        $input->user_id = $request->user_id;
-        $input->role_id = $request->role_id;
+        $input = new Domainlist();
+        $input->institute_id = $request->institute_id;
+        $input->url = $request->url;
         $input->save();
 
-        return redirect(route('role.view'))->with('message', 'Data Upload Successfully')->withErrors('message', 'Data Upload Successfully');
-    
+        return redirect(route('domain.view'))->with('message', 'Data Upload Successfully')->withErrors('message', 'Data Upload Successfully');
+
     }
 
     /**
