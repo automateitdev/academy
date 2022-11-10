@@ -303,9 +303,8 @@
 
 
           <!-- Administrator part -->
-          @foreach($users as $user)
-            @foreach($user->roles as $role)
-              @if($role->pivot->user_id == Auth::user()->id)
+          @foreach(Auth::user()->roles as $role)
+              @if($role->id == 1)
                 <li class="nav-header">Maintenance</li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
@@ -358,18 +357,25 @@
                         </li>
                       </ul>
                     </li>
-                    <li class="nav-item menu-open">
+                    <li class="nav-item">
                         <a href="{{route('bankinfo.view')}}" class="nav-link active">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="far fa-circle nav-icon"></i>
                           <p>
                             Bank Info
+                          </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('role.view')}}" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                          <p>
+                            Role Assign
                           </p>
                         </a>
                     </li>
                   </ul>
                 </li>
               @endif
-            @endforeach
           @endforeach
           <!-- Administrator part -->
         </ul>

@@ -5,32 +5,50 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paymentupdate;
+use Illuminate\Support\Facades\Session;
 
 class ApiController extends Controller
 {
     public function dataupdate(Request $request)
      {
-        // dd($request);
-        // $paymentupdates = Paymentupdate::where('transaction_id', $request->TransactionId)->get();
 
-        // foreach($paymentupdates as $pay)
-        // {
-        //     // dd($request);
-        //     if($pay->session_token == $request->session_Token 
-        //         && $pay->transaction_id == $request->TransactionId
-        //         && $pay->invoice_no == $request->InvoiceNo
-        //         && $pay->applicant_no == $request->ApplicantContactNo
-        //         && $pay->total_amount == $request->TotalAmount
-        //         && $pay->pay_status == $request->PaymentStatus
-        //      )
-        //      {
-        //         echo "success";
-        //      }
-        //      else{
-        //         echo "fail";
-        //      }
-        // }
-        return $request;
+        $result = json_decode($request->res->getBody(), true);
+
+
+        $input = new Paymentupdate();
+        $input->institute_id =  $request->ins_id;
+        $input->student_id = $request->std_id;
+        $input->session_token = $request->session_Token;
+        $input->status = $result['status'];
+        $input->msg = $result['msg'];
+        $input->transaction_id = $result['TransactionId'];
+        $input->transaction_date = $result['TransactionDate'];
+        $input->invoice_no = $result['InvoiceNo'];
+        $input->invoice_date = $result['InvoiceDate'];
+        $input->br_code = $result['BrCode'];
+        $input->applicant_name = $result['ApplicantName'];;
+        $input->applicant_no = $result['ApplicantContactNo'];
+        $input->total_amount = $result['TotalAmount'];
+        $input->pay_status = $result['PaymentStatus'];
+        $input->pay_mode = $result['PayMode'];
+        $input->pay_amount = $result['PayAmount'];
+        $input->vat = $result['Vat'];
+        $input->comission = $result['Commission'];
+        $input->scroll_no = $result['ScrollNo'];
+
+        if($result['status'] == 200)
+        {
+            if($input->save())
+            {
+                
+            }else{
+                Session::put('payment_error', $request->ins_id, $request->std_id);
+            }
+        }else{
+
+        }
+        
+        return redirect(route('student.auth.submit'));
      }
     /**
      * Display a listing of the resource.

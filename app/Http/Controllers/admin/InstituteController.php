@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class InstituteController extends Controller
 {
@@ -40,15 +41,15 @@ class InstituteController extends Controller
         $request->validate([
             'institute_id' => 'required',
             'institute_name' => 'required',
-            'EIIN_number' => 'required',
-            'institute_type' => 'required',
-            'edu_board' => 'required',
-            'address' => 'required',
-            'post_office' => 'required',
-            'police_station' => 'required',
-            'district' => 'required',
-            'division' => 'required',
-            'contact_no' => 'required',
+            'EIIN_number' => 'nullable',
+            'institute_type' => 'nullable',
+            'edu_board' => 'nullable',
+            'address' => 'nullable',
+            'post_office' => 'nullable',
+            'police_station' => 'nullable',
+            'district' => 'nullable',
+            'division' => 'nullable',
+            'contact_no' => 'nullable',
             'email' => 'required',
             'password' => 'required'
         ]);
@@ -66,8 +67,10 @@ class InstituteController extends Controller
         $input->division = $request->division;
         $input->contact_no = $request->contact_no;
         $input->email = $request->email;
-        $input->password = $request->password;
+        $input->password = Hash::make($request->password);
         $input->save();
+        return redirect(route('institute.view'))->with('message', 'Data Upload Successfully')->withErrors('message', 'Data Upload Successfully');
+ 
     }
 
     /**

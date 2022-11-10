@@ -29,6 +29,7 @@ use App\Http\Controllers\school\home\DashboardController;
 //admin
 use App\Http\Controllers\admin\InstituteController;
 use App\Http\Controllers\admin\BankInfoController;
+use App\Http\Controllers\admin\RoleAssignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,10 +81,9 @@ Route::get('/institute', [InstituteController::class, 'index'])->name('institute
 Route::get('/bank-info', [BankInfoController::class, 'index'])->name('bankinfo.view');
 Route::post('/bank-info/store', [BankInfoController::class, 'store'])->name('bankinfo.store');
 
-
-
-
-
+//role assign
+Route::get('/role-assign', [RoleAssignController::class, 'index'])->name('role.view');
+Route::post('/role-assign/store', [RoleAssignController::class, 'store'])->name('role.store');
 
 
 //////////////////// Admin Part End/////////////////////////////////////////
