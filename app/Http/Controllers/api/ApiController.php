@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paymentupdate;
+use App\Models\Payapply;
 use Illuminate\Support\Facades\Session;
 
 class ApiController extends Controller

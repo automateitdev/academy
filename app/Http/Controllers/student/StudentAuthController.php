@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Datesetup;
-use App\Models\Paymentupdate;
-use App\Models\Accountinfo;
 use App\Models\Payapply;
 use App\Models\Bankinfo;
 use App\Models\Waivermapping;
@@ -38,7 +36,7 @@ class StudentAuthController extends Controller
         $std_id = $request->std_id;
         $ins_id = $request->ins_id;
 
-
+        $payapplies = new Payapply();
         $students = Student::where('std_id', $std_id)->get();
         $datesetups = Datesetup::all();
         $waivermappings = Waivermapping::where('student_id', $std_id)
@@ -49,7 +47,7 @@ class StudentAuthController extends Controller
         foreach ($students as $std) {
             // dd($std->std_id == $request->std_id);
             if ($std->institute_id == $request->ins_id && $std->std_id == $request->std_id) {
-                return view('layouts.student.dashboard', compact('students', 'datesetups', 'waivermappings'))
+                return view('layouts.student.dashboard', compact('students', 'datesetups', 'waivermappings', 'payapplies'))
                     ->with('std_id', $std_id)
                     ->with('ins_id', $ins_id);
             } else {

@@ -329,9 +329,6 @@ a{
             .owl-carousel{
                 .item{
                     border: 0px solid black;
-                    // filter: grayscale(100%);
-                    // -webkit-filter: grayscale(100%);
-                    // filter: gray;
                     -webkit-transition: all .6s ease;
                     width: 169.667px;
                     margin: 3px;
@@ -343,11 +340,9 @@ a{
                     }
                 }
                 .item:hover {
-                    // filter: grayscale(0%);
                     filter: grayscale(100%);
                     -webkit-filter: grayscale(0%);
                     filter: gray;
-                    // filter: none;
                 }
             }
         }

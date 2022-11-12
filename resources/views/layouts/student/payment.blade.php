@@ -29,6 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
                     @foreach ($students as $student)
                         @if ($student->std_id == $std_id && $student->institute_id == $ins_id)
                             <!-- class id from section assign table -->
