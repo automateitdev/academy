@@ -37,7 +37,7 @@ class StudentAuthController extends Controller
         $ins_id = $request->ins_id;
 
         $payapplies = new Payapply();
-        $students = Student::where('std_id', $std_id)->get();
+        $students = Student::where('std_id', $std_id)->where('institute_id', $ins_id)->get();
         $datesetups = Datesetup::all();
         $waivermappings = Waivermapping::where('student_id', $std_id)
             ->where('institute_id', $ins_id)->get();

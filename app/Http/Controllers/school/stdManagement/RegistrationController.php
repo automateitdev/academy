@@ -12,11 +12,17 @@ use App\Models\SectionAssign;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentImport;
+use App\Models\Datesetup;
+use App\Models\Waivermapping;
+use App\Models\Feeamount;
+use App\Models\Payapply;
 use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 use Maatwebsite\Excel\Validators\ValidationException;
+use App\Http\Traits\StudentTraits;
 
 class RegistrationController extends Controller
 {
+    use StudentTraits;
     /**
      * Display a listing of the resource.
      *
@@ -78,6 +84,7 @@ class RegistrationController extends Controller
             $input->mother_name = $request->mother_name[$key];
             $input->mobile_no = $request->mobile_no[$key];
             $input->save();
+            $this->assign_fee($request->std_id[$key], $request->institute_id);
         }
         return redirect(route('enrollment.auto.index'))->with('message', 'Data Upload Successfully');
     }
@@ -101,12 +108,31 @@ class RegistrationController extends Controller
         // Excel::import($import, $request->file('file'));
 
         try {
+            
             Excel::import($import, $request->file('file'));
+            $arr = Excel::toArray([], $request->file('file'));
+            // dd($arr[0]);
+            $i = 0;
+            foreach($arr[0] as $key=>$student)
+            {
+                
+                if($i == 0)
+                {
+                    $i++;
+                    continue;
+                }
+                $this->assign_fee($student[0], $request->institute_id);
+                // var_dump($student[0]);
+            }
+            // die();
+            
         } catch ( NoTypeDetectedException $e) {
             return redirect(route('enrollment.excel.index'))->with('message', 'Please, Only Upload Excel Sheet');
         }
         return redirect(route('enrollment.excel.index'))->with('message', 'Data Upload Successfully');
     }
+
+   
 
 
     public function download()

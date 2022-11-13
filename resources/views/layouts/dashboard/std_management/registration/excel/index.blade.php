@@ -14,18 +14,13 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12">
-                @if ($errors->any())
+              
+                
+                @if(session()->has('error'))
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{session('errors')->first('error');}}</li>
-                                <!-- <li>{{ $error }}</li> -->
-                            @endforeach
-                        </ul>
+                        {{ session()->get('error') }}
                     </div>
-                @endif
-                @if(session()->has('message'))
+                    @elseif(session()->has('message'))
                     <div class="alert alert-success">
                         {{ session()->get('message') }}
                     </div>

@@ -42,10 +42,11 @@
                                             @if ($section_assign->class_id == $datesetup->class_id)
                                                 @if ($student->academic_year_id == $datesetup->academic_year_id)
                                                     @if ($datesetup->feehead_id == $feeamount->feehead_id)
-                                                        @if ($todate >= $datesetup->payable_date || $pa_month == $month)
                                                             @php
                                                                 $pa_month = \Carbon\Carbon::parse($datesetup->payable_date)->format('m');
                                                             @endphp
+                                                        @if ($todate >= $datesetup->payable_date || $pa_month == $month)
+                                                            
                                                             <tr>
                                                                 <td>{{ $datesetup->feehead->head_name }}</td>
                                                                 <td>{{ $datesetup->feesubhead->subhead_name }}</td>

@@ -5,13 +5,13 @@ namespace App\Imports;
 use App\Models\Gender;
 use App\Models\Religion;
 use App\Models\Student;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
+use App\Http\Traits\StudentTraits;
 
 class StudentImport implements ToModel, WithHeadingRow
 {
+    use StudentTraits;
     /**
      * @param array $row
      *
@@ -40,12 +40,6 @@ class StudentImport implements ToModel, WithHeadingRow
         $this->group_id = $group_id;
     }
 
-
-    // public function headingRow(): int
-    // {
-    //     return 2;
-    // }
-
     public function model(array $rows)
     {
         
@@ -59,10 +53,11 @@ class StudentImport implements ToModel, WithHeadingRow
             !empty($rows['mother_name']) &&
             !empty($rows['mobile_no'])
         ) {
-            // $duplicates = Student::where('std_id', $rows['student_id'])->first();
-            // dd($duplicates);
+            
             $gender = Gender::where('g_name', $rows['gender'])->first();
             $religion = Religion::where('r_name', $rows['religion'])->first();
+            $student_id = Student::distinct()->where('std_id', $rows['student_id'])->first();
+            if(empty($student_id)){
             
             return new Student([
                 'std_id' => $rows['student_id'],
@@ -80,23 +75,14 @@ class StudentImport implements ToModel, WithHeadingRow
                 'std_category_id' => $this->std_category_id,
                 'group_id' => $this->group_id,
             ]);
+            
+             }
+            else{
+                redirect(route('enrollment.excel.index'))->with('error', 'Duplicate Data');
+            }
         }
+        
     }
+   
 
-    // public function rules(): array
-    // {
-    //     return [
-    //         'std_id' => Rule::unique('students', 'std_id'),
-    //     ];
-    // }
-
-    // /**
-    //  * @return array
-    //  */
-    // public function customValidationMessages()
-    // {
-    //     return [
-    //         'std_in.unique' => 'Duplicate Data',
-    //     ];
-    // }
 }
