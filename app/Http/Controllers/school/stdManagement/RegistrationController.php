@@ -108,8 +108,8 @@ class RegistrationController extends Controller
         // Excel::import($import, $request->file('file'));
 
         try {
+            if(Excel::import($import, $request->file('file'))){
             
-            Excel::import($import, $request->file('file'));
             $arr = Excel::toArray([], $request->file('file'));
             // dd($arr[0]);
             $i = 0;
@@ -124,6 +124,7 @@ class RegistrationController extends Controller
                 $this->assign_fee($student[0], $request->institute_id);
                 // var_dump($student[0]);
             }
+        }
             // die();
             
         } catch ( NoTypeDetectedException $e) {
