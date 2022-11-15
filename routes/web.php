@@ -5,26 +5,29 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\website\MainController;
-use App\Http\Controllers\school\frontend\MenuController;
-use App\Http\Controllers\school\master\StartupController;
-use App\Http\Controllers\school\master\BasicSetupController;
-use App\Http\Controllers\school\master\ClassSetupController;
-use App\Http\Controllers\school\frontend\SliderController;
-use App\Http\Controllers\school\frontend\SpeechController;
-use App\Http\Controllers\school\frontend\AboutController;
-use App\Http\Controllers\school\stdManagement\RegistrationController;
-use App\Http\Controllers\school\fee_management\FeeStartupController;
-use App\Http\Controllers\school\fee_management\FeeMapingController;
-use App\Http\Controllers\school\frontend\AdministrationController;
-use App\Http\Controllers\school\frontend\GalleryController;
-use App\Http\Controllers\school\fee_management\AmountController;
-use App\Http\Controllers\school\fee_management\DateSetupController;
-use App\Http\Controllers\school\fee_management\WaiverController;
-use App\Http\Controllers\school\fee_management\FeeCollectionController;
+use App\Http\Controllers\dashboard\frontend\MenuController;
+use App\Http\Controllers\dashboard\master\StartupController;
+use App\Http\Controllers\dashboard\master\BasicSetupController;
+use App\Http\Controllers\dashboard\master\ClassSetupController;
+use App\Http\Controllers\dashboard\frontend\SliderController;
+use App\Http\Controllers\dashboard\frontend\SpeechController;
+use App\Http\Controllers\dashboard\frontend\AboutController;
+use App\Http\Controllers\dashboard\stdManagement\RegistrationController;
+use App\Http\Controllers\dashboard\fee_management\FeeStartupController;
+use App\Http\Controllers\dashboard\fee_management\FeeMapingController;
+use App\Http\Controllers\dashboard\frontend\AdministrationController;
+use App\Http\Controllers\dashboard\frontend\GalleryController;
+use App\Http\Controllers\dashboard\fee_management\AmountController;
+use App\Http\Controllers\dashboard\fee_management\DateSetupController;
+use App\Http\Controllers\dashboard\fee_management\WaiverController;
+use App\Http\Controllers\dashboard\fee_management\FeeCollectionController;
 
 use App\Http\Controllers\student\StudentAuthController;
 use App\Http\Controllers\student\CopyController;
-use App\Http\Controllers\school\home\DashboardController;
+use App\Http\Controllers\dashboard\home\DashboardController;
+
+//exam management
+use App\Http\Controllers\dashboard\examManagement\ExamStartupController;
 
 //admin
 use App\Http\Controllers\admin\InstituteController;
@@ -171,7 +174,7 @@ Route::get('/StudentManagement/enrollment/excel', [RegistrationController::class
 Route::post('/StudentManagement/enrollment/excel/store', [RegistrationController::class, 'excel_store'])->name('enrollment.excel.store');
 Route::get('/download/excel', [RegistrationController::class, 'download'])->name('excel.download');
 
-// Fees Management
+///////////////////// Fees Management Start ///////////
 
 Route::get('/FeesManagement/startup/index', [FeeStartupController::class, 'index'])->name('fee.startup.index');
 Route::post('/FeesManagement/startup/head/store', [FeeStartupController::class, 'headstore'])->name('fee.startup.headstore');
@@ -222,18 +225,18 @@ Route::get('/getfeeheadForWaiver', [WaiverController::class, 'getfeeheadForWaive
 
 
 
-//////////////  Fee Collection Controller ////////////////////
+//Fee Collection Controller
 Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
 Route::get('/FeesManagement/feecollection/view/{id}', [FeeCollectionController::class, 'show'])->name('feecollection.view');
 Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
 
-
+////////////////////// Fees Management End ////////////
 /////////// Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
 
-// ///////////////////// Student Portal ////////////////////////////
+// ///////////////////// Student Portal Start////////////////////////////
 Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
 
 Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
@@ -246,6 +249,10 @@ Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name
 // Route::post('/makepayment', [CopyController::class, 'makepayment'])->name('makepayment');
 // Route::get('/confirmation',[CopyController::class, 'confirmation'])->name('confirmation');
 
+// ///////////////////// Student Portal End////////////////////////////
 
+/////////////////////// Exam Management Start//////////////////
+Route::get('/exam-management/exam-startup', [ExamStartupController::class, 'index'])->name('examstartup');
 
+/////////////////////// Exam Management End//////////////////
 

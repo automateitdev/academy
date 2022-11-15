@@ -12,42 +12,21 @@ class ApiController extends Controller
 {
     public function dataupdate(Request $request)
      {
+        dd($request);
 
-        $result = json_decode($request->res->getBody(), true);
 
 
-        $input = new Paymentupdate();
-        $input->institute_id =  $request->ins_id;
-        $input->student_id = $request->std_id;
-        $input->session_token = $request->session_Token;
-        $input->status = $result['status'];
-        $input->msg = $result['msg'];
-        $input->transaction_id = $result['TransactionId'];
-        $input->transaction_date = $result['TransactionDate'];
-        $input->invoice_no = $result['InvoiceNo'];
-        $input->invoice_date = $result['InvoiceDate'];
-        $input->br_code = $result['BrCode'];
-        $input->applicant_name = $result['ApplicantName'];;
-        $input->applicant_no = $result['ApplicantContactNo'];
-        $input->total_amount = $result['TotalAmount'];
-        $input->pay_status = $result['PaymentStatus'];
-        $input->pay_mode = $result['PayMode'];
-        $input->pay_amount = $result['PayAmount'];
-        $input->vat = $result['Vat'];
-        $input->comission = $result['Commission'];
-        $input->scroll_no = $result['ScrollNo'];
+        // if($result['status'] == 200)
+        // {
+        //     if($input->save())
+        //     {
+        //         redirect(route('student.auth.index'))->with('message', 'Payment Success');
+        //     }else{
+        //         Session::put('payment error', $request->ins_id, $request->std_id);
+        //     }
+        // }else{
 
-        if($result['status'] == 200)
-        {
-            if($input->save())
-            {
-                
-            }else{
-                Session::put('payment_error', $request->ins_id, $request->std_id);
-            }
-        }else{
-
-        }
+        // }
         
         return redirect(route('student.auth.submit'));
      }

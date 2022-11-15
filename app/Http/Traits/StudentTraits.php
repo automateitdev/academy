@@ -7,6 +7,12 @@ use App\Models\Datesetup;
 use App\Models\SectionAssign;
 use App\Models\Feeamount;
 use App\Models\Payapply;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\Session as FacadesSession;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
+
+use function PHPUnit\Framework\isEmpty;
 
 trait StudentTraits
 {
@@ -41,29 +47,38 @@ trait StudentTraits
                             && $students->group_id == $feeamount->group_id
                         ) {
                             foreach ($datesetups as $datesetup) {
+                                
                                 if ($datesetup->class_id == $feeamount->class_id) {
                                     // we check student table, datesetup table and fee amount table, we get feesubhead_id
                                     if (
                                         $students->academic_year_id == $datesetup->academic_year_id
                                     ) {
                                         if ($datesetup->feehead_id == $feeamount->feehead_id) {
-                                            $payData = Payapply::where('class_id', $datesetup->class_id)->get();
-                                            dd($payData);
-                                            foreach ($payData as $data) {
-                                                
-                                                if ($data->feesubhead_id !== $datesetup->feesubhead_id) {
-                                                    $input = new Payapply();
-                                                    $input->institute_id = $institute_id;
-                                                    $input->class_id = $datesetup->class_id;
-                                                    $input->student_id = $student_id;
-                                                    $input->feehead_id = $feeamount->feehead_id;
-                                                    $input->feesubhead_id = $datesetup->feesubhead_id;
-                                                    $input->payable = $feeamount->feeamount;
-                                                    $input->save();
-                                                } else {
-                                                    redirect(route('enrollment.excel.index'))->with('error', 'Duplicate Payment');
+                                            $pay_data = Payapply::where('student_id', $student_id)->where('institute_id', $institute_id)
+                                                        ->where('feesubhead_id',$datesetup->feesubhead_id)
+                                                        ->where('feehead_id', $feeamount->feehead_id)->count();
+                                                        // dd($pay_data);
+                                            if($pay_data == 0){
+                                                $input = new Payapply();
+                                                $input->institute_id = $institute_id;
+                                                $input->class_id = $datesetup->class_id;
+                                                $input->student_id = $student_id;
+                                                $input->feehead_id = $feeamount->feehead_id;
+                                                $input->feesubhead_id = $datesetup->feesubhead_id;
+                                                $input->payable = $feeamount->feeamount;
+                                                if($input->save())
+                                                {
+                                                    // FacadesSession::put("message", "Payment Data Uploaded Successfully");
+                                                    // FacadesSession::forget('error');
                                                 }
                                             }
+                                            else{
+                                                // FacadesSession::put('error', 'Duplicate Entry for Fee');
+                                                // FacadesSession::forget('message');
+                                                // redirect(route('enrollment.excel.index'))->with('error', 'Duplicate tiutiu');
+                                            }
+                                            // redirect(route('enrollment.excel.index'))->with(FacadesSession::get("message"))->with(FacadesSession::get("error"));
+                                            redirect(route('enrollment.excel.index'));
                                         }
                                     }
                                 }

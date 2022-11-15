@@ -16,15 +16,16 @@
                 <div class="col-sm-12 col-md-12">
               
                 
-                @if(session()->has('error'))
+                    @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                        @elseif(session()->has('error'))
                     <div class="alert alert-danger">
                         {{ session()->get('error') }}
                     </div>
-                    @elseif(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                    @endif
+                    
                     </div>
-                @endif
                     <form action="{{route('enrollment.excel.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="student_table">

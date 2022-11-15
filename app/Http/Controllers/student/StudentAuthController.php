@@ -8,8 +8,11 @@ use App\Models\Student;
 use App\Models\Datesetup;
 use App\Models\Payapply;
 use App\Models\Bankinfo;
+use App\Models\Paymentupdate;
 use App\Models\Waivermapping;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Session;
 
 class StudentAuthController extends Controller
@@ -66,25 +69,26 @@ class StudentAuthController extends Controller
         $year = $request->year;
         $day = $request->day;
         $invoice = 'AE' . $ins_id . ''.$day.'' . $std_id . '' . $year . '';
+        // $invoice = 'INV155422121443';
         Session::put('ins_id', $ins_id);
         Session::put('std_id', $std_id);
 
         $tableData = json_decode($request->tableData, true);
 
-        foreach ($tableData as $key => $data) {
-            $payapply = new Payapply();
-            foreach ($data as $key => $value) {
-                $payapply->institute_id = $request->ins_id;
-                $payapply->student_id = $request->std_id;
-                $payapply->invoice = $invoice;
-                $payapply->$key = $value;
-            }
-            $payapply->save();
-        }
+        // foreach ($tableData as $key => $data) {
+        //     $payapply = new Payapply();
+        //     foreach ($data as $key => $value) {
+        //         $payapply->institute_id = $request->ins_id;
+        //         $payapply->student_id = $request->std_id;
+        //         $payapply->invoice = $invoice;
+        //         $payapply->$key = $value;
+        //     }
+        //     $payapply->save();
+        // }
 
 
         $amount = $request->erp;
-        $invoicedate = $request->date;
+        $invoicedate = \Carbon\Carbon::now()->format('Y-m-d');
         $accountInfo = Bankinfo::where('institute_id', $ins_id)->first();
         $applicantName = Student::where('institute_id', $ins_id)->where('std_id', $std_id)->first();
         // dd($applicantName['name']);
@@ -93,20 +97,21 @@ class StudentAuthController extends Controller
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
-            'Content-Type' => 'application/json',
+            'Content-Type' => 'application/JSON',
             'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh',
+            'Cookie' => 'f5avraaaaaaaaaaaaaaaa_session_=HEACLNAJLNOKBPJNOOCJMOFOELOEGOBECMGKNKJNBDDCFLDILNPFHMPHLIHIEIGHEGODGLEBLFKKADHHODGADBGINNLFBDPJANOOHILILOKAJNKAMHEDEELPMCHBLNCK; TS016ab1ea=01e5cf53c1afb1009f23ec5c6aa549fc62badb4c01d3943b4f7ad2d32a43ab36985e72de8225ddfdb7fe90e5d96c254d8db1377c9f0015d023a0d65e3a47c0f1a9682823ac'
         ];
 
         $data = '{"AccessUser":
             {"userName":"AutoMateIT",
             "password":"Au3t7o1M4asteIT!"
             },
-            "invoiceNo":"' . $invoice . '",
-            "amount":"' . $amount . '",
-            "invoiceDate":"' . $invoicedate . '",
-            "accounts":[{"crAccount":"' . $accountInfo['account'] . '","crAmount":' . $amount . '}]}';
+            "invoiceNo":"'.$invoice.'",
+            "amount":"'.$amount.'",
+            "invoiceDate":"'.$invoicedate.'",
+            "accounts":[{"crAccount":"'.$accountInfo['account'].'","crAmount":'.$amount.'}]}';
 
-        // dd($data);
+        //dd($data);
         // API 1
         $res = $client->request(
             'POST',
@@ -118,20 +123,22 @@ class StudentAuthController extends Controller
         $data_two =
             '{ "authentication":{
                 "apiAccessUserId": "AutoMateIT",
-                "apiAccessToken": "' . $token['access_token'] . '"
+                "apiAccessToken": "'.$token['access_token'].'"
             },
             "referenceInfo": {
-                "InvoiceNo": "' . $invoice . '", 
-                "invoiceDate": "' . $invoicedate . '", 
-                "returnUrl": "http://127.0.0.2:8000/confirmation", 
-                "totalAmount": "' . $amount . '", 
-                "applicentName": "' . $applicantName['name'] . '", 
-                "applicentContactNo": "' . $applicantName['mobile_no'] . '"
+                "InvoiceNo": "'.$invoice.'", 
+                "invoiceDate": "'.$invoicedate.'", 
+                "returnUrl": "https://live.academyims.com/confirmation", 
+                "totalAmount": "'.$amount.'", 
+                "applicentName": "'.$applicantName['name'].'", 
+                "applicentContactNo": "'.$applicantName['mobile_no'].'",
+                "extraRefNo": "2132"
             }, 
             "creditInformations": [
             {
-                "crAccount": "' . $accountInfo['account'] . '", 
-                "crAmount": "' . $amount . '", 
+                "slno": "1",
+                "crAccount": "'.$accountInfo['account'].'", 
+                "crAmount": "'.$amount.'", 
                 "tranMode": "TRN"}]}';
 
         // dd($data_two);
@@ -160,7 +167,8 @@ class StudentAuthController extends Controller
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
             'Content-Type' => 'application/json',
-            'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh',
+            'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh'
+            
         ];
 
         $data = '{"session_Token": "' . $request->session_token . '"}';
@@ -171,12 +179,38 @@ class StudentAuthController extends Controller
             'https://spg.com.bd:6314/api/v2/SpgService/TransactionVerificationWithToken',
             ['headers' => $headers, 'body' => $data]
         );
-        
 
+        $result = json_decode($res->getBody(), true);
+
+
+        $input = new Paymentupdate();
+        $input->institute_id = $ins_id;
+        $input->student_id = $std_id;
+        $input->session_token = $request->session_token;
+        $input->status = $result['status'];
+        $input->msg = $result['msg'];
+        $input->transaction_id = $result['TransactionId'];
+        $input->transaction_date = $result['TransactionDate'];
+        $input->invoice_no = $result['InvoiceNo'];
+        $input->invoice_date = $result['InvoiceDate'];
+        $input->br_code = $result['BrCode'];
+        $input->applicant_name = $result['ApplicantName'];;
+        $input->applicant_no = $result['ApplicantContactNo'];
+        $input->total_amount = $result['TotalAmount'];
+        $input->pay_status = $result['PaymentStatus'];
+        $input->pay_mode = $result['PayMode'];
+        $input->pay_amount = $result['PayAmount'];
+        $input->vat = $result['Vat'];
+        $input->comission = $result['Commission'];
+        $input->scroll_no = $result['ScrollNo'];
+        $input->save();
+        
 
         $finalheaders = [
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh',
+            'X-CSRF-Token'=> csrf_token(),
+            'exceptions' => false
         ];
 
         $final_data = '{ 
@@ -185,15 +219,39 @@ class StudentAuthController extends Controller
                 "std_id": "'.$std_id.'",
                 "auth_code": "Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh",
                 "session_Token": "'.$request->session_token.'",
-                "result": "'.$res.'",
+                "payment_status": "'.$result['status'].'"
+
                 } 
             }';
+            
 
-        $final = $client->request(
-            'POST',
-            'http://127.0.0.1:8000/api/dataupdate',
-            ['headers' => $finalheaders, 'body' => $final_data]
-        );
+            $client = new GuzzleClient();
+            try {
+                $mainurl = 'https://live.academyims.com/api/dataupdate';
+                    $api_request = curl_init($mainurl);
+                    curl_setopt($api_request, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($api_request, CURLINFO_HEADER_OUT, true);
+                    curl_setopt($api_request, CURLOPT_POST, true);
+                    curl_setopt($api_request, CURLOPT_POSTFIELDS, $final_data);
+                    curl_setopt($api_request, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($api_request, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Content-Length: ' . strlen($final_data)));
+                    $result = curl_exec($api_request);
+                    $json_data = json_decode($result);
+                    print_r($json_data);
+                // $client->request(
+                //     'POST',
+                //     'https://live.academyims.com/api/dataupdate',
+
+                //     ['headers' => $finalheaders, 
+                    
+                //     'body' => $final_data]
+                // );   
+            }
+            catch (ClientException $e) {
+                $response = $e->getResponse();
+                $responseBodyAsString = $response->getBody()->getContents();
+            }
+        
 
 
     }

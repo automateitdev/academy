@@ -233,7 +233,7 @@
           </li>
           <!-- Master Setting end -->
 
-      <!-- Website Maintenance start -->
+          <!-- Website Maintenance start -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -301,6 +301,94 @@
           </li>
           <!-- Website Maintenance end -->
 
+          <!-- Exam Management start -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Exam Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Settings</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('examstartup')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Exam Startup</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mark Input</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Section Wise</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <!-- Exam Management end -->
+
+          <!-- layout & certificate start -->
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Layout & Certificate
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Settings</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Field One</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Download</p>
+                  <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>ID Card</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <!-- layout & certificate end -->
 
           <!-- Administrator part -->
           @foreach(Auth::user()->roles as $role)
@@ -372,6 +460,12 @@
                             Role Assign
                           </p>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{route('menu')}}" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Menu</p>
+                      </a>
                     </li>
                   </ul>
                 </li>

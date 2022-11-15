@@ -14,7 +14,7 @@
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <!-- Menu -->
+                        <!-- Menu List -->
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <div class="table_house">
                                 <table class="table table-bordered">
@@ -52,17 +52,41 @@
                                 @csrf
                                 <div class="form_house">
                                     <div class="row">
-                                        <div class="col-sm-6 col-md-6">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Title</label>
-                                                <input type="text" class="form-control" id="name" name="name" disabled aria-describedby="name" required>
+                                            
+                                        @foreach(Auth::user()->roles as $role)
+                                            @if($role->id == 1)
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">Institute ID</label>
+                                                    <input type="text" class="form-control" id="institute_id" name="institute_id" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Title</label>
+                                                    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="link_name" class="form-label">External Link</label>
+                                                    <input type="text" class="form-control" id="link_name" name="link_name">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="link_name" class="form-label">External Link</label>
-                                                <input type="text" class="form-control" id="link_name" name="link_name">
+                                            @else
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control insId" value="{{Auth::user()->institute_id}}" id="institute_id" name="institute_id" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Title</label>
+                                                    <input type="text" class="form-control" id="name" name="name" disabled aria-describedby="name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="link_name" class="form-label">External Link</label>
+                                                    <input type="text" class="form-control" id="link_name" name="link_name">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
                                             </div>
-                                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
-                                        </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             </form>

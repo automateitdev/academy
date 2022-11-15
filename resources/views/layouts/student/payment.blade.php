@@ -131,7 +131,7 @@
                     <input type="hidden" value="{{ $std_id }}" name="std_id">
                     <input type="hidden" value="{{ $day }}" name="day">
                     <input type="hidden" value="{{ $year }}" name="year">
-                    <input type="hidden" value="{{ $in_date }}" name="date">
+                    <!-- <input type="hidden" value="{{ $in_date }}" name="date"> -->
                     <button class="btn btn-success float-right">Pay Now</button>
                 </form>
 

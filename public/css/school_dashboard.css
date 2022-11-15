@@ -658,3 +658,41 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+#examstartup .container .row .tab-content {
+  margin-top: 30px;
+}
+#examstartup .container .row .tab-content .rkj {
+  border: 1px solid #19686d;
+  padding: 35px;
+  padding-bottom: 65px;
+  border-radius: 6px;
+}
+#examstartup .container .row .tab-content .rkj p {
+  margin-top: -10px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  color: #19686d;
+}
+#examstartup .container .row .tab-content .rkj .select2.select2-container.select2-container--default.select2-container--focus, #examstartup .container .row .tab-content .rkj .select2.select2-container.select2-container--default {
+  width: 236px !important;
+}
+#examstartup .container .row .tab-content .rkj .date_assign_table {
+  width: 100%;
+  text-align: inherit;
+}
+#examstartup .container .row .tab-content .rkj .date_assign_table tbody tr {
+  padding: 10px !important;
+  display: flex;
+}
+#examstartup .container .row .tab-content .rkj .date_assign_table tbody tr td {
+  width: 33.3%;
+}
+#examstartup .container .row .tab-content .rkj .dBtn {
+  float: right;
+  margin-top: 15px;
+}
+#examstartup .container .row .tab-content .rkj .btn.btn-primary.saveBtn {
+  margin-top: 31px;
+}

@@ -8,6 +8,7 @@ use App\Models\Student;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Http\Traits\StudentTraits;
+use Illuminate\Support\Facades\Session;
 
 class StudentImport implements ToModel, WithHeadingRow
 {
@@ -78,7 +79,9 @@ class StudentImport implements ToModel, WithHeadingRow
             
              }
             else{
-                redirect(route('enrollment.excel.index'))->with('error', 'Duplicate Data');
+                // Session::put('message', 'something something');
+                // dd("something");
+                redirect(route('enrollment.excel.index'))->with('error', 'Duplicate Entry');
             }
         }
         
