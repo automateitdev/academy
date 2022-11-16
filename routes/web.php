@@ -205,7 +205,7 @@ Route::get('/FeesManagement/amount/index', [AmountController::class, 'index'])->
 Route::post('/FeesManagement/amount/feeamount/store', [AmountController::class, 'store'])->name('fee.amount.store');
 Route::get('/FeesManagement/amount/feeamount/edit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
 Route::post('/FeesManagement/amount/feeamount/update', [AmountController::class, 'update'])->name('fee.amount.update');
-
+Route::delete('/FeesManagement/amount/feeamount/{id}',[AmountController::class,'destroy'])->name('fee.amount.delete');
 Route::post('/FeesManagement/amount/fineamount/store', [AmountController::class, 'fineStore'])->name('fine.amount.store');
 
 Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);

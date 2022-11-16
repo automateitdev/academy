@@ -195,12 +195,7 @@ class AmountController extends Controller
      */
     public function destroy($id)
     {
-        FeeMaping::find($id)->delete();
-        return redirect()->back();
-    }
-    public function fine_destroy($id)
-    {
-        FeeFineMaping::find($id)->delete();
+        Feeamount::find($id)->delete();
         return redirect()->back();
     }
 }

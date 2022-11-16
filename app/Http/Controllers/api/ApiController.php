@@ -12,7 +12,7 @@ class ApiController extends Controller
 {
     public function dataupdate(Request $request)
      {
-        dd($request);
+        var_dump($request);
 
 
 

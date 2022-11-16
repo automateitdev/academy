@@ -57,14 +57,6 @@
                                 <div class="col-md-12">
                                     <div class="dju">
                                         <p>Student list</p>
-                                        <!-- <ul>
-                                            <li>Student ID</li>
-                                            <li>Roll No.</li>
-                                            <li>Name</li>
-                                            <li>Group</li>
-                                            <li>Category</li>
-                                            <li>Action</li>
-                                        </ul> -->
                                         <table class="table table-bordered quickCollection">
                                             <thead>
                                                 <tr>
