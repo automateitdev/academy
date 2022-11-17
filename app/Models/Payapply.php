@@ -11,10 +11,14 @@ class Payapply extends Model
     protected $fillable = [
         'institute_id',
         'student_id',
+        'class_id',
         'feehead_id',
         'feesubhead_id',
         'payable',
         'fine',
-        'waiver'
+        'fineactive_date',
+        'total_amount',
+        'waiver_id',
+        'waiver_amount'
     ];
 }

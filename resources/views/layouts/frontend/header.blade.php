@@ -83,6 +83,20 @@
         </div>
     </div>
 
+        <div class="news">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-2 py-2 text-center" style="background-color: #b1dae7">
+                    Latest Notice
+                </div>
+
+                <marquee behavior="alternate" class="col-md-10 py-2" style="background-color: #F1F8E9"><span
+                        class="marquee">এইচএসসি ও সমমানের পরীক্ষায় বসছে ১২ লাখ পরীক্ষার্থী</span>
+                </marquee>
+
+            </div>
+        </div>
+    </div>
     <div class="menu" style="background-color:#19686d">
         <div class="container">
             <div class="col-md-12 col-sm-12">
@@ -101,16 +115,19 @@
                                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             {{ $item->name }}
+                                             @if(count($item->subcategories) > 0)
+                                                <span><i class="fa fa-chevron-down"></i></span>
+                                             @endif
                                         </a>
                                         
-                                        @if(!empty($item->subcategories))
-                                        <ul class="dropdown-menu"
+                                        @if(count($item->subcategories) > 0)
+                                        <ul class="dropdown-menu" style="background-color:#f1f8e9"
                                             aria-labelledby="navbarDropdown">
                                             @foreach($item->subcategories as $subcat)
                                             @php 
                                             $link = strtolower('/'.$item->name.'/'. $subcat->subcat_link.'/'.$subcat->id);
                                             @endphp
-                                            <li><a class="dropdown-item text-lg" href="{{$link}}">{{$subcat->subcat_name}}</a></li>
+                                            <li class="text-center"><a class="dropdown-item text-lg" href="{{$link}}">{{$subcat->subcat_name}}</a></li>
                                             @endforeach
                                         </ul>
                                         @endif
@@ -123,20 +140,7 @@
             </div>
         </div>
     </div>
-    <div class="news">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-2 py-2 text-center" style="background-color: #b1dae7">
-                    Latest Notice
-                </div>
 
-                <marquee behavior="alternate" class="col-md-10 py-2" style="background-color: #F1F8E9"><span
-                        class="marquee">এইচএসসি ও সমমানের পরীক্ষায় বসছে ১২ লাখ পরীক্ষার্থী</span>
-                </marquee>
-
-            </div>
-        </div>
-    </div>
     <!-- <div class="nav-down">
         <div class="container">
             <div class="col-md-12 col-sm-12">

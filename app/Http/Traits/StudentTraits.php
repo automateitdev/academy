@@ -7,6 +7,7 @@ use App\Models\Datesetup;
 use App\Models\SectionAssign;
 use App\Models\Feeamount;
 use App\Models\Payapply;
+use App\Models\Waivermapping;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -57,26 +58,65 @@ trait StudentTraits
                                             $pay_data = Payapply::where('student_id', $student_id)->where('institute_id', $institute_id)
                                                         ->where('feesubhead_id',$datesetup->feesubhead_id)
                                                         ->where('feehead_id', $feeamount->feehead_id)->count();
-                                                        // dd($pay_data);
-                                            if($pay_data == 0){
-                                                $input = new Payapply();
-                                                $input->institute_id = $institute_id;
-                                                $input->class_id = $datesetup->class_id;
-                                                $input->student_id = $student_id;
-                                                $input->feehead_id = $feeamount->feehead_id;
-                                                $input->feesubhead_id = $datesetup->feesubhead_id;
-                                                $input->payable = $feeamount->feeamount;
-                                                if($input->save())
-                                                {
-                                                    // FacadesSession::put("message", "Payment Data Uploaded Successfully");
-                                                    // FacadesSession::forget('error');
-                                                }
+                                            // dd($pay_data);
+                                            // if($pay_data == 0){
+                                            $today = \Carbon\Carbon::now();
+
+                                            if ($today->lte($datesetup->fineactive_date)) {
+                                                $fine = 0;
+                                            } else {
+                                                $fine = $feeamount->fineamount;
                                             }
-                                            else{
+
+                                            // $input = new Payapply();
+                                            // $input->institute_id = $institute_id;
+                                            // $input->class_id = $datesetup->class_id;
+                                            // $input->student_id = $student_id;
+                                            // $input->feehead_id = $feeamount->feehead_id;
+                                            // $input->feesubhead_id = $datesetup->feesubhead_id;
+                                            // $input->fine = $fine;
+                                            // $input->fineactive_date = $datesetup->fineactive_date;
+                                            // $input->payable = $feeamount->feeamount;
+                                            // if($input->save())
+                                            // {
+                                            //     // FacadesSession::put("message", "Payment Data Uploaded Successfully");
+                                            //     // FacadesSession::forget('error');
+                                            // }
+
+                                            $waiver = Waivermapping::where([
+                                                ['feehead_id', $datesetup->feehead_id],
+                                                ['student_id', $student_id],
+                                                ['institute_id', $institute_id]
+                                            ])->first();
+
+                                            if (empty($waiver)) {
+                                                $waiver_amount = 0;
+                                                $waiver_category = null;
+                                            } else {
+                                                $waiver_amount = $waiver->amount;
+                                                $waiver_category = $waiver->waiver_category_id;
+                                            }
+
+
+                                            $total_amount = ($feeamount->feeamount + $fine) - $waiver;
+                                            $payapply = Payapply::updateOrCreate(
+                                                ['class_id' => $datesetup->class_id, 'student_id' => $student_id, 'feehead_id' => $feeamount->feehead_id, 'feesubhead_id' => $datesetup->feesubhead_id],
+                                                [
+                                                    'institute_id' => $institute_id,
+                                                    'fine' => $fine,
+                                                    'fineactive_date' => $datesetup->fineactive_date,
+                                                    'waiver_id' => $waiver_category,
+                                                    'waiver_amount' => $waiver_amount,
+                                                    'payable' => $feeamount->feeamount,
+                                                    'total_amount' => $total_amount
+                                                ]
+                                            );
+                                            // }
+                                            // else{
                                                 // FacadesSession::put('error', 'Duplicate Entry for Fee');
                                                 // FacadesSession::forget('message');
                                                 // redirect(route('enrollment.excel.index'))->with('error', 'Duplicate tiutiu');
-                                            }
+                                            // }
                                             // redirect(route('enrollment.excel.index'))->with(FacadesSession::get("message"))->with(FacadesSession::get("error"));
                                             redirect(route('enrollment.excel.index'));
                                         }

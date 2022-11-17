@@ -10,6 +10,7 @@ use App\Models\Payapply;
 use App\Models\Bankinfo;
 use App\Models\Paymentupdate;
 use App\Models\Waivermapping;
+use Carbon\Carbon;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ClientException;
@@ -68,25 +69,27 @@ class StudentAuthController extends Controller
         $ins_id = $request->ins_id;
         $year = $request->year;
         $day = $request->day;
-        $invoice = 'AE' . $ins_id . ''.$day.'' . $std_id . '' . $year . '';
+        $now = Carbon::now();
+        $unique_code = $now->format('ymdHis');
+        $invoice = 'AE' . $ins_id . substr($std_id, -4) . $unique_code;
+        $invoice = strtoupper($invoice);
+        
         // $invoice = 'INV155422121443';
         Session::put('ins_id', $ins_id);
         Session::put('std_id', $std_id);
 
         $tableData = json_decode($request->tableData, true);
 
-        // foreach ($tableData as $key => $data) {
-        //     $payapply = new Payapply();
-        //     foreach ($data as $key => $value) {
-        //         $payapply->institute_id = $request->ins_id;
-        //         $payapply->student_id = $request->std_id;
-        //         $payapply->invoice = $invoice;
-        //         $payapply->$key = $value;
-        //     }
-        //     $payapply->save();
-        // }
-
-
+        foreach ($tableData as $data) {
+            $invoice_assign = Payapply::where(
+                [
+                    ['student_id',  $std_id],
+                    ['institute_id', $ins_id],
+                    ['feehead_id', $data['feehead_id']],
+                    ['feesubhead_id', $data['feesubhead_id']]
+                ]
+            )->update(['invoice' => $invoice]);
+        }
         $amount = $request->erp;
         $invoicedate = \Carbon\Carbon::now()->format('Y-m-d');
         $accountInfo = Bankinfo::where('institute_id', $ins_id)->first();
@@ -203,8 +206,15 @@ class StudentAuthController extends Controller
         $input->vat = $result['Vat'];
         $input->comission = $result['Commission'];
         $input->scroll_no = $result['ScrollNo'];
-        $input->save();
-        
+        if ($input->save()) {
+            $updateDetails = [
+                'payment_state' => $result['status'],
+                'trx_id' => $result['TransactionId']
+            ];
+
+            $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
+                ->update($updateDetails);
+        }
 
         $finalheaders = [
             'Content-Type' => 'application/json',
@@ -218,34 +228,24 @@ class StudentAuthController extends Controller
                 "ins_id": "'.$ins_id.'",
                 "std_id": "'.$std_id.'",
                 "auth_code": "Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh",
-                "session_Token": "'.$request->session_token.'",
-                "payment_status": "'.$result['status'].'"
-
+                "session_Token": "'.$request->session_token. '",
+                "payment_status": "' . $result['status'] . '"
                 } 
             }';
-            
 
-            $client = new GuzzleClient();
-            try {
-                $mainurl = 'https://live.academyims.com/api/dataupdate';
-                    $api_request = curl_init($mainurl);
-                    curl_setopt($api_request, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($api_request, CURLINFO_HEADER_OUT, true);
-                    curl_setopt($api_request, CURLOPT_POST, true);
-                    curl_setopt($api_request, CURLOPT_POSTFIELDS, $final_data);
-                    curl_setopt($api_request, CURLOPT_SSL_VERIFYPEER, false);
-                    curl_setopt($api_request, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Content-Length: ' . strlen($final_data)));
-                    $result = curl_exec($api_request);
-                    $json_data = json_decode($result);
-                    print_r($json_data);
-                // $client->request(
-                //     'POST',
-                //     'https://live.academyims.com/api/dataupdate',
 
-                //     ['headers' => $finalheaders, 
-                    
-                //     'body' => $final_data]
-                // );   
+
+        try {
+            $client->request(
+                'POST',
+                'https://live.academyims.com/api/dataupdate',
+
+                [
+                    'headers' => $finalheaders,
+
+                    'body' => $final_data
+                ]
+            );   
             }
             catch (ClientException $e) {
                 $response = $e->getResponse();

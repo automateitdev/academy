@@ -19,6 +19,7 @@ use App\Models\Payapply;
 use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 use Maatwebsite\Excel\Validators\ValidationException;
 use App\Http\Traits\StudentTraits;
+use Illuminate\Contracts\Session\Session;
 
 class RegistrationController extends Controller
 {
@@ -108,27 +109,24 @@ class RegistrationController extends Controller
         // Excel::import($import, $request->file('file'));
 
         try {
-            if(Excel::import($import, $request->file('file'))){
-            
+            Excel::import($import, $request->file('file'));
+
+            if (!empty($import)) {
                 $arr = Excel::toArray([], $request->file('file'));
-                // dd($arr[0]);
-                $i = 0;
-                foreach($arr[0] as $key=>$student)
-                {
-                    
-                    if($i == 0)
-                    {
-                        $i++;
+                foreach ($arr[0] as $key => $student) {
+                    if ($key == 0) {
                         continue;
-                    }
+                    };
                     $this->assign_fee($student[0], $request->institute_id);
-                    // var_dump($student[0]);
                 }
-                return redirect(route('enrollment.excel.index'))->with('message', 'Data Upload Successfully');
             }
-            // die();
-            // $request->session()->forget('error');
-            // return redirect(route('enrollment.excel.index'))->with('message', 'Data Upload Successfully');
+
+            $error = Session()->get('error');
+            if (empty($error)) {
+                return redirect(route('enrollment.excel.index'))->with('message', 'Students are added successfully.');
+            } else {
+                return redirect(route('enrollment.excel.index'))->with('message', 'New students are added (duplicacy ignored).');
+            }
             
         } catch ( NoTypeDetectedException $e) {
             // $request->session()->forget('message');
