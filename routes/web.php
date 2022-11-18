@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\website\MainController;
+use App\Http\Controllers\website\NoticeViewController;
+
 use App\Http\Controllers\dashboard\frontend\MenuController;
 use App\Http\Controllers\dashboard\master\StartupController;
 use App\Http\Controllers\dashboard\master\BasicSetupController;
@@ -36,20 +38,8 @@ use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-// Route::get('/', function () {
-//     return view('frontend');
-// });
+
 Route::get('/', [MainController::class, 'index'])->name('landingpage');
 
 Auth::routes();
@@ -75,8 +65,9 @@ Route::get('/about/{subcat_link}/{id}', [MainController::class, 'allAbout']);
 Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'administration']);
 
 //notice
-Route::get('/notice', [MainController::class, 'notice'])->name('all.notice.view');
-
+Route::get('/all/notice', [NoticeViewController::class, 'index'])->name('web.notice');
+Route::get('/all/notice/view/{id}', [NoticeViewController::class, 'show'])->name('web.notice.view');
+Route::get('/all/notice/download/{id}', [NoticeViewController::class, 'download'])->name('web.notice.download');
 
 
 

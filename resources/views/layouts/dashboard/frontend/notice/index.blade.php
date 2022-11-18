@@ -26,12 +26,14 @@
                     </thead>
                     <tbody>
                         @foreach($notices as $notice)
+                            @if($notice->institute_id == Auth::user()->institute_id)
                             <tr>
                                 <td>{{$notice->date}}</td>
                                 <td>{{$notice->name}}</td>
                                 <td>{{$notice->description}}</td>
                                 <td>{{$notice->file}}</td>
                             </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

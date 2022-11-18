@@ -410,8 +410,11 @@
 </head>
 
 <body class="antialiased">
+    
     @include('layouts.frontend.header')
-    @include('layouts.frontend.teacherList')
+    <div class="wrap mt-5 mb-5">
+        <embed src="{{asset('/notice/'.$notices->file.'#toolbar=0&navpanes=0&scrollbar=0')}}" type="application/pdf" width="100%" height="600px" />
+    </div>
     @include('layouts.frontend.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -432,8 +432,12 @@
                                 <td>{{$notice->description}}</td>
                                 <td>{{$notice->file}}</td>
                                 <td>
-                                    <button>View</button>
-                                    <button>Download</button>
+                                    <a href="{{route('web.notice.view', $notice->id)}}">
+                                        <button class="btn btn-success">View</button>
+                                    </a>
+                                    <a href="{{route('web.notice.download' , $notice->id)}}">
+                                        <button class="btn btn-primary">Download</button>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

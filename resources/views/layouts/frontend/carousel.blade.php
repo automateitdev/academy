@@ -20,62 +20,61 @@
         </div>
         <div class="col-md-4">
             <div class="row">
-                <div class="card col-md-4 p-2 "
-                    style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
+                <a href="{{route('web.notice')}}" class="card col-md-4 p-2" style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-bullhorn fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Notice</a>
+                        <span class="d-block text-uppercase py-2 link" style="font-weight: 700">Notice</span>
                     </div>
-                </div>
-                <div class="card col-md-4 p-2 "
+                </a>
+                <a href="" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-square-poll-horizontal fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Results</a>
+                        <span class="d-block text-uppercase py-2" style="font-weight: 700">Results</span>
                     </div>
-                </div>
-                <div class="card col-md-4 p-2 "
+                </a>
+                <a href="" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-table fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Routine</a>
+                        <span class="d-block text-uppercase py-2" style="font-weight: 700">Routine</span>
                     </div>
-                </div>
-                <div class="card col-md-4 p-2 "
+                </a>
+                <a href="" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-landmark fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Departments</a>
+                        <span class="d-block text-uppercase py-2" style="font-weight: 700">Departments</span>
                     </div>
-                </div>
-                <div class="card col-md-4 p-2 "
+                </a>
+                <a href="" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-person-chalkboard fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Teachers</a>
+                        <span class="d-block text-uppercase py-2" style="font-weight: 700">Teachers</span>
                     </div>
-                </div>
-                <div class="card col-md-4 p-2 "
+                </a>
+                <a href="" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-people-group fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Students</a>
+                        <span class="d-block text-uppercase py-2" style="font-weight: 700">Students</span>
                     </div>
-                </div>
-                <div class="card col-md-4 p-2 "
+                </a>
+                <a href="" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-money-check fa-2xl"></i>
                         <br>
-                        <a href="" class="d-block text-uppercase py-2" style="font-weight: 700">Payment</a>
+                        <span class="d-block text-uppercase py-2" style="font-weight: 700">Payment</span>
                     </div>
-                </div>
+                </a>
 
             </div>
 
