@@ -96,9 +96,8 @@ trait StudentTraits
                                                 $waiver_amount = $waiver->amount;
                                                 $waiver_category = $waiver->waiver_category_id;
                                             }
-
-
-                                            $total_amount = ($feeamount->feeamount + $fine) - $waiver;
+// dd($waiver);
+                                            $total_amount = ($feeamount->feeamount + $fine) - $waiver_amount;
                                             $payapply = Payapply::updateOrCreate(
                                                 ['class_id' => $datesetup->class_id, 'student_id' => $student_id, 'feehead_id' => $feeamount->feehead_id, 'feesubhead_id' => $datesetup->feesubhead_id],
                                                 [

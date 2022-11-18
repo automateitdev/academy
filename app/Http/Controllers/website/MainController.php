@@ -15,6 +15,7 @@ use App\Models\Administration;
 use App\Models\Basic;
 use App\Models\Gallery;
 use App\Models\Domainlist;
+use App\Models\Notice;
 
 class MainController extends Controller
 {
@@ -108,8 +109,9 @@ class MainController extends Controller
         $users = User::where('institute_id', $ins_id)->get();
         $basics = Basic::where('institute_id', $ins_id)->get();
         $galleries = Gallery::where('institute_id', $ins_id)->get();
-        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
-        // return view('auth.login', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries'));
+        $notices = Notice::where('institute_id', $ins_id)->orderBy('id', 'desc')->get();
+        return view('frontend', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries', 'notices'));
+        // return view('auth.login', compact('categories', 'subcategories', 'sliders', 'speeches','users','basics','galleries', 'notices'));
     }
     public function getSubCat(Request $request)
     {

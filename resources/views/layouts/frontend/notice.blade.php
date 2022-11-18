@@ -10,16 +10,29 @@
                     <h1>Recent Notice</h1>
                     <div class="content">
                         <ul>
-                            <li>
-                                <a href="#">প্রধানমন্ত্রীর ৭৬ তম জন্মদিন পালনের অফিস আদেশ </a>
-                                <p class="cont_date">২৫-০৯-২২</p>
+                            @foreach($notices as $key=>$notice)
+                            @php
+                            $orgDate = $notice->date;
+                            $newDate = date("d-M", strtotime($orgDate));
+                            $noticeDate = explode('-',$newDate);
+                            if($key==6){
+                            break;
+                            }
+                            @endphp
+                            <li class="d-flex align-items-center" style="border-bottom:1px solid #ddd">
+                                <div class="px-2 py-1 m-2 text-center">
+                                    <h5 class="m-0 mb-1" style="color:#19686d; font-weight:bold; border-bottom:1px solid #ddd">{{$noticeDate[1]}}</h5>
+                                    <h5 class="m-0 mb-1" style="color:darkmagenta; font-weight:bold;">{{$noticeDate[0]}}</h5>
+                                </div>
+                                <div class="px-2 py-1"><a href="#" class="text-info text-lg"{{$notice->name}}</a></div>
                             </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="shgTr">
                         <a href="#">
-                            <button class="btn">সব নোটিশ
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <button class="btn">See All
+                                <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </a>
                     </div>

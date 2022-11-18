@@ -1,49 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\dashboard\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Paymentupdate;
-use App\Models\Payapply;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Http;
+use App\Models\User;
+use App\Models\Notice;
+use Illuminate\Support\Facades\Auth;
 
-class ApiController extends Controller
+class NoticeController extends Controller
 {
-    public function dataupdate(Request $request)
-     {
-        $response = Http::withBody( 
-            '{
-      "data": {
-        "auth_code": "Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh",
-        "session_Token": "3b3a555314930c394e5ddb2b193d94630ff3c6ba831",
-        "trax_id": "2211159000004898",
-        "invoice_no": "AE221106215100052022"
-      }
-    }', 'json' 
-        ) 
-        ->withHeaders([ 
-            'Content-Type'=> 'application/json', 
-            'Authorization'=> 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh', 
-        ]) 
-        ->post('https://live.academyims.com/api/dataupdate'); 
-    
-    echo $response->body();
-        // if($result['status'] == 200)
-        // {
-        //     if($input->save())
-        //     {
-        //         redirect(route('student.auth.index'))->with('message', 'Payment Success');
-        //     }else{
-        //         Session::put('payment error', $request->ins_id, $request->std_id);
-        //     }
-        // }else{
-
-        // }
-        
-        return redirect(route('student.auth.submit'));
-     }
     /**
      * Display a listing of the resource.
      *
@@ -51,7 +17,9 @@ class ApiController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        $notices = Notice::all();
+        return view('layouts.dashboard.frontend.notice.index', compact('users','notices'));
     }
 
     /**
@@ -72,7 +40,25 @@ class ApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'nullable',
+            'file'=>'nullable',
+            'date'=>'required'
+        ]);
+        $document = new Notice();
+        $document->institute_id = Auth::user()->institute_id;
+        $document->name = $request->name;
+        $document->description = $request->description;
+        $document->date = $request->date;
+
+        $documentFile = $request->file('file');
+        $filename = time().'.'.$documentFile->getClientOriginalExtension();
+        $request->file->move('notice',$filename);
+        $document->file=$filename;
+        $document->save();
+
+        return redirect()->route('notice.index')->with('message', 'Data Upload Success');
     }
 
     /**

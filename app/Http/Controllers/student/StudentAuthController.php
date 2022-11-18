@@ -73,6 +73,7 @@ class StudentAuthController extends Controller
         $unique_code = $now->format('ymdHis');
         $invoice = 'AE' . $ins_id . substr($std_id, -4) . $unique_code;
         $invoice = strtoupper($invoice);
+        $auth = 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh';
         
         // $invoice = 'INV155422121443';
         Session::put('ins_id', $ins_id);
@@ -94,16 +95,13 @@ class StudentAuthController extends Controller
         $invoicedate = \Carbon\Carbon::now()->format('Y-m-d');
         $accountInfo = Bankinfo::where('institute_id', $ins_id)->first();
         $applicantName = Student::where('institute_id', $ins_id)->where('std_id', $std_id)->first();
-        // dd($applicantName['name']);
-
-
+        
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
             'Content-Type' => 'application/JSON',
-            'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh',
-            'Cookie' => 'f5avraaaaaaaaaaaaaaaa_session_=HEACLNAJLNOKBPJNOOCJMOFOELOEGOBECMGKNKJNBDDCFLDILNPFHMPHLIHIEIGHEGODGLEBLFKKADHHODGADBGINNLFBDPJANOOHILILOKAJNKAMHEDEELPMCHBLNCK; TS016ab1ea=01e5cf53c1afb1009f23ec5c6aa549fc62badb4c01d3943b4f7ad2d32a43ab36985e72de8225ddfdb7fe90e5d96c254d8db1377c9f0015d023a0d65e3a47c0f1a9682823ac'
-        ];
+            'Authorization' => $auth,
+           ];
 
         $data = '{"AccessUser":
             {"userName":"AutoMateIT",
@@ -166,11 +164,12 @@ class StudentAuthController extends Controller
         $status = $request->status;
         $ins_id= Session::get('ins_id');
         $std_id= Session::get('std_id');
+        $auth = 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh';
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
             'Content-Type' => 'application/json',
-            'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh'
+            'Authorization' => $auth
             
         ];
 
@@ -218,34 +217,30 @@ class StudentAuthController extends Controller
 
         $finalheaders = [
             'Content-Type' => 'application/json',
-            'Authorization' => 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh',
-            'X-CSRF-Token'=> csrf_token(),
-            'exceptions' => false
+            'Authorization' => $auth,
         ];
 
         $final_data = '{ 
             "data": {
-                "ins_id": "'.$ins_id.'",
-                "std_id": "'.$std_id.'",
-                "auth_code": "Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh",
+                "auth_code": "'.$auth.'",
                 "session_Token": "'.$request->session_token. '",
-                "payment_status": "' . $result['status'] . '"
+                "trax_id": "'.$result['TransactionId'].'",
+                "invoice_no": "'.$result['InvoiceNo'].'"
                 } 
             }';
 
-
-
         try {
+            $resposnedata = 
             $client->request(
                 'POST',
                 'https://live.academyims.com/api/dataupdate',
 
                 [
                     'headers' => $finalheaders,
-
                     'body' => $final_data
                 ]
-            );   
+            ); 
+            dd($resposnedata);  
             }
             catch (ClientException $e) {
                 $response = $e->getResponse();

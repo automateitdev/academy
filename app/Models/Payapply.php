@@ -19,6 +19,7 @@ class Payapply extends Model
         'fineactive_date',
         'total_amount',
         'waiver_id',
-        'waiver_amount'
+        'waiver_amount',
+        'trx_id'
     ];
 }

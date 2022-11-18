@@ -14,9 +14,11 @@ use App\Models\Waiver;
 use App\Models\Feeamount;
 use App\Models\Waivermapping;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\StudentTraits;
 
 class WaiverController extends Controller
 {
+    use StudentTraits;
     /**
      * Display a listing of the resource.
      *
@@ -86,7 +88,11 @@ class WaiverController extends Controller
         $input->feehead_id = $request->feehead_id ;
         $input->waiver_category_id = $request->waiver_category_id ;
         $input->amount = $request->amount ;
-        $input->save();
+        
+        if($input->save())
+        {
+            $this->assign_fee($request->student_id,Auth::user()->institute_id);
+        }
         
         return redirect(route('waiver.index'))->with('message', 'Data Upload Successfully');
     }

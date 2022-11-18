@@ -21,6 +21,7 @@ use App\Http\Controllers\dashboard\fee_management\AmountController;
 use App\Http\Controllers\dashboard\fee_management\DateSetupController;
 use App\Http\Controllers\dashboard\fee_management\WaiverController;
 use App\Http\Controllers\dashboard\fee_management\FeeCollectionController;
+use App\Http\Controllers\dashboard\frontend\NoticeController;
 
 use App\Http\Controllers\student\StudentAuthController;
 use App\Http\Controllers\student\CopyController;
@@ -72,6 +73,15 @@ Route::get('/sobornojointy', [MainController::class, 'corner'])->name('corner');
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
 Route::get('/about/{subcat_link}/{id}', [MainController::class, 'allAbout']);
 Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'administration']);
+
+//notice
+Route::get('/notice', [MainController::class, 'notice'])->name('all.notice.view');
+
+
+
+
+
+
 
 ///////dashboard start
 
@@ -141,7 +151,9 @@ Route::delete('/WebsiteManagement/administration/delete/{id}', [AdministrationCo
 Route::get('/WebsiteManagement/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 Route::post('/WebsiteManagement/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
 Route::delete('/WebsiteManagement/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.delete');
-
+//notice
+Route::get('/WebsiteManagement/notice', [NoticeController::class, 'index'])->name('notice.index');
+Route::post('/WebsiteManagement/notice/store', [NoticeController::class, 'store'])->name('notice.store');
 
 
 // ////////////////////////Website Management end /////////////////////////////

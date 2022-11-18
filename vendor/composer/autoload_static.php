@@ -453,8 +453,8 @@ class ComposerStaticInit24d18988517d99d30abef7167ebb39dc
         ),
         'Fruitcake\\Cors\\' => 
         array (
-            0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
-            1 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+            1 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
         'Faker\\' => 
         array (
@@ -576,6 +576,7 @@ class ComposerStaticInit24d18988517d99d30abef7167ebb39dc
         'App\\Http\\Controllers\\dashboard\\frontend\\AdministrationController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/AdministrationController.php',
         'App\\Http\\Controllers\\dashboard\\frontend\\GalleryController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/GalleryController.php',
         'App\\Http\\Controllers\\dashboard\\frontend\\MenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/MenuController.php',
+        'App\\Http\\Controllers\\dashboard\\frontend\\NoticeController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/NoticeController.php',
         'App\\Http\\Controllers\\dashboard\\frontend\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/SettingController.php',
         'App\\Http\\Controllers\\dashboard\\frontend\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/SliderController.php',
         'App\\Http\\Controllers\\dashboard\\frontend\\SpeechController' => __DIR__ . '/../..' . '/app/Http/Controllers/dashboard/frontend/SpeechController.php',
@@ -620,6 +621,7 @@ class ComposerStaticInit24d18988517d99d30abef7167ebb39dc
         'App\\Models\\Gender' => __DIR__ . '/../..' . '/app/Models/Gender.php',
         'App\\Models\\GroupAssign' => __DIR__ . '/../..' . '/app/Models/GroupAssign.php',
         'App\\Models\\Ledger' => __DIR__ . '/../..' . '/app/Models/Ledger.php',
+        'App\\Models\\Notice' => __DIR__ . '/../..' . '/app/Models/Notice.php',
         'App\\Models\\Payapply' => __DIR__ . '/../..' . '/app/Models/Payapply.php',
         'App\\Models\\Payment' => __DIR__ . '/../..' . '/app/Models/Payment.php',
         'App\\Models\\Paymentupdate' => __DIR__ . '/../..' . '/app/Models/Paymentupdate.php',
