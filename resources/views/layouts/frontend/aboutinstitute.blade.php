@@ -4,7 +4,7 @@
             <div class="col-sm-12 col-md-12">
                 <div class="lksUi">
                     <div class="row p-5">
-                        <h1 class="title text-left pb-2">About Institute</h1>
+                        <h1 class="title text-left pb-2"><i class="fa-sharp fa-solid fa-school"></i> About Institute</h1>
                         
                         <div class="col-md-7">
                             <p class="borde"></p>

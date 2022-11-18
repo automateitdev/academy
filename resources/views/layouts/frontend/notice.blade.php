@@ -1,7 +1,7 @@
 <div id="notice">
     <div class="container">
         <div class="divtitle">
-            <h2>Notice Board</h2>
+            <h2 style="text-align: left; color:#19686d;"> <i class="fa-solid fa-thumbtack"></i> Notice Board</h2>
             <p class="borde"></p>
         </div>
         <div class="row">
@@ -9,33 +9,34 @@
                 <div class="recent">
                     <h1>Recent Notice</h1>
                     <div class="content">
-                        <ul>
+                        <ul class="px-4 list-group">
                             @foreach($notices as $key=>$notice)
                             @php
                             $orgDate = $notice->date;
                             $newDate = date("d-M", strtotime($orgDate));
                             $noticeDate = explode('-',$newDate);
-                            if($key==6){
+                            if($key==5){
                             break;
                             }
                             @endphp
-                            <li class="d-flex align-items-center" style="border-bottom:1px solid #ddd">
-                                <div class="px-2 py-1 m-2 text-center">
-                                    <h5 class="m-0 mb-1" style="color:#19686d; font-weight:bold; border-bottom:1px solid #ddd">{{$noticeDate[1]}}</h5>
-                                    <h5 class="m-0 mb-1" style="color:darkmagenta; font-weight:bold;">{{$noticeDate[0]}}</h5>
+                            <li class="d-flex align-items-start list-group-item p-0" style="background-color:#fff">
+                                <div class="px-3 py-1 m-2 text-center" style="border-radius:5px; background-color: #f2f9fb">
+                                    <p class="m-0 mb-1" style="color:#19686d; font-weight:bold; border-bottom:1px solid #ddd">{{$noticeDate[1]}}</p>
+                                    <p class="m-0 mb-1" style="color:darkmagenta; font-weight:bold;">{{$noticeDate[0]}}</p>
                                 </div>
-                                <div class="px-2 py-1"><a href="#" class="text-info text-lg"{{$notice->name}}</a></div>
+                                <div class="px-2 py-1"><p><a href="#" class="text-oblique">{{$notice->name}}</a></p></div>
                             </li>
                             @endforeach
                         </ul>
-                    </div>
-                    <div class="shgTr">
+                        <div class="shgTr">
                         <a href="#">
                             <button class="btn">See All
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </a>
                     </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="col-sm-6 col-md-6">
