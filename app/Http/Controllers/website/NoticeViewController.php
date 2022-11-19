@@ -26,7 +26,7 @@ class NoticeViewController extends Controller
         $ins_id = $url->institute_id;
 
         $users = User::where('institute_id', $ins_id)->get();
-        $notices = Notice::where('institute_id', $ins_id)->get();
+        $notices = Notice::where('institute_id', $ins_id)->paginate(20);
         $categories = category::where('institute_id', $ins_id)->get();
         $subcategories = subcategory::where('institute_id', $ins_id)->get();
         $basics = Basic::where('institute_id', $ins_id)->get();
@@ -68,11 +68,12 @@ class NoticeViewController extends Controller
         $ins_id = $url->institute_id;
 
         $users = User::where('institute_id', $ins_id)->get();
-        $notices = Notice::find($id);
+        $selectedNotice = Notice::find($id);
+        $notices = Notice::where('institute_id', $ins_id)->orderBy('id', 'desc')->get();
         $categories = category::where('institute_id', $ins_id)->get();
         $subcategories = subcategory::where('institute_id', $ins_id)->get();
         $basics = Basic::where('institute_id', $ins_id)->get();
-        return view('layouts.frontend.more.notice.view', compact('categories', 'subcategories','basics', 'notices','users'));
+        return view('layouts.frontend.more.notice.view', compact('categories', 'subcategories','basics', 'selectedNotice','users','notices'));
 
     }
 

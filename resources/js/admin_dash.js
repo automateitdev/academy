@@ -245,7 +245,28 @@ $(document).ready(function(){
   });
 });
 
-
 ///////////// Waiver end
 
+// Admit card start///
+
+$(document).ready(function(){
+  $(document).on('change', '#admit_section', function(){
+    var section_id = $(this).val();
+    console.log(section_id);
+    var a=$(this).parent().parent();
+    $.ajax({
+      type:'get',
+      url: '/getStudentForAdmitCard',
+      data:{'id':section_id},
+      success: function(data){
+        console.log(data);
+        
+      },
+    });
+
+    });
+
+  });
+
+// Admit card end///
 

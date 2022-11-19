@@ -31,6 +31,7 @@ use App\Http\Controllers\dashboard\home\DashboardController;
 
 //exam management
 use App\Http\Controllers\dashboard\examManagement\ExamStartupController;
+use App\Http\Controllers\dashboard\certificate\ExamCardController;
 
 //admin
 use App\Http\Controllers\admin\InstituteController;
@@ -256,6 +257,13 @@ Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name
 
 /////////////////////// Exam Management Start//////////////////
 Route::get('/exam-management/exam-startup', [ExamStartupController::class, 'index'])->name('examstartup');
+Route::post('/exam-management/exam-startup/store', [ExamStartupController::class, 'store'])->name('examstartup.store');
 
 /////////////////////// Exam Management End//////////////////
+
+/////////////////////// Layout & Certificate Start/////////////////
+Route::get('/layout&certificate/exam-essential', [ExamCardController::class, 'index'])->name('exam.card.index');
+Route::get('/getStudentForAdmitCard', [ExamCardController::class, 'getStudentForAdmitCard']);
+
+/////////////////////// Layout & Certificate End//////////////////
 

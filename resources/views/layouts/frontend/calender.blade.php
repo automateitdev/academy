@@ -3,7 +3,7 @@
         <div class="row">
             <h1 class="title text-left pb-2 py-5"><i class="fa-solid fa-calendar-days"></i> Academic Calendar</h1>
             <div class="col-md-8 offset-md-2">
-                <div class="accordion py-5" id="accordionExample">
+                <div class="accordion pb-5" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

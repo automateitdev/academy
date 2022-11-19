@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+        @foreach($users as $item)
+        <title>{{$item->institute_name}}</title>
+        @endforeach
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.css" rel="stylesheet" />
 
@@ -420,7 +422,6 @@
                                 <th>Date</th>
                                 <th>Notice Head</th>
                                 <th>Description</th>
-                                <th>File</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -429,20 +430,25 @@
                             <tr>
                                 <td>{{$notice->date}}</td>
                                 <td>{{$notice->name}}</td>
-                                <td>{{$notice->description}}</td>
-                                <td>{{$notice->file}}</td>
+                                <td>{{Str::words ($notice->description, 20, ' . . . ')}}</td>
                                 <td>
                                     <a href="{{route('web.notice.view', $notice->id)}}">
                                         <button class="btn btn-success">View</button>
                                     </a>
+                                    @if(!empty($notice->file))
                                     <a href="{{route('web.notice.download' , $notice->id)}}">
                                         <button class="btn btn-primary">Download</button>
                                     </a>
+                                    @else
+                                    <a href=""></a>
+                                    @endif
+                                    
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{$notices->links('pagination::bootstrap-4')}}
                 </div>
             </div>
         </div>

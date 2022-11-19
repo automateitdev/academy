@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\dashboard\frontend;
+namespace App\Http\Controllers\dashboard\certificate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Notice;
+use App\Models\SectionAssign;
+use App\Models\Startup;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
-class NoticeController extends Controller
+class ExamCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +20,17 @@ class NoticeController extends Controller
     public function index()
     {
         $users = User::all();
-        $notices = Notice::all();
-        return view('layouts.dashboard.frontend.notice.index', compact('users','notices'));
+        $sectionAssignes = SectionAssign::all();
+        $startups = Startup::all();
+        return view('layouts.dashboard.layout_certificate.download.essentials.index',
+         compact('users', 'sectionAssignes', 'startups'));
+    }
+
+    public function getStudentForAdmitCard(Request $request)
+    {
+        $institute_id = Auth::user()->institute_id;
+        $data = Student::select('roll','name','std_id')->where('institute_id', $institute_id)->where('section_id', $request->id)->get();
+        return response()->json($data);
     }
 
     /**
@@ -40,30 +51,7 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'description'=>'nullable',
-            'file'=>'nullable',
-            'date'=>'required'
-        ]);
-        $document = new Notice();
-        $document->institute_id = Auth::user()->institute_id;
-        $document->name = $request->name;
-        $document->description = $request->description;
-        $document->date = $request->date;
-
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('notice/',$filename);
-            $document->file = $filename;
-        }else{
-            $document->file = '';
-        }
-        $document->save();
-
-        return redirect()->route('notice.index')->with('message', 'Data Upload Success');
+        //
     }
 
     /**

@@ -5,7 +5,7 @@
                 @foreach ($sliders as $item)
                     <div class="carousel-item active">
                         <img src="{{ asset('images/carousel/' . $item->slider_img) }}" class="d-block w-100"
-                            alt="...">
+                            alt="">
                     </div>
                 @endforeach
             </div>

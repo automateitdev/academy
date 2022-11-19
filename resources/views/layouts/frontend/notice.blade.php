@@ -1,13 +1,13 @@
 <div id="notice">
     <div class="container">
         <div class="divtitle">
-            <h2 style="text-align: left; color:#19686d;"> <i class="fa-solid fa-thumbtack"></i> Notice Board</h2>
+            <h2 style="color:#19686d;"> <i class="fa-solid fa-thumbtack"></i> Notice Board</h2>
             <p class="borde"></p>
         </div>
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="recent">
-                    <h1>Recent Notice</h1>
+                    <h4>Recent Notice</h4>
                     <div class="content">
                         <ul class="px-4 list-group">
                             @foreach($notices as $key=>$notice)
@@ -19,12 +19,12 @@
                             break;
                             }
                             @endphp
-                            <li class="d-flex align-items-start list-group-item p-0" style="background-color:#fff">
+                            <li class="d-flex align-items-center list-group-item p-0" style="background-color:#fff">
                                 <div class="px-3 py-1 m-2 text-center" style="border-radius:5px; background-color: #f2f9fb">
                                     <p class="m-0 mb-1" style="color:#19686d; font-weight:bold; border-bottom:1px solid #ddd">{{$noticeDate[1]}}</p>
                                     <p class="m-0 mb-1" style="color:darkmagenta; font-weight:bold;">{{$noticeDate[0]}}</p>
                                 </div>
-                                <div class="px-2 py-1"><p><a href="#" class="text-oblique">{{$notice->name}}</a></p></div>
+                                <div class="px-2"><p class="m-0"><a href="{{route('web.notice.view', $notice->id)}}" class="text-oblique">{{Str::words ($notice->name, 20)}}</a></p></div>
                             </li>
                             @endforeach
                         </ul>

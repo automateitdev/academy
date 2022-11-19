@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @foreach($users as $item)
+        @foreach($users as $item)
         <title>{{$item->institute_name}}</title>
         @endforeach
 

@@ -20,7 +20,7 @@
                         <h1 class="p_name">{{ $spech->name }}</h1>
                         <h4 class="p_title">{{ $spech->designation->designation }}</h4>
                         <p class="p_msg text-justify" style="text-align: justify">
-                            {{ Str::words($spech->message), 50 }}
+                            {{ Str::words($spech->message, 100, ' . . . ')}}
                         </p>
                         @endif
                     @endforeach

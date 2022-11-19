@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+        @foreach($users as $item)
+        <title>{{$item->institute_name}}</title>
+        @endforeach
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.css" rel="stylesheet" />
 
@@ -412,8 +414,14 @@
 <body class="antialiased">
     
     @include('layouts.frontend.header')
-    <div class="wrap mt-5 mb-5">
-        <embed src="{{asset('/notice/'.$notices->file.'#toolbar=0&navpanes=0&scrollbar=0')}}" type="application/pdf" width="100%" height="600px" />
+    <div class="wrap mt-5 mx-auto" style="width: 80%; text-align:justify;">
+        <p class="text-lg font-weight-bold m-0" style="font-weight: bold;">{{$selectedNotice->name}}
+        </p>
+        <small class="d-block mb-2" style="font-style: oblique; color: #2d2d2d;">{{$selectedNotice->date}}</small>
+        <p>{{$selectedNotice->description}}</p>
+    </div>
+    <div class="wrap mt-5 mb-5 text-center">
+        <embed src="{{asset('/notice/'.$selectedNotice->file.'#toolbar=0&navpanes=0&scrollbar=0')}}" type="application/pdf" class="" width="80%" height="600px" />
     </div>
     @include('layouts.frontend.footer')
 

@@ -8,7 +8,7 @@
                     <div class="col">
                         <h2 class="mb-25">
                             <a href="#">Speech Info</a> 
-                            <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#speechModal">+ Add Speech</button> -->
+                            <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#speechModal">+ Add Speech</button>
                         </h2>
                     </div>
             </div>
@@ -74,13 +74,15 @@
                                     <select class="form-control" name="designation_id">
                                         <option value="">Select a Menu</option>
                                             @foreach($designations as $item)
-                                            <option value="{{$item->id}}">{{$item->designation}}</option>
+                                                @if($item->institute_id == Auth::user()->institute_id)
+                                                    <option value="{{$item->id}}">{{$item->designation}}</option>
+                                                @endif
                                             @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="form-label">Message</label>
-                                    <input type="text" class="form-control" id="message" name="message" required>
+                                    <textarea type="text" rows="10" class="form-control" id="message" name="message" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="pro_img" class="form-label">Photo</label>
