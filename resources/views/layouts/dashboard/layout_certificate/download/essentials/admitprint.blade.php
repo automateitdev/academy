@@ -1,4 +1,4 @@
-
+{{$allData}}
 <div class="card" style="width: 45rem; border-color: blue; border-width: 0.5rem;">
         <div style = "text-align: center; background-color: skyblue;">
             <p><b>Bangladesh Marine Academy. Sylhet</b></p>

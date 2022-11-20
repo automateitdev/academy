@@ -52,11 +52,15 @@
     <div class="container-fluid pt-4 pb-4 d-sm-none d-md-block" style="background-color: #FBFBFB">
         <div class="d-flex justify-content-around text-center align-items-end">
             <a class="" href="{{ route('landingpage') }}">
-                
-                @foreach($basics as $basic)
-                    <img src="{{ asset('images/logo/' . $basic->logo) }}" alt="" width="100"
+                @php
+                    $heee = DB::table('basics')
+                        ->latest('id')
+                        ->first();
+                @endphp
+                @if ($heee->logo)
+                    <img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100"
                         class="d-inline-block align-text-top">
-                @endforeach
+                @endif
             </a>
             @foreach ($users as $item)
                 <a href="{{ route('landingpage') }}" class="">
@@ -66,10 +70,15 @@
                 </a>
             @endforeach
             <a class="" href="{{ route('landingpage') }}">
-                @foreach($basics as $basic)
-                    <img src="{{ asset('images/logo/' . $basic->logo) }}" alt="" width="100"
-                        class="d-inline-block align-text-top">
-                @endforeach
+                @php
+                    $heee = DB::table('basics')
+                        ->latest('id')
+                        ->first();
+                @endphp
+                @if ($heee->logo)
+                    <!-- <img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100" -->
+                        <!-- class="d-inline-block align-text-top"> -->
+                @endif
             </a>
         </div>
     </div>
@@ -78,8 +87,9 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-2 py-2 text-center" style="background-color: #b1dae7">
-                    Latest Notice
+                    <small>Latest Notice</small>
                 </div>
+
                 @foreach($notices as $key=>$notice)
                 @php
                 if($key == 1)
@@ -88,9 +98,10 @@
                 }
                 @endphp
                 <marquee class="col-md-10 py-2" style="background-color: #F1F8E9"><span
-                        class="marquee">{{$notice->name}}</span>
+                        class="marquee"><small>{{$notice->name}}</small></span>
                 </marquee>
                 @endforeach
+
             </div>
         </div>
     </div>
@@ -108,14 +119,18 @@
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 @foreach ($categories as $item)
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link" data-value="{{ $item->id }}"
-                                            href="{{$item->link_name}}" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        @if(count($item->subcategories) > 0)
+                                            <a class="nav-link" data-value="{{ $item->id }}"
+                                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                             aria-expanded="false">
+                                             {{ $item->name }}
+                                             <span><i class="fa fa-chevron-down"></i></span>
+                                            </a>
+                                        @else
+                                        <a class="nav-link"  href="#">
                                             {{ $item->name }}
-                                             @if(count($item->subcategories) > 0)
-                                                <span><i class="fa fa-chevron-down"></i></span>
-                                             @endif
                                         </a>
+                                        @endif
                                         
                                         @if(count($item->subcategories) > 0)
                                         <ul class="dropdown-menu" style="background-color:#f1f8e9"
@@ -137,4 +152,51 @@
             </div>
         </div>
     </div>
+
+    <!-- <div class="nav-down">
+        <div class="container">
+            <div class="col-md-12 col-sm-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{ route('landingpage') }}">
+                        @php
+                            $heee = DB::table('basics')
+                                ->latest('id')
+                                ->first();
+                        @endphp
+                            @if ($heee->logo)
+<img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100" height="60"
+                                class="d-inline-block align-text-top">
+@endif
+                        </a>
+                        @foreach ($users as $item)
+<a href="{{ route('landingpage') }}" class="clg_name">{{ $item->institute_name }}</a>
+@endforeach
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                @foreach ($categories as $item)
+<li class="nav-item dropdown">
+                                        <a class="nav-link ecom_cat" data-value="{{ $item->id }}" href="#"
+                                            id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            {{ $item->name }}
+                                        </a>
+                                        <ul class="dropdown-menu subcatEcom  type_{{ $item->id }}"
+                                            aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="#"></a></li>
+                                        </ul>
+                                    </li>
+@endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div> -->
 </div>

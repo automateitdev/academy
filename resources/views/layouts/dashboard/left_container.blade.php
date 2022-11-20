@@ -1,5 +1,5 @@
  <!-- Brand Logo -->
- <a href="#" class="brand-link">
+ <a href="#" class="brand-link" style="border:none">
       <img src="{{asset('images/com/Academy Logo Final.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
       <!-- <span class="brand-text font-weight-light">Academy</span> -->
     </a>
@@ -22,20 +22,20 @@
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
             <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
+              <i class="fas fa-search fa-fw" style="font-size:.875em"></i>
             </button>
           </div>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      <nav class="mt-2 text-md">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" >
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="{{route('dashboard.index')}}" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-xs fa-tachometer-alt" style="font-size:.875em"></i>
               <p>
                 Dashboard
               </p>
@@ -45,29 +45,29 @@
           <!-- student management start -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-xs fa-graduation-cap" style="font-size:.875em"></i>
               <p>
                 Student Management
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Registration</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('enrollment.auto.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Enrollment Form</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('enrollment.excel.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Excel Form</p>
                     </a>
                   </li>
@@ -80,71 +80,71 @@
           <!-- Fees management start -->
           <li class="nav-item ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+             <i class="nav-icon fa fa-xs fa-solid fa-receipt" style="font-size:.875em"></i>
               <p>
                 Fees Management
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('fee.startup.index')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Fee Startup</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('fee.maping.index')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Fee Mapping</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('amount.index')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Amount Set</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('date.index')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Date Setup</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('waiver.index')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Waiver Setup</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Fee Remove</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Fee Collection</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('feecollection.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Quick Collection</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Bulk Collection</p>
                     </a>
                   </li>
@@ -152,23 +152,23 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Payslip</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Delete</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Report</p>
-                  <!-- <i class="right fas fa-angle-left"></i> -->
+                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                 </a>
               </li>
             </ul>
@@ -178,39 +178,39 @@
           <!-- Master Setting start -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-xs fa-solid fa-wrench" style="font-size:.875em"></i>
               <p>
                 Master Setting
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <!-- Institute Setup start -->
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Institute Setup</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('startup.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Startup</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('basic.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Basic Setup</p>
                     </a>
                   </li>
                   <!-- Class Setup start -->
                   <li class="nav-item">
                     <a href="{{route('class.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Class Setup</p>
-                      <!-- <i class="right fas fa-angle-left"></i> -->
+                      <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                     </a>
                   </li>
                   <!-- Class Setup end -->
@@ -219,13 +219,13 @@
               <!-- Institute Setup end -->
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Subject Setup</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>User Setup</p>
                 </a>
               </li>
@@ -236,23 +236,24 @@
           <!-- Website Maintenance start -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-xs fa-solid fa-globe" style="font-size:.875em"></i>
+              <i class="" style="font-size:.875em"></i>
               <p>
                 Website Management
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Configuration</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('menu')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Menu</p>
                     </a>
                   </li>
@@ -260,44 +261,44 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Content Management</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('slider.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Slider</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('speech.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Speech Info</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('about.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>About</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('admns.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Administration</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('gallery.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Gallery</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('notice.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Notice</p>
                     </a>
                   </li>
@@ -310,23 +311,23 @@
           <!-- Exam Management start -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-xs fa-solid fa-feather" style="font-size:.875em"></i>
               <p>
                 Exam Management
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Settings</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{route('examstartup')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Exam Startup</p>
                     </a>
                   </li>
@@ -334,14 +335,14 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Mark Input</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Section Wise</p>
                     </a>
                   </li>
@@ -355,23 +356,23 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-xs fa-solid fa-layer-group" style="font-size:.875em"></i>
               <p>
                 Layout & Certificate
-                <i class="right fas fa-angle-left"></i>
+                <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Settings</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Field One</p>
                     </a>
                   </li>
@@ -379,21 +380,15 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Download</p>
-                  <i class="right fas fa-angle-left"></i>
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>ID Card</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('exam.card.index')}}" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Exam Essentials</p>
                     </a>
                   </li>
                 </ul>
@@ -408,29 +403,29 @@
                 <li class="nav-header">Maintenance</li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="nav-icon fa fa-xss fa-tachometer-alt" style="font-size:.875em"></i>
                     <p>
                       Global Management
-                      <i class="right fas fa-angle-left"></i>
+                      <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
                       <a href="#" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                         <p>Institute</p>
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
                           <a href="{{route('institute.view')}}" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                             <p>Users</p>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a href="{{route('domain.view')}}" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                             <p>Domain Assign</p>
                           </a>
                         </li>
@@ -438,20 +433,20 @@
                     </li>
                     <li class="nav-item">
                       <a href="#" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                         <p>Global Field</p>
-                        <i class="right fas fa-angle-left"></i>
+                        <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
                           <a href="" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                             <p>Field One</p>
                           </a>
                         </li>
                         <li class="nav-item">
                           <a href="" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                             <p>Field Two</p>
                           </a>
                         </li>
@@ -459,7 +454,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('bankinfo.view')}}" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                           <p>
                             Bank Info
                           </p>
@@ -467,7 +462,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('role.view')}}" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                           <p>
                             Role Assign
                           </p>
@@ -475,7 +470,7 @@
                     </li>
                     <li class="nav-item">
                       <a href="{{route('menu')}}" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                         <p>Menu</p>
                       </a>
                     </li>

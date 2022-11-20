@@ -40,7 +40,7 @@ class ApiController extends Controller
         $exam_name = StartupSubcategory::select('startup_subcategory_name')->where('id',$startup_subcategory->startup_subcategory_id)->first();
         $exam = $exam_name->startup_subcategory_name;
         $path = $request->path;
-        $data = $request->data;
+        $data = $request->studentData;
         $pdfname = $request->pdfname.'.pdf';
 
         $allData = '{

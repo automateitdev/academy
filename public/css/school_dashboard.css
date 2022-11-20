@@ -159,11 +159,10 @@
 }
 
 .wrapper .navbar-white {
-  background-color: #19686d;
-  color: #fff;
+  background-color: #537895;
 }
 .wrapper [class*=sidebar-dark-] {
-  background-color: #19686d;
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
 }
 .wrapper .brand-link .brand-image {
   float: inherit;
@@ -188,14 +187,13 @@
   color: #fff;
 }
 .wrapper .main-sidebar .sidebar .os-padding nav .nav-link {
-  background-color: #19686d;
+  background-color: transparent;
   color: #fff;
+  font-weight: normal;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 0px 0px rgba(0, 0, 0, 0.24);
 }
 .wrapper .main-sidebar .sidebar .os-padding nav .nav-link:hover, .wrapper .main-sidebar .sidebar .os-padding nav .nav-link:focus {
   background: rgba(142, 190, 249, 0.631372549) !important;
-  border-radius: 0 30px 30px 0 !important;
-  box-shadow: 0 0 3px #19686d !important;
 }
 .wrapper .main-sidebar .sidebar .os-padding nav .nav-treeview {
   background-color: transparent;

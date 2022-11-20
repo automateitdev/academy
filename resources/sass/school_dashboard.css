@@ -183,7 +183,6 @@
 
 .wrapper .main-sidebar .sidebar .os-padding nav .nav-link:hover, .wrapper .main-sidebar .sidebar .os-padding nav .nav-link:focus {
   background: #8ebef9a1 !important;
-  border-radius: 0 30px 30px 0 !important;
   -webkit-box-shadow: 0 0 3px #19686d !important;
           box-shadow: 0 0 3px #19686d !important;
 }

@@ -291,9 +291,9 @@ $(document).on('keyup change', '#admitTo', function(e){
           'from':from,
           'to':to
       },
-      success: function(data){
-        studentData = data;
-        
+    success: function (data) {
+      console.log(data);
+      studentData = data; 
       },
 
     });
@@ -322,11 +322,11 @@ $(document).on('click', '#carddownloadBtn', function(e){
       //       link.setAttribute('download', 'admitcards.pdf'); // Need to modify filename ...
       //       link.click();
 
-      const blob = new Blob([res], {type: 'application/application/vnd.openxmlformats-officedocument.pdf'});
+      const blob = new Blob([res], { type: 'pdf' });
     const downloadUrl = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = downloadUrl;
-    a.download = "file.pdf";
+    // a.download = "file.pdf";
     document.body.appendChild(a);
     a.click();
     },
