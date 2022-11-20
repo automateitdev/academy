@@ -4,8 +4,8 @@
     "/js/admin_dash.js": "/js/admin_dash.js?id=0fd3df778b76bad44b8bfedae2235d5f",
     "/js/student.js": "/js/student.js?id=31cfb8e1244d49a42344b6467a8d581c",
     "/js/payment.js": "/js/payment.js?id=c2250359625a3212d642a1c812e166aa",
-    "/css/student.css": "/css/student.css?id=d1d8435390b721a91216799cebea5617",
-    "/css/app.css": "/css/app.css?id=35e9cbe38cb9c1c51f185bc56101463a",
     "/css/school_dashboard.css": "/css/school_dashboard.css?id=b5785f6219a4d0b460ad9f68445cc9c1",
-    "/css/frontend.css": "/css/frontend.css?id=7fb6ad7858255de14005440a457f2acf"
+    "/css/student.css": "/css/student.css?id=d1d8435390b721a91216799cebea5617",
+    "/css/frontend.css": "/css/frontend.css?id=7fb6ad7858255de14005440a457f2acf",
+    "/css/app.css": "/css/app.css?id=35e9cbe38cb9c1c51f185bc56101463a"
 }

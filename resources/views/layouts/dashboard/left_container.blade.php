@@ -391,6 +391,12 @@
                       <p>ID Card</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('exam.card.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                      <p>Exam Essentials</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             </ul>
