@@ -48,8 +48,6 @@
                                 @endif
                                 <div class="rkj">
                                     <p>Admit Card</p>
-                                    <form action="" method="post" enctype="multipart/form-data">
-                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -80,7 +78,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Exam</label>
-                                                    <select class="form-control single" name="exam_id">
+                                                    <select class="form-control single" id="admit_exam" name="exam_id">
                                                         <option value="">Select a Class</option>
                                                         @foreach($startups as $item)
                                                         @if($item->institute_id == Auth::user()->institute_id)
@@ -97,7 +95,7 @@
                                             <div class="col-md-5">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">From Roll No.</label>
-                                                    <input type="number" class="form-control">
+                                                    <input type="number" class="form-control" id="admitForm" name="admitForm">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -108,15 +106,14 @@
                                             <div class="col-md-5">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label"></label>
-                                                    <input type="number" class="form-control">
+                                                    <input type="number" class="form-control" id="admitTo" name="admitTo">
                                                 </div>
                                             </div>
-                                            
+                                            <input type="hidden" value="admitcards" name="admitcards">
                                         </div>
                                         <div class="mb-3">
-                                            <button type="submit" class="btn btn-primary saveBtn"><i class="fas fa-plus-circle"></i> Print</button>
+                                            <button type="submit" class="btn btn-primary" id="carddownloadBtn"><i class="fas fa-plus-circle"></i> Download</button>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

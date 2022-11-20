@@ -29,10 +29,18 @@ class ExamCardController extends Controller
     public function getStudentForAdmitCard(Request $request)
     {
         $institute_id = Auth::user()->institute_id;
-        $data = Student::select('roll','name','std_id')->where('institute_id', $institute_id)->where('section_id', $request->id)->get();
+        $data = Student::select('roll','name','std_id')
+                            ->where('institute_id', $institute_id)
+                            ->where('section_id', $request->section_id)
+                            ->whereBetween('roll',[$request->from, $request->to])
+                            ->get();
         return response()->json($data);
     }
 
+    public function admitprint()
+    {
+        return view('layouts.dashboard.layout_certificate.download.essentials.admitprint');
+    }
     /**
      * Show the form for creating a new resource.
      *

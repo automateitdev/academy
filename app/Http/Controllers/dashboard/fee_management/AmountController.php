@@ -101,7 +101,7 @@ class AmountController extends Controller
 
     public function fineStore(Request $request)
     {
-        dd($request->class_id);
+        // dd($request->class_id);
         $this->validate($request,[
             'institute_id'=> 'required', 
             'class_id'=> 'required',
@@ -196,6 +196,11 @@ class AmountController extends Controller
     public function destroy($id)
     {
         Feeamount::find($id)->delete();
+        return redirect()->back();
+    }
+    public function absentdestroy($id)
+    {
+        Feefineamount::find($id)->delete();
         return redirect()->back();
     }
 }

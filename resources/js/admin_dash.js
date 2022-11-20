@@ -1,5 +1,5 @@
 const { colors } = require("laravel-mix/src/Log");
-const { isEmpty, isNumber, add, forEach, isSet } = require("lodash");
+const { isEmpty, isNumber, add, forEach, isSet, replace } = require("lodash");
 
 //startup start
 $(document).ready(function(){
@@ -249,24 +249,91 @@ $(document).ready(function(){
 
 // Admit card start///
 
-$(document).ready(function(){
-  $(document).on('change', '#admit_section', function(){
-    var section_id = $(this).val();
-    console.log(section_id);
-    var a=$(this).parent().parent();
-    $.ajax({
+// $(document).ready(function(){
+//   $(document).on('change', '#admit_section', function(){
+//     var section_id = $(this).val();
+//     var from = a.find('#formData').val();
+//     var to = a.find('#toData').val();
+//       $.ajax({
+//         type:'post',
+//         url: '/getStudentForAdmitCard',
+//         data:{'id':section_id, 'from': from, 'to':to},
+//         success: function(data){
+//           console.log(data);
+//           $("#std_name").val(data.name);
+//         },
+//       }); 
+
+//     });
+
+//   });
+
+let studentData;
+let exam_id;
+let pdfname;
+let path = "layouts.dashboard.layout_certificate.download.essentials.admitprint";
+$(document).on('keyup change', '#admitTo', function(e){
+
+  e.preventDefault();
+  let section_id = $("select[name=section_id]").val();
+  exam_id = $("select[name=exam_id]").val();
+  let from = $("input[name=admitForm]").val();
+  let to = $("input[name=admitTo]").val();
+  pdfname = $("input[name=admitcards]").val();
+
+  let _token   = $('meta[name="csrf-token"]').attr('content');
+
+  $.ajax({
       type:'get',
       url: '/getStudentForAdmitCard',
-      data:{'id':section_id},
+      data:{
+          'section_id':section_id,
+          'from':from,
+          'to':to
+      },
       success: function(data){
-        console.log(data);
+        studentData = data;
         
       },
-    });
 
     });
+    
+});
+
+$(document).on('click', '#carddownloadBtn', function(e){
+ 
+  $.ajax({
+    type:'post',
+    url: 'http://127.0.0.1:8000/api/pdfgenerate',
+    dataType: "text",
+    data:{
+        'studentData':studentData,
+        'exam_id':exam_id,
+        'pdfname':pdfname,
+        'path':path
+    },
+    success: function(res){
+      console.log(res);
+      // window.location.href.print(data);
+
+      // const data = res;
+      //       const link = document.createElement('a');
+      //       link.setAttribute('href', window.location.data);
+      //       link.setAttribute('download', 'admitcards.pdf'); // Need to modify filename ...
+      //       link.click();
+
+      const blob = new Blob([res], {type: 'application/application/vnd.openxmlformats-officedocument.pdf'});
+    const downloadUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = downloadUrl;
+    a.download = "file.pdf";
+    document.body.appendChild(a);
+    a.click();
+    },
 
   });
+});
+
 
 // Admit card end///
 

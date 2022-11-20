@@ -225,7 +225,9 @@ class StudentAuthController extends Controller
                 "auth_code": "'.$auth.'",
                 "session_Token": "'.$request->session_token. '",
                 "trax_id": "'.$result['TransactionId'].'",
-                "invoice_no": "'.$result['InvoiceNo'].'"
+                "invoice_no": "'.$result['InvoiceNo'].'",
+                "status": "'.$result['status'].'",
+                "msg": "'.$result['msg'].'"
                 } 
             }';
 
@@ -237,10 +239,9 @@ class StudentAuthController extends Controller
 
                 [
                     'headers' => $finalheaders,
-                    'body' => $final_data
+                    'body' => $final_data,
                 ]
             ); 
-            dd($resposnedata);  
             }
             catch (ClientException $e) {
                 $response = $e->getResponse();

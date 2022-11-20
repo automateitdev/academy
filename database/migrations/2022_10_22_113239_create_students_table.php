@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
             $table->integer('section_id');
             $table->integer('std_category_id');
             $table->integer('group_id');
-            $table->string('roll');
+            $table->bigInteger('roll');
             $table->string('name');
             $table->bigInteger('gender_id')->unsigned();
             $table->bigInteger('religion_id')->unsigned();

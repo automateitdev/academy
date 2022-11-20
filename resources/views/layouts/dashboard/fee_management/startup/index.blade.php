@@ -49,13 +49,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php 
+                                                    $i =1;
+                                                    @endphp
                                                     @foreach($feeheads as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
                                                     <tr>
-                                                        <th scope="row">{{$item->id}}</th>
+                                                        <th scope="row">{{$i++}}</th>
                                                         <td>{{$item->head_name}}</td>
                                                         <td>
-                                                            <form method="POST" id="delete-form-{{$item->id}}" 
+                                                            <!-- <form method="POST" id="delete-form-{{$item->id}}" 
                                                             action="{{route('fee.startup.headstore.delete',$item->id)}}" style="display: none;">
                                                             @csrf
                                                             {{method_field('delete')}}
@@ -71,7 +74,7 @@
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                             </svg>
-                                                            </button>
+                                                            </button> -->
                                                         </td>
                                                     </tr>
                                                     @endif
@@ -108,13 +111,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php 
+                                                    $i =1;
+                                                    @endphp
                                                     @foreach($feesubheads as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
                                                     <tr>
-                                                        <th scope="row">{{$item->id}}</th>
+                                                        <th scope="row">{{$i++}}</th>
                                                         <td>{{$item->subhead_name}}</td>
                                                         <td>
-                                                            <form method="POST" id="delete-form-{{$item->id}}" 
+                                                            <!-- <form method="POST" id="delete-form-{{$item->id}}" 
                                                             action="{{route('fee.startup.subheadstore.delete',$item->id)}}" style="display: none;">
                                                             @csrf
                                                             {{method_field('delete')}}
@@ -130,7 +136,7 @@
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                             </svg>
-                                                            </button>
+                                                            </button> -->
                                                         </td>
                                                     </tr>
                                                     @endif
@@ -168,13 +174,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php 
+                                                    $i =1;
+                                                    @endphp
                                                     @foreach($waivers as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
                                                     <tr>
-                                                        <th scope="row">{{$item->id}}</th>
+                                                        <th scope="row">{{$i++}}</th>
                                                         <td>{{$item->waiver_name}}</td>
                                                         <td>
-                                                            <form method="POST" id="delete-form-{{$item->id}}" 
+                                                            <!-- <form method="POST" id="delete-form-{{$item->id}}" 
                                                             action="{{route('fee.startup.waiverstore.delete',$item->id)}}" style="display: none;">
                                                             @csrf
                                                             {{method_field('delete')}}
@@ -190,7 +199,7 @@
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                             </svg>
-                                                            </button>
+                                                            </button> -->
                                                         </td>
                                                     </tr>
                                                     @endif
@@ -227,13 +236,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php 
+                                                    $i =1;
+                                                    @endphp
                                                     @foreach($funds as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
                                                     <tr>
-                                                        <th scope="row">{{$item->id}}</th>
+                                                        <th scope="row">{{$i++}}</th>
                                                         <td>{{$item->fund_name}}</td>
                                                         <td>
-                                                            <form method="POST" id="delete-form-{{$item->id}}" 
+                                                            <!-- <form method="POST" id="delete-form-{{$item->id}}" 
                                                             action="{{route('fee.startup.fundstore.delete',$item->id)}}" style="display: none;">
                                                             @csrf
                                                             {{method_field('delete')}}
@@ -249,7 +261,7 @@
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                             </svg>
-                                                            </button>
+                                                            </button> -->
                                                         </td>
                                                     </tr>
                                                     @endif
@@ -308,13 +320,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php 
+                                                    $i =1;
+                                                    @endphp
                                                     @foreach($ledgers as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
                                                     <tr>
-                                                        <th scope="row">{{$item->id}}</th>
+                                                        <th scope="row">{{$i++}}</th>
                                                         <td>{{$item->ledger_name}}</td>
                                                         <td>
-                                                            <form method="POST" id="delete-form-{{$item->id}}" 
+                                                            <!-- <form method="POST" id="delete-form-{{$item->id}}" 
                                                             action="{{route('fee.startup.fundstore.delete',$item->id)}}" style="display: none;">
                                                             @csrf
                                                             {{method_field('delete')}}
@@ -330,7 +345,7 @@
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                             </svg>
-                                                            </button>
+                                                            </button> -->
                                                         </td>
                                                     </tr>
                                                     @endif

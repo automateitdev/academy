@@ -4,51 +4,60 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Startup;
+use App\Models\StartupCategory;
 use App\Models\Paymentupdate;
 use App\Models\Payapply;
+use App\Models\StartupSubcategory;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
+// use Mpdf\Mpdf as PDF;
+use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ApiController extends Controller
 {
     public function dataupdate(Request $request)
      {
-        $response = Http::withBody( 
-            '{
-      "data": {
-        "auth_code": "Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh",
-        "session_Token": "3b3a555314930c394e5ddb2b193d94630ff3c6ba831",
-        "trax_id": "2211159000004898",
-        "invoice_no": "AE221106215100052022"
-      }
-    }', 'json' 
-        ) 
-        ->withHeaders([ 
-            'Content-Type'=> 'application/json', 
-            'Authorization'=> 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh', 
-        ]) 
-        ->post('https://live.academyims.com/api/dataupdate'); 
-    
-    echo $response->body();
-        // if($result['status'] == 200)
-        // {
-        //     if($input->save())
-        //     {
-        //         redirect(route('student.auth.index'))->with('message', 'Payment Success');
-        //     }else{
-        //         Session::put('payment error', $request->ins_id, $request->std_id);
-        //     }
-        // }else{
-
-        // }
-        
-        return redirect(route('student.auth.submit'));
+        $ipndata=
+        '{
+            "Tranid": "'.$request->data['trax_id'].'",
+            "StatusCode": "'.$request->data['status'].'",
+            "Message": "'.$request->data['msg'].'"
+            }';
+        return $ipndata;
      }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function generate_pdf(Request $request)
+    {
+        $startup_subcategory = Startup::select('startup_subcategory_id')->where('id', $request->exam_id)->first();
+
+        $exam_name = StartupSubcategory::select('startup_subcategory_name')->where('id',$startup_subcategory->startup_subcategory_id)->first();
+        $exam = $exam_name->startup_subcategory_name;
+        $path = $request->path;
+        $data = $request->data;
+        $pdfname = $request->pdfname.'.pdf';
+
+        $allData = '{
+            data : "'.$data.'";
+            exam : "'.$exam.'";
+        }';
+
+        // $pdf = new PDF();
+        $pdf = PDF::loadView($path, compact('allData'));
+
+        $savepath = storage_path('pdf/');
+        $der = $pdf->save($savepath . '/' . $pdfname);
+        $pdf_path = storage_path('pdf/'.$pdfname);
+        
+        return response()->download($pdf_path);
+    }
+
     public function index()
     {
         //

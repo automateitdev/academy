@@ -212,6 +212,8 @@ Route::post('/FeesManagement/amount/feeamount/update', [AmountController::class,
 Route::delete('/FeesManagement/amount/feeamount/{id}',[AmountController::class,'destroy'])->name('fee.amount.delete');
 Route::post('/FeesManagement/amount/fineamount/store', [AmountController::class, 'fineStore'])->name('fine.amount.store');
 
+Route::delete('/FeesManagement/amount/fineamount/delete/{id}',[AmountController::class,'absentdestroy'])->name('fine.amount.delete');
+
 Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
 
 //date config
@@ -264,6 +266,8 @@ Route::post('/exam-management/exam-startup/store', [ExamStartupController::class
 /////////////////////// Layout & Certificate Start/////////////////
 Route::get('/layout&certificate/exam-essential', [ExamCardController::class, 'index'])->name('exam.card.index');
 Route::get('/getStudentForAdmitCard', [ExamCardController::class, 'getStudentForAdmitCard']);
+Route::get('/layout&certificate/exam-essential/admitprint', [ExamCardController::class, 'admitprint'])->name('admitprint');
 
+Route::get('/admitprint', [ExamCardController::class, 'admitprint']);
 /////////////////////// Layout & Certificate End//////////////////
 
