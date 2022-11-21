@@ -1,8 +1,8 @@
 @foreach($allData as $data)
     @foreach($data['data'] as $key=>$value)
-            @php 
+        @php 
             var_dump($data['data']['name']);
-            @endphp
+        @endphp
     @endforeach
 @endforeach
 

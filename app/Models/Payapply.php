@@ -16,6 +16,7 @@ class Payapply extends Model
         'feesubhead_id',
         'payable',
         'fine',
+        'payable_date',
         'fineactive_date',
         'total_amount',
         'waiver_id',

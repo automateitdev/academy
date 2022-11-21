@@ -23,6 +23,7 @@ class CreatePayappliesTable extends Migration
             $table->bigInteger('feesubhead_id');
             $table->double('payable');
             $table->double('fine')->nullable();
+            $table->date('payable_date')->nullable();
             $table->date('fineactive_date')->nullable();
             $table->bigInteger('waiver_id')->nullable();
             $table->double('waiver_amount')->nullable();

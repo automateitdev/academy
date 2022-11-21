@@ -103,6 +103,7 @@ trait StudentTraits
                                                 [
                                                     'institute_id' => $institute_id,
                                                     'fine' => $fine,
+                                                    'payable_date' => $datesetup->payable_date,
                                                     'fineactive_date' => $datesetup->fineactive_date,
                                                     'waiver_id' => $waiver_category,
                                                     'waiver_amount' => $waiver_amount,
