@@ -1,58 +1,56 @@
-@foreach($allData as $data)
-    @foreach($data['data'] as $key=>$value)
-        @php 
-            var_dump($data['data']['name']);
-        @endphp
-    @endforeach
-@endforeach
 
-
+@foreach ($data as $value)
 <div class="card" style="width: 45rem; border-color: blue; border-width: 0.5rem;">
         <div style = "text-align: center; background-color: skyblue;">
-            <p><b>Bangladesh Marine Academy. Sylhet</b></p>
-            <p>Sylhet sadar, Sylhet</p>
-            <div class="container" style = "background-color: blue; width:20%; border-radius: 0.5rem;"><b style="text-align: center; color: white;">Admit card</b></div>
+            <p><b>{{$value['institute_name']}}</b></p>
+            <p>{{$value['institute_add']}}</p>
+            <div class="container" style = "text-align: center; color: white; background-color: blue; width:20%; border-radius: 0.5rem;"><b>Admit card</b></div>
         </div>
         <div class="card-body">
           <table width = "100%">
             <tr>
                 <td>
-                    <label id="std_name">Name: </label>
+                    <label id="std_name">Name: {{$value['name']}}</label>
                 </td>
                 <td>
-                    <label>Exam name: </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Student ID: </label>
-                </td>
-                <td>
-                    <label>Academic Year: </label>
+                    <label>Exam name: {{$value['exam_name']}}</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>Roll No: </label>
+                    <label>Student ID: {{$value['std_id']}}</label>
                 </td>
                 <td>
-                    <label>Session: </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Class: </label>
-                </td>
-                <td>
-                    <label>Date of Issue: </label>
+                    <label>Academic Year: {{$value['academic_yr']}}</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>Department/Section</label>
+                    <label>Roll No: {{$value['roll']}}</label>
                 </td>
                 <td>
-                    <label>Mobile No: </label>
+                    <label>Session: {{$value['session']}}</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Class: {{$value['class_name']}}-{{$value['shift_name']}}-{{$value['section_name']}}</label>
+                </td>
+                <td>
+                    @php 
+                        $date = \Carbon\Carbon::now()->format('d-m-Y');
+                    @endphp
+                    <label>Date of Issue: 
+                        {{$date}}
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Group: {{$value['group']}}</label>
+                </td>
+                <td>
+                    <label>Mobile No: {{$value['mobile_no']}}</label>
                 </td>
             </tr>
           </table>
@@ -65,3 +63,8 @@
         </div>
         
       </div>
+    </div>
+</div>
+@endforeach
+
+

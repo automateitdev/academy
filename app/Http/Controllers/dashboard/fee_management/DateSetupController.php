@@ -100,7 +100,7 @@ class DateSetupController extends Controller
         } 
            
     }
-        return redirect(route('date.index'))->with('message', 'Data Upload Successfully');
+        // return redirect(route('date.index'))->with('message', 'Data Upload Successfully');
     }
 
     /**

@@ -249,27 +249,9 @@ $(document).ready(function(){
 
 // Admit card start///
 
-// $(document).ready(function(){
-//   $(document).on('change', '#admit_section', function(){
-//     var section_id = $(this).val();
-//     var from = a.find('#formData').val();
-//     var to = a.find('#toData').val();
-//       $.ajax({
-//         type:'post',
-//         url: '/getStudentForAdmitCard',
-//         data:{'id':section_id, 'from': from, 'to':to},
-//         success: function(data){
-//           console.log(data);
-//           $("#std_name").val(data.name);
-//         },
-//       }); 
-
-//     });
-
-//   });
-
 let studentData;
 let exam_id;
+let exam_name;
 let pdfname;
 let path = "layouts.dashboard.layout_certificate.download.essentials.admitprint";
 $(document).on('keyup change', '#admitTo', function(e){
@@ -293,9 +275,24 @@ $(document).on('keyup change', '#admitTo', function(e){
       },
     success: function (data) {
       console.log(data);
-      studentData = data; 
+      $.ajax({
+        type: 'get',
+        url: '/getAdmitInfo',
+        data: {
+          'exam_id': exam_id,
+          'std_info': data,
+        },
+        success: function (res) {
+          let data2 = res;
+          for (let i = 0; i < data.length; i++) {
+            data[i] = Object.assign(data[i], data2);
+          }
+          console.log(data.length);
+          studentData = data;
+        },
       },
-
+      )
+    }
     });
     
 });
@@ -309,30 +306,11 @@ $(document).on('click', '#carddownloadBtn', function(e){
       responseType: 'blob'
     },
     data:{
-        'studentData':studentData,
-        'exam_id':exam_id,
-        'pdfname':pdfname,
-        'path':path
+      'studentData': studentData,
+      'pdfname': pdfname,
+      'path': path
     },
     success: function(data){
-      // console.log(res);
-      // window.location.href.print(data);
-
-      // const data = res;
-      //       const link = document.createElement('a');
-      //       link.setAttribute('href', window.location.data);
-      //       link.setAttribute('download', 'admitcards.pdf'); // Need to modify filename ...
-      //       link.click();
-
-      // const blob = new Blob([res], { type: 'pdf' });
-      // console.log(new Blob([res]));
-      // const downloadUrl = URL.createObjectURL(blob);
-      // const a = document.createElement("a");
-      // a.href = downloadUrl;
-      // // console.log(downloadUrl);
-      // // a.download = "file.pdf";
-      // document.body.appendChild(a);
-      // a.click();
 
       var blob=new Blob([data], { type: 'contentType'});
       var link=document.createElement('a');

@@ -437,6 +437,22 @@
   margin-top: 30px;
 }
 
+#sign .container .row .rkj {
+  border: 1px solid #19686d;
+  padding: 35px;
+  border-radius: 6px;
+}
+#sign .container .row .rkj p {
+  margin-top: -10px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  color: #19686d;
+}
+#sign .container .row .saveBtn {
+  margin-bottom: 50px;
+}
+
 #enrollment_auto .container .row .mb-25 {
   line-height: 36px;
   font-size: 24px;

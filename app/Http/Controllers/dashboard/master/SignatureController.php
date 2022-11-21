@@ -1,51 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\dashboard\master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Startup;
-use App\Models\StartupSubcategory;
-use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use App\Models\User;
+use App\Models\Signature;
+use App\Models\Place;
+use Illuminate\Support\Facades\Auth;
 
-class ApiController extends Controller
+class SignatureController extends Controller
 {
-    public function dataupdate(Request $request)
-     {
-        $ipndata=
-        '{
-            "Tranid": "'.$request->data['trax_id'].'",
-            "StatusCode": "'.$request->data['status'].'",
-            "Message": "'.$request->data['msg'].'"
-            }';
-        return $ipndata;
-     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function generate_pdf(Request $request)
-    {
-
-        $path = $request->path;
-        $data = $request->studentData;
-        $pdfname = $request->pdfname.'.pdf';
-
-        $pdf = PDF::loadView($path, compact('data'));
-
-        $savepath = storage_path('pdf/');
-        $der = $pdf->save($savepath . '/' . $pdfname);
-        $pdf_path = storage_path('pdf/'.$pdfname);
-      
-        return response()->download($pdf_path);
-    }
-
     public function index()
     {
-        //
+        $users = User::all();
+        $places = Place::all();
+        $signatures = Signature::all();
+        return view('layouts.dashboard.master_setting.signature.index', compact('users','places','signatures'));
     }
 
     /**
@@ -66,7 +42,33 @@ class ApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'place_id' => 'required',
+            'status' => 'required',
+            'title' => 'required',
+            'sign' => 'required'
+
+        ]);
+        $input = new Signature();
+        
+        $input->institute_id = Auth::user()->institute_id;
+        $input->place_id = $request->place_id;
+        $input->status = $request->status;
+        $input->title = $request->title;
+
+        if($request->hasFile('sign')){
+            $file = $request->file('sign');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/sign/',$filename);
+            $input->sign = $filename;
+        }else{
+            $input->sign = '';
+        }
+        
+        $input->save();
+        
+        return redirect(route('signature.index'));
     }
 
     /**

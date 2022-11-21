@@ -229,6 +229,13 @@
                   <p>User Setup</p>
                 </a>
               </li>
+              <li class="nav-item">
+                    <a href="{{route('signature.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                      <p>Signature</p>
+                      <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                    </a>
+                  </li>
             </ul>
           </li>
           <!-- Master Setting end -->

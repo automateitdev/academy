@@ -40,6 +40,7 @@ trait StudentTraits
                 if ($students->section_id == $section_assign->id) {
 
                     foreach ($feeamounts->unique('feehead_id') as $feeamount) {
+                        
                         // we check Student table and Feeamount table
                         // we get class_id, std-category_id and group_id
                         if (
@@ -50,11 +51,14 @@ trait StudentTraits
                             foreach ($datesetups as $datesetup) {
                                 
                                 if ($datesetup->class_id == $feeamount->class_id) {
+                                    
                                     // we check student table, datesetup table and fee amount table, we get feesubhead_id
                                     if (
                                         $students->academic_year_id == $datesetup->academic_year_id
                                     ) {
+                                        echo $datesetup->feehead_id;
                                         if ($datesetup->feehead_id == $feeamount->feehead_id) {
+                                            
                                             $pay_data = Payapply::where('student_id', $student_id)->where('institute_id', $institute_id)
                                                         ->where('feesubhead_id',$datesetup->feesubhead_id)
                                                         ->where('feehead_id', $feeamount->feehead_id)->count();
@@ -118,7 +122,7 @@ trait StudentTraits
                                                 // redirect(route('enrollment.excel.index'))->with('error', 'Duplicate tiutiu');
                                             // }
                                             // redirect(route('enrollment.excel.index'))->with(FacadesSession::get("message"))->with(FacadesSession::get("error"));
-                                            redirect(route('enrollment.excel.index'));
+                                            // redirect(route('enrollment.excel.index'));
                                         }
                                     }
                                 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\api\ApiController;
-use App\Http\Controllers\api\PdfController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

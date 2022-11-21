@@ -512,6 +512,28 @@
         }
     }
 }
+
+#sign{
+    .container{
+        .row{
+            .rkj{
+                border: 1px solid #19686d;
+                padding: 35px;
+                border-radius: 6px;
+                p{
+                    margin-top: -10px;
+                    margin-bottom: 1rem;
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #19686d
+                }
+            }
+            .saveBtn{
+                margin-bottom: 50px;
+            }
+        }
+    }
+}
 // Master setting end/////
 
 //student management start

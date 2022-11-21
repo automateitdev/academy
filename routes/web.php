@@ -24,6 +24,7 @@ use App\Http\Controllers\dashboard\fee_management\DateSetupController;
 use App\Http\Controllers\dashboard\fee_management\WaiverController;
 use App\Http\Controllers\dashboard\fee_management\FeeCollectionController;
 use App\Http\Controllers\dashboard\frontend\NoticeController;
+use App\Http\Controllers\dashboard\master\SignatureController;
 
 use App\Http\Controllers\student\StudentAuthController;
 use App\Http\Controllers\student\CopyController;
@@ -150,6 +151,7 @@ Route::post('/WebsiteManagement/notice/store', [NoticeController::class, 'store'
 
 // ////////////////////////Website Management end /////////////////////////////
 
+// master setting start
 // startup
 Route::get('/MasterSetting/InstituteSetting/startup', [StartupController::class, 'index'])->name('startup.index');
 Route::post('/MasterSetting/InstituteSetting/startup/store_cat', [StartupController::class, 'store_cat'])->name('startup.store_cat');
@@ -169,7 +171,11 @@ Route::get('/MasterSetting/InstituteSetting/class_setup', [ClassSetupController:
 Route::post('/MasterSetting/InstituteSetting/class_setup/section_store', [ClassSetupController::class, 'section_store'])->name('class.section_store');
 Route::post('/MasterSetting/InstituteSetting/class_setup/group_store', [ClassSetupController::class, 'group_store'])->name('class.group_store');
 
+//signature
+Route::get('/MasterSetting/Signature', [SignatureController::class, 'index'])->name('signature.index');
+Route::post('/MasterSetting/Signature/store', [SignatureController::class, 'store'])->name('signature.store');
 
+//master setting end
 
 //student management
 Route::get('/StudentManagement/enrollment/auto_id', [RegistrationController::class, 'index'])->name('enrollment.auto.index');
@@ -268,6 +274,7 @@ Route::get('/layout&certificate/exam-essential', [ExamCardController::class, 'in
 Route::get('/getStudentForAdmitCard', [ExamCardController::class, 'getStudentForAdmitCard']);
 Route::get('/layout&certificate/exam-essential/admitprint', [ExamCardController::class, 'admitprint'])->name('admitprint');
 
+Route::get('/getAdmitInfo', [ExamCardController::class, 'getAdmitInfo']);
 Route::get('/admitprint', [ExamCardController::class, 'admitprint']);
 /////////////////////// Layout & Certificate End//////////////////
 
