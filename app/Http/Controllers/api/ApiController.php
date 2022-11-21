@@ -5,13 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Startup;
-use App\Models\StartupCategory;
-use App\Models\Paymentupdate;
-use App\Models\Payapply;
 use App\Models\StartupSubcategory;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Http;
-// use Mpdf\Mpdf as PDF;
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ApiController extends Controller
@@ -35,6 +29,7 @@ class ApiController extends Controller
 
     public function generate_pdf(Request $request)
     {
+
         $startup_subcategory = Startup::select('startup_subcategory_id')->where('id', $request->exam_id)->first();
 
         $exam_name = StartupSubcategory::select('startup_subcategory_name')->where('id',$startup_subcategory->startup_subcategory_id)->first();
@@ -43,10 +38,20 @@ class ApiController extends Controller
         $data = $request->studentData;
         $pdfname = $request->pdfname.'.pdf';
 
-        $allData = '{
-            data : "'.$data.'";
-            exam : "'.$exam.'";
-        }';
+        // $allData = '{
+        //     "all":{
+        //     "data" : "'.$data.'";
+        //     "exam" : "'.$exam.'";
+        //     }
+        // }';
+        $allData = [];
+      foreach($request->studentData as $studentData){
+          $allData[] = [
+              'data' => $studentData,
+              'exam' => $exam
+          ];
+      }
+    //   return $allData;
 
         // $pdf = new PDF();
         $pdf = PDF::loadView($path, compact('allData'));
@@ -54,8 +59,9 @@ class ApiController extends Controller
         $savepath = storage_path('pdf/');
         $der = $pdf->save($savepath . '/' . $pdfname);
         $pdf_path = storage_path('pdf/'.$pdfname);
-        
+      
         return response()->download($pdf_path);
+        // return $pdf->stream($pdf_path);
     }
 
     public function index()

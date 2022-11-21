@@ -305,15 +305,17 @@ $(document).on('click', '#carddownloadBtn', function(e){
   $.ajax({
     type:'post',
     url: 'http://127.0.0.1:8000/api/pdfgenerate',
-    dataType: "text",
+    xhrFields: {
+      responseType: 'blob'
+    },
     data:{
         'studentData':studentData,
         'exam_id':exam_id,
         'pdfname':pdfname,
         'path':path
     },
-    success: function(res){
-      console.log(res);
+    success: function(data){
+      // console.log(res);
       // window.location.href.print(data);
 
       // const data = res;
@@ -322,13 +324,21 @@ $(document).on('click', '#carddownloadBtn', function(e){
       //       link.setAttribute('download', 'admitcards.pdf'); // Need to modify filename ...
       //       link.click();
 
-      const blob = new Blob([res], { type: 'pdf' });
-    const downloadUrl = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = downloadUrl;
-    // a.download = "file.pdf";
-    document.body.appendChild(a);
-    a.click();
+      // const blob = new Blob([res], { type: 'pdf' });
+      // console.log(new Blob([res]));
+      // const downloadUrl = URL.createObjectURL(blob);
+      // const a = document.createElement("a");
+      // a.href = downloadUrl;
+      // // console.log(downloadUrl);
+      // // a.download = "file.pdf";
+      // document.body.appendChild(a);
+      // a.click();
+
+      var blob=new Blob([data], { type: 'contentType'});
+      var link=document.createElement('a');
+      link.href=window.URL.createObjectURL(blob);
+      link.download="admitcard.pdf";
+      link.click();
     },
 
   });

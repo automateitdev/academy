@@ -1,4 +1,12 @@
-{{$allData}}
+@foreach($allData as $data)
+    @foreach($data['data'] as $key=>$value)
+            @php 
+            var_dump($data['data']['name']);
+            @endphp
+    @endforeach
+@endforeach
+
+
 <div class="card" style="width: 45rem; border-color: blue; border-width: 0.5rem;">
         <div style = "text-align: center; background-color: skyblue;">
             <p><b>Bangladesh Marine Academy. Sylhet</b></p>
