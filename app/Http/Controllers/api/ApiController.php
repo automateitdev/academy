@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Startup;
 use App\Models\StartupSubcategory;
-use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class ApiController extends Controller
 {
     public function dataupdate(Request $request)
@@ -34,13 +33,33 @@ class ApiController extends Controller
         $data = $request->studentData;
         $pdfname = $request->pdfname.'.pdf';
 
-        $pdf = PDF::loadView($path, compact('data'));
+        // $allData = '{
+        //     "all":{
+        //     "data" : "'.$data.'";
+        //     "exam" : "'.$exam.'";
+        //     }
+        // }';
+        //     $allData = [];
+        //   foreach($request->studentData as $studentData){
+        //       $allData[] = [
+        //             'data' => $studentData,
+        //       ];
+        //   }
+        //   return $allData;
 
+        // $pdf = new PDF();
+
+        $pdf = Pdf::setOption([
+            'dpi' => 150,
+            'defaultFont' => 'sans-serif',
+            'isHtml5ParserEnabled' => true
+        ])->loadView($path, compact('data'));
         $savepath = storage_path('pdf/');
         $der = $pdf->save($savepath . '/' . $pdfname);
         $pdf_path = storage_path('pdf/'.$pdfname);
       
         return response()->download($pdf_path);
+        // return $pdf->stream($pdf_path);
     }
 
     public function index()
