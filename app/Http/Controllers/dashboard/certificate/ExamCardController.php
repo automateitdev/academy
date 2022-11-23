@@ -9,6 +9,8 @@ use App\Models\SectionAssign;
 use App\Models\Startup;
 use App\Models\StartupSubcategory;
 use App\Models\Student;
+use App\Models\Basic;
+use App\Models\Signature;
 use Illuminate\Support\Facades\Auth;
 
 class ExamCardController extends Controller
@@ -70,7 +72,9 @@ class ExamCardController extends Controller
 
         $institute_name = User::select('institute_name')->where('institute_id', $request->std_info[0]['institute_id'])->first();
         $institute_add = User::select('address')->where('institute_id', $request->std_info[0]['institute_id'])->first();
-       
+        $institute_logo = Basic::select('logo')->where('institute_id', $request->std_info[0]['institute_id'])->first();
+        $sign = Signature::select('sign')->where('institute_id', $request->std_info[0]['institute_id'])->first();
+
         $additional_info = [
             'exam_name' => $exam_name->startup_subcategory_name,
             'academic_yr' => $academic_yr->startup_subcategory_name,
@@ -81,6 +85,8 @@ class ExamCardController extends Controller
             'shift_name' => $shift_name->startup_subcategory_name,
             'institute_name' => $institute_name->institute_name,
             'institute_add' => $institute_add->address,
+            'institute_logo' => $institute_logo->logo,
+            'sign' => $sign->sign,
 
         ];
         return $additional_info;

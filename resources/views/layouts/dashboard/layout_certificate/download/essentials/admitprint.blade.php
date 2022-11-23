@@ -44,13 +44,13 @@
 
 <div class="card" style="page-break-inside:avoid; position: relative; vertical-align:middle; width:45rem; margin:0 auto; margin-bottom:20px; height:520px; background-color:#F0FFF0; border:15px solid #ddd;">
     
-    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/logo/1665899289.png'))) }}" style="position:absolute; width:250px; left:17rem; bottom:55px; opacity:.15; z-index:-1">
+    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/logo/'.$value['institute_logo']))) }}" style="position:absolute; width:250px; left:17rem; bottom:55px; opacity:.15; z-index:-1">
     
     <div style ="position:relative; color:#fff; background-color:#19686d; text-align: center; padding:40px 0 20px 0; margin-bottom:20px;">
-        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/logo/1665899289.png'))) }}" alt="" width="80px" style="vertical-align:middle;">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/logo/'.$value['institute_logo']))) }}" alt="" width="80px" style="vertical-align:middle;">
             
-        <div style="display: inline-block; vertical-align:middle"><h3 style="display:inline-block; padding:0 20px; margin:0"><b>Bangladesh Marine Academy. Sylhet</b></h3>
-            <p style="padding:0 20px; margin:0;">Sylhet sadar, Sylhet Sylhet sadar, Sylhet</p></div>
+        <div style="display: inline-block; vertical-align:middle"><h3 style="display:inline-block; padding:0 20px; margin:0"><b>{{$value['institute_name']}}</b></h3>
+            <p style="padding:0 20px; margin:0;">{{$value['institute_add']}}</p></div>
             <div style = "font-size:.75rem; margin:0px auto; padding:5px 10px; text-transform:uppercase; font-weight:bold; text-align: center; color: #19686d; background-color: #F0FFF0; width:15%; border-radius: 0.2rem;"><b>Admit card</b></div>
         </div>
         
@@ -115,7 +115,7 @@
             
             <span style="position:absolute; bottom:-10px; right:13.5rem; font-size:.6rem">Powered By: Academy-Institue Management System</span>
             
-            <img  src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/signatures/1669050252.jpg'))) }}" style="position:absolute; top:-10px; right:2rem; width:200px" />
+            <img  src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/sign/'.$value['sign']))) }}" style="position:absolute; top:-10px; right:2rem; width:200px" />
             <span style="position:absolute; top:50px; right:3rem; text-decoration:overline;">HeadMaster</span>
         </div>
 

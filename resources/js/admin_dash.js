@@ -248,7 +248,6 @@ $(document).on('keyup change', '#admitTo', function(e){
   let from = $("input[name=admitForm]").val();
   let to = $("input[name=admitTo]").val();
   pdfname = $("input[name=admitcards]").val();
-// console.log(section_id,exam_id,from,to);
   let _token   = $('meta[name="csrf-token"]').attr('content');
 
   $.ajax({
@@ -260,7 +259,7 @@ $(document).on('keyup change', '#admitTo', function(e){
           'to':to
       },
     success: function (data) {
-      // console.log("data: "+data);
+     
       $.ajax({
         type: 'get',
         url: '/getAdmitInfo',
