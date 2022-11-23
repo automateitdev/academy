@@ -23,21 +23,28 @@
                     </div>
 
                     <div class="card-bodys">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
+                        <div class="col-md-6">
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            @if(session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                            @endif
+                            @if(session()->has('message'))
+                            <div class="alert alert-success">
+                                {{ session()->get('message') }}
+                            </div>
+                            @endif
                         </div>
-                    @endif
-                    @if(session()->has('message'))
-                        <div class="alert alert-success">
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
                         <form method="POST" action="{{ route('student.auth.submit') }}">
                             @csrf
 
@@ -69,9 +76,9 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6">
                                                 @if (Route::has('password.request'))
-                                                    <a class="btn btn-link forget" href="{{ route('password.request') }}">
-                                                        {{ __('Forgot Your Password?') }}
-                                                    </a>
+                                                <a class="btn btn-link forget" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot Your Password?') }}
+                                                </a>
                                                 @endif
                                             </div>
                                         </div>
@@ -81,7 +88,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-5">
-                                <div class="">
+                                    <div class="">
                                         <button type="submit" class="btn btn-primary login_submit">
                                             {{ __('Login') }}
                                         </button>

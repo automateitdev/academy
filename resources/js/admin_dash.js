@@ -175,32 +175,18 @@ $(document).ready(function(){
 //payment
 
 $(document).on('click', '#v-pills-payment-tab', function(){
-  console.log("click click");
-  var payable;
-  var fine;
-  var waiver;
+  
   var grand = 0;
 
-  $(".pay-table tr td").each(function(index) {
-    payable = $('.payable').eq(index).text();
-    fine = $('.fine').eq(index).text();
-    waiver = $('.waiver').eq(index).text();
-    var pyfine = parseFloat(payable) + parseFloat(fine);
-    $('.pay_total').eq(index).html(pyfine - waiver); 
-    
-  });
 
   $('.pay_total').each(function(index){
-    // paytotal = ;
     grand += parseInt($('.pay_total').eq(index).text()); 
     
   });
-  var waiverAmount = $('#waiverAmount').val();
-  var FinalGrandtotal = grand - waiverAmount;
 
   $('.grandTotal').html(grand);
   
-  $('.grandpass').val(grand);
+  $('#grandTotal').val(grand);
 });
 
 // ////////////////////Stdent dashboard end

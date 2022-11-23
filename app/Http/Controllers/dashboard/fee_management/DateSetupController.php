@@ -82,6 +82,7 @@ class DateSetupController extends Controller
             $input['feesubhead_id'] = $feesubhead_id;
             $input['payable_date'] = $request->payable_date[$key];
             $input['fineactive_date'] = $request->fineactive_date[$key];
+            
             if($data = Datesetup::insert($input))
             {
                 $sectionAssign = SectionAssign::where('class_id', $class_id)->get();
@@ -100,7 +101,7 @@ class DateSetupController extends Controller
         } 
            
     }
-        // return redirect(route('date.index'))->with('message', 'Data Upload Successfully');
+        return redirect(route('date.index'))->with('message', 'Data Upload Successfully');
     }
 
     /**

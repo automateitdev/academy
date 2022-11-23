@@ -15,6 +15,7 @@ class CreateWaivermappingsTable extends Migration
     {
         Schema::create('waivermappings', function (Blueprint $table) {
             $table->increments('id');
+            $table->unique(array('student_id', 'feehead_id', 'waiver_category_id'));
             $table->string('institute_id');
             $table->bigInteger('student_id');
             $table->bigInteger('feehead_id');

@@ -23,4 +23,13 @@ class Payapply extends Model
         'waiver_amount',
         'trx_id'
     ];
+
+    public function feehead()
+    {
+        return $this->belongsTo(FeeHead::class, 'feehead_id');
+    }
+    public function feesubhead()
+    {
+        return $this->belongsTo(Feesubhead::class, 'feesubhead_id');
+    }
 }

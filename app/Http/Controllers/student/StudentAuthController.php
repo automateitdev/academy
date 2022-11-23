@@ -9,6 +9,7 @@ use App\Models\Datesetup;
 use App\Models\Payapply;
 use App\Models\Bankinfo;
 use App\Models\Paymentupdate;
+use App\Models\User;
 use App\Models\Waivermapping;
 use Carbon\Carbon;
 use GuzzleHttp\Client as GuzzleClient;
@@ -31,7 +32,6 @@ class StudentAuthController extends Controller
 
     public function authentication(Request $request)
     {
-        // dd($request->ins_id);
         $request->validate([
             'std_id' => 'required',
             'ins_id' => 'required',
@@ -40,24 +40,22 @@ class StudentAuthController extends Controller
         $std_id = $request->std_id;
         $ins_id = $request->ins_id;
 
-        $payapplies = new Payapply();
-        $students = Student::where('std_id', $std_id)->where('institute_id', $ins_id)->get();
-        $datesetups = Datesetup::all();
-        $waivermappings = Waivermapping::where('student_id', $std_id)
-            ->where('institute_id', $ins_id)->get();
+        $inst_id = User::where('institute_id',$ins_id)->first();
+        if(!empty($inst_id)){
+            $payapplies = Payapply::where('student_id', $std_id)->where('institute_id', $ins_id)->get();
+            $student = Student::where('std_id', $std_id)->where('institute_id', $ins_id)->first(); // $student = null;
 
-
-
-        foreach ($students as $std) {
-            // dd($std->std_id == $request->std_id);
-            if ($std->institute_id == $request->ins_id && $std->std_id == $request->std_id) {
-                return view('layouts.student.dashboard', compact('students', 'datesetups', 'waivermappings', 'payapplies'))
-                    ->with('std_id', $std_id)
-                    ->with('ins_id', $ins_id);
+            // null->institute_id
+            if ($student->institute_id == $request->ins_id && $student->std_id == $request->std_id) {
+                return view('layouts.student.dashboard', compact('student', 'payapplies'));
             } else {
-                return back()->with('message', 'Wrong Login Details');
+                return redirect()->back()->with('error', 'Wrong Login Details');
             }
+        }else{
+            return redirect()->back()->with('error', "Institute doesn't exist");
         }
+        
+        
     }
 
     // AE-institute_id-invoicedate-student_id-year-serial_no
@@ -65,23 +63,35 @@ class StudentAuthController extends Controller
     public function makepayment(Request $request)
     {
 
+        $grandTotal = $request->grandTotal;
         $std_id = $request->std_id;
         $ins_id = $request->ins_id;
+        Session::put('ins_id', $ins_id);
+        Session::put('std_id', $std_id);
+        $student = Student::where('std_id', $std_id)->where('institute_id', $ins_id)->first();
+        $payapplies = Payapply::where('student_id', $std_id)->where('institute_id', $ins_id)->get();
+        $amount = 0;
+        $total_payable = 0;
+        $todate = \Carbon\Carbon::now();
+        foreach ($payapplies as $payapplie) {
+            if (!$payapplie->payment_state == 200 || !$payapplie->payment_state == 3) {
+                if($todate->gte($payapplie->payable_date)){
+                    $total_payable += $payapplie->total_amount;
+                }
+            }
+        }
+
         $year = $request->year;
         $day = $request->day;
         $now = Carbon::now();
         $unique_code = $now->format('ymdHis');
         $invoice = 'AE' . $ins_id . substr($std_id, -4) . $unique_code;
         $invoice = strtoupper($invoice);
-        $auth = 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh';
-        
-        // $invoice = 'INV155422121443';
-        Session::put('ins_id', $ins_id);
-        Session::put('std_id', $std_id);
 
         $tableData = json_decode($request->tableData, true);
 
         foreach ($tableData as $data) {
+
             $invoice_assign = Payapply::where(
                 [
                     ['student_id',  $std_id],
@@ -91,26 +101,33 @@ class StudentAuthController extends Controller
                 ]
             )->update(['invoice' => $invoice]);
         }
-        $amount = $request->erp;
+        // dd($total_payable);
+        if ($grandTotal == $total_payable) {
+            $amount = $total_payable;
+        } else {
+            return redirect(route('student.auth.index'))->with('error', 'Something went wrong. Please, try again');
+        }
+
+        $auth = 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh';
         $invoicedate = \Carbon\Carbon::now()->format('Y-m-d');
         $accountInfo = Bankinfo::where('institute_id', $ins_id)->first();
         $applicantName = Student::where('institute_id', $ins_id)->where('std_id', $std_id)->first();
-        
+
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
             'Content-Type' => 'application/JSON',
             'Authorization' => $auth,
-           ];
+        ];
 
         $data = '{"AccessUser":
             {"userName":"AutoMateIT",
             "password":"Au3t7o1M4asteIT!"
             },
-            "invoiceNo":"'.$invoice.'",
-            "amount":"'.$amount.'",
-            "invoiceDate":"'.$invoicedate.'",
-            "accounts":[{"crAccount":"'.$accountInfo['account'].'","crAmount":'.$amount.'}]}';
+            "invoiceNo":"' . $invoice . '",
+            "amount":"' . $amount . '",
+            "invoiceDate":"' . $invoicedate . '",
+            "accounts":[{"crAccount":"' . $accountInfo['account'] . '","crAmount":' . $amount . '}]}';
 
         //dd($data);
         // API 1
@@ -124,22 +141,22 @@ class StudentAuthController extends Controller
         $data_two =
             '{ "authentication":{
                 "apiAccessUserId": "AutoMateIT",
-                "apiAccessToken": "'.$token['access_token'].'"
+                "apiAccessToken": "' . $token['access_token'] . '"
             },
             "referenceInfo": {
-                "InvoiceNo": "'.$invoice.'", 
-                "invoiceDate": "'.$invoicedate.'", 
+                "InvoiceNo": "' . $invoice . '", 
+                "invoiceDate": "' . $invoicedate . '", 
                 "returnUrl": "https://live.academyims.com/confirmation", 
-                "totalAmount": "'.$amount.'", 
-                "applicentName": "'.$applicantName['name'].'", 
-                "applicentContactNo": "'.$applicantName['mobile_no'].'",
+                "totalAmount": "' . $amount . '", 
+                "applicentName": "' . $applicantName['name'] . '", 
+                "applicentContactNo": "' . $applicantName['mobile_no'] . '",
                 "extraRefNo": "2132"
             }, 
             "creditInformations": [
             {
                 "slno": "1",
-                "crAccount": "'.$accountInfo['account'].'", 
-                "crAmount": "'.$amount.'", 
+                "crAccount": "' . $accountInfo['account'] . '", 
+                "crAmount": "' . $amount . '", 
                 "tranMode": "TRN"}]}';
 
         // dd($data_two);
@@ -162,15 +179,15 @@ class StudentAuthController extends Controller
     {
         $receive_token = $request->session_token;
         $status = $request->status;
-        $ins_id= Session::get('ins_id');
-        $std_id= Session::get('std_id');
+        $ins_id = Session::get('ins_id');
+        $std_id = Session::get('std_id');
         $auth = 'Basic QXV0b01hdGVJVDpBdTN0N28xTTRhc3RlSVQh';
 
         $client = new GuzzleClient(array('curl' => array(CURLOPT_SSL_VERIFYPEER => false,),));
         $headers = [
             'Content-Type' => 'application/json',
             'Authorization' => $auth
-            
+
         ];
 
         $data = '{"session_Token": "' . $request->session_token . '"}';
@@ -182,6 +199,9 @@ class StudentAuthController extends Controller
             ['headers' => $headers, 'body' => $data]
         );
 
+        if(empty($res)){
+            return redirect(route('student.auth.index'))->with('error', 'No response! i.e., If your payment has been deducted, Please contact your institute.');
+        }
         $result = json_decode($res->getBody(), true);
 
 
@@ -213,6 +233,19 @@ class StudentAuthController extends Controller
 
             $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
                 ->update($updateDetails);
+            if($result['status'] == 200){
+                return redirect(route('student.auth.index'))->with('message', 'Your payments successful.');
+            }
+            if($result['status'] == 201){
+                return redirect(route('student.auth.index'))->with('error', 'Technical issues, Try again later.');
+            }
+            if($result['status'] == 400){
+                return redirect(route('student.auth.index'))->with('message', 'Payment has been canceled.');
+            }
+            if($result['status'] == 5555){
+                return redirect(route('student.auth.index'))->with('error', 'System error, Try again later.');
+            }
+
         }
 
         $finalheaders = [
@@ -222,103 +255,29 @@ class StudentAuthController extends Controller
 
         $final_data = '{ 
             "data": {
-                "auth_code": "'.$auth.'",
-                "session_Token": "'.$request->session_token. '",
-                "trax_id": "'.$result['TransactionId'].'",
-                "invoice_no": "'.$result['InvoiceNo'].'",
-                "status": "'.$result['status'].'",
-                "msg": "'.$result['msg'].'"
+                "auth_code": "' . $auth . '",
+                "session_Token": "' . $request->session_token . '",
+                "trax_id": "' . $result['TransactionId'] . '",
+                "invoice_no": "' . $result['InvoiceNo'] . '",
+                "status": "' . $result['status'] . '",
+                "msg": "' . $result['msg'] . '"
                 } 
             }';
 
         try {
-            $resposnedata = 
-            $client->request(
-                'POST',
-                'https://live.academyims.com/api/dataupdate',
+            $resposnedata =
+                $client->request(
+                    'POST',
+                    'https://live.academyims.com/api/dataupdate',
 
-                [
-                    'headers' => $finalheaders,
-                    'body' => $final_data,
-                ]
-            ); 
-            }
-            catch (ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-            }
-        
-
-
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
-
-    public function create()
-    {
-        //
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //cadmin_academy
-        //Academy$1234
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+                    [
+                        'headers' => $finalheaders,
+                        'body' => $final_data,
+                    ]
+                );
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+        }
     }
 }

@@ -15,6 +15,7 @@ use App\Models\Feeamount;
 use App\Models\Waivermapping;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Traits\StudentTraits;
+use Illuminate\Database\QueryException;
 
 class WaiverController extends Controller
 {
@@ -82,19 +83,32 @@ class WaiverController extends Controller
             'waiver_category_id' => 'required',
             'amount' => 'required',
         ]);
-        $input = new Waivermapping();
-        $input->institute_id = Auth::user()->institute_id ;
-        $input->student_id = $request->student_id ;
-        $input->feehead_id = $request->feehead_id ;
-        $input->waiver_category_id = $request->waiver_category_id ;
-        $input->amount = $request->amount ;
+
+        try{
+            $input = Waivermapping::updateOrCreate(
+                ['student_id' => $request->student_id, 'feehead_id' => $request->feehead_id, 'waiver_category_id' => $request->waiver_category_id ],
+                [
+                    'institute_id' => Auth::user()->institute_id,
+                    'student_id' => $request->student_id,
+                    'feehead_id' => $request->feehead_id,
+                    'waiver_category_id' => $request->waiver_category_id,
+                    'amount' => $request->amount
+                ]
+            );
+                if($input->save())
+                {
+                    $this->assign_fee($request->student_id,Auth::user()->institute_id);
+                }
+                return redirect(route('waiver.index'))->with('message', 'Data Upload Successfully');
+          }
+          catch (QueryException $e){
+              $errorCode = $e->errorInfo[1];
+              if($errorCode == 1062){
+                  // houston, we have a duplicate entry problem
+                  return redirect(route('waiver.edit'.'/'.$id))->with('error', 'Waiver is already assigned');
+              }
+          }
         
-        if($input->save())
-        {
-            $this->assign_fee($request->student_id,Auth::user()->institute_id);
-        }
-        
-        return redirect(route('waiver.index'))->with('message', 'Data Upload Successfully');
     }
 
     /**

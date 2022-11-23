@@ -18,7 +18,7 @@ class CreatePaymentupdatesTable extends Migration
             $table->string('student_id');
             $table->string('institute_id');
             $table->string('session_token');
-            $table->string('ststus');
+            $table->string('status');
             $table->string('msg');
             $table->string('transaction_id');
             $table->string('transaction_date');

@@ -13,6 +13,26 @@
             </div>
         </div>
         <div class="row">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if(session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+            @endif
+            @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+            @endif
             <div class="col-sm-10 col-md-10 offset-md-1">
                 <table class="table table-bordered">
                     <thead>
@@ -27,18 +47,18 @@
                     </thead>
                     <tbody>
                         @foreach($students as $student)
-                            @if($student->institute_id == Auth::user()->institute_id)
-                            <tr>
-                                <td>{{$student->std_id}}</td>
-                                <td>{{$student->roll}}</td>
-                                <td>{{$student->name}}</td>
-                                <td>{{$student->group_id}}</td>
-                                <td>{{$student->std_category_id}}</td>
-                                <td><a href="{{route('waiver.edit', $student->id)}}">
+                        @if($student->institute_id == Auth::user()->institute_id)
+                        <tr>
+                            <td>{{$student->std_id}}</td>
+                            <td>{{$student->roll}}</td>
+                            <td>{{$student->name}}</td>
+                            <td>{{$student->group_id}}</td>
+                            <td>{{$student->std_category_id}}</td>
+                            <td><a href="{{route('waiver.edit', $student->id)}}">
                                     Process
                                 </a></td>
-                            </tr>
-                            @endif
+                        </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
