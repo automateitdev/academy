@@ -56,7 +56,6 @@ class DateSetupController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->class_id);
         $this->validate($request,[
             'academic_year_id' => 'required',
             'class_id' => 'nullable',

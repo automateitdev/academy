@@ -248,7 +248,7 @@ $(document).on('keyup change', '#admitTo', function(e){
   let from = $("input[name=admitForm]").val();
   let to = $("input[name=admitTo]").val();
   pdfname = $("input[name=admitcards]").val();
-
+// console.log(section_id,exam_id,from,to);
   let _token   = $('meta[name="csrf-token"]').attr('content');
 
   $.ajax({
@@ -260,7 +260,7 @@ $(document).on('keyup change', '#admitTo', function(e){
           'to':to
       },
     success: function (data) {
-      console.log(data);
+      // console.log("data: "+data);
       $.ajax({
         type: 'get',
         url: '/getAdmitInfo',
@@ -269,11 +269,11 @@ $(document).on('keyup change', '#admitTo', function(e){
           'std_info': data,
         },
         success: function (res) {
+          console.log(res);
           let data2 = res;
           for (let i = 0; i < data.length; i++) {
             data[i] = Object.assign(data[i], data2);
           }
-          console.log(data.length);
           studentData = data;
         },
       },

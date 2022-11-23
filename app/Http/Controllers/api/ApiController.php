@@ -28,26 +28,9 @@ class ApiController extends Controller
 
     public function generate_pdf(Request $request)
     {
-
         $path = $request->path;
         $data = $request->studentData;
         $pdfname = $request->pdfname.'.pdf';
-
-        // $allData = '{
-        //     "all":{
-        //     "data" : "'.$data.'";
-        //     "exam" : "'.$exam.'";
-        //     }
-        // }';
-        //     $allData = [];
-        //   foreach($request->studentData as $studentData){
-        //       $allData[] = [
-        //             'data' => $studentData,
-        //       ];
-        //   }
-        //   return $allData;
-
-        // $pdf = new PDF();
 
         $pdf = Pdf::setOption([
             'dpi' => 150,
@@ -59,7 +42,6 @@ class ApiController extends Controller
         $pdf_path = storage_path('pdf/'.$pdfname);
       
         return response()->download($pdf_path);
-        // return $pdf->stream($pdf_path);
     }
 
     public function index()

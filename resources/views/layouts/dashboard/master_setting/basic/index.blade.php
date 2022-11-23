@@ -188,7 +188,7 @@
                                             <!-- <label for="logo" class="form-label">Add New Logo</label> -->
                                         </div>
                                         <div class="col-sm-8 col-md-8">
-                                            <img src="{{asset('logos/'. $basic->logo)}}" class="rounded" alt="Logo" width="60px" height="60px">
+                                            <img src="{{asset('images/logo/'. $basic->logo)}}" class="rounded" alt="Logo" width="60px" height="60px">
                                         </div>
                                     </div>
                                     

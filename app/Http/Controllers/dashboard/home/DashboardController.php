@@ -5,6 +5,7 @@ namespace App\Http\Controllers\dashboard\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Basic;
 
 
 class DashboardController extends Controller
@@ -17,7 +18,8 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('layouts.dashboard.dash.index', compact('users'));
+        $basics = Basic::all();
+        return view('layouts.dashboard.dash.index', compact('users','basics'));
     }
 
     /**
