@@ -62,7 +62,9 @@
                         <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab">
                             @include('layouts.student.payment')
                         </div>
-                        <div class="tab-pane fade" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">
+                            @include('layouts.student.report')
+                        </div>
                         <div class="tab-pane fade" id="v-pills-result" role="tabpanel" aria-labelledby="v-pills-result-tab">...</div>
                     </div>
                 </div>
