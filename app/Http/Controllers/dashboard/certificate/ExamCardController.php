@@ -25,8 +25,10 @@ class ExamCardController extends Controller
         $users = User::all();
         $sectionAssignes = SectionAssign::all();
         $startups = Startup::all();
+        $signs = Signature::where('institute_id', Auth::user()->institute_id)->get();
         return view('layouts.dashboard.layout_certificate.download.essentials.index',
-         compact('users', 'sectionAssignes', 'startups'));
+            compact('users', 'sectionAssignes', 'startups', 'signs')
+        );
     }
 
     public function getStudentForAdmitCard(Request $request)
@@ -75,6 +77,16 @@ class ExamCardController extends Controller
         $institute_logo = Basic::select('logo')->where('institute_id', $request->std_info[0]['institute_id'])->first();
         $sign = Signature::select('sign')->where('institute_id', $request->std_info[0]['institute_id'])->first();
 
+
+        if (!empty($request->left_sign)) {
+            $left_sign = Signature::where(['id' => $request->left_sign, 'institute_id' => $request->std_info[0]['institute_id']])->first();
+            $left_title = $left_sign->place->name;
+        }
+
+        if (!empty($request->right_sign)) {
+            $right_sign = Signature::where(['id' => $request->right_sign, 'institute_id' => $request->std_info[0]['institute_id']])->first();
+            $right_title = $right_sign->place->name;
+        }
         $additional_info = [
             'exam_name' => $exam_name->startup_subcategory_name,
             'academic_yr' => $academic_yr->startup_subcategory_name,
@@ -86,8 +98,11 @@ class ExamCardController extends Controller
             'institute_name' => $institute_name->institute_name,
             'institute_add' => $institute_add->address,
             'institute_logo' => $institute_logo->logo,
+            'left_sign' => isset($left_sign) ? $left_sign->sign : null,
+            'left_title' => isset($left_title) ? $left_title : null,
+            'right_sign' => isset($right_sign) ? $right_sign->sign : null,
+            'right_title' => isset($right_title) ? $right_title : null,
             'sign' => $sign->sign,
-
         ];
         return $additional_info;
     }

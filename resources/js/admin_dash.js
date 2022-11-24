@@ -235,28 +235,49 @@ $(document).ready(function(){
 
 // Admit card start///
 
+
+
+
+
 let studentData;
 let exam_id;
 let exam_name;
 let pdfname;
+let lft = null;
+let rgt = null;
 let path = "layouts.dashboard.layout_certificate.download.essentials.admitprint";
-$(document).on('keyup change', '#admitTo', function(e){
+
+
+
+$(document).ready(function () {
+  $("#left_sign").change(function () {
+    lft = $(this).children("option:selected").val();
+  });
+  $("#right_sign").change(function () {
+    rgt = $(this).children("option:selected").val();
+  });
+});
+
+
+$(document).on('keyup change', '#admitTo', function (e) {
 
   e.preventDefault();
+
   let section_id = $("select[name=section_id]").val();
   exam_id = $("select[name=exam_id]").val();
   let from = $("input[name=admitForm]").val();
   let to = $("input[name=admitTo]").val();
-  pdfname = $("input[name=admitcards]").val();
-  let _token   = $('meta[name="csrf-token"]').attr('content');
 
+  pdfname = $("input[name=righ_title]").val();
+  let _token = $('meta[name="csrf-token"]').attr('content');
+  if (!isEmpty(lft) || !isEmpty(rgt)) {
   $.ajax({
-      type:'get',
+    type: 'get',
       url: '/getStudentForAdmitCard',
-      data:{
-          'section_id':section_id,
-          'from':from,
-          'to':to
+    data: {
+      'section_id': section_id,
+      'from': from,
+      'to': to,
       },
     success: function (data) {
      
@@ -266,6 +287,8 @@ $(document).on('keyup change', '#admitTo', function(e){
         data: {
           'exam_id': exam_id,
           'std_info': data,
+          'left_sign': lft,
+          'right_sign': rgt,
         },
         success: function (res) {
           console.log(res);
@@ -279,11 +302,10 @@ $(document).on('keyup change', '#admitTo', function(e){
       )
     }
     });
-    
+  }
 });
 
-$(document).on('click', '#carddownloadBtn', function(e){
- 
+$(document).on('click', '#carddownloadBtn', function (e) {
   $.ajax({
     type:'post',
     url: 'http://127.0.0.1:8000/api/pdfgenerate',
@@ -293,10 +315,9 @@ $(document).on('click', '#carddownloadBtn', function(e){
     data:{
       'studentData': studentData,
       'pdfname': pdfname,
-      'path': path
+      'path': path,
     },
-    success: function(data){
-
+    success: function (data) {
       var blob=new Blob([data], { type: 'contentType'});
       var link=document.createElement('a');
       link.href=window.URL.createObjectURL(blob);
