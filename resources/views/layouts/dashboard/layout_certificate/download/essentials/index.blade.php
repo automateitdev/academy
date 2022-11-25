@@ -1,7 +1,9 @@
 @extends('school_admin')
 
 @section('content')
-
+<div class="mainloader d-none" id="mainloader">
+    @include('layouts.loader.index')
+</div>
 <div id="examstartup">
     <div class="container">
         <div class="row">
@@ -48,103 +50,130 @@
                                 @endif
                                 <div class="rkj">
                                     <p>Admit Card</p>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
                                                 <label for="section_id" class="form-label">Class-Shift-Section</label>
-                                                    <select class="form-control single" id="admit_section" name="section_id">
-                                                        <option value=" ">Choose One</option>
-                                                        @foreach($sectionAssignes as $item)
-                                                            @if($item->institute_id == Auth::user()->institute_id)
-                                                                @php
-                                                                $startup_data = $startups->where('id', $item->class_id);
-                                                                $startup_data2 = $startups->where('id', $item->section_id);
-                                                                $startup_data3 = $startups->where('id', $item->shift_id);
-                                                                @endphp
-                                                                @foreach($startup_data as $strData)
-                                                                    @foreach($startup_data2 as $strData2)
-                                                                        @foreach($startup_data3 as $strData3)
-                                                                            <option value="{{$item->id}}">
-                                                                                {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}
-                                                                            </option>
-                                                                        @endforeach
-                                                                    @endforeach
-                                                                @endforeach
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">Exam</label>
-                                                    <select class="form-control single" id="admit_exam" name="exam_id">
-                                                        <option value="">Select a Class</option>
-                                                        @foreach($startups as $item)
-                                                        @if($item->institute_id == Auth::user()->institute_id)
-                                                        @if($item->startup_category_id == 11)
-                                                        <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
-                                                        @endif
-                                                        @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                <select class="form-control single" id="admit_section" name="section_id">
+                                                    <option value=" ">Choose One</option>
+                                                    @foreach($sectionAssignes as $item)
+                                                    @if($item->institute_id == Auth::user()->institute_id)
+                                                    @php
+                                                    $startup_data = $startups->where('id', $item->class_id);
+                                                    $startup_data2 = $startups->where('id', $item->section_id);
+                                                    $startup_data3 = $startups->where('id', $item->shift_id);
+                                                    @endphp
+                                                    @foreach($startup_data as $strData)
+                                                    @foreach($startup_data2 as $strData2)
+                                                    @foreach($startup_data3 as $strData3)
+                                                    <option value="{{$item->id}}">
+                                                        {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}
+                                                    </option>
+                                                    @endforeach
+                                                    @endforeach
+                                                    @endforeach
+                                                    @endif
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">Title for left Side</label>
-                                                    {{-- <input type="text" placeholder="e.g. Class Teacher" class="form-control" name="left_title"> --}}
-                                                    <select class="form-control single" id="left_sign" name="left_sign">
-                                                        <option value="">Select Authority</option>
-                                                        @foreach($signs as $sign)
-                                                        <option value="{{$sign->id}}">{{$sign->place->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <a href="{{route('signature.index')}}" class="btn btn-sm btn-dark my-1">Add New</a>
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="academic_year_id" class="form-label">Academic Year</label>
+                                                <select class="form-control single" name="academic_year_id">
+                                                    <option value=" ">Choose One</option>
+                                                    @foreach($startups as $startup)
+                                                    @if($startup->institute_id == Auth::user()->institute_id)
+                                                    @if($startup->startup_category_id == "1")
+                                                    <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                    @endif
+                                                    @endif
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">Title for Right Side</label>
-                                                    {{-- <input type="text" placeholder="e.g. Principal" class="form-control" name="right_title"> --}}   
-                                                    <select class="form-control single" id="right_sign" name="right_sign">
-                                                        <option value="">Select Authority</option>
-                                                        @foreach($signs as $sign)
-                                                        <option value="{{$sign->id}}">{{$sign->place->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    
-                                                </div>
-                                                
-                                            </div>
-
-
-                                            <div class="col-md-5">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">From Roll No.</label>
-                                                    <input type="number" class="form-control" id="admitForm" name="admitForm">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">To</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label"></label>
-                                                    <input type="number" class="form-control" id="admitTo" name="admitTo">
-                                                </div>
-                                            </div>
-
-                                            
-                                            <input type="hidden" value="admitcards" name="admitcards">
                                         </div>
-                                        <div class="mb-3">
-                                            <button type="submit" class="btn btn-primary" id="carddownloadBtn"><i class="fa fas fa-file"></i> Generate</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Exam</label>
+                                                <select class="form-control single" id="admit_exam" name="exam_id">
+                                                    <option value="">Select a Class</option>
+                                                    @foreach($startups as $item)
+                                                    @if($item->institute_id == Auth::user()->institute_id)
+                                                    @if($item->startup_category_id == 11)
+                                                    <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
+                                                    @endif
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="session_id" class="form-label">Session</label>
+                                                <select class="form-control single" name="session_id">
+                                                    <option value=" ">Choose One</option>
+                                                    @foreach($startups as $startup)
+                                                    @if($startup->institute_id == Auth::user()->institute_id)
+                                                    @if($startup->startup_category_id == "2")
+                                                    <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                    @endif
+                                                    @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Title for left Side</label>
+                                                {{-- <input type="text" placeholder="e.g. Class Teacher" class="form-control" name="left_title"> --}}
+                                                <select class="form-control single" id="left_sign" name="left_sign">
+                                                    <option value="">Select Authority</option>
+                                                    @foreach($signs as $sign)
+                                                    <option value="{{$sign->id}}">{{$sign->place->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <a href="{{route('signature.index')}}" class="btn btn-sm btn-dark my-1">Add New</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Title for Right Side</label>
+                                                {{-- <input type="text" placeholder="e.g. Principal" class="form-control" name="right_title"> --}}
+                                                <select class="form-control single" id="right_sign" name="right_sign">
+                                                    <option value="">Select Authority</option>
+                                                    @foreach($signs as $sign)
+                                                    <option value="{{$sign->id}}">{{$sign->place->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">From Roll No.</label>
+                                                <input type="number" class="form-control" id="admitForm" name="admitForm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">To</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label"></label>
+                                                <input type="number" class="form-control" id="admitTo" name="admitTo">
+                                            </div>
+                                        </div>
+                                        <input type="hidden" value="admitcards" name="admitcards">
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary" id="carddownloadBtn"><i class="fa fas fa-file"></i> Generate</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

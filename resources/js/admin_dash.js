@@ -245,6 +245,7 @@ let exam_name;
 let pdfname;
 let lft = null;
 let rgt = null;
+let academic_yr_id;
 let path = "layouts.dashboard.layout_certificate.download.essentials.admitprint";
 
 
@@ -259,71 +260,83 @@ $(document).ready(function () {
 });
 
 
-$(document).on('keyup change', '#admitTo', function (e) {
-
-  e.preventDefault();
+$(document).on('keyup', '#admitTo', function () {
+ 
+  // if (e.isComposing || e.keyCode === 229) {
+    // e.preventDefault();
+ 
 
   let section_id = $("select[name=section_id]").val();
+  let session_id = $("select[name=session_id]").val();
+  academic_yr_id = $("select[name=academic_year_id]").val();
   exam_id = $("select[name=exam_id]").val();
   let from = $("input[name=admitForm]").val();
   let to = $("input[name=admitTo]").val();
 
   pdfname = $("input[name=righ_title]").val();
-  let _token = $('meta[name="csrf-token"]').attr('content');
+
   if (!isEmpty(lft) || !isEmpty(rgt)) {
-  $.ajax({
-    type: 'get',
-      url: '/getStudentForAdmitCard',
-    data: {
-      'section_id': section_id,
-      'from': from,
-      'to': to,
-      },
-    success: function (data) {
-     
-      $.ajax({
-        type: 'get',
-        url: '/getAdmitInfo',
-        data: {
-          'exam_id': exam_id,
-          'std_info': data,
-          'left_sign': lft,
-          'right_sign': rgt,
+    $.ajax({
+      
+      type: 'get',
+        url: '/getStudentForAdmitCard',
+      data: {
+        'section_id': section_id,
+        'session_id': session_id,
+        'academic_yr_id': academic_yr_id,
+        'from': from,
+        'to': to,
+        'exam_id': exam_id,
+        'left_sign': lft,
+        'right_sign':rgt
         },
-        success: function (res) {
-          console.log(res);
-          let data2 = res;
-          for (let i = 0; i < data.length; i++) {
-            data[i] = Object.assign(data[i], data2);
-          }
-          studentData = data;
-        },
+      success: function (data) {
+        console.log(data);
+        let contentsize = data.length/1024;
+        console.log(contentsize);
+        studentData = data;
       },
-      )
-    }
-    });
+      });
   }
+  else{
+    alert("Admit Card should have atleast one title");
+  }
+// }
 });
 
 $(document).on('click', '#carddownloadBtn', function (e) {
+  e.preventDefault();
+  $('#mainloader').removeClass('d-none');
+  let _token   = $('meta[name="csrf-token"]').attr('content');
+  // apiurl = $form.attr('api/pdfgenerate'),
   $.ajax({
     type:'post',
-    url: 'http://127.0.0.1:8000/api/pdfgenerate',
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+    url: '/api/pdfgenerate',
     xhrFields: {
       responseType: 'blob'
     },
     data:{
+      _token:_token,
       'studentData': studentData,
       'pdfname': pdfname,
       'path': path,
     },
     success: function (data) {
+      $('#mainloader').addClass('d-none');
       var blob=new Blob([data], { type: 'contentType'});
       var link=document.createElement('a');
       link.href=window.URL.createObjectURL(blob);
       link.download="admitcard.pdf";
       link.click();
+      
     },
+    error: function () {
+      $('#mainloader').addClass('d-none');
+      alert("Something went wrong! Please try later.");
+    }
 
   });
 });

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Basic;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\File\File;
+// use SebastianBergmann\CodeCoverage\Node\File;
 use Illuminate\Support\Facades\Storage;
 
 class BasicSetupController extends Controller
@@ -65,10 +67,21 @@ class BasicSetupController extends Controller
         $basics->pi_link = $request->pi_link;
 
         if($request->hasFile('logo')){
+           
+            $allowedfileExtension = ['jpeg', 'jpg', 'png'];
             $file = $request->file('logo');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $file->move(storage_path('images/logo/',$filename));
+            $check = in_array($extension, $allowedfileExtension);
+            if ($check) {
+                $filename = $file->storeAs('images', $filename);
+            }
+
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/logo/',$filename);
+
             $basics->logo = $filename;
         }else{
             //return $request;
@@ -125,10 +138,21 @@ class BasicSetupController extends Controller
         $basics->pi_link = $request->pi_link;
 
         if($request->hasFile('logo')){
+            
+            $allowedfileExtension = ['jpeg', 'jpg', 'png'];
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $check = in_array($extension, $allowedfileExtension);
+            if ($check) {
+                $filename = $file->storeAs('images', $filename);
+            }
+
             $file = $request->file('logo');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('images/logo/',$filename);
+
             $basics->logo = $filename;
         }else{
             //return $request;

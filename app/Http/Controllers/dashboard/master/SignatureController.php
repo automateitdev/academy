@@ -57,10 +57,25 @@ class SignatureController extends Controller
         $input->title = $request->title;
 
         if($request->hasFile('sign')){
+
+
+            $allowedfileExtension = ['jpeg', 'jpg', 'png'];
+            $file = $request->file('sign');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $check = in_array($extension, $allowedfileExtension);
+            if ($check) {
+                $filename = $file->storeAs('sign', $filename);
+            }
+
+
             $file = $request->file('sign');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('images/sign/',$filename);
+
+
+
             $input->sign = $filename;
         }else{
             $input->sign = '';
@@ -111,8 +126,10 @@ class SignatureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
+        Signature::find($id)->delete();
+        return redirect()->back();
     }
 }

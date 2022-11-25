@@ -8,7 +8,7 @@
         }
 
         *{ 
-            font-family: DejaVu Sans;
+            font-family: DejaVu Sans Mono;
             font-size: .85rem;
         }
         table tr>td{
@@ -23,7 +23,7 @@
             font-weight: bold;
         }
     @font-face {
-      font-family: "DejaVu Sans";
+      font-family: "DejaVu Sans Mono";
       font-style: normal;
       font-weight: normal;
       src: url('fonts/DejaVuSans.ttf') format('truetype');
@@ -46,10 +46,10 @@
 
 <div class="card" style="page-break-inside:avoid; position: relative; vertical-align:middle; width:45rem; margin:0 auto; margin-bottom:20px; height:520px; background-color:#F0FFF0; border:12px solid #5F9EA0;">
     
-    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/logo/'.$value['institute_logo']))) }}" style="position:absolute; width:320px; left:15rem; bottom:45px; opacity:.15; z-index:-1">
+    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/' .$value['institute_logo']))) }}" style="position:absolute; width:320px; left:15rem; bottom:45px; opacity:.15; z-index:-1">
     
     <div style ="position:relative; color:#fff; background-color:#19686d; text-align: center; padding:30px 0; margin-bottom:20px;">
-        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/logo/'.$value['institute_logo']))) }}" alt="" width="120px" style="position: absolute; left:40px; top: 25px">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/'.$value['institute_logo']))) }}" alt="" width="120px" style="position: absolute; left:40px; top: 25px">
             
         <div style="display: inline-block; vertical-align:middle">
             <span style="padding:0 20px; margin:0"><b style="font-size:1rem">{{$value['institute_name']}}</b></span>
@@ -88,7 +88,11 @@
                 <td style="width:170px">
                     <label>Session</label>
                 </td>
+                @if(isset($value['session']) && !empty($value['session']))
                 <td> : {{$value['session']}} </td>
+                @else
+                <td> : N/A</td>
+                @endif
             </tr>
             <tr>
                 <td style="width:120px">
@@ -104,7 +108,7 @@
                 <td style="width:120px">
                     <label>Group</label>
                 </td>
-                <td> : {{$value['group']}}</td>
+                <td> : {{$value['startup_subcategory_name']}}</td>
                 <td style="width:170px">
                     <label>Mobile No</label>
                 </td>
@@ -115,22 +119,22 @@
         <div style="page-break-inside:avoid; height:45px; margin-top:50px; position: relative; padding-bottom:30px;">
             
             @if (!empty($value['left_title']) && !empty($value['left_sign']))
-            <img  src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/sign/'.$value['left_sign']))) }}" style="position:absolute; top:-35px; left:3rem; width:140px" />
+                <img  src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('sign/'.$value['left_sign']))) }}" style="position:absolute; top:0px; left:3rem; width:140px;height:60px " />
             @php
                 $left_title = ucwords(strtolower($value['left_title']));
             @endphp
-            <span style="position:absolute; top:50px; left:3rem; text-decoration:overline;">{{$left_title}}</span>    
+            <span style="position:absolute; top:70px; left:3rem; text-decoration:overline;">{{$left_title}}</span>    
             @endif            
             
-            <span style="position:absolute; bottom:-25px; right:14rem; font-size:.6rem">Powered By: Academy-Institue Management System</span>
+            <span style="position:absolute; bottom:-40px; right:14rem; font-size:.6rem">Powered By: Academy-Institue Management System</span>
             
             
             @if (!empty($value['right_title']) && !empty($value['right_sign']))
-            <img  src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/sign/'.$value['right_sign']))) }}" style="position:absolute; top:-35px; right:4rem; width:140px" />
+                <img  src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('sign/'.$value['right_sign']))) }}" style="position:absolute; top:0px; right:3rem; width:140px; height:60px" />
             @php
                 $right_title = ucwords(strtolower($value['right_title']));
             @endphp
-            <span style="position:absolute; top:50px; right:3rem; text-decoration:overline;">{{$right_title}}</span>     
+            <span style="position:absolute; top:70px; right:3rem; text-decoration:overline;">{{$right_title}}</span>     
             @endif
            
         </div>

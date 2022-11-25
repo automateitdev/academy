@@ -6,7 +6,7 @@
               <div class="widget widget-about">
               @foreach($basics as $item)
                 <a href="{{route('landingpage')}}">
-                  <img src="{{ asset('images/logo/'. $item->logo) }}" class="footer-logo" alt="Footer Logo" width="100" height="60">
+                  <img src="{{ asset('images/logo/'. $item->logo) }}" class="footer-logo" alt="Footer Logo" width="100" height="100">
                 </a>
                 
                 <p>{{$item->institute_title}}</p>

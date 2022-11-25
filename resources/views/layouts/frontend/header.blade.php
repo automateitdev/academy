@@ -52,15 +52,10 @@
     <div class="container-fluid pt-4 pb-4 d-sm-none d-md-block" style="background-color: #FBFBFB">
         <div class="d-flex justify-content-around text-center align-items-end">
             <a class="" href="{{ route('landingpage') }}">
-                @php
-                    $heee = DB::table('basics')
-                        ->latest('id')
-                        ->first();
-                @endphp
-                @if ($heee->logo)
-                    <img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100"
+                @foreach($basics as $basic)
+                    <img src="{{ asset('images/logo/' . $basic->logo) }}" alt="" width="100"
                         class="d-inline-block align-text-top">
-                @endif
+                @endforeach
             </a>
             @foreach ($users as $item)
                 <a href="{{ route('landingpage') }}" class="">
@@ -70,15 +65,10 @@
                 </a>
             @endforeach
             <a class="" href="{{ route('landingpage') }}">
-                @php
-                    $heee = DB::table('basics')
-                        ->latest('id')
-                        ->first();
-                @endphp
-                @if ($heee->logo)
-                    <!-- <img src="{{ asset('images/logo/' . $heee->logo) }}" alt="" width="100" -->
-                        <!-- class="d-inline-block align-text-top"> -->
-                @endif
+                
+                    <img src="" alt="" width="100">
+                    
+                
             </a>
         </div>
     </div>

@@ -15,6 +15,7 @@
             <div class="row">
                 <div class="col-sm-10 col-md-10 offset-sm-1 offset-md-1">
                     <div class="row">
+                    
                         <div class="col-sm-6 col-md-6">
                             <div class="row left">
                                 <div class="col-sm-4 col-md-4">
