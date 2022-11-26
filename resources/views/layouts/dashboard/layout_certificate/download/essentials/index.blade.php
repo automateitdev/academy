@@ -164,11 +164,11 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="mb-3">
-                                                <label for="" class="form-label"></label>
+                                                <label for="" class="form-label">(Max 50 Student)</label>
                                                 <input type="number" class="form-control" id="admitTo" name="admitTo">
                                             </div>
                                         </div>
-                                        <input type="hidden" value="admitcards" name="admitcards">
+                                        
                                     </div>
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary" id="carddownloadBtn"><i class="fa fas fa-file"></i> Generate</button>

@@ -33,8 +33,10 @@
 </head>
 
 @php
+    ini_set('memory_limit', '1024M');
     $date = date('d/m/y');
     $i = 0;
+    $data = json_decode($data, true);
 @endphp
 
 @foreach ($data as $value)
@@ -66,7 +68,7 @@
                 </td>
                 <td> : <b>{{$name}}</td>
                 <td style="width:170px">
-                    <label>Exam name</label>
+                    <label>Exam Name</label>
                 </td>
                 <td> : <b>{{$value['exam_name']}}</b></td>
             </tr>

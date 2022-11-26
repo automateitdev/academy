@@ -49,7 +49,6 @@ class ExamCardController extends Controller
             ->join('startup_subcategories', 'startup_subcategories.id', '=', 'startups.startup_subcategory_id')
             ->where('students.institute_id', $institute_id)
             ->where('students.section_id', $request->section_id)
-           
             ->get(['students.institute_id', 'students.roll', 'students.name', 'students.std_id', 'students.mobile_no', 'startup_subcategories.startup_subcategory_name']);
 
         $institute_name = User::select('institute_name')->where('institute_id', $institute_id)->first();
@@ -102,7 +101,7 @@ class ExamCardController extends Controller
             $data[$key]['right_sign'] = isset($right_sign) ? $right_sign->sign : null;
             $data[$key]['left_sign'] = isset($left_sign) ? $left_sign->sign : null;
         }
-        // $data = json_encode($data);
+        $data = json_encode($data);
         return response()->json($data);
     }
     // public function getStudentForAdmitCard(Request $request)

@@ -80,7 +80,7 @@ class NoticeViewController extends Controller
     public function download($id)
     {
         $notices = Notice::find($id);
-        return response()->download(public_path('notice/'.$notices->file));
+        return response()->download(storage_path($notices->file));
     }
     /**
      * Show the form for editing the specified resource.

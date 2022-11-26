@@ -56,7 +56,8 @@ class NoticeController extends Controller
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            $file->move('notice/',$filename);
+            // $file->move('notice/',$filename);
+            $filename = $file->storeAs('notice', $filename);
             $document->file = $filename;
         }else{
             $document->file = '';
@@ -106,8 +107,10 @@ class NoticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy($id)
     {
-        //
+        Notice::find($id)->delete();
+        return redirect()->back();
     }
 }

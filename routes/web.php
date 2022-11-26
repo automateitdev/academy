@@ -39,8 +39,7 @@ use App\Http\Controllers\admin\InstituteController;
 use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
-
-
+use App\Http\Controllers\student\GeneralController;
 
 Route::get('/', [MainController::class, 'index'])->name('landingpage');
 
@@ -148,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
     //notice
     Route::get('/WebsiteManagement/notice', [NoticeController::class, 'index'])->name('notice.index');
     Route::post('/WebsiteManagement/notice/store', [NoticeController::class, 'store'])->name('notice.store');
-
+    Route::delete('/WebsiteManagement/notice/{id}',[NoticeController::class,'destroy'])->name('notice.delete');
 
     // ////////////////////////Website Management end /////////////////////////////
 
@@ -273,6 +272,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
     Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
     Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name('confirmation');
+    Route::get('/getDataForPaymentReport',[GeneralController::class, 'getReportData']);
+
+    
 
     // Route::get('/Student_Portal', [CopyController::class, 'index'])->name('student.auth.index');
 

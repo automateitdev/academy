@@ -18,14 +18,27 @@
         }
 
     </style>
+@php
+    ini_set('memory_limit', '1024M');
+    $date = date('d/m/y');
+    $i = 0;
+    $data = json_decode($data, true);
+@endphp
+
 
     <div class = "card" style=" width: 55rem;  margin-left:20px; margin-top: 20px;">
         <div class="card-header" style="text-align: center; border-bottom-width: 0.3rem; border-bottom-color: black;">
             <img src="C:/Users/Lenovo/Desktop/laravel intern/PDFs/schoologo.jpg" style="width: 150px;height:120px; margin-right: 800px; margin-bottom:-110px;" alt="">
-            <p style="font-size:20px;"><b>Model School and College</b>
+            @foreach ($data as $value)
+            <p style="font-size:20px;"><b>{{$value['institute_name']}}</b>
                 <br/>
-                    Mirpur
+                {{$value['institute_add']}}
             </p>
+                    @php 
+                        break;
+                    @endphp
+                    @endforeach
+            
            <p style="margin-left: 600px; margin-top: -80px;text-align:right; "><img src="C:/Users/Lenovo/Desktop/laravel pages/barimage.png" style="width:100px; height:100px;" ></p> 
         </div>
         <div class="card-body">
@@ -48,7 +61,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>2022</td>
+                    @foreach ($data as $value)
+                    <td>{{$value['academic_yr_name']}}</td>
+                    @php 
+                        break;
+                    @endphp
+                    @endforeach
 
                     <td ><label style="text-align: right; margin-left: 100px;">Academic Session</label></td>
                     <td></td>
@@ -64,7 +82,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><label>1</label></td>
+                        @foreach ($data as $value)
+                        <td>{{$value['session_name']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
                 </tr>
                 <tr>
                     <td>Student ID</td>
@@ -81,7 +104,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>10001</td>
+                        @foreach ($data as $value)
+                        <td>{{$value['student_id']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
 
                     <td ><label style="text-align: right; margin-left: 100px;">Roll No</label></td>
                     <td></td>
@@ -97,7 +125,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><label>41</label></td>
+                        @foreach ($data as $value)
+                        <td>{{$value['roll']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
                 </tr>
                 <tr>
                     <td>Name</td>
@@ -114,8 +147,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>Nazmul</td>
-
+                        @foreach ($data as $value)
+                        <td>{{$value['name']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
                     <td ><label style="text-align: right; margin-left: 100px;">Class-Shift-Section</label></td>
                     <td></td>
                     <td></td>
@@ -130,7 +167,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><label>One-Day-A</label></td>
+                    @foreach ($data as $value)
+                        <td>{{$value['class_name']}}-{{$value['shift_name']}}-{{$value['section_name']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
                 </tr>
                 <tr>
                     <td>Invoice ID</td>
@@ -147,7 +189,14 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>AE2210001388998898</td>
+                    
+                        @foreach ($data as $value)
+                        <td>{{$value['invoice']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
+                    
 
                     <td ><label style="text-align: right; margin-left: 100px;">Payment Date</label></td>
                     <td></td>
@@ -163,7 +212,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><label>04-11-22</label></td>
+                    @foreach ($data as $value)
+                        <td>{{$value['updated_at']}}</td>
+                        @php 
+                            break;
+                        @endphp
+                        @endforeach
                 </tr>
                 
             </table>
@@ -179,14 +233,16 @@
                     <th class = "invhead" >Fine</th>
                     <th class = "invhead">Payable</th>
                 </tr>
+                @foreach ($data as $value)
                 <tr class = "invrow" >
-                    <td class = "invtd">Tution Fee</td>
-                    <td class = "invtd">Tution Fee</td>
-                    <td class = "invtd" style="text-align:right">600.00</td>
-                    <td class = "invtd" style="text-align:right">100.00</td>
-                    <td class = "invtd" style="text-align: right;">0</td>
-                    <td class = "invtd" style="text-align: right;">500.00</td>
+                    <td class = "invtd">{{$value['head_name']}}</td>
+                    <td class = "invtd">{{$value['subhead_name']}}</td>
+                    <td class = "invtd" style="text-align:right">{{$value['payable']}}</td>
+                    <td class = "invtd" style="text-align:right">{{$value['waiver_amount']}}</td>
+                    <td class = "invtd" style="text-align: right;">{{$value['fine']}}</td>
+                    <td class = "invtd" style="text-align: right;">{{$value['payable']}}</td>
                 </tr>
+                @endforeach
                 <tr class = "invrow"  style="margin-top: -10rem;">
                     <td class = "invtd" colspan="3" style="text-align:left; margin-left:20px;border-bottom-color: white;">
                         <p><b>Note:</b></p>
@@ -207,11 +263,6 @@
                     <td colspan="2" class = "invtd" style="border: 1px solid black;text-align:left;">Paid Amount</td>
                     <td style="text-align: right;border: 1px solid black">1500.00</td>
                 </tr>
-                <tr>
-                    <td colspan="3" class ="invnottd"></td>
-                    <td colspan="2" class = "invtd" style="border: 1px solid black; text-align: left;">Due Amount</td>
-                    <td style="text-align: right; border: 1px solid black;">500.00</td>
-                </tr>
                 <tr class="invrow">
                     <td colspan="6" class = "invtd" style="text-align: left;"> <b>Paid In Word:</b> One Taka Only</td>
                 </tr>
@@ -226,4 +277,3 @@
                 
         </div>
     </div>
-

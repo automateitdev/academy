@@ -29,7 +29,7 @@ class ApiController extends Controller
     public function generate_pdf(Request $request)
     {
         $path = $request->path;
-        $data = $request->studentData;
+        $data = $request->data;
         $pdfname = $request->pdfname.'.pdf';
 
         $pdf = Pdf::setOption([

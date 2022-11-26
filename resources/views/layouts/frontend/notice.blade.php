@@ -24,7 +24,7 @@
                                     <p class="m-0 mb-1" style="color:#19686d; font-weight:bold; border-bottom:1px solid #ddd">{{$noticeDate[1]}}</p>
                                     <p class="m-0 mb-1" style="color:darkmagenta; font-weight:bold;">{{$noticeDate[0]}}</p>
                                 </div>
-                                <div class="px-2 py-1"><p><a href="#" class="text-oblique">{{$notice->name}}</a></p></div>
+                                <div class="px-2 py-1"><p><a href="{{route('web.notice.view', $notice->id)}}" class="text-oblique">{{$notice->name}}</a></p></div>
                             </li>
                             @endforeach
                         </ul>

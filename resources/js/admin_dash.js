@@ -246,6 +246,7 @@ let pdfname;
 let lft = null;
 let rgt = null;
 let academic_yr_id;
+let admitname
 let path = "layouts.dashboard.layout_certificate.download.essentials.admitprint";
 
 
@@ -272,14 +273,17 @@ $(document).on('keyup', '#admitTo', function () {
   exam_id = $("select[name=exam_id]").val();
   let from = $("input[name=admitForm]").val();
   let to = $("input[name=admitTo]").val();
-
+  admitname = $("select[name=section_id] option:selected").text();
+  // console.log(admitname);
+  // $( "#myselect option:selected" ).text();
   pdfname = $("input[name=righ_title]").val();
 
   if (!isEmpty(lft) || !isEmpty(rgt)) {
     $.ajax({
       
       type: 'get',
-        url: '/getStudentForAdmitCard',
+      contentType: 'application/json',
+      url: '/getStudentForAdmitCard',
       data: {
         'section_id': section_id,
         'session_id': session_id,
@@ -292,8 +296,6 @@ $(document).on('keyup', '#admitTo', function () {
         },
       success: function (data) {
         console.log(data);
-        let contentsize = data.length/1024;
-        console.log(contentsize);
         studentData = data;
       },
       });
@@ -320,7 +322,7 @@ $(document).on('click', '#carddownloadBtn', function (e) {
     },
     data:{
       _token:_token,
-      'studentData': studentData,
+      'data': studentData,
       'pdfname': pdfname,
       'path': path,
     },
@@ -329,7 +331,7 @@ $(document).on('click', '#carddownloadBtn', function (e) {
       var blob=new Blob([data], { type: 'contentType'});
       var link=document.createElement('a');
       link.href=window.URL.createObjectURL(blob);
-      link.download="admitcard.pdf";
+      link.download=admitname.trim()+'.pdf';
       link.click();
       
     },
@@ -343,4 +345,58 @@ $(document).on('click', '#carddownloadBtn', function (e) {
 
 
 // Admit card end///
+
+// payment report start
+
+let payapplies_invoice;
+let payreportpath = 'layouts/student/reportview';
+$(document).on('click', '#payreportpdfGenerate', function(e){
+  e.preventDefault();
+  payapplies_invoice = $(this).val();
+  let _token   = $('meta[name="csrf-token"]').attr('content');
+  $.ajax({
+      
+    type: 'get',
+    url: '/getDataForPaymentReport',
+    data: {
+      'payapplies_invoice': payapplies_invoice,
+      },
+    success: function (data) {
+
+      console.log(data);
+      $.ajax({
+        type:'post',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+        url: '/api/pdfgenerate',
+        xhrFields: {
+          responseType: 'blob'
+        },
+        data:{
+          _token:_token,
+          'data': data,
+          'pdfname': pdfname,
+          'path': payreportpath,
+        },
+        success: function (data) {
+
+          // $('#mainloader').addClass('d-none');
+          var blob=new Blob([data], { type: 'contentType'});
+          var link=document.createElement('a');
+          link.href=window.URL.createObjectURL(blob);
+          link.download=payapplies_invoice.trim()+".pdf";
+          link.click();
+          
+        },
+        error: function () {
+          // $('#mainloader').addClass('d-none');
+          alert("Something went wrong! Please try later.");
+        }
+    
+      });
+    },
+    });
+});
+// payment report end
 
