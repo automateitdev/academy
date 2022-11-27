@@ -829,6 +829,34 @@
         }
     }
 }
+#ops{
+    .container{
+        .row{
+            .rkj{
+                border: 1px solid #19686d;
+                padding: 35px;
+                padding-bottom: 65px;
+                border-radius: 6px;
+                p{
+                    margin-top: -10px;
+                    margin-bottom: 1rem;
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #19686d
+                }
+                
+            }
+            .searchBtn{
+                margin-bottom: 20px;
+                float: right;
+            }
+            #des{
+                text-align: center;
+                font-size: 30px;
+            }
+        }
+    }
+}
 //fee managemenet end
 
 // exam management start

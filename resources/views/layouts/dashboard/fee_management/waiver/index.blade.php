@@ -125,22 +125,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                            @foreach($students as $student)
-                                                @if($student->institute_id == Auth::user()->institute_id)
-                                               
-                                                <tr>
-                                                    <td>{{$student->std_id}}</td>
-                                                    <td>{{$student->roll}}</td>
-                                                    <td>{{$student->name}}</td>
-                                                    <td>{{$student->group_id}}</td>
-                                                    <td>{{$student->std_category_id}}</td>
-                                                    <td><a href="{{route('waiver.edit', $student->id)}}">
-                                                            Process
-                                                        </a></td>
-                                                </tr>
-                                                @endif
-                                            @endforeach
+                                        @foreach($students as $student)
+                                            @if($student->institute_id == Auth::user()->institute_id)
+                                            <tr>
+                                                <td>{{$student->std_id}}</td>
+                                                <td>{{$student->roll}}</td>
+                                                <td>{{$student->name}}</td>
+                                                <td>{{$student->group_id}}</td>
+                                                <td>{{$student->std_category_id}}</td>
+                                                <td>
+                                                    <a href="{{route('waiver.edit', $student->id)}}" class="btn btn-primary">
+                                                        Process
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 @else

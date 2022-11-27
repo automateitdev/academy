@@ -19,7 +19,10 @@
                             <td>{{$payapplie->updated_at}}</td>
                             <td>{{$payapplie->invoice}}</td>
                             <td>{{$payapplie->feehead->head_name}}</td>
-                            <td>{{$payapplie->total_amount}}</td>
+                            @php 
+                                $total = $payapplies->where('invoice', $payapplie->invoice)->sum('total_amount')
+                            @endphp
+                            <td>{{$total}}</td>
                             <td>Success</td>
                             <td>
                                 <button class="btn btn-success" value="{{$payapplie->invoice}}" id="payreportpdfGenerate">

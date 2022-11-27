@@ -41,12 +41,12 @@ class WaiverController extends Controller
     }
     public function search(Request $request)
     {
-        // $this->validate($request,[
-        //     'section_id' => 'required',
-        //     'group_id' => 'required',
-        //     'academic_year_id' => 'required',
-        //     'stdcategory_id' => 'required',
-        // ]);
+        $this->validate($request,[
+            'section_id' => 'required',
+            'group_id' => 'required',
+            'academic_year_id' => 'required',
+            'stdcategory_id' => 'required',
+        ]);
         $users = User::all();
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();

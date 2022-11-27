@@ -246,6 +246,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
     //report
     Route::get('/FeesManagement/report/ops-collection', [OpsController::class, 'index'])->name('ops.index');
+    Route::post('/FeesManagement/report/ops-collection/query', [OpsController::class, 'search'])->name('ops.search');
+    Route::get('/FeesManagement/report/ops-collection/{invoice}', [OpsController::class, 'show'])->name('ops.show');
     ////////////////////// Fees Management End ////////////
    
 
