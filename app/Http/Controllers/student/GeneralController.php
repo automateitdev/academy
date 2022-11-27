@@ -11,22 +11,22 @@ use App\Models\Payapply;
 use App\Models\Startup;
 use App\Models\SectionAssign;
 use App\Models\StartupSubcategory;
-use Illuminate\Support\Facades\DB;
+use NumberFormatter;
 
 class GeneralController extends Controller
 {
     public function getReportData(Request $request)
     {
-        // $request->payapplies_invoice
+     
         $institute_id = Payapply::select('institute_id')->where('invoice', $request->payapplies_invoice)->first();
         $student_id = Payapply::select('student_id')->where('invoice', $request->payapplies_invoice)->first();
-        // 'feehead_id', 'feesubhead_id', 'payable', 'fine', 'waiver', 'updated_at'
+       
         $data = Payapply::
                 join('fee_heads', 'fee_heads.id', '=', 'payapplies.feehead_id')
                 ->join('feesubheads', 'feesubheads.id', '=', 'payapplies.feesubhead_id')
                 ->where('payapplies.invoice', $request->payapplies_invoice)
                 ->get([ 'payapplies.student_id', 'payapplies.payable', 'payapplies.fine','payapplies.invoice', 'payapplies.waiver_amount', 'payapplies.total_amount', 'payapplies.updated_at', 'fee_heads.head_name', 'feesubheads.subhead_name']);
-// return $data;
+
         $institute_name = User::select('institute_name')->where('institute_id', $institute_id->institute_id)->first();
         
         $institute_add = User::select('address')->where('institute_id', $institute_id->institute_id)->first();
@@ -56,8 +56,10 @@ class GeneralController extends Controller
         $section_id = SectionAssign::select('section_id')->where('id', $std_class->section_id)->first();
         $section = Startup::select('startup_subcategory_id')->where('id', $section_id->section_id)->first();
         $section_name = StartupSubcategory::select('startup_subcategory_name')->where('id', $section->startup_subcategory_id)->first();
+        
+        $total = Payapply::where('invoice', $request->payapplies_invoice)->sum('total_amount');
+        $amountInWords = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($total));
 
-       
         $data = json_decode($data, true);
         foreach ($data as $key => $arr) {
             $data[$key]['roll'] = $roll->roll;
@@ -70,6 +72,8 @@ class GeneralController extends Controller
             $data[$key]['institute_name'] = $institute_name->institute_name;
             $data[$key]['institute_add'] = $institute_add->address;
             $data[$key]['institute_logo'] = $institute_logo->logo;
+            $data[$key]['total'] = $total;
+            $data[$key]['amountInWords'] = $amountInWords;
         }
         $data = json_encode($data);
         return response()->json($data);

@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '45b0f6e627b8503ba5c04e5b3e04c111f46d8589',
+        'reference' => '842bfb5705b9af3ed854ad4e2580feae3e4866a3',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -430,6 +430,15 @@
                 0 => '*',
             ),
         ),
+        'kwn/number-to-words' => array(
+            'pretty_version' => '2.6.0',
+            'version' => '2.6.0.0',
+            'reference' => 'abd6d5b4be3892c001bba0084b94fa938e752617',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kwn/number-to-words',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v8.83.26',
             'version' => '8.83.26.0',
@@ -442,7 +451,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '45b0f6e627b8503ba5c04e5b3e04c111f46d8589',
+            'reference' => '842bfb5705b9af3ed854ad4e2580feae3e4866a3',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

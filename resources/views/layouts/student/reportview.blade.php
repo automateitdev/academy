@@ -48,7 +48,7 @@ foreach ($data as $key => $value) {
     Student Name: {$value['name']}
     Student ID: {$value['student_id']}
     Invoice ID: {$value['invoice']}
-    Total Paid Amount: {$value['total_amount']}
+    Total Paid Amount: {$value['total']}
     Institute: {$value['institute_name']}
     ";            
     break;
@@ -289,7 +289,7 @@ foreach ($data as $key => $value) {
 
                 </td>
                 <td class="invtd">
-                    <p style="text-align: right;">2000.00</p>
+                    <p style="text-align: right;">{{$value['total']}}</p>
 
                 </td>
 
@@ -299,10 +299,10 @@ foreach ($data as $key => $value) {
                     <p style="margin-top: -10px;">Online Fees Payment</p>
                 </td>
                 <td colspan="2" class="invtd" style="border: 1px solid black;text-align:right;">Paid Amount</td>
-                <td style="text-align: right;border: 1px solid black">1500.00</td>
+                <td style="text-align: right;border: 1px solid black">{{$value['total']}}</td>
             </tr>
             <tr class="invrow">
-                <td colspan="6" class="invtd" style="text-align: left;"> <b>Paid In Word:</b> One Taka Only</td>
+                <td colspan="6" class="invtd" style="text-align: left;"> <b>Paid In Word:</b> {{$value['amountInWords']}}</td>
             </tr>
             <tr>
                 <td colspan="2"><label style="font-size:10px;">Powered By: Academy-Institute Management System </label></td>
