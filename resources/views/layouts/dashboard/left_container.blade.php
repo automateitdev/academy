@@ -126,8 +126,22 @@
                 <a href="#" class="nav-link active">
                   <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Fee Remove</p>
-                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('feecollection.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                      <p>Fee Head</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('feecollection.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                      <p>Fee Subhead</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active">
@@ -168,8 +182,16 @@
                 <a href="#" class="nav-link active">
                   <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                   <p>Report</p>
-                  <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                  <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('ops.index')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                      <p>OPS Collection</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>

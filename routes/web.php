@@ -39,6 +39,7 @@ use App\Http\Controllers\admin\InstituteController;
 use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
+use App\Http\Controllers\dashboard\report\OpsController;
 use App\Http\Controllers\student\GeneralController;
 
 Route::get('/', [MainController::class, 'index'])->name('landingpage');
@@ -243,7 +244,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
     Route::get('/FeesManagement/feecollection/view/{id}', [FeeCollectionController::class, 'show'])->name('feecollection.view');
     Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
-
+    //report
+    Route::get('/FeesManagement/report/ops-collection', [OpsController::class, 'index'])->name('ops.index');
     ////////////////////// Fees Management End ////////////
    
 
