@@ -35,8 +35,6 @@
                         @if($payapplie->payment_state == 200)
                             <tr>
                                 <td>{{$payapplie->student_id}}</td>
-                                <td>{{$payapplie->}}</td>
-                                <td>{{$payapplie->}}</td>
                                 <td>{{$payapplie->updated_at}}</td>
                                 <td>{{$payapplie->invoice}}</td>
                                 <td>{{$payapplie->feehead->head_name}}</td>
