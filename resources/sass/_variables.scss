@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+// common
+
+* {
+   font-family: 'Noto Sans Bengali', sans-serif;
+}
 // Body
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: 'Noto Sans Bengali',
+   sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;

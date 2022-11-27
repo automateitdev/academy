@@ -23,8 +23,7 @@
                             <td>Success</td>
                             <td>
                                 <button class="btn btn-success" value="{{$payapplie->invoice}}" id="payreportpdfGenerate">
-                                Generate</button>
-                                <button class="btn btn-success">Download</button>
+                                <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
                             </td>
                         </tr>
                     @endif

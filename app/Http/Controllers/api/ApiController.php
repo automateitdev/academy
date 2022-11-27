@@ -32,6 +32,8 @@ class ApiController extends Controller
         $data = $request->data;
         $pdfname = $request->pdfname.'.pdf';
 
+        
+
         $pdf = Pdf::setOption([
             'dpi' => 150,
             'defaultFont' => 'sans-serif',

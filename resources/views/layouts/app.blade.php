@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <div id="app" style="background-color: #8BC6EC;background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);">
+    <div id="app">
         
 
         <main class="py-4">

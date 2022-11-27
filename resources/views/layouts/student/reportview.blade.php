@@ -1,6 +1,7 @@
 <style>
         @page { 
             margin:20px auto;
+            padding: 20px;
         }
 
         *{ 
@@ -42,13 +43,25 @@ ini_set('memory_limit', '1024M');
 $date = date('d/m/y');
 $i = 0;
 $data = json_decode($data, true);
+foreach ($data as $key => $value) {
+    $qrtext = "
+    Student Name: {$value['name']}
+    Student ID: {$value['student_id']}
+    Invoice ID: {$value['invoice']}
+    Total Paid Amount: {$value['total_amount']}
+    Institute: {$value['institute_name']}
+    ";            
+    break;
+}
 @endphp
 
 
-<div class="card" style="background-color:#eee">
+<div class="card" style="background-color:#eee; padding:20px; margin:20px; background-color:#F0FFF0;">
     <div class="card-header" style="text-align: center; border-bottom-width: 0.3rem; border-bottom-color: black;">
         @foreach ($data as $value)
-        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/' .$value['institute_logo']))) }}" style="position: absolute; top:40px; left:3rem; width: 150px;" alt="">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/1669289727.png'))) }}" style="position: absolute; top:40px; left:3rem; width: 120px;" alt="">
+        
+        <img src="data:image/png;base64, {{ base64_encode(QrCode::size(300)->generate($qrtext)) }}" style="position: absolute; top:40px; right:3rem; width: 120px;" alt="">
 
         <p style="font-size:20px;"><b>{{$value['institute_name']}}</b>
             <br />
@@ -59,10 +72,10 @@ $data = json_decode($data, true);
         @endphp
         @endforeach
 
-        <p style="margin-left: 600px; margin-top: -80px;text-align:right; "><img src="C:/Users/Lenovo/Desktop/laravel pages/barimage.png" style="width:100px; height:100px;"></p>
+        {{-- <p style="margin-left: 600px; margin-top: -80px;text-align:right; "><img src="C:/Users/Lenovo/Desktop/laravel pages/barimage.png" style="width:100px; height:100px;"></p> --}}
     </div>
     <div class="card-body">
-        <p style="text-align: center;"><b>Money Receipt</b></span>
+        <p style="text-align: center;"><b>Money Receipt</b>
         <p style="text-align: center;margin-top: -40px;">______</p>
 
         <table style="margin-top: 30px;">
@@ -271,8 +284,8 @@ $data = json_decode($data, true);
                     <p><b>Note:</b></p>
 
                 </td>
-                <td colspan="2" class="invtd" style="text-align: left;">
-                    <p>Total Payable</p>
+                <td colspan="2" class="invtd">
+                    <p style="text-align: right;">Total Payable</p>
 
                 </td>
                 <td class="invtd">
@@ -285,20 +298,16 @@ $data = json_decode($data, true);
                 <td colspan="3" class="invnottd" style="text-align:left; margin-left:20px;border-bottom-color: white;">
                     <p style="margin-top: -10px;">Online Fees Payment</p>
                 </td>
-                <td colspan="2" class="invtd" style="border: 1px solid black;text-align:left;">Paid Amount</td>
+                <td colspan="2" class="invtd" style="border: 1px solid black;text-align:right;">Paid Amount</td>
                 <td style="text-align: right;border: 1px solid black">1500.00</td>
             </tr>
             <tr class="invrow">
                 <td colspan="6" class="invtd" style="text-align: left;"> <b>Paid In Word:</b> One Taka Only</td>
             </tr>
-
-        </table>
-        <table style="margin-top: -10px;">
             <tr>
-                <td><label style="font-size:10px;">Powered By: Academy-Institute Management System </label></td>
-                <td><label style="font-size:10px; margin-left:50px;">Special Note: This Money Receipt was created on a software and is valid without signature and seal </label></td>
+                <td colspan="2"><label style="font-size:10px;">Powered By: Academy-Institute Management System </label></td>
+                <td colspan="4" style="text-align: right;"><label style="font-size:10px; margin-left:50px;">Special Note: This Money Receipt was created on a software and is valid without signature and seal </label></td>
             </tr>
         </table>
-
     </div>
 </div>

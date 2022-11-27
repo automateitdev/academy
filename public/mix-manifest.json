@@ -1,11 +1,11 @@
 {
-    "/js/app.js": "/js/app.js?id=29cd129b2f14e634a240ca1b38cfc3de",
-    "/js/frontend.js": "/js/frontend.js?id=b8cf352afe74e32517c3e9c9d81f06cc",
-    "/js/admin_dash.js": "/js/admin_dash.js?id=fdd71c0ca3993fe2fdfa1ea980f7b6a8",
-    "/js/student.js": "/js/student.js?id=d1c7d3f8e19c6bcc478574b2e2fb0847",
-    "/js/payment.js": "/js/payment.js?id=c143a51bd87f59325e9f3f9b51a0f418",
-    "/css/school_dashboard.css": "/css/school_dashboard.css?id=8d4dd8cc5ef01cdc54ce9a74d5035506",
+    "/js/app.js": "/js/app.js?id=eacb368f0e8d5471485251bf77210e00",
+    "/js/frontend.js": "/js/frontend.js?id=8871053c085c68d5d2840a86618429ff",
+    "/js/admin_dash.js": "/js/admin_dash.js?id=45a48fb86b3898a52074d980ca4e3cea",
+    "/js/student.js": "/js/student.js?id=31cfb8e1244d49a42344b6467a8d581c",
+    "/js/payment.js": "/js/payment.js?id=c2250359625a3212d642a1c812e166aa",
+    "/css/school_dashboard.css": "/css/school_dashboard.css?id=5265e5a17b683deaa3e2dd18bc94da54",
+    "/css/app.css": "/css/app.css?id=322cea655db55e8929a5e6d5dc25f885",
     "/css/student.css": "/css/student.css?id=d1d8435390b721a91216799cebea5617",
-    "/css/frontend.css": "/css/frontend.css?id=7fb6ad7858255de14005440a457f2acf",
-    "/css/app.css": "/css/app.css?id=03c094d97fd9e540249424e34ab522bb"
+    "/css/frontend.css": "/css/frontend.css?id=7fb6ad7858255de14005440a457f2acf"
 }
