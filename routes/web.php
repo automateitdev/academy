@@ -39,7 +39,8 @@ use App\Http\Controllers\admin\InstituteController;
 use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
-use App\Http\Controllers\dashboard\report\OpsController;
+use App\Http\Controllers\dashboard\fee_management\RemoveController;
+use App\Http\Controllers\dashboard\fee_management\OpsController;
 use App\Http\Controllers\student\GeneralController;
 
 Route::get('/', [MainController::class, 'index'])->name('landingpage');
@@ -237,8 +238,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/FeesManagement/waiver/edit/{id}', [WaiverController::class, 'edit'])->name('waiver.edit');
     Route::post('/FeesManagement/waiver/store/{id}', [WaiverController::class, 'store'])->name('waiver.store');
     Route::get('/getfeeheadForWaiver', [WaiverController::class, 'getfeeheadForWaiver']);
-
-
+    // feehead remove
+    Route::get('/FeesManagement/feehead_remove', [RemoveController::class, 'feeheadindex'])->name('fee.remove.index');
+    Route::post('/FeesManagement/feehead_remove/query', [RemoveController::class, 'feeheadsearch'])->name('feeheadsearch');
+    Route::get('/FeesManagement/feehead_remove/details/{id}', [RemoveController::class, 'feeheadremove'])->name('feeheadremove');
+    Route::post('/FeesManagement/feehead_remove/store', [RemoveController::class, 'feeheadstore'])->name('feeheadremove.store');
+   // sub head remove
+    Route::get('/FeesManagement/feesubhead_remove', [RemoveController::class, 'feesubheadindex'])->name('feesub.remove.index');
+    Route::post('/FeesManagement/feesubhead_remove/query', [RemoveController::class, 'feesubheadsearch'])->name('feesubheadsearch');
+    Route::get('/FeesManagement/feesubhead_remove/details/{id}', [RemoveController::class, 'feesubheadremove'])->name('feesubheadremove');
+    Route::post('/FeesManagement/feesubhead_remove/store', [RemoveController::class, 'feesubheadstore'])->name('feesubheadremove.store');
+    Route::get('/getsubheadforremove', [RemoveController::class, 'getsubheadforremove']);
+    //fee head reassign
+    Route::get('/FeesManagement/feehead_assign/details/{id}', [RemoveController::class, 'feeheadassign'])->name('feeheadassign');
+    Route::post('/FeesManagement/feehead_assign/store', [RemoveController::class, 'feeheadassignstore'])->name('feeheadassignstore.store');
+    //fee sub head reassign
+    Route::get('/FeesManagement/feesubhead_assign/details/{id}', [RemoveController::class, 'feesubheadassign'])->name('feesubheadassign');
+    Route::post('/FeesManagement/feesubhead_assign/store', [RemoveController::class, 'feesubheadassignstore'])->name('feesubheadassignstore.store');
 
     //Fee Collection Controller
     Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');

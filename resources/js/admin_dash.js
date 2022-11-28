@@ -400,3 +400,31 @@ $(document).on('click', '#payreportpdfGenerate', function(e){
 });
 // payment report end
 
+// fee sub head remove
+$(document).ready(function(){
+  $(document).on('change', '.feeheadForRemove', function(){
+    var feehead_id=$(this).val();
+    console.log(feehead_id);
+          var op=" ";
+          var url;
+
+    $.ajax({
+      type:'get',
+      url: '/getsubheadforremove',
+      data:{'id':feehead_id},
+      success: function(data){
+       console.log(data);
+
+       $('.feesubheadforremove').html("");
+       for(var i=0;i<data.length;i++){ 
+          op+='<option value="'+data[i].feesubhead.id+'">'+data[i].feesubhead.subhead_name+'</option>'
+        }
+       $('.feesubheadforremove').append(op);
+
+      },
+
+    });
+
+  });
+});
+// fee sub head remove end

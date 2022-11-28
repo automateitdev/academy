@@ -130,13 +130,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('feecollection.index')}}" class="nav-link active">
+                    <a href="{{route('fee.remove.index')}}" class="nav-link active">
                       <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Fee Head</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('feecollection.index')}}" class="nav-link active">
+                    <a href="{{route('feesub.remove.index')}}" class="nav-link active">
                       <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                       <p>Fee Subhead</p>
                     </a>

@@ -8,6 +8,7 @@ use App\Models\SectionAssign;
 use App\Models\Feeamount;
 use App\Models\Payapply;
 use App\Models\Waivermapping;
+use App\Models\Feeheadremove;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -25,6 +26,7 @@ trait StudentTraits
     }
     public function assign_fee($student_id, $institute_id)
     {
+        
         $students = Student::where('std_id', $student_id)->where('institute_id', $institute_id)->first();
      
         $datesetups = Datesetup::all();
@@ -35,6 +37,7 @@ trait StudentTraits
            
             // check class id is equal in student and section assign table
             foreach ($section_assigns as $section_assign) {
+                
                 // we check Student table section ID is equal in section assign ID //we get student class_id
                 if ($students->section_id == $section_assign->id) {
                     
@@ -69,7 +72,18 @@ trait StudentTraits
                                             } else {
                                                 $fine = $feeamount->fineamount;
                                             }
+                                            
+                                            // $feeheadremoves = Feeheadremove::where([
+                                            //     ['feehead_id', $datesetup->feehead_id],
+                                            //     ['student_id', $student_id],
+                                            //     ['institute_id', $institute_id]
+                                            // ])->first();
 
+                                            // if (empty($feeheadremoves)) {
+                                            //     $payment_state = 0;
+                                            // } else {
+                                            //     $payment_state = 3;
+                                            // }
 
                                             $waiver = Waivermapping::where([
                                                 ['feehead_id', $datesetup->feehead_id],

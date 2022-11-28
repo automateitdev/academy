@@ -19,7 +19,7 @@
 }
 
 .select2-container {
-  width: 70%;
+  width: 100% !important;
 }
 
 .btn-check:focus + .btn, .btn:focus, .form-control:focus {
@@ -76,6 +76,25 @@
   color: #19686d !important;
 }
 
+.rkj {
+  border: 1px solid #19686d;
+  padding: 35px;
+  padding-bottom: 65px;
+  border-radius: 6px;
+}
+.rkj p {
+  margin-top: -10px;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  color: #19686d;
+}
+
+#des {
+  text-align: center;
+  font-size: 30px;
+}
+
 .main-footer {
   text-align: center;
 }
@@ -83,8 +102,8 @@
   margin: 0;
 }
 
-.select2.select2-container.select2-container--default.select2-container--focus, .select2.select2-container.select2-container--default {
-  width: 306px !important;
+.select2-container.select2-container--default.select2-container--open {
+  z-index: 9999;
 }
 
 #app {
@@ -542,9 +561,6 @@
   font-weight: 500;
   color: #19686d;
 }
-#date_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default.select2-container--focus, #date_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default {
-  width: 236px !important;
-}
 #date_config .container .row .tab-content .rkj .date_assign_table {
   width: 100%;
   text-align: inherit;
@@ -591,9 +607,6 @@
   font-size: 20px;
   font-weight: 500;
   color: #19686d;
-}
-#waiver_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default.select2-container--focus, #waiver_config .container .row .tab-content .rkj .select2.select2-container.select2-container--default {
-  width: 236px !important;
 }
 #waiver_config .container .row .tab-content .rkj .date_assign_table {
   width: 100%;
@@ -657,10 +670,6 @@
   z-index: 9999;
 }
 
-.select2-container.select2-container--default.select2-container--open {
-  z-index: 9999;
-}
-
 #quick_collection .container .row .upi {
   margin-top: 50px;
 }
@@ -709,9 +718,6 @@
   font-size: 20px;
   font-weight: 500;
   color: #19686d;
-}
-#examstartup .container .row .tab-content .rkj .select2.select2-container.select2-container--default.select2-container--focus, #examstartup .container .row .tab-content .rkj .select2.select2-container.select2-container--default {
-  width: 236px !important;
 }
 #examstartup .container .row .tab-content .rkj .date_assign_table {
   width: 100%;
