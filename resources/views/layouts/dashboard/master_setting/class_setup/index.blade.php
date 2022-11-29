@@ -88,6 +88,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php 
+                                        $i =1;
+                                        @endphp
                                         @foreach($sectionassigns as $section)
                                         @if($section->institute_id == Auth::user()->institute_id)
                                         <tr>

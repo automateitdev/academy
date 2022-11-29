@@ -26,7 +26,7 @@
                             <div class="col-md-7 offset-md-2">
                                 <div class="rkj">
                                     <p>Waiver Assign Form</p>
-                                    <form action="{{route('waiver.search')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('waiver.search')}}" method="GET" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-6">
@@ -143,6 +143,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                {{$students->withQueryString()->links('pagination::bootstrap-4')}}
                                 @else
                                 <p id="des">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
                                  @endif

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\SectionAssign;
 use App\Models\Startup;
 use App\Models\Student;
+use App\Models\GroupAssign;
 use App\Models\Quickcollection;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +28,20 @@ class FeeCollectionController extends Controller
         compact('users','sectionAssignes','startups'));
     }
 
+    public function quicksearch(Request $request)
+    {
+        $this->validate($request,[
+            'section_id' => 'required',
+        ]);
+        $users = User::all();
+        $startups = Startup::all();
+        $sectionAssignes = SectionAssign::all();
+        $groupassigns = GroupAssign::all();
+        $students = Student::where('section_id','LIKE','%'.$request->section_id.'%')
+                    ->paginate(100);
+        return view('layouts.dashboard.fee_management.feecollection.quick.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns','students'));
+   
+    }
     /**
      * Show the form for creating a new resource.
      *

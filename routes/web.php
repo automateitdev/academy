@@ -233,7 +233,7 @@ Route::middleware(['auth'])->group(function () {
 
     //waiver config
     Route::get('/FeesManagement/waiver/index', [WaiverController::class, 'index'])->name('waiver.index');
-    Route::post('/FeesManagement/waiver/index/query', [WaiverController::class, 'search'])->name('waiver.search');
+    Route::get('/FeesManagement/waiver/index/query', [WaiverController::class, 'search'])->name('waiver.search');
     Route::get('/getSectionForWaiver', [WaiverController::class, 'getSectionForWaiver']);
     Route::get('/FeesManagement/waiver/edit/{id}', [WaiverController::class, 'edit'])->name('waiver.edit');
     Route::post('/FeesManagement/waiver/store/{id}', [WaiverController::class, 'store'])->name('waiver.store');
@@ -257,7 +257,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/FeesManagement/feesubhead_assign/store', [RemoveController::class, 'feesubheadassignstore'])->name('feesubheadassignstore.store');
 
     //Fee Collection Controller
-    Route::get('/FeesManagement/feecollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
+    Route::get('/FeesManagement/feecollection/quickcollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
+    Route::get('/FeesManagement/feecollection/quickcollection/query', [FeeCollectionController::class, 'quicksearch'])->name('quicksearch');
     Route::get('/FeesManagement/feecollection/view/{id}', [FeeCollectionController::class, 'show'])->name('feecollection.view');
     Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
     //report

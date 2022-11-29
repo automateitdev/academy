@@ -55,7 +55,7 @@ class WaiverController extends Controller
                     ->where('group_id','LIKE','%'.$request->group_id.'%')
                     ->where('academic_year_id','LIKE','%'.$request->academic_year_id.'%')
                     ->where('std_category_id','LIKE','%'.$request->stdcategory_id.'%')
-                    ->paginate(120);
+                    ->paginate(100);
         return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns','students'));
     }
     /**
