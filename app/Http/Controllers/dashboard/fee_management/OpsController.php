@@ -24,13 +24,12 @@ class OpsController extends Controller
     public function index()
     {
         $users  = User::all();
-        $payapplies = Payapply::all();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $startupsubcategories = StartupSubcategory::all();
         $sectionassigns = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
         $students = Student::where('institute_id', Auth::user()->institute_id)->get();
         return view('layouts/dashboard/fee_management/report/ops', 
-            compact('users', 'payapplies','students','sectionassigns', 'startups', 'startupsubcategories'));
+            compact('users','students','sectionassigns', 'startups', 'startupsubcategories'));
     }
 
     public function search(Request $request)

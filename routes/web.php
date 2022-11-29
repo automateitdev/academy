@@ -240,12 +240,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/getfeeheadForWaiver', [WaiverController::class, 'getfeeheadForWaiver']);
     // feehead remove
     Route::get('/FeesManagement/feehead_remove', [RemoveController::class, 'feeheadindex'])->name('fee.remove.index');
-    Route::post('/FeesManagement/feehead_remove/query', [RemoveController::class, 'feeheadsearch'])->name('feeheadsearch');
+    Route::get('/FeesManagement/feehead_remove/query', [RemoveController::class, 'feeheadsearch'])->name('feeheadsearch');
     Route::get('/FeesManagement/feehead_remove/details/{id}', [RemoveController::class, 'feeheadremove'])->name('feeheadremove');
     Route::post('/FeesManagement/feehead_remove/store', [RemoveController::class, 'feeheadstore'])->name('feeheadremove.store');
    // sub head remove
     Route::get('/FeesManagement/feesubhead_remove', [RemoveController::class, 'feesubheadindex'])->name('feesub.remove.index');
-    Route::post('/FeesManagement/feesubhead_remove/query', [RemoveController::class, 'feesubheadsearch'])->name('feesubheadsearch');
+    Route::get('/FeesManagement/feesubhead_remove/query', [RemoveController::class, 'feesubheadsearch'])->name('feesubheadsearch');
     Route::get('/FeesManagement/feesubhead_remove/details/{id}', [RemoveController::class, 'feesubheadremove'])->name('feesubheadremove');
     Route::post('/FeesManagement/feesubhead_remove/store', [RemoveController::class, 'feesubheadstore'])->name('feesubheadremove.store');
     Route::get('/getsubheadforremove', [RemoveController::class, 'getsubheadforremove']);

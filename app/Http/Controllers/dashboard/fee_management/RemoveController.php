@@ -44,7 +44,7 @@ class RemoveController extends Controller
         $sectionAssignes = SectionAssign::all();
         $students = Student::where('section_id', 'LIKE', '%' . $request->section_id . '%')
             ->where('academic_year_id', 'LIKE', '%' . $request->academic_year_id . '%')
-            ->paginate(120);
+            ->paginate(100);
         return view('layouts/dashboard/fee_management/remove/feehead/index', compact('users', 'startups', 'sectionAssignes', 'students'));
     }
 
@@ -147,7 +147,7 @@ class RemoveController extends Controller
         $sectionAssignes = SectionAssign::all();
         $students = Student::where('section_id', 'LIKE', '%' . $request->section_id . '%')
             ->where('academic_year_id', 'LIKE', '%' . $request->academic_year_id . '%')
-            ->paginate(120);
+            ->paginate(100);
         return view('layouts/dashboard/fee_management/remove/feesubhead/index', compact('users', 'startups', 'sectionAssignes', 'students'));
     }
 

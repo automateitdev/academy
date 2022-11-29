@@ -33,7 +33,7 @@
                             </div>
                             @endif
                             <div class="rkj">
-                                <form action="{{route('feesubheadsearch')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('feesubheadsearch')}}" method="GET" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -121,6 +121,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{$students->withQueryString()->links('pagination::bootstrap-4')}}
                             @else
                             <p id="des">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
                             @endif
