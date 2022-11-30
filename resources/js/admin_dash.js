@@ -404,7 +404,6 @@ $(document).on('click', '#payreportpdfGenerate', function(e){
 $(document).ready(function(){
   $(document).on('change', '.feeheadForRemove', function(){
     var feehead_id=$(this).val();
-    console.log(feehead_id);
           var op=" ";
           var url;
 
@@ -413,7 +412,6 @@ $(document).ready(function(){
       url: '/getsubheadforremove',
       data:{'id':feehead_id},
       success: function(data){
-       console.log(data);
 
        $('.feesubheadforremove').html("");
        for(var i=0;i<data.length;i++){ 
@@ -428,3 +426,30 @@ $(document).ready(function(){
   });
 });
 // fee sub head remove end
+
+//subject assign
+let i = 1;
+$('form').on('click', '.addsubjecttable', function(){
+
+  $('select.subject_name').val('');
+  
+
+  let $newRow = $('div.add:first').clone();
+
+  // $('.selectall').each(function(){
+    // $('.selectall'+i).select2();
+  // });
+  // $('#selectall').each(function(index,event){
+  //   $('#selectall'+index).select2();
+  // });
+
+  
+  $newRow.find('select.subject_name').val('');
+  $newRow.find('select.type').val('');
+  $newRow.find('input.serial').val('');
+  $newRow.find('input.merge').val('');
+
+
+  $('.subject_table').append($newRow);
+});
+// subject assign end

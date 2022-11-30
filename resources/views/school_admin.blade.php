@@ -164,6 +164,10 @@
       $(document).ready(function() {
         $('.single').select2();
       });
+
+      $(document).ready(function() {
+        $('.selectall').select2();
+      });
   </script>
 </body>
 </html>

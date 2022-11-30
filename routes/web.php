@@ -41,6 +41,7 @@ use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
 use App\Http\Controllers\dashboard\fee_management\RemoveController;
 use App\Http\Controllers\dashboard\fee_management\OpsController;
+use App\Http\Controllers\dashboard\master\SubjectController;
 use App\Http\Controllers\student\GeneralController;
 
 Route::get('/', [MainController::class, 'index'])->name('landingpage');
@@ -178,6 +179,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/MasterSetting/Signature', [SignatureController::class, 'index'])->name('signature.index');
     Route::post('/MasterSetting/Signature/store', [SignatureController::class, 'store'])->name('signature.store');
     Route::delete('/MasterSetting/Signature/delete/{id}', [SignatureController::class, 'destroy'])->name('signature.delete');
+
+    //Subject config
+    Route::get('/MasterSetting/Subject_config', [SubjectController::class, 'index'])->name('subject.index');
+    Route::post('/MasterSetting/Subjectadd', [SubjectController::class, 'subjectadd'])->name('subjectadd');
 
     //master setting end
 

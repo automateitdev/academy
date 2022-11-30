@@ -8,8 +8,6 @@
     <title>Student Portal</title>
 </head>
 <body onload='document.forms[0].submit()'>
-<!-- <form name='PostForm' method='GET' action='confirmation/?session_token={{$receive_token}}&status={{$status}}'/'>
-@csrf
- </textarea></form> -->
+
 </body>
 </html>

@@ -136,17 +136,14 @@ class CopyController extends Controller
                 }]
                 }';
 
-            // dd($data_two);
         //API 2
         $res_two = $client->request(
             'POST',
             'https://spgapi.sblesheba.com:6314/api/v2/SpgService/CreatePaymentRequest',
             ['headers' => $headers, 'body' => $data_two]
         );
-// dd($res_two);
         $sessiontoken = json_decode($res_two->getBody(), true);
         
-        // dd($sessiontoken);
 
         return view('layouts.student.spg_paymentform', compact('sessiontoken'));
     }
