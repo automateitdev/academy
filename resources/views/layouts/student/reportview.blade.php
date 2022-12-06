@@ -59,7 +59,7 @@ foreach ($data as $key => $value) {
 <div class="card" style="background-color:#eee; padding:20px; margin:20px; background-color:#F0FFF0;">
     <div class="card-header" style="text-align: center; border-bottom-width: 0.3rem; border-bottom-color: black;">
         @foreach ($data as $value)
-        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/1669289727.png'))) }}" style="position: absolute; top:40px; left:3rem; width: 120px;" alt="">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/'.$value['institute_logo']))) }}" style="position: absolute; top:40px; left:3rem; width: 120px;" alt="">
         
         <img src="data:image/png;base64, {{ base64_encode(QrCode::size(300)->generate($qrtext)) }}" style="position: absolute; top:40px; right:3rem; width: 120px;" alt="">
 

@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="section_id" class="form-label">Section</label>
+                                            <label for="section_id" class="form-label">Class-Shift-Section</label>
                                             <select class="form-control single" name="section_id">
                                                 <option value=" ">Choose One</option>
                                                 @foreach($sectionAssignes as $item)
@@ -83,7 +83,7 @@
                                                             @foreach($startup_data2 as $strData2)
                                                                 @foreach($startup_data3 as $strData3)
                                                                 <option value="{{$item->id}}">
-                                                                    {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
+                                                                    {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}
                                                                 </option>
                                                                 @endforeach
                                                             @endforeach

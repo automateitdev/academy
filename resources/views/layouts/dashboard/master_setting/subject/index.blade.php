@@ -32,7 +32,8 @@
             {{ session()->get('error') }}
         </div>
         @endif
-        <form action="">
+        <form action="{{route('subjectadd.store')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="subject_table">
                 <div class="row mt-3">
                     <div class="col-md-6 d-flex" style="margin: 0 auto;">
@@ -72,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5" style="margin-left:100px;">
+                <div class="row mt-5 text-center">
                     <div class="col">
                         <div class="mb-3">
                             <label for="" class="form-label">Subject</label>
@@ -99,9 +100,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row add mb-3" style="margin-left:30px;">
+                <div class="row add mb-3">
                     <div class="col">
-                        <select name="subject_id" class="selectall">
+                        <select name="subject_id[]" class="selectall">
                             <option value="">Choose Subject</option>
                             @foreach($subjects as $item)
                             <option value="{{$item->id}}">{{$item->name}}</option>
@@ -109,7 +110,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <select name="type" id="" class="single">
+                        <select name="type[]" id="" class="selectall">
                             <option value="">Choose Type</option>
                             @foreach($subjecttypes as $subjecttype)
                             <option value="{{$subjecttype->id}}">{{$subjecttype->name}}</option>
@@ -117,12 +118,12 @@
                         </select>
                     </div>
                     <div class="col">
-                        <input type="number" name="serial">
+                        <input type="number" class="form-control" name="serial[]">
                     </div>
                     <div class="col">
-                        <input type="number" name="merge">
+                        <input type="number" class="form-control" name="merge[]">
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <button class="btn btn-danger">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
@@ -133,7 +134,7 @@
             </div>
             <div class="btn-content mt-5">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
-                <a href="javascript:void(0)" class="addsubjecttable btn btn-primary" style="float:inline-end; padding:7px; border-radius:4px;"><i class="fas fa-plus-circle"></i> Add Subject</a>
+                <a href="javascript:void(0)" class="addsubjecttable btn btn-dark" style="padding:7px; border-radius:4px;"><i class="fas fa-plus-circle"></i> Add Subject</a>
             </div>
         </form>
     </div>

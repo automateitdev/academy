@@ -7,12 +7,14 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="jkuy">
-
                     <div class="row">
                         <div class="col-md-3">
-                            
-                            <img src="" alt="" width="100px" height="100px">
-                           
+                            @php
+                            $jk = DB::table('basics')->select('logo')->where('institute_id', Auth::user()->institute_id)->first();
+                            @endphp
+                            @if(!empty($jk))
+                            <img src="{{asset('images/logo/'.$jk->logo)}}" alt="" width="100px" height="100px">
+                            @endif
                         </div>
                         <div class="col-md-9">
                             @foreach($users as $user)

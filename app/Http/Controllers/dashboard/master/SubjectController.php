@@ -9,10 +9,14 @@ use App\Models\Startup;
 use App\Models\Subjecttype;
 use App\Models\Subject;
 use App\Models\Subjectmap;
+use App\Models\SectionAssign;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\StudentTraits;
 
 class SubjectController extends Controller
 {
+    use StudentTraits;
     /**
      * Display a listing of the resource.
      *
@@ -64,7 +68,6 @@ class SubjectController extends Controller
             'serial' => 'required',
             'merge' => 'nullable',
         ]);
-
         foreach($request->subject_id as $key=>$subject_id)
         {
             $input = new Subjectmap();
@@ -75,15 +78,14 @@ class SubjectController extends Controller
             $input->type = $request->type[$key];
             $input->serial = $request->serial[$key];
             $input->merge = $request->merge[$key];
-
+            
             if($input->save())
             {
-                return redirect(route('subject.index'))->with('success', 'Subject Configure Success.');
+                $this->assign_subject(Auth::user()->institute_id, null, $request->class_id, $request->group_id);
             }
-            else{
-                return redirect(route('subject.index'))->with('success', 'Something wrong, try again.');
-            }
+            
         }
+        return redirect(route('subject.index'))->with('success', 'Subject Configure Success.');
     }
 
     /**
@@ -115,6 +117,8 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
+
     public function update(Request $request, $id)
     {
         //
@@ -129,5 +133,45 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    public function fourthsubject()
+    {
+        $users = User::all();
+        $startups = Startup::all();
+        $subjecttypes = Subjecttype::all();
+        $subjects = Subject::all();
+        $sectionAssignes = SectionAssign::all();
+        return view('layouts/dashboard/master_setting/subject/foursubject', 
+        compact('users', 'startups', 'subjecttypes', 'subjects', 'sectionAssignes'));
+    }
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'group_id' => 'required',
+            'section_id' => 'required',
+        ]);
+
+        $users = User::all();
+        $startups = Startup::all();
+        $sectionAssignes = SectionAssign::all();
+        $students = Student::where('section_id', 'LIKE', '%' . $request->section_id . '%')
+            ->where('group_id', 'LIKE', '%' . $request->group_id . '%')
+            ->paginate(50);
+        return view('layouts/dashboard/master_setting/subject/foursubject', compact('users', 'startups', 'sectionAssignes', 'students'));
+    }
+    public function singleedit($id)
+    {
+        $users = User::all();
+        $students = Student::find($id);
+        return view('layouts/dashboard/master_setting/subject/singleupdate', compact('students', 'users'));
+    }
+    public function multipleedit($id)
+    {
+        $users = User::all();
+        $students = Student::find($id);
+        return view('layouts/dashboard/master_setting/subject/multipleupdate', compact('students', 'users'));
     }
 }

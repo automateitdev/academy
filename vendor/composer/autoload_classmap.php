@@ -105,6 +105,7 @@ return array(
     'App\\Models\\StartupCategory' => $baseDir . '/app/Models/StartupCategory.php',
     'App\\Models\\StartupSubcategory' => $baseDir . '/app/Models/StartupSubcategory.php',
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
+    'App\\Models\\StudentSubjectMap' => $baseDir . '/app/Models/StudentSubjectMap.php',
     'App\\Models\\Subject' => $baseDir . '/app/Models/Subject.php',
     'App\\Models\\Subjectmap' => $baseDir . '/app/Models/Subjectmap.php',
     'App\\Models\\Subjecttype' => $baseDir . '/app/Models/Subjecttype.php',

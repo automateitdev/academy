@@ -57,7 +57,9 @@ class StudentImport implements ToModel, WithHeadingRow
             
             $gender = Gender::where('g_name', $rows['gender'])->first();
             $religion = Religion::where('r_name', $rows['religion'])->first();
-            $student_id = Student::distinct()->where('std_id', $rows['student_id'])->first();
+            $student_id = Student::distinct()->where('std_id', $rows['student_id'])
+                                            ->where('institute_id', $this->institute_id)
+                                            ->first();
             if (empty($student_id)) {
             return new Student([
                 'std_id' => $rows['student_id'],
@@ -78,8 +80,6 @@ class StudentImport implements ToModel, WithHeadingRow
             
              }
             else{
-                // Session::put('message', 'something something');
-                // dd("something");
                 redirect(route('enrollment.excel.index'))->with('error', 'Duplicate Entry');
             }
         }

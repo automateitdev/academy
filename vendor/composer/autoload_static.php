@@ -692,6 +692,7 @@ class ComposerStaticInit24d18988517d99d30abef7167ebb39dc
         'App\\Models\\StartupCategory' => __DIR__ . '/../..' . '/app/Models/StartupCategory.php',
         'App\\Models\\StartupSubcategory' => __DIR__ . '/../..' . '/app/Models/StartupSubcategory.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
+        'App\\Models\\StudentSubjectMap' => __DIR__ . '/../..' . '/app/Models/StudentSubjectMap.php',
         'App\\Models\\Subject' => __DIR__ . '/../..' . '/app/Models/Subject.php',
         'App\\Models\\Subjectmap' => __DIR__ . '/../..' . '/app/Models/Subjectmap.php',
         'App\\Models\\Subjecttype' => __DIR__ . '/../..' . '/app/Models/Subjecttype.php',

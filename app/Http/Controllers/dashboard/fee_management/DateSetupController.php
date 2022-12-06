@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SectionAssign;
 use App\Models\Student;
 use App\Http\Traits\StudentTraits;
+set_time_limit(120);
 
 class DateSetupController extends Controller
 {
     use StudentTraits;
+
     /**
      * Display a listing of the resource.
      *

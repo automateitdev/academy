@@ -183,6 +183,13 @@ Route::middleware(['auth'])->group(function () {
     //Subject config
     Route::get('/MasterSetting/Subject_config', [SubjectController::class, 'index'])->name('subject.index');
     Route::post('/MasterSetting/Subjectadd', [SubjectController::class, 'subjectadd'])->name('subjectadd');
+    Route::post('/MasterSetting/Subject_config/post', [SubjectController::class, 'store'])->name('subjectadd.store');
+
+    Route::get('/MasterSetting/4th_Subject_config', [SubjectController::class, 'fourthsubject'])->name('fourthsubject.index');
+    Route::get('/MasterSetting/4th_Subject_config/query', [SubjectController::class, 'search'])->name('fourthsubject.search');
+    Route::get('/MasterSetting/4th_Subject_config/single_subject/{id}', [SubjectController::class, 'singleedit'])->name('fourthsubject.single.edit');
+    Route::get('/MasterSetting/4th_Subject_config/multiple_subject/{id}', [SubjectController::class, ' multipleedit'])->name('fourthsubject.multiple.edit');
+   
 
     //master setting end
 

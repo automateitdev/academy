@@ -432,24 +432,21 @@ let i = 1;
 $('form').on('click', '.addsubjecttable', function(){
 
   $('select.subject_name').val('');
+  $('.selectall').select2("destroy").end();
   
-
   let $newRow = $('div.add:first').clone();
-
-  // $('.selectall').each(function(){
-    // $('.selectall'+i).select2();
-  // });
-  // $('#selectall').each(function(index,event){
-  //   $('#selectall'+index).select2();
-  // });
-
+  
+  // $('.subject_table').append(clone)
+  // $('.selectall').select2()
   
   $newRow.find('select.subject_name').val('');
   $newRow.find('select.type').val('');
   $newRow.find('input.serial').val('');
   $newRow.find('input.merge').val('');
 
-
   $('.subject_table').append($newRow);
+  $('.selectall').select2()
+  
 });
+
 // subject assign end
