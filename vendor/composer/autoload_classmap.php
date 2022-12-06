@@ -75,6 +75,8 @@ return array(
     'App\\Models\\Datesetup' => $baseDir . '/app/Models/Datesetup.php',
     'App\\Models\\Designation' => $baseDir . '/app/Models/Designation.php',
     'App\\Models\\Domainlist' => $baseDir . '/app/Models/Domainlist.php',
+    'App\\Models\\Examcode' => $baseDir . '/app/Models/Examcode.php',
+    'App\\Models\\Examgrade' => $baseDir . '/app/Models/Examgrade.php',
     'App\\Models\\Examstartup' => $baseDir . '/app/Models/Examstartup.php',
     'App\\Models\\FeeFineMaping' => $baseDir . '/app/Models/FeeFineMaping.php',
     'App\\Models\\FeeHead' => $baseDir . '/app/Models/FeeHead.php',

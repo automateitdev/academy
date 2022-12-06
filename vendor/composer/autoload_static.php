@@ -662,6 +662,8 @@ class ComposerStaticInit24d18988517d99d30abef7167ebb39dc
         'App\\Models\\Datesetup' => __DIR__ . '/../..' . '/app/Models/Datesetup.php',
         'App\\Models\\Designation' => __DIR__ . '/../..' . '/app/Models/Designation.php',
         'App\\Models\\Domainlist' => __DIR__ . '/../..' . '/app/Models/Domainlist.php',
+        'App\\Models\\Examcode' => __DIR__ . '/../..' . '/app/Models/Examcode.php',
+        'App\\Models\\Examgrade' => __DIR__ . '/../..' . '/app/Models/Examgrade.php',
         'App\\Models\\Examstartup' => __DIR__ . '/../..' . '/app/Models/Examstartup.php',
         'App\\Models\\FeeFineMaping' => __DIR__ . '/../..' . '/app/Models/FeeFineMaping.php',
         'App\\Models\\FeeHead' => __DIR__ . '/../..' . '/app/Models/FeeHead.php',

@@ -229,7 +229,7 @@ class RemoveController extends Controller
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1062) {
                 // houston, we have a duplicate entry problem
-                return redirect(route('feesub.remove.index'))->with('message', 'Data Upload Successfully');
+                return redirect(route('feesub.remove.index'))->with('message', 'You have a duplicate entry');
             }
         }
     }
