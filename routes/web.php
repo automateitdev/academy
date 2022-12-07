@@ -283,6 +283,12 @@ Route::middleware(['auth'])->group(function () {
     /////////////////////// Exam Management Start//////////////////
     Route::get('/exam-management/exam-startup', [ExamStartupController::class, 'index'])->name('examstartup');
     Route::post('/exam-management/exam-startup/store', [ExamStartupController::class, 'store'])->name('examstartup.store');
+    Route::post('/exam-management/exam-code/store', [ExamStartupController::class, 'examcode_store'])->name('examcode.store');
+    Route::post('/exam-management/exam-code/update', [ExamStartupController::class, 'examcode_update'])->name('examcode.update');
+    Route::post('/exam-management/exam-grade/store', [ExamStartupController::class, 'examgrade_store'])->name('examgrade.store');
+    Route::post('/exam-management/exam-grade/update', [ExamStartupController::class, 'examgrade_update'])->name('examgrade.update');
+
+
 
     /////////////////////// Exam Management End//////////////////
 

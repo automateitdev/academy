@@ -8,17 +8,27 @@ use App\Models\User;
 use App\Models\Startup;
 use App\Models\Meritprocess;
 use App\Models\Examstartup;
+use App\Models\Examcode;
+use App\Models\Examgrade;
+use App\Models\GlobalExamCode;
+use App\Models\GlobalGrade;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class ExamStartupController extends Controller
 {
     public function index()
     {
         $users = User::all();
-        $startups = Startup::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $meritprocesses = Meritprocess::all();
-        return view('layouts.dashboard.exam_management.settings.examstartup.index', compact('users','startups','meritprocesses'));
+        $examcodes = Examcode::where('institute_id', Auth::user()->institute_id)->get();
+        $examgrades = Examgrade::where('institute_id', Auth::user()->institute_id)->get();
+        $globalexamcodes = GlobalExamCode::all();
+        $globalgrades = GlobalGrade::all();
+        return view('layouts.dashboard.exam_management.settings.examstartup.index', 
+            compact('users','startups','meritprocesses','examcodes','examgrades','globalexamcodes','globalgrades'));
     }
 
     public function store(Request $request)
@@ -51,4 +61,75 @@ class ExamStartupController extends Controller
               }
             
     }
+
+    // exam code start
+    public function examcode_store(Request $request)
+    {
+        // dd($request);
+        $this->validate($request,[
+            'class_id'=> 'required',
+            'globalcode'=> 'required'
+        ]);
+
+        foreach ($request->globalcode as $key => $globalcode) {
+           
+            $input = new Examcode();
+            $input->institute_id = Auth::user()->institute_id;
+            $input->class_id = $request->class_id;
+            $input->title = $globalcode;
+            $input->save();
+        }
+        return redirect(route('examstartup'))->with('message', 'Data Upload Successfully');
+    }
+
+    public function examcode_update(Request $request){
+        // dd($request);
+       $exampair =  array_combine($request->examcode_id ,$request->title);
+       foreach($exampair as $key=>$value)
+       {
+            DB::table('examcodes')
+                    ->where('id',$key)
+                    ->update(['title' => $value]);
+
+       }
+       return redirect(route('examstartup'))->with('message', 'Data Update Successfully');
+    }
+    // exam code end
+
+    // exam grade
+    public function examgrade_store(Request $request)
+    {
+       $grades = implode(',',$request->grade);
+   
+       $this->validate($request,[
+        'class_id'=> 'required',
+        'grade'=> 'required'
+        ]);
+
+            $input = new Examgrade();
+            $input->institute_id = Auth::user()->institute_id;
+            $input->class_id = $request->class_id;
+            $input->grade = $grades;
+            $input->save();
+
+        return redirect(route('examstartup'))->with('message', 'Data Upload Successfully');
+    }
+
+    public function examgrade_update(Request $request)
+    {
+       $grades = array_combine($request->grade_key, $request->grade_value);
+    
+       $output = implode(', ', array_map(
+        function ($v, $k) { return sprintf("%s:%s", $k, $v); },
+        $grades,
+        array_keys($grades)
+        ));
+                   
+        DB::table('examgrades')
+        ->where('id',$request->examgrades_id)
+        ->update(['grade' => $output]);
+        return redirect(route('examstartup'))->with('message', 'Data Update Successfully');
+    }
+    // exam grade
+
 }

@@ -15,10 +15,9 @@ class CreateExamgradesTable extends Migration
     {
         Schema::create('examgrades', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('institute_id');
+            $table->string('institute_id');
             $table->bigInteger('class_id');
             $table->string('grade');
-            $table->string('grade_range');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class CreateDatesetupsTable extends Migration
     {
         Schema::create('datesetups', function (Blueprint $table) {
             $table->increments('id');
+            $table->unique(array('institute_id', 'academic_year_id', 'class_id', 'feehead_id', 'feesubhead_id'), 'feehead_combination');
             $table->string('institute_id');
             $table->bigInteger('academic_year_id');
             $table->bigInteger('class_id');

@@ -32,6 +32,11 @@
                                 {{ session()->get('message') }}
                             </div>
                             @endif
+                            @if(session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                            @endif
                             <div class="rkj">
                                 <form action="{{route('feeheadsearch')}}" method="GET" enctype="multipart/form-data">
                                     @csrf

@@ -18,4 +18,12 @@ class Examcode extends Model
     {
         return $this->belongsTo(Examstartup::class);
     }
+    public function startup()
+    {
+        return $this->belongsTo(Startup::class);
+    }
+    public function startupSubcategory()
+    {
+        return $this->belongsTo(startupSubcategory::class);
+    }
 }
