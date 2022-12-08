@@ -8,7 +8,7 @@
                 <div class="col">
                     <h2 class="mb-25">
                         <a href="#"> Edit Basic Configuration</a> 
-                        <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#basicsModal">+ Add Information</button>
+                        <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#basicsModal">+ Add Information</button> -->
                     </h2>
                 </div>
             </div>
@@ -116,7 +116,6 @@
                         </div>
                         <div class="col-sm-6 col-md-6">
                             @foreach($basics as $basic)
-                                @if($basic->institute_id == Auth::user()->institute_id)
                                 <form action="#" method="POST" enctype="multipart/form-data">
                                     <div class="row right">
                                         <div class="col-sm-4 col-md-4">
@@ -201,7 +200,6 @@
                                         Edit
                                     </a>
                                 </form>
-                                @endif
                             @endforeach
                         </div>
                     </div>

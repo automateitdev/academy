@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Basic;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\File\File;
-// use SebastianBergmann\CodeCoverage\Node\File;
 use Illuminate\Support\Facades\Storage;
 
 class BasicSetupController extends Controller
@@ -19,7 +19,7 @@ class BasicSetupController extends Controller
      */
     public function index()
     {
-        $basics = Basic::all();
+        $basics = Basic::where('institute_id', Auth::user()->institute_id)->get();
         $users = User::all();
         return view('layouts.dashboard.master_setting.basic.index', compact('basics','users'));
     }
