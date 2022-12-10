@@ -151,7 +151,6 @@
                                             <tr>
                                                 <th>Class</th>
                                                 <th>Exam Code Title</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -303,7 +302,7 @@
                                                     </td>
                                                     <td>
                                                     @foreach($end_array as $key=>$value)
-                                                    <input type="text" value="{{$value}}" name="grade_value[]" placeholder="80-100">
+                                                    <input type="text" onkeypress="return /[0-9,-]/i.test(event.key)" value="{{$value}}" name="grade_value[]" placeholder="80-100">
                                                     @endforeach
                                                     </td>
                                                 </tr>

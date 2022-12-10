@@ -39,8 +39,10 @@ use App\Http\Controllers\admin\InstituteController;
 use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
+use App\Http\Controllers\dashboard\examManagement\MarkConfigController;
 use App\Http\Controllers\dashboard\fee_management\RemoveController;
 use App\Http\Controllers\dashboard\fee_management\OpsController;
+use App\Http\Controllers\dashboard\frontend\AboutInstituteController;
 use App\Http\Controllers\dashboard\master\SubjectController;
 use App\Http\Controllers\student\GeneralController;
 
@@ -64,7 +66,7 @@ Route::get('/departments', [MainController::class, 'getDepartments'])->name('dep
 Route::get('/department/{name}', [MainController::class, 'getEachDepartment'])->name('department');
 Route::get('/sobornojointy', [MainController::class, 'corner'])->name('corner');
 
-
+//menu
 Route::get('/getSubCat', [MainController::class, 'getSubCat']);
 Route::get('/about/{subcat_link}/{id}', [MainController::class, 'allAbout']);
 Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'administration']);
@@ -73,6 +75,8 @@ Route::get('/administration/{subcat_link}/{id}', [MainController::class, 'admini
 Route::get('/all/notice', [NoticeViewController::class, 'index'])->name('web.notice');
 Route::get('/all/notice/view/{id}', [NoticeViewController::class, 'show'])->name('web.notice.view');
 Route::get('/all/notice/download/{id}', [NoticeViewController::class, 'download'])->name('web.notice.download');
+//about institute
+
 
 // Website View end
 
@@ -151,6 +155,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/WebsiteManagement/notice', [NoticeController::class, 'index'])->name('notice.index');
     Route::post('/WebsiteManagement/notice/store', [NoticeController::class, 'store'])->name('notice.store');
     Route::delete('/WebsiteManagement/notice/{id}',[NoticeController::class,'destroy'])->name('notice.delete');
+    //about institute
+    Route::get('/WebsiteManagement/about_institute', [AboutInstituteController::class, 'index'])->name('aboutinstitute.index');
+    Route::post('/WebsiteManagement/about_institute/store', [AboutInstituteController::class, 'store'])->name('aboutinstitute.store');
+    Route::get('/WebsiteManagement/about_institute/edit/{id}', [AboutInstituteController::class, 'edit'])->name('aboutinstitute.edit');
+    Route::post('/WebsiteManagement/about_institute/update/{id}', [AboutInstituteController::class, 'update'])->name('aboutinstitute.update');
 
     // ////////////////////////Website Management end /////////////////////////////
 
@@ -287,7 +296,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/exam-management/exam-code/update', [ExamStartupController::class, 'examcode_update'])->name('examcode.update');
     Route::post('/exam-management/exam-grade/store', [ExamStartupController::class, 'examgrade_store'])->name('examgrade.store');
     Route::post('/exam-management/exam-grade/update', [ExamStartupController::class, 'examgrade_update'])->name('examgrade.update');
-
+    //mark config
+    Route::get('/exam-management/Mark_config', [MarkConfigController::class, 'index'])->name('markconfig');
+    Route::get('/exam-management/Mark_config/query', [MarkConfigController::class, 'search'])->name('markconfig.search');
+    Route::post('/exam-management/Mark_config/store', [MarkConfigController::class, 'store'])->name('markconfig.store');
 
 
     /////////////////////// Exam Management End//////////////////

@@ -12,13 +12,11 @@ class Examstartup extends Model
         'institute_id',
         'class_id',
         'exam_id',
-        'merit_id',
-        'examcode_id'
+        'merit_id'
     ];
-
-    public function exam_codes()
+    public function startup()
     {
-        return $this->hasMany(Examcode::class, 'examcode_id');
+        return $this->belongsTo(Startup::class, 'exam_id', 'id');
     }
 
 }

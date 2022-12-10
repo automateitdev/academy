@@ -428,7 +428,7 @@ $(document).ready(function(){
 // fee sub head remove end
 
 //subject assign
-let i = 1;
+
 $('form').on('click', '.addsubjecttable', function(){
 
   $('select.subject_name').val('');
@@ -436,8 +436,6 @@ $('form').on('click', '.addsubjecttable', function(){
   
   let $newRow = $('div.add:first').clone();
   
-  // $('.subject_table').append(clone)
-  // $('.selectall').select2()
   
   $newRow.find('select.subject_name').val('');
   $newRow.find('select.type').val('');
@@ -450,4 +448,23 @@ $('form').on('click', '.addsubjecttable', function(){
 });
 
 // subject assign end
+
+// mark config
+$('form').on('click', '.addmarkconfig', function(){
+
+  $('.selectall').select2("destroy").end();
+  
+  let $newRow = $('div.add:first').clone();
+  
+  
+  $newRow.find('select.examcode_id').val('');
+  $newRow.find('input.total_marks').val('');
+  $newRow.find('input.pass_mark').val('');
+  $newRow.find('input.acceptance').val('');
+
+  $('.markconfig_table').append($newRow);
+  $('.selectall').select2()
+  
+});
+// mark config
 

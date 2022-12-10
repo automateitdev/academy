@@ -26,7 +26,9 @@
                 </thead>
                 <tbody>
                    @foreach($payapplies as $payapplie)
-                    @if(!$payapplie->payment_state == 200 || !$payapplie->payment_state == 3)
+                 
+                    @if($payapplie->payment_state !== 200 || $payapplie->payment_state !== 3)
+                   
                         @if($todate->gte($payapplie->payable_date))
                         <tr>
                             <td>{{$payapplie->feehead->head_name}}</td>

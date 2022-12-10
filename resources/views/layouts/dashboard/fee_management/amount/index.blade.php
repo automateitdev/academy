@@ -109,13 +109,13 @@
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Fee Amount</label>
-                                                            <input type="text" class="form-control feeamount" name="feeamount">
+                                                            <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control feeamount" name="feeamount">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Fine Amount</label>
-                                                            <input type="text" class="form-control" name="fineamount">
+                                                            <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="fineamount">
                                                         </div>
                                                     </div>
                                                 </div>

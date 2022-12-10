@@ -1,7 +1,6 @@
  <!-- Brand Logo -->
  <a href="#" class="brand-link" style="border:none">
-     <img src="{{ asset('images/com/Academy Logo Final.png') }}" alt="AdminLTE Logo"
-         class="brand-image img-circle elevation-3" style="opacity: 1">
+     <img src="{{ asset('images/com/Academy Logo Final.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
      <!-- <span class="brand-text font-weight-light">Academy</span> -->
  </a>
 
@@ -49,8 +48,7 @@
                      <i class="nav-icon fa fa-xs fa-graduation-cap" style="font-size:.875em"></i>
                      <p>
                          Student
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
                  <ul class="nav nav-treeview">
@@ -113,8 +111,7 @@
                      <i class="nav-icon fa fa-xs fa-users" style="font-size:.875em"></i>
                      <p>
                          Teacher/Staff
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
                  <ul class="nav nav-treeview">
@@ -156,8 +153,7 @@
                      <i class="nav-icon fa fa-xs fa-id-badge" style="font-size:.875em"></i>
                      <p>
                          Attendance
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
                  <ul class="nav nav-treeview">
@@ -202,6 +198,12 @@
                                  <a href="{{ route('examstartup') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                                      <p>Exam Startup</p>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('markconfig') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Mark Config</p>
                                  </a>
                              </li>
                          </ul>
@@ -386,8 +388,7 @@
                      <i class="nav-icon fa fa-xs fa-solid fa-file-invoice-dollar" style="font-size:.875em"></i>
                      <p>
                          Payroll
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
              </li>
@@ -399,8 +400,7 @@
                      <i class="nav-icon fa fa-xs fa-sharp fa-solid fa-box" style="font-size:.875em"></i>
                      <p>
                          Inventory
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
              </li>
@@ -412,8 +412,7 @@
                      <i class="nav-icon fa fa-xs fa-sharp fa-solid fa-bookmark" style="font-size:.875em"></i>
                      <p>
                          General Accounts
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
              </li>
@@ -425,8 +424,7 @@
                      <i class="nav-icon fa fa-xs fa-solid fa-clipboard-list" style="font-size:.875em"></i>
                      <p>
                          Routine
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
              </li>
@@ -439,8 +437,7 @@
                      <i class=""></i>
                      <p>
                          SMS/Notification
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
              </li>
@@ -503,8 +500,7 @@
                      <i class=""></i>
                      <p>
                          Online Admission
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
                  <ul class="nav nav-treeview">
@@ -662,40 +658,64 @@
                          </a>
                          <ul class="nav nav-treeview">
                              <li class="nav-item">
-                                 <a href="{{ route('slider.index') }}" class="nav-link active">
+                                 <a href="#" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Slider</p>
+                                     <p>Front Page</p>
+                                     <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                                  </a>
+                                 <ul class="nav nav-treeview">
+                                     <li class="nav-item">
+                                         <a href="{{ route('slider.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Slider</p>
+                                         </a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a href="{{ route('speech.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Speech Info</p>
+                                         </a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a href="{{ route('gallery.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Gallery</p>
+                                         </a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a href="{{ route('notice.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Notice</p>
+                                         </a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a href="{{ route('aboutinstitute.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>About Institute</p>
+                                         </a>
+                                     </li>
+                                 </ul>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ route('speech.index') }}" class="nav-link active">
+                                 <a href="#" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Speech Info</p>
+                                     <p>Menu</p>
+                                     <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                                  </a>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="{{ route('about.index') }}" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>About</p>
-                                 </a>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="{{ route('admns.index') }}" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Administration</p>
-                                 </a>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="{{ route('gallery.index') }}" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Gallery</p>
-                                 </a>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="{{ route('notice.index') }}" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Notice</p>
-                                 </a>
+                                 <ul class="nav nav-treeview">
+                                     <li class="nav-item">
+                                         <a href="{{ route('about.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>About</p>
+                                         </a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a href="{{ route('admns.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Administration</p>
+                                         </a>
+                                     </li>
+                                 </ul>
                              </li>
                          </ul>
                      </li>
@@ -710,8 +730,7 @@
                      <i class=""></i>
                      <p>
                          Help Line
-                         <i class="right fas fa-angle-left"
-                             style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em; line-height:1.5em"></i>
                      </p>
                  </a>
              </li>
@@ -721,87 +740,85 @@
 
              <!-- Administrator part -->
              @foreach (Auth::user()->roles as $role)
-                 @if ($role->id == 1)
-                     <li class="nav-header">Maintenance</li>
+             @if ($role->id == 1)
+             <li class="nav-header">Maintenance</li>
+             <li class="nav-item">
+                 <a href="#" class="nav-link">
+                     <i class="nav-icon fa fa-xss fa-tachometer-alt" style="font-size:.875em"></i>
+                     <p>
+                         Global Management
+                         <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
+                     </p>
+                 </a>
+                 <ul class="nav nav-treeview">
                      <li class="nav-item">
-                         <a href="#" class="nav-link">
-                             <i class="nav-icon fa fa-xss fa-tachometer-alt" style="font-size:.875em"></i>
-                             <p>
-                                 Global Management
-                                 <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
-                             </p>
+                         <a href="#" class="nav-link active">
+                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                             <p>Institute</p>
+                             <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
                          <ul class="nav nav-treeview">
                              <li class="nav-item">
-                                 <a href="#" class="nav-link active">
+                                 <a href="{{ route('institute.view') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Institute</p>
-                                     <i class="right fas fa-angle-left"
-                                         style="font-size:.875em; line-height:1.5em"></i>
-                                 </a>
-                                 <ul class="nav nav-treeview">
-                                     <li class="nav-item">
-                                         <a href="{{ route('institute.view') }}" class="nav-link active">
-                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                             <p>Users</p>
-                                         </a>
-                                     </li>
-                                     <li class="nav-item">
-                                         <a href="{{ route('domain.view') }}" class="nav-link active">
-                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                             <p>Domain Assign</p>
-                                         </a>
-                                     </li>
-                                 </ul>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="#" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Global Field</p>
-                                     <i class="right fas fa-angle-left"
-                                         style="font-size:.875em; line-height:1.5em"></i>
-                                 </a>
-                                 <ul class="nav nav-treeview">
-                                     <li class="nav-item">
-                                         <a href="" class="nav-link active">
-                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                             <p>Field One</p>
-                                         </a>
-                                     </li>
-                                     <li class="nav-item">
-                                         <a href="" class="nav-link active">
-                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                             <p>Field Two</p>
-                                         </a>
-                                     </li>
-                                 </ul>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="{{ route('bankinfo.view') }}" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>
-                                         Bank Info
-                                     </p>
+                                     <p>Users</p>
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ route('role.view') }}" class="nav-link active">
+                                 <a href="{{ route('domain.view') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>
-                                         Role Assign
-                                     </p>
-                                 </a>
-                             </li>
-                             <li class="nav-item">
-                                 <a href="{{ route('menu') }}" class="nav-link active">
-                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Menu</p>
+                                     <p>Domain Assign</p>
                                  </a>
                              </li>
                          </ul>
                      </li>
-                     <li class="nav-header">Customer Support</li>
-                 @endif
+                     <li class="nav-item">
+                         <a href="#" class="nav-link active">
+                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                             <p>Global Field</p>
+                             <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
+                         </a>
+                         <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                 <a href="" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Field One</p>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Field Two</p>
+                                 </a>
+                             </li>
+                         </ul>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ route('bankinfo.view') }}" class="nav-link active">
+                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                             <p>
+                                 Bank Info
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ route('role.view') }}" class="nav-link active">
+                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                             <p>
+                                 Role Assign
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ route('menu') }}" class="nav-link active">
+                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                             <p>Menu</p>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+             <li class="nav-header">Customer Support</li>
+             @endif
              @endforeach
              <!-- Administrator part -->
          </ul>

@@ -118,10 +118,10 @@
                         </select>
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control" name="serial[]">
+                        <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="serial[]" placeholder="1">
                     </div>
                     <div class="col">
-                        <input type="number" class="form-control" name="merge[]">
+                        <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="merge[]" placeholder="1">
                     </div>
                     <div class="col text-center">
                         <button class="btn btn-danger">

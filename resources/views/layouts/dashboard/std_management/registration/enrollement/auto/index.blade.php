@@ -171,10 +171,10 @@
                             </div>
                             <div class="row add">
                                 <div class="col">
-                                    <input type="text" class="form-control" id="std_id" name="std_id[]" placeholder="Student ID" required>
+                                    <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" id="std_id" name="std_id[]" placeholder="Student ID" required>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control roll" name="roll[]" placeholder="Roll">
+                                    <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control roll" name="roll[]" placeholder="Roll">
                                 </div>
                                 <div class="col">
                                     <input type="text" class="form-control name" name="name[]" placeholder="name">

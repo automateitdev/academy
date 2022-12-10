@@ -19,7 +19,7 @@ class BasicSetupController extends Controller
      */
     public function index()
     {
-        $basics = Basic::where('institute_id', Auth::user()->institute_id)->get();
+        $basics = Basic::where('institute_id', Auth::user()->institute_id)->first();
         $users = User::all();
         return view('layouts.dashboard.master_setting.basic.index', compact('basics','users'));
     }
@@ -137,7 +137,7 @@ class BasicSetupController extends Controller
         $basics->insta_link = $request->insta_link;
         $basics->pi_link = $request->pi_link;
 
-        if($request->hasFile('logo')){
+        if(!empty($request->hasFile('logo'))){
             
             $allowedfileExtension = ['jpeg', 'jpg', 'png'];
             $file = $request->file('logo');
@@ -154,9 +154,6 @@ class BasicSetupController extends Controller
             $file->move('images/logo/',$filename);
 
             $basics->logo = $filename;
-        }else{
-            //return $request;
-            $basics->logo = '';
         }
         
         $basics->save();
