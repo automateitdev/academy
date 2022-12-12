@@ -82,49 +82,27 @@ class MarkConfigController extends Controller
         try {
             foreach($request->examstartups_id as $examstartups_id){
                 foreach ($request->subjectmap_id as $key=>$subjectmap_id) {
-                    // $input = new Examconfig();                 
-                    // $input->institute_id = Auth::user()->institute_id;
-                    // $input->class_id = $request->class_id;
-                    // $input->group_id = $request->group_id;
-                    // $input->subjectmap_id = $subjectmap_id;
-                    // $input->examcode_id = $request->examcode_id[$key];
-                    // $input->total_marks = $request->total_marks[$key];
-                    // $input->pass_mark = $request->pass_mark[$key];
-                    // $input->acceptance = $request->acceptance[$key];
-                    // $input->examstartups_id = $examstartups_id;
-                    // $input->save();
-                    // try{
-                        // dd($request->class_id,$request->group_id,$examstartups_id,$subjectmap_id,$request->examcode_id[$key],$request->total_marks[$key]);
-                    $input = Examconfig::updateOrCreate(
-                       [
-                            'class_id' => $request->class_id,
-                            'group_id' => $request->group_id,
-                            'subjectmap_id' => $subjectmap_id,
-                            'examstartups_id' => $examstartups_id,
-                            'examcode_id' => $request->examcode_id[$key]
-                       ],
-                       [
-                            'institute_id' => Auth::user()->institute_id,
-                            'class_id' => $request->class_id,
-                            'group_id' => $request->group_id,
-                            'subjectmap_id' => $subjectmap_id,
-                            'examstartups_id' => $examstartups_id,
-                            'examcode_id' => $request->examcode_id[$key],
-                            'total_marks' => $request->total_marks[$key],
-                            'pass_mark' => $request->pass_mark[$key],
-                            'acceptance' => $request->acceptance[$key],
-                            
-                        ]
-                    );
                     
-//                 }catch(QueryException $e){
-// dd($e);
-//                 }
-                
+                    $input = Examconfig::
+                    updateOrInsert(
+                        [
+                             'class_id' => $request->class_id,
+                             'group_id' => $request->group_id,
+                             'subjectmap_id' => $subjectmap_id,
+                             'examstartups_id' => $examstartups_id,
+                             'examcode_id' => $request->examcode_id[$key]
+                        ],
+                        [
+ 
+                             'institute_id' => Auth::user()->institute_id,
+                             'total_marks' => $request->total_marks[$key],
+                             'pass_mark' => $request->pass_mark[$key],
+                             'acceptance' => $request->acceptance[$key],     
+                         ]
+                     );
+                    }
                 }    
 
-            }
-            // dd($input);
             return redirect(route('markconfig'))->with('message', 'Data Upload Successfully');
         
         } 

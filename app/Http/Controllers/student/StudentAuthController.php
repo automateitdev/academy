@@ -74,7 +74,9 @@ class StudentAuthController extends Controller
         $total_payable = 0;
         $todate = \Carbon\Carbon::now();
         foreach ($payapplies as $payapplie) {
-            if (!$payapplie->payment_state == 200 || !$payapplie->payment_state == 3) {
+            if($payapplie->payment_state == 400 || $payapplie->payment_state == 0 || $payapplie->payment_state == 201){
+
+            // if (!$payapplie->payment_state == 200 || !$payapplie->payment_state == 3) {
                 if($todate->gte($payapplie->payable_date)){
                     $total_payable += $payapplie->total_amount;
                 }
@@ -248,36 +250,36 @@ class StudentAuthController extends Controller
 
         }
 
-        $finalheaders = [
-            'Content-Type' => 'application/json',
-            'Authorization' => $auth,
-        ];
+        // $finalheaders = [
+        //     'Content-Type' => 'application/json',
+        //     'Authorization' => $auth,
+        // ];
 
-        $final_data = '{ 
-            "data": {
-                "auth_code": "' . $auth . '",
-                "session_Token": "' . $request->session_token . '",
-                "trax_id": "' . $result['TransactionId'] . '",
-                "invoice_no": "' . $result['InvoiceNo'] . '",
-                "status": "' . $result['status'] . '",
-                "msg": "' . $result['msg'] . '"
-                } 
-            }';
+        // $final_data = '{ 
+        //     "data": {
+        //         "auth_code": "' . $auth . '",
+        //         "session_Token": "' . $request->session_token . '",
+        //         "trax_id": "' . $result['TransactionId'] . '",
+        //         "invoice_no": "' . $result['InvoiceNo'] . '",
+        //         "status": "' . $result['status'] . '",
+        //         "msg": "' . $result['msg'] . '"
+        //         } 
+        //     }';
 
-        try {
-            $resposnedata =
-                $client->request(
-                    'POST',
-                    'https://live.academyims.com/api/dataupdate',
+        // try {
+        //     $resposnedata =
+        //         $client->request(
+        //             'POST',
+        //             'https://live.academyims.com/api/dataupdate',
 
-                    [
-                        'headers' => $finalheaders,
-                        'body' => $final_data,
-                    ]
-                );
-        } catch (ClientException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
-        }
+        //             [
+        //                 'headers' => $finalheaders,
+        //                 'body' => $final_data,
+        //             ]
+        //         );
+        // } catch (ClientException $e) {
+        //     $response = $e->getResponse();
+        //     $responseBodyAsString = $response->getBody()->getContents();
+        // }
     }
 }

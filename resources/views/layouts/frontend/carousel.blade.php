@@ -67,7 +67,7 @@
                         <span class="d-block text-uppercase py-2" style="font-weight: 700">Students</span>
                     </div>
                 </a>
-                <a href="" class="card col-md-4 p-2 "
+                <a href="{{ route('student.auth.index') }}" class="card col-md-4 p-2 "
                     style="background-color:#F1F8E9; border:6px solid #fff; border-radius:5px; color:#19686d">
                     <div class="text-center p-2">
                         <i class="fa-solid fa-money-check fa-2xl"></i>

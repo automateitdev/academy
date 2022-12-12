@@ -3,7 +3,7 @@
 @section('content')
     <section>
         @include('layouts.backdrop.index')
-        <div class="login" style="margin-top: 20vh;">
+        <div class="login" style="margin-top: 12%;">
 
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-end">
@@ -72,7 +72,7 @@
                 </div>
                 
             </div>
-                                    <img src="{{ asset('images/com/Homapage/Handshake.png') }}" alt="" class="img-fluid d-md-none mt-4 mx-auto" style="max-width:330px">
+            <img src="{{ asset('images/com/Homapage/Handshake.png') }}" alt="" class="img-fluid d-md-none px-2 mt-4 mx-auto" style="max-width:330px">
         </div>
         
     </section>

@@ -166,7 +166,7 @@
 
                 <input type="hidden" value="{{$class_id}}" name="class_id">
                 <input type="hidden" value="{{$group_id}}" name="group_id">
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label for="" class="form-label">Exam</label>
@@ -257,7 +257,7 @@
 
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="btn-content mt-5">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Save</button>
                     <a href="javascript:void(0)" class="addmarkconfig btn btn-dark" style="padding:7px; border-radius:4px;"><i class="fas fa-plus-circle"></i> Add Subject</a>

@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/dataupdate', [ApiController::class, 'dataupdate']);
+Route::post('/dataupdate', [ApiController::class, 'dataupdate']);
 Route::post('/pdfgenerate', [ApiController::class, 'generate_pdf']);
 

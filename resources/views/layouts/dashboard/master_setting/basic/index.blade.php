@@ -117,6 +117,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">
+                            @if(!empty($basics))
                                 <form action="#" method="POST" enctype="multipart/form-data">
                                     <div class="row right">
                                         <div class="col-sm-4 col-md-4">
@@ -201,6 +202,7 @@
                                         Edit
                                     </a>
                                 </form>
+                            @endif
                         </div>
                     </div>
                 </div>
