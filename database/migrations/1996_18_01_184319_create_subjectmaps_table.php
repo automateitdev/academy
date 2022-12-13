@@ -15,8 +15,9 @@ class CreateSubjectmapsTable extends Migration
     {
         Schema::create('subjectmaps', function (Blueprint $table) {
             $table->increments('id');
-            $table->unique(array('institute_id', 'class_id', 'group_id', 'subject_id', 'serial'), 'subject_combination');
+            $table->unique(array('institute_id', 'academic_year_id', 'class_id', 'group_id', 'subject_id', 'serial'), 'subject_combination');
             $table->string('institute_id');
+            $table->integer('academic_year_id');
             $table->bigInteger('class_id');
             $table->bigInteger('group_id');
             $table->bigInteger('subject_id');

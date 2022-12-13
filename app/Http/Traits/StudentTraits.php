@@ -10,6 +10,7 @@ use App\Models\Payapply;
 use App\Models\Waivermapping;
 use App\Models\StudentSubjectMap;
 use App\Models\Subjectmap;
+use App\Models\GroupAssign;
 
 trait StudentTraits
 {
@@ -25,16 +26,12 @@ trait StudentTraits
 
         if ($students->std_id == $student_id && $students->institute_id == $institute_id) {
 
-            // check class id is equal in student and section assign table
             foreach ($section_assigns as $section_assign) {
 
-                // we check Student table section ID is equal in section assign ID //we get student class_id
                 if ($students->section_id == $section_assign->id) {
 
                     foreach ($feeamounts as $feeamount) {
 
-                        // we check Student table and Feeamount table
-                        // we get class_id, std-category_id and group_id
                         if (
                             $section_assign->class_id == $feeamount->class_id
                             && $students->std_category_id == $feeamount->stdcategory_id
@@ -45,15 +42,10 @@ trait StudentTraits
 
                                 if ($datesetup->class_id == $feeamount->class_id) {
 
-                                    // we check student table, datesetup table and fee amount table, we get feesubhead_id
                                     if (
                                         $students->academic_year_id == $datesetup->academic_year_id
                                     ) {
                                         if ($datesetup->feehead_id == $feeamount->feehead_id) {
-
-                                            // $pay_data = Payapply::where('student_id', $student_id)->where('institute_id', $institute_id)
-                                            //             ->where('feesubhead_id',$datesetup->feesubhead_id)
-                                            //             ->where('feehead_id', $feeamount->feehead_id)->count();
 
                                             $today = \Carbon\Carbon::now();
 
@@ -63,17 +55,6 @@ trait StudentTraits
                                                 $fine = $feeamount->fineamount;
                                             }
 
-                                            // $feeheadremoves = Feeheadremove::where([
-                                            //     ['feehead_id', $datesetup->feehead_id],
-                                            //     ['student_id', $student_id],
-                                            //     ['institute_id', $institute_id]
-                                            // ])->first();
-
-                                            // if (empty($feeheadremoves)) {
-                                            //     $payment_state = 0;
-                                            // } else {
-                                            //     $payment_state = 3;
-                                            // }
 
                                             $waiver = Waivermapping::where([
                                                 ['feehead_id', $datesetup->feehead_id],
@@ -113,50 +94,71 @@ trait StudentTraits
         }
     }
 
-    public function assign_subject($institute_id, $student_id, $class_id, $group_id)
-    {
-
-        $section_id = SectionAssign::select('id')->where('class_id', $class_id)->get();
+    public function assign_subject($institute_id, $student_id, $class_id, $group_id, $academic_year_id)
+    {  
+        $section_id = SectionAssign::where('id', $class_id)->get();
+        $section_id_two = SectionAssign::where('class_id', $class_id)->get();
+        $groupassign_group_id = GroupAssign::select('group_id')->where('id', $group_id)->first();
 
         if ($student_id != null) {
             foreach ($section_id as $class) {
                 $students = Student::where('std_id', $student_id)
                     ->where('institute_id', $institute_id)
-                    ->where('section_id', $class)
-                    ->where('group_id', $group_id)
-                    ->get();
-
-                if (
-                    $students->std_id == $student_id && $students->institute_id == $institute_id
-                    && $students->section_id == $class && $students->group_id == $group_id
-                ) {
-                }
-            }
-        } else {
-            foreach ($section_id as $class) {
-
-                // var_dump($institute_id, $class->id, $group_id);
-                // die();
-                $students = Student::where('institute_id', $institute_id)
                     ->where('section_id', $class->id)
                     ->where('group_id', $group_id)
+                    ->where('academic_year_id',$academic_year_id)
                     ->get();
 
-                foreach ($students as $student) {
-                    // if ($student->institute_id == $institute_id && $student->section_id == $class && $student->group_id == $group_id) {
-
+                foreach($students as $student)
+                    {
                     $subjectmaps = Subjectmap::where([
                         ['institute_id', $institute_id],
-                        ['class_id', $class_id],
-                        ['group_id', $group_id]
+                        ['class_id', $class->class_id],
+                        ['group_id', $group_id],
+                        ['academic_year_id', $academic_year_id]
                     ])->get();
-                    // dd($subjectmaps);
                         
                     foreach($subjectmaps as $subjectmap){
                         $input = StudentSubjectMap::updateOrCreate(
 
                             [
                                 'institute_id' => $institute_id,
+                                'academic_year_id' => $academic_year_id,
+                                'student_id' => $student->std_id,
+                                'class_id' => $class->class_id,
+                                'group_id' => $group_id,
+                                'subjectmap_id' => $subjectmap->id,
+                                'subject_type_id' => $subjectmap->type,
+                            ]
+                        );
+                    }
+
+                }
+            }
+        } else {
+            foreach ($section_id_two as $class) {
+                // dd($class);
+                $students = Student::where('institute_id', $institute_id)
+                    ->where('section_id', $class->id)
+                    ->where('group_id', $groupassign_group_id)
+                    ->where('academic_year_id',$academic_year_id)
+                    ->get();
+// dd($class->id,$groupassign_group_id);
+                foreach ($students as $student) {
+
+                    $subjectmaps = Subjectmap::where([
+                        ['institute_id', $institute_id],
+                        ['class_id', $class_id],
+                        ['group_id', $group_id],
+                        ['academic_year_id', $academic_year_id]
+                    ])->get();
+                        
+                    foreach($subjectmaps as $subjectmap){
+                        $input = StudentSubjectMap::updateOrCreate(
+
+                            [
+                                'institute_id' => $institute_id,
+                                'academic_year_id' => $academic_year_id,
                                 'student_id' => $student->std_id,
                                 'class_id' => $class->id,
                                 'group_id' => $group_id,

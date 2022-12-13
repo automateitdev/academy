@@ -10,6 +10,7 @@ class Subjectmap extends Model
     use HasFactory;
     protected $fillable = [
         'institute_id',
+        'academic_year_id',
         'class_id',
         'group_id',
         'subject_id',

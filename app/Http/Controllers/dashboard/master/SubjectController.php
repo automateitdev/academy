@@ -25,10 +25,10 @@ class SubjectController extends Controller
     public function index()
     {
         $users = User::all();
-        $startups = Startup::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $subjecttypes = Subjecttype::all();
         $subjects = Subject::all();
-        return view('layouts/dashboard/master_setting/subject/index', compact('users', 'startups', 'subjecttypes', 'subjects'));
+        return view('layouts.dashboard.master_setting.subject.index', compact('users', 'startups', 'subjecttypes', 'subjects'));
     }
 
     public function subjectadd(Request $request)
@@ -61,6 +61,7 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'academic_year_id' => 'required',
             'class_id' => 'required',
             'group_id' => 'required',
             'subject_id' => 'required',
@@ -72,6 +73,7 @@ class SubjectController extends Controller
         {
             $input = new Subjectmap();
             $input->institute_id = Auth::user()->institute_id;
+            $input->academic_year_id = $request->academic_year_id;
             $input->class_id = $request->class_id;
             $input->group_id = $request->group_id;
             $input->subject_id = $subject_id;
@@ -81,7 +83,7 @@ class SubjectController extends Controller
             
             if($input->save())
             {
-                $this->assign_subject(Auth::user()->institute_id, null, $request->class_id, $request->group_id);
+                $this->assign_subject(Auth::user()->institute_id, null, $request->class_id, $request->group_id, $request->academic_year_id);
             }
             
         }
@@ -140,11 +142,11 @@ class SubjectController extends Controller
     public function fourthsubject()
     {
         $users = User::all();
-        $startups = Startup::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $subjecttypes = Subjecttype::all();
         $subjects = Subject::all();
-        $sectionAssignes = SectionAssign::all();
-        return view('layouts/dashboard/master_setting/subject/foursubject', 
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        return view('layouts.dashboard.master_setting.subject.foursubject', 
         compact('users', 'startups', 'subjecttypes', 'subjects', 'sectionAssignes'));
     }
     public function search(Request $request)
@@ -152,26 +154,28 @@ class SubjectController extends Controller
         $this->validate($request, [
             'group_id' => 'required',
             'section_id' => 'required',
+            'academic_year_id' => 'required'
         ]);
 
         $users = User::all();
-        $startups = Startup::all();
-        $sectionAssignes = SectionAssign::all();
-        $students = Student::where('section_id', 'LIKE', '%' . $request->section_id . '%')
-            ->where('group_id', 'LIKE', '%' . $request->group_id . '%')
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        $students = Student::where('section_id', $request->section_id)
+            ->where('academic_year_id', $request->academic_year_id)
+            ->where('group_id', $request->group_id)
             ->paginate(50);
-        return view('layouts/dashboard/master_setting/subject/foursubject', compact('users', 'startups', 'sectionAssignes', 'students'));
+        return view('layouts.dashboard.master_setting.subject.foursubject', compact('users', 'startups', 'sectionAssignes', 'students'));
     }
     public function singleedit($id)
     {
         $users = User::all();
         $students = Student::find($id);
-        return view('layouts/dashboard/master_setting/subject/singleupdate', compact('students', 'users'));
+        return view('layouts.dashboard.master_setting.subject.singleupdate', compact('students', 'users'));
     }
     public function multipleedit($id)
     {
         $users = User::all();
         $students = Student::find($id);
-        return view('layouts/dashboard/master_setting/subject/multipleupdate', compact('students', 'users'));
+        return view('layouts.dashboard.master_setting.subject.multipleupdate', compact('students', 'users'));
     }
 }

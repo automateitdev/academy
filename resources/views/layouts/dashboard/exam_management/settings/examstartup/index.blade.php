@@ -276,7 +276,7 @@
                                                         @if($item->id == $examgrade->class_id)
                                                             @if($item->startup_category_id == 4)
                                                             <td>
-                                                                <input type="hidden" value="{{$examgrade->id}}" name="examgrades_id">
+                                                                <input type="hidden" value="{{$examgrade->id}}" name="examgrades_id[]">
                                                                 {{$item->startupsubcategory->startup_subcategory_name}}
                                                             </td>
                                                             @endif
@@ -297,12 +297,12 @@
 
                                                     <td>
                                                         @foreach($end_array as $key=>$value)
-                                                        <input type="text" value="{{$key}}" name="grade_key[]">
+                                                        <input type="text" value="{{$key}}" name="grade_key[{{$examgrade->id}}][]">
                                                         @endforeach
                                                     </td>
                                                     <td>
                                                     @foreach($end_array as $key=>$value)
-                                                    <input type="text" onkeypress="return /[0-9,-]/i.test(event.key)" value="{{$value}}" name="grade_value[]" placeholder="80-100">
+                                                    <input type="text" onkeypress="return /[0-9,-]/i.test(event.key)" value="{{$value}}" name="grade_value[{{$examgrade->id}}][]" placeholder="80-100">
                                                     @endforeach
                                                     </td>
                                                 </tr>

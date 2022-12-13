@@ -74,9 +74,7 @@
                                     <select class="form-control" name="designation_id">
                                         <option value="">Select a Menu</option>
                                             @foreach($designations as $item)
-                                                @if($item->institute_id == Auth::user()->institute_id)
-                                                    <option value="{{$item->id}}">{{$item->designation}}</option>
-                                                @endif
+                                                <option value="{{$item->id}}">{{$item->designation}}</option>
                                             @endforeach
                                     </select>
                                 </div>

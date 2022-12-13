@@ -19,6 +19,7 @@ use App\Models\Payapply;
 use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 use Maatwebsite\Excel\Validators\ValidationException;
 use App\Http\Traits\StudentTraits;
+use App\Models\StartupSubcategory;
 use Illuminate\Contracts\Session\Session;
 
 class RegistrationController extends Controller
@@ -67,6 +68,10 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
+        $sectionassign_id = SectionAssign::select('section_id')->where('id', $request->section_id)->first();
+        $startup_id = Startup::select('id')->where('id', $sectionassign_id->section_id)->first();
+        // dd($startup_id->id);
+        // $startup_subcat_id = StartupSubcategory::select('startup_subcategory_name')->where('id',$startup_id->startup_subcategory_id)->first();
         // dd($request->all());
         foreach ($request->roll as $key => $roll) {
             $input = new Student();
@@ -86,6 +91,7 @@ class RegistrationController extends Controller
             $input->mobile_no = $request->mobile_no[$key];
             $input->save();
             $this->assign_fee($request->std_id[$key], $request->institute_id);
+            $this->assign_subject($request->institute_id, $request->std_id[$key], $request->section_id, $request->group_id, $request->academic_year_id);
         }
         return redirect(route('enrollment.auto.index'))->with('message', 'Data Upload Successfully');
     }
@@ -118,6 +124,8 @@ class RegistrationController extends Controller
                         continue;
                     };
                     $this->assign_fee($student[0], $request->institute_id);
+                    $this->assign_subject($request->institute_id, $student[0], $request->section_id, $request->group_id, $request->academic_year_id);
+
                 }
             }
 

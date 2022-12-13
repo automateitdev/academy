@@ -11,10 +11,13 @@ class StudentSubjectMap extends Model
 
     protected $fillable = [
         'institute_id',
+        'academic_year_id',
         'student_id',
         'class_id',
         'group_id',
         'subjectmap_id',
-        'subject_type_id'
+        'subject_type_id',
+        'marksmap',
+        'examstartups_id'
     ];
 }

@@ -36,8 +36,6 @@
                                                     <select class="form-control single" name="section_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($sectionAssignes as $item)
-                                                        @if($item->institute_id == Auth::user()->institute_id)
-
                                                         @php
                                                         $startup_data = $startups->where('id', $item->class_id);
                                                         $startup_data2 = $startups->where('id', $item->section_id);
@@ -52,7 +50,6 @@
                                                         @endforeach
                                                         @endforeach
                                                         @endforeach
-                                                        @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -63,10 +60,8 @@
                                                     <select class="form-control single" name="group_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($startups as $startup)
-                                                        @if($startup->institute_id == Auth::user()->institute_id)
                                                         @if($startup->startup_category_id == "5")
                                                         <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                        @endif
                                                         @endif
                                                         @endforeach
                                                     </select>
@@ -74,8 +69,23 @@
                                             </div>
                                         </div>
                                         <div class="row mb-0">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">Academic Year</label>
+                                                    <select class="form-control single" name="academic_year_id">
+                                                        <option value=" ">Choose One</option>
+                                                        @foreach($startups as $startup)
+                                                        @if($startup->startup_category_id == "1")
+                                                        <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="col-md-3">
-                                                <button class="btn btn-primary">Search</button>
+                                                <div class="mb-3 mt-4">
+                                                    <button class="btn btn-primary">Search</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row mt-2">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-6 offset-md-1">
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -41,12 +41,21 @@
                         <li>Student ID : {{$students->std_id}}</li>
                         <li>Roll No. : {{$students->roll}}</li>
                     </ul>
-                    <div class="lkoi rkj">
+                    <div class="rkj">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <input type="text" class="insId" name="student_id" value="{{$students->std_id}}">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Fee Head</label>
+                                    <label for="" class="form-label">Type</label>
+                                    <select class="form-control single" name="feehead_id">
+                                        <option value=" ">Choose One</option>
+                                       
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Subject</label>
                                     <select class="form-control single" name="feehead_id">
                                         <option value=" ">Choose One</option>
                                        

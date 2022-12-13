@@ -183,6 +183,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/MasterSetting/InstituteSetting/class_setup', [ClassSetupController::class, 'index'])->name('class.index');
     Route::post('/MasterSetting/InstituteSetting/class_setup/section_store', [ClassSetupController::class, 'section_store'])->name('class.section_store');
     Route::post('/MasterSetting/InstituteSetting/class_setup/group_store', [ClassSetupController::class, 'group_store'])->name('class.group_store');
+    Route::delete('/MasterSetting/InstituteSetting/class_setup/group/delete/{id}', [ClassSetupController::class, 'group_destroy'])->name('class.group_destroy');
+    Route::get('/getgroupfromgroupassign', [ClassSetupController::class, 'getgroupfromgroupassign']);
 
     //signature
     Route::get('/MasterSetting/Signature', [SignatureController::class, 'index'])->name('signature.index');
@@ -300,6 +302,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/exam-management/Mark_config', [MarkConfigController::class, 'index'])->name('markconfig');
     Route::get('/exam-management/Mark_config/query', [MarkConfigController::class, 'search'])->name('markconfig.search');
     Route::post('/exam-management/Mark_config/store', [MarkConfigController::class, 'store'])->name('markconfig.store');
+    Route::post('/exam-management/Mark_config/update', [MarkConfigController::class, 'update'])->name('markconfig.update');
 
 
     /////////////////////// Exam Management End//////////////////

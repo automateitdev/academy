@@ -15,13 +15,16 @@ class CreateStudentSubjectMapsTable extends Migration
     {
         Schema::create('student_subject_maps', function (Blueprint $table) {
             $table->increments('id');
-            $table->unique(array('institute_id', 'student_id', 'subjectmap_id'), 'student_subject_combination');
+            $table->unique(array('institute_id', 'academic_year_id', 'student_id', 'subjectmap_id'), 'student_subject_combination');
             $table->string('institute_id');
+            $table->integer('academic_year_id');
             $table->bigInteger('student_id');
-            $table->bigInteger('class_id');
-            $table->bigInteger('group_id');
-            $table->bigInteger('subjectmap_id');
-            $table->bigInteger('subject_type_id');
+            $table->integer('class_id');
+            $table->integer('group_id');
+            $table->integer('subjectmap_id');
+            $table->integer('subject_type_id');
+            $table->string('marksmap')->nullable();
+            $table->integer('examstartups_id')->nullable();
             $table->timestamps();
         });
     }

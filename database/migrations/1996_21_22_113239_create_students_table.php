@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 
 class CreateStudentsTable extends Migration
@@ -15,8 +16,9 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
+            $table->unique(array('institute_id', 'std_id', 'academic_year_id'), 'student_combine');
             $table->string('institute_id');
-            $table->string('std_id')->unique();
+            $table->string('std_id');
             $table->integer('academic_year_id');
             $table->integer('session_id');
             $table->integer('section_id');

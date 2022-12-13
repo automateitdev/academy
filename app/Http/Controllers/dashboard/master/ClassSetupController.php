@@ -10,6 +10,7 @@ use App\Models\GroupAssign;
 use App\Models\StartupCategory;
 use App\Models\StartupSubcategory;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 
 class ClassSetupController extends Controller
 {
@@ -63,9 +64,16 @@ class ClassSetupController extends Controller
             'class_id' => 'required',
             'group_id' => 'required',
         ]);
-        $groupassigns = GroupAssign::create($request->all());
-
-        return redirect(route('class.index'));
+        try {
+            $groupassigns = GroupAssign::create($request->all());
+            
+            return redirect(route('class.index'))->with('message', 'Data Upload Successfully');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062) {
+                return redirect(route('class.index'))->with('error', 'This Group is already configured.');
+            }
+        }
     }
 
     /**
@@ -108,8 +116,40 @@ class ClassSetupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function getgroupfromgroupassign(Request $request)
+    {
+        $startup_id = [];
+        $groupname = [];
+        $groupassign_id = [];
+        $data = GroupAssign::select('id', 'group_id')->where('class_id', $request->id)->get();
+        foreach($data as $d){
+            $startups = Startup::select('startup_subcategory_id')->where('id', $d->group_id)->get();
+            array_push($groupassign_id, $d->id);
+            foreach($startups as $startup)
+            {
+                array_push($startup_id,$startup->startup_subcategory_id);
+                $subName = StartupSubcategory::select('startup_subcategory_name')->where('id', $startup->startup_subcategory_id)->get();
+                foreach($subName as $name)
+                {
+                    array_push($groupname, $name->startup_subcategory_name);
+                }
+            }
+            
+        }
+        $groupdata = array_combine($groupassign_id, $groupname);
+        // $alldata = $data->id 
+        // $subName->startup_subcategory_name,
+        return $groupdata;
+    }
+     
     public function destroy($id)
     {
         //
+    }
+    public function group_destroy($id)
+    {
+        GroupAssign::find($id)->delete();
+        return redirect()->back();
+
     }
 }

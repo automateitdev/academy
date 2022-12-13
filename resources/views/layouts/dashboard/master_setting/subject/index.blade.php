@@ -42,13 +42,11 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Class</label>
-                                        <select class="form-control" name="class_id">
+                                        <select class="form-control single subjectClass" name="class_id">
                                             <option value="">Select a Class</option>
                                             @foreach($startups as $item)
-                                            @if($item->institute_id == Auth::user()->institute_id)
                                             @if($item->startup_category_id == 4)
                                             <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
-                                            @endif
                                             @endif
                                             @endforeach
                                         </select>
@@ -57,14 +55,22 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Group</label>
-                                        <select class="form-control" name="group_id">
-                                            <option value="">Select a Group</option>
-                                            @foreach($startups as $item)
-                                            @if($item->institute_id == Auth::user()->institute_id)
-                                            @if($item->startup_category_id == 5)
-                                            <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
-                                            @endif
-                                            @endif
+                                        <select class="form-control single subjectgroup" name="group_id">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Academic Year</label>
+                                        <select class="form-control single" name="academic_year_id">
+                                            <option value=" ">Choose One</option>
+                                            @foreach($startups as $startup)
+                                                @if($startup->startup_category_id == "1")
+                                                    <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -121,7 +127,7 @@
                         <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="serial[]" placeholder="1">
                     </div>
                     <div class="col">
-                        <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="merge[]" placeholder="1">
+                        <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="merge[]" value="0" placeholder="1">
                     </div>
                     <div class="col text-center">
                         <button class="btn btn-danger">

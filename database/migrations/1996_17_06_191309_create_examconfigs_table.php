@@ -15,12 +15,13 @@ class CreateExamconfigsTable extends Migration
     {
         Schema::create('examconfigs', function (Blueprint $table) {
             $table->id();
-            $table->unique(array('institute_id', 'class_id', 'group_id','subjectmap_id', 'examstartups_id','examcode_id'), 'exam_mark_combination');
+            $table->unique(array('institute_id', 'academic_year_id', 'class_id', 'group_id','subjectmap_id', 'examstartups_id','examcode_id'), 'exam_mark_combination');
             $table->string('institute_id');
-            $table->bigInteger('class_id');
-            $table->bigInteger('group_id');
+            $table->integer('academic_year_id');
+            $table->integer('class_id');
+            $table->integer('group_id');
             $table->bigInteger('subjectmap_id');
-            $table->bigInteger('examstartups_id');
+            $table->integer('examstartups_id');
             $table->bigInteger('examcode_id');
             $table->integer('total_marks');
             $table->integer('pass_mark');

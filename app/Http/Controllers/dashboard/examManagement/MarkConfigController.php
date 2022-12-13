@@ -33,6 +33,7 @@ class MarkConfigController extends Controller
     {
         $class_id = $request->class_id;
         $group_id = $request->group_id;
+        $academic_year_id = $request->academic_year_id;
         $examcodes = Examcode::where('class_id', $request->class_id)
             ->where('institute_id', Auth::user()->institute_id)
             ->get();
@@ -42,14 +43,17 @@ class MarkConfigController extends Controller
         $subjectmaps = Subjectmap::where('class_id', $request->class_id)
             ->where('group_id', $request->group_id)
             ->where('institute_id', Auth::user()->institute_id)
+            ->where('academic_year_id', $request->academic_year_id)
             ->get();
+        // $user_id = User::select('id')->where('institute_id',Auth::user()->institute_id)->first();
         $examconfiges = Examconfig::where('institute_id', Auth::user()->institute_id)
-                                ->where('class_id', $request->class_id)
-                                ->where('group_id', $request->group_id)
-                                ->get();
+            ->where('class_id', $request->class_id)
+            ->where('group_id', $request->group_id)
+            ->where('academic_year_id', $request->academic_year_id)
+            ->get();
         $users = User::where('institute_id', Auth::user()->institute_id)->get();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
-        return view('layouts.dashboard.exam_management.settings.markconfig.index', compact('users', 'startups', 'examcodes', 'examstartups', 'subjectmaps', 'class_id', 'group_id', 'examconfiges'));
+        return view('layouts.dashboard.exam_management.settings.markconfig.index', compact('users', 'startups', 'examcodes', 'examstartups', 'subjectmaps', 'class_id', 'group_id', 'examconfiges', 'academic_year_id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -70,7 +74,6 @@ class MarkConfigController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-
             'subjectmap_id' => 'required',
             'examstartups_id' => 'required',
             'examcode_id' => 'required',
@@ -80,33 +83,28 @@ class MarkConfigController extends Controller
         ]);
 
         try {
-            foreach($request->examstartups_id as $examstartups_id){
-                foreach ($request->subjectmap_id as $key=>$subjectmap_id) {
-                    
-                    $input = Examconfig::
-                    updateOrInsert(
-                        [
-                             'class_id' => $request->class_id,
-                             'group_id' => $request->group_id,
-                             'subjectmap_id' => $subjectmap_id,
-                             'examstartups_id' => $examstartups_id,
-                             'examcode_id' => $request->examcode_id[$key]
-                        ],
-                        [
- 
-                             'institute_id' => Auth::user()->institute_id,
-                             'total_marks' => $request->total_marks[$key],
-                             'pass_mark' => $request->pass_mark[$key],
-                             'acceptance' => $request->acceptance[$key],     
-                         ]
-                     );
-                    }
-                }    
+            // $user_id = User::select('id')->where('institute_id',Auth::user()->institute_id)->first();
+            foreach ($request->examstartups_id as $examstartups_id) {
+                foreach ($request->subjectmap_id as $key => $subjectmap_id) {
+
+                    $input = new Examconfig();
+
+                    $input->institute_id = Auth::user()->institute_id;
+                    $input->academic_year_id = $request->academic_year_id;
+                    $input->class_id = $request->class_id;
+                    $input->group_id = $request->group_id;
+                    $input->subjectmap_id = $subjectmap_id;
+                    $input->examstartups_id = $examstartups_id;
+                    $input->examcode_id = $request->examcode_id[$key];
+                    $input->total_marks = $request->total_marks[$key];
+                    $input->pass_mark = $request->pass_mark[$key];
+                    $input->acceptance = $request->acceptance[$key];
+                    $input->save();
+                }
+            }
 
             return redirect(route('markconfig'))->with('message', 'Data Upload Successfully');
-        
-        } 
-        catch (QueryException $e) {
+        } catch (QueryException $e) {
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1062) {
                 return redirect(route('markconfig'))->with('error', 'This Subject is already configured.');
@@ -143,9 +141,46 @@ class MarkConfigController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        $this->validate($request, [
+
+            'subjectmap_id' => 'nullable',
+            'examstartups_id' => 'nullable',
+            'examcode_id' => 'nullable',
+            'total_marks' => 'nullable',
+            'pass_mark' => 'nullable',
+            'acceptance' => 'nullable'
+        ]);
+
+        try {
+                foreach ($request->subjectmap_id as $key => $subjectmap_id) {
+
+                    DB::table('examconfigs')
+                        ->where(
+                            ['institute_id' => Auth::user()->institute_id,
+                            'academic_year_id' => $request->academic_year_id,
+                            'class_id'=> $request->class_id,
+                            'group_id' => $request->group_id,
+                            'subjectmap_id' => $subjectmap_id,
+                            'examstartups_id' => $request->examstartups_id[$key],
+                            'examcode_id' => $request->examcode_id[$key]]
+                        )
+                        ->update(
+                            ['total_marks' => $request->total_marks[$key],
+                            'pass_mark' => $request->pass_mark[$key],
+                            'acceptance' => $request->acceptance[$key]]
+                        );
+                }
+
+            return redirect(route('markconfig'))->with('message', 'Data Upload Successfully');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062) {
+                return redirect(route('markconfig'))->with('error', 'This Subject is already configured.');
+            }
+        }
     }
 
     /**
