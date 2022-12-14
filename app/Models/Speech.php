@@ -11,7 +11,8 @@ class Speech extends Model
     protected $fillable = [
         'institute_id',
         'name',
-        'designation_id',
+        'designation',
+        'serial',
         'message',
         'pro_img'
     ];

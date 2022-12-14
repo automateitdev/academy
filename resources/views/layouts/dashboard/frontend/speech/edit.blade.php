@@ -21,8 +21,12 @@
                             <input type="text" class="form-control" id="name" name="name" value="{{$speeches->name}}">
                         </div>
                         <div class="mb-3">
+                            <label for="designation" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="designation" name="designation" value="{{$speeches->designation}}">
+                        </div>
+                        <div class="mb-3">
                             <label for="message" class="form-label">Message</label>
-                            <textarea type="text" class="form-control" id="message" aria-label="With textarea" name="message" value="{{$speeches->message}}"></textarea>
+                            <textarea type="text" class="form-control" id="message" aria-label="With textarea" name="message">{{$speeches->message}}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="pro_img" class="form-label">Photo</label>

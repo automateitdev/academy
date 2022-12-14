@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Designation;
 use App\Models\Speech;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class SpeechController extends Controller
 {
@@ -18,7 +19,7 @@ class SpeechController extends Controller
      */
     public function index()
     {
-        $speeches = Speech::all();
+        $speeches = Speech::where('institute_id', Auth::user()->institute_id)->get();
         $designations = Designation::all();
         $users = User::all();
         return  view('layouts.dashboard.frontend.speech.index', compact('designations', 'speeches','users'));
@@ -42,35 +43,44 @@ class SpeechController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request, [
             'institute_id' => 'required',
             'name' => 'required',
-            'designation_id' => 'required',
+            'designation' => 'required',
+            'serial' => 'required',
             'message' => 'required',
             'pro_img' => 'required',
         ]);
 
-        $speeches = new Speech();
         
-        $speeches->institute_id = $request->institute_id;
-        $speeches->name = $request->name;
-        $speeches->designation_id = $request->designation_id;
-        $speeches->message = $request->message;
+        try {
+            $speeches = new Speech();
+        
+            $speeches->institute_id = $request->institute_id;
+            $speeches->name = $request->name;
+            $speeches->designation = $request->designation;
+            $speeches->serial = $request->serial;
+            $speeches->message = $request->message;
+    
+            if($request->hasFile('pro_img')){
+                $file = $request->file('pro_img');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $file->move('images/speech/',$filename);
+                $speeches->pro_img = $filename;
+            }else{
+                $speeches->pro_img = '';
+            }
+            
+            $speeches->save();
 
-        if($request->hasFile('pro_img')){
-            $file = $request->file('pro_img');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('images/speech/',$filename);
-            $speeches->pro_img = $filename;
-        }else{
-            $speeches->pro_img = '';
+            return redirect(route('speech.index'))->with('message', 'Data Upload Successfully');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062) {
+                return redirect(route('speech.index'))->with('error', 'This Serial is already configured.');
+            }
         }
-        
-        $speeches->save();
-
-        return redirect(route('speech.index'));
     }
 
     /**
@@ -109,7 +119,7 @@ class SpeechController extends Controller
         $this->validate($request, [
             'institute_id' => 'nullable',
             'name' => 'nullable',
-            'designation_id' => 'nullable',
+            'designation' => 'nullable',
             'message' => 'nullable',
             'pro_img' => 'nullable',
         ]);
@@ -117,6 +127,7 @@ class SpeechController extends Controller
         $speeches = Speech::find($id);
         
         $speeches->name = $request->name;
+        $speeches->designation = $request->designation;
         $speeches->message = $request->message;
 
         if($request->hasFile('pro_img')){
@@ -125,8 +136,6 @@ class SpeechController extends Controller
             $filename = time().'.'.$extension;
             $file->move('images/speech/',$filename);
             $speeches->pro_img = $filename;
-        }else{
-            $speeches->pro_img = '';
         }
         
         $speeches->save();

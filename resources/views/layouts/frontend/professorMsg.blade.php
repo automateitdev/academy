@@ -6,7 +6,7 @@
                     <span class="ewKuy overflow-hidden">
                         <div class="d_shadow"></div>
                         @foreach ($speeches as $spech)
-                            @if ($spech->designation_id == 1)
+                            @if ($spech->serial == 1)
                             <img src="{{ asset('images/speech/' . $spech->pro_img) }}" alt="" width="375px">
                             @endif
                         @endforeach
@@ -16,9 +16,9 @@
             <div class="col-sm-6 col-md-6">
                 <div class="contentOfPr">
                     @foreach ($speeches as $spech)
-                        @if ($spech->designation_id == 1)
+                        @if ($spech->serial == 1)
                         <h1 class="p_name">{{ $spech->name }}</h1>
-                        <h4 class="p_title">{{ $spech->designation->designation }}</h4>
+                        <h4 class="p_title">{{ $spech->designation }}</h4>
                         <p class="p_msg text-justify" style="text-align: justify">
                             {{ Str::words($spech->message, 100, ' . . . ')}}
                         </p>
@@ -30,10 +30,11 @@
         <div class="row vice">
             <div class="col-sm-6 col-md-6">
                 <div class="contentOfPr">
+                    
                     @foreach ($speeches as $spech)
-                    @if ($spech->designation_id == 2)
+                    @if ($spech->serial == 2)
                         <h1 class="p_name">{{ $spech->name }}</h1>
-                        <h4 class="p_title">{{ $spech->designation->designation }}</h4>
+                        <h4 class="p_title">{{ $spech->designation}}</h4>
                         <p class="p_msg text-justify" style="text-align: justify" {{ $spech->message }}</p>
                         @endif
                     @endforeach
@@ -44,7 +45,7 @@
                     <span class="ewKuy overflow-hidden">
                         <div class="d_shadow"></div>
                         @foreach ($speeches as $spech)
-                        @if ($spech->designation_id == 2)
+                        @if ($spech->serial == 2)
                             <img src="{{ asset('images/speech/' . $spech->pro_img) }}" alt="" width="375px">
                             @endif
                         @endforeach

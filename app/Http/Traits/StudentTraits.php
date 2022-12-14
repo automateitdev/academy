@@ -95,12 +95,11 @@ trait StudentTraits
     }
 
     public function assign_subject($institute_id, $student_id, $class_id, $group_id, $academic_year_id)
-    {  
-        $section_id = SectionAssign::where('id', $class_id)->get();
-        $section_id_two = SectionAssign::where('class_id', $class_id)->get();
-        $groupassign_group_id = GroupAssign::select('group_id')->where('id', $group_id)->first();
-
+    {
         if ($student_id != null) {
+            $groupassign_group_id = GroupAssign::select('id')->where('group_id', $group_id)->first();
+            $section_id = SectionAssign::where('id', $class_id)->get();
+            
             foreach ($section_id as $class) {
                 $students = Student::where('std_id', $student_id)
                     ->where('institute_id', $institute_id)
@@ -108,19 +107,19 @@ trait StudentTraits
                     ->where('group_id', $group_id)
                     ->where('academic_year_id',$academic_year_id)
                     ->get();
-
+            
+                // dd($section_id);
                 foreach($students as $student)
                     {
                     $subjectmaps = Subjectmap::where([
                         ['institute_id', $institute_id],
                         ['class_id', $class->class_id],
-                        ['group_id', $group_id],
+                        ['group_id', $groupassign_group_id->id],
                         ['academic_year_id', $academic_year_id]
                     ])->get();
-                        
+                    // dd($subjectmaps);
                     foreach($subjectmaps as $subjectmap){
                         $input = StudentSubjectMap::updateOrCreate(
-
                             [
                                 'institute_id' => $institute_id,
                                 'academic_year_id' => $academic_year_id,
@@ -133,19 +132,20 @@ trait StudentTraits
                         );
                     }
 
+                    
                 }
             }
         } else {
-            foreach ($section_id_two as $class) {
+            $groupassign_group_id = GroupAssign::select('group_id')->where('id', $group_id)->first();
+            $section_id = SectionAssign::where('class_id', $class_id)->get();
+            foreach ($section_id as $class) {
                 // dd($class);
                 $students = Student::where('institute_id', $institute_id)
                     ->where('section_id', $class->id)
-                    ->where('group_id', $groupassign_group_id)
+                    ->where('group_id', $groupassign_group_id->group_id)
                     ->where('academic_year_id',$academic_year_id)
-                    ->get();
-// dd($class->id,$groupassign_group_id);
+                ->get();
                 foreach ($students as $student) {
-
                     $subjectmaps = Subjectmap::where([
                         ['institute_id', $institute_id],
                         ['class_id', $class_id],
@@ -155,7 +155,6 @@ trait StudentTraits
                         
                     foreach($subjectmaps as $subjectmap){
                         $input = StudentSubjectMap::updateOrCreate(
-
                             [
                                 'institute_id' => $institute_id,
                                 'academic_year_id' => $academic_year_id,
