@@ -13,4 +13,9 @@ class GroupAssign extends Model
         'class_id',
         'group_id'
     ];
+
+    public function startup()
+    {
+        return $this->belongsTo(Startup::class, 'group_id', 'id');
+    }
 }

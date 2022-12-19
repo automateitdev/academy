@@ -12,15 +12,10 @@ use App\Models\SectionAssign;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentImport;
-use App\Models\Datesetup;
-use App\Models\Waivermapping;
-use App\Models\Feeamount;
-use App\Models\Payapply;
 use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
-use Maatwebsite\Excel\Validators\ValidationException;
 use App\Http\Traits\StudentTraits;
-use App\Models\StartupSubcategory;
-use Illuminate\Contracts\Session\Session;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
@@ -37,7 +32,7 @@ class RegistrationController extends Controller
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
         $users = User::all();
-        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups','genders','religions','sectionAssignes', 'users'));
+        return view('layouts.dashboard.std_management.registration.enrollement.auto.index', compact('startups', 'genders', 'religions', 'sectionAssignes', 'users'));
     }
 
     public function excel_index()
@@ -47,7 +42,7 @@ class RegistrationController extends Controller
         $startups = Startup::all();
         $sectionAssignes = SectionAssign::all();
         $users = User::all();
-        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups','genders','religions','sectionAssignes', 'users'));
+        return view('layouts.dashboard.std_management.registration.excel.index', compact('startups', 'genders', 'religions', 'sectionAssignes', 'users'));
     }
 
     /**
@@ -70,30 +65,50 @@ class RegistrationController extends Controller
     {
         $sectionassign_id = SectionAssign::select('section_id')->where('id', $request->section_id)->first();
         $startup_id = Startup::select('id')->where('id', $sectionassign_id->section_id)->first();
-        // dd($startup_id->id);
-        // $startup_subcat_id = StartupSubcategory::select('startup_subcategory_name')->where('id',$startup_id->startup_subcategory_id)->first();
-        // dd($request->all());
-        foreach ($request->roll as $key => $roll) {
-            $input = new Student();
-            $input->institute_id = $request->institute_id;
-            $input->std_id = $request->std_id[$key];
-            $input->academic_year_id = $request->academic_year_id;
-            $input->session_id = $request->session_id;
-            $input->section_id = $request->section_id;
-            $input->std_category_id = $request->std_category_id;
-            $input->group_id = $request->group_id;
-            $input->roll = $roll;
-            $input->name = $request->name[$key];
-            $input->gender_id = $request->gender_id[$key];
-            $input->religion_id = $request->religion_id[$key];
-            $input->father_name = $request->father_name[$key];
-            $input->mother_name = $request->mother_name[$key];
-            $input->mobile_no = $request->mobile_no[$key];
-            $input->save();
-            $this->assign_fee($request->std_id[$key], $request->institute_id);
-            $this->assign_subject($request->institute_id, $request->std_id[$key], $request->section_id, $request->group_id, $request->academic_year_id);
+
+        try {
+
+            foreach ($request->roll as $key => $roll) {
+                $student = Student::where('institute_id', Auth::user()->institute_id)
+                    ->where('std_id', $request->std_id[$key])
+                    ->first();
+
+                if (!empty($student)) {
+
+                    return redirect(route('enrollment.auto.index'))->with('error', 'This Student is already registered');
+                }
+                $input = new Student();
+                $input->institute_id = $request->institute_id;
+                $input->std_id = $request->std_id[$key];
+                $input->academic_year_id = $request->academic_year_id;
+                $input->session_id = $request->session_id;
+                $input->section_id = $request->section_id;
+                $input->std_category_id = $request->std_category_id;
+                $input->group_id = $request->group_id;
+                $input->roll = $roll;
+                $input->name = $request->name[$key];
+                $input->gender_id = $request->gender_id[$key];
+                $input->religion_id = $request->religion_id[$key];
+                $input->father_name = $request->father_name[$key];
+                $input->mother_name = $request->mother_name[$key];
+                $input->mobile_no = $request->mobile_no[$key];
+
+                if ($input->save()) {
+                    $this->assign_fee($request->std_id[$key], $request->institute_id);
+                    $this->assign_subject($request->institute_id, $request->std_id[$key], $request->section_id, $request->group_id, $request->academic_year_id);
+                }
+                else{
+                    return redirect(route('enrollment.auto.index'))->with('error', 'Try again later.');
+                }
+            }
+
+            return redirect(route('enrollment.auto.index'))->with('message', 'Data Upload Successfully');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062) {
+                return redirect(route('enrollment.auto.index'))->with('error', 'This Student is already registered.');
+            }
         }
-        return redirect(route('enrollment.auto.index'))->with('message', 'Data Upload Successfully');
     }
 
     public function excel_store(Request $request)
@@ -102,7 +117,7 @@ class RegistrationController extends Controller
             ['file' => ['required', 'file', 'mimes:xlsx']],
             ['file.required' => 'Please upload the file']
         );
-        
+
         $import = new StudentImport(
             $request->institute_id,
             $request->academic_year_id,
@@ -125,7 +140,6 @@ class RegistrationController extends Controller
                     };
                     $this->assign_fee($student[0], $request->institute_id);
                     $this->assign_subject($request->institute_id, $student[0], $request->section_id, $request->group_id, $request->academic_year_id);
-
                 }
             }
 
@@ -135,22 +149,19 @@ class RegistrationController extends Controller
             } else {
                 return redirect(route('enrollment.excel.index'))->with('message', 'New students are added (duplicacy ignored).');
             }
-            
-        } catch ( NoTypeDetectedException $e) {
+        } catch (NoTypeDetectedException $e) {
             // $request->session()->forget('message');
             return redirect(route('enrollment.excel.index'))->with('error', 'Please, Only Upload Excel Sheet');
         }
-        
-        
     }
 
-   
+
 
 
     public function download()
     {
         $file_path = storage_path('excel_form.xlsx');
-        return response()->download( $file_path);
+        return response()->download($file_path);
     }
     /**
      * Display the specified resource.

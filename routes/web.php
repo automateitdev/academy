@@ -40,6 +40,8 @@ use App\Http\Controllers\admin\BankInfoController;
 use App\Http\Controllers\admin\RoleAssignController;
 use App\Http\Controllers\admin\DomainAssignController;
 use App\Http\Controllers\dashboard\examManagement\MarkConfigController;
+use App\Http\Controllers\dashboard\examManagement\MarkInputController;
+use App\Http\Controllers\dashboard\examManagement\MarkUpdateController;
 use App\Http\Controllers\dashboard\fee_management\RemoveController;
 use App\Http\Controllers\dashboard\fee_management\OpsController;
 use App\Http\Controllers\dashboard\frontend\AboutInstituteController;
@@ -198,7 +200,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/MasterSetting/4th_Subject_config', [SubjectController::class, 'fourthsubject'])->name('fourthsubject.index');
     Route::get('/MasterSetting/4th_Subject_config/query', [SubjectController::class, 'search'])->name('fourthsubject.search');
-    Route::get('/MasterSetting/4th_Subject_config/single_subject/{id}', [SubjectController::class, 'singleedit'])->name('fourthsubject.single.edit');
+    Route::get('/MasterSetting/4th_Subject_config/single_subject/{student_id}', [SubjectController::class, 'singleedit'])->name('fourthsubject.single.edit');
+    Route::post('/MasterSetting/4th_Subject_config/update', [SubjectController::class, 'foursubjectupdate'])->name('foursubjectupdate');
     Route::get('/MasterSetting/4th_Subject_config/multiple_subject/{id}', [SubjectController::class, ' multipleedit'])->name('fourthsubject.multiple.edit');
    
 
@@ -303,7 +306,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/exam-management/Mark_config/query', [MarkConfigController::class, 'search'])->name('markconfig.search');
     Route::post('/exam-management/Mark_config/store', [MarkConfigController::class, 'store'])->name('markconfig.store');
     Route::post('/exam-management/Mark_config/update', [MarkConfigController::class, 'update'])->name('markconfig.update');
-
+    //mark input
+    Route::get('/exam-management/Mark_input', [MarkInputController::class, 'index'])->name('markinput');
+    Route::get('/exam-management/Mark_input/query', [MarkInputController::class, 'search'])->name('markinput.search');
+    Route::get('/getexamfromexamcreate', [MarkInputController::class, 'getexamfromexamcreate']);
+    Route::get('/getsubjectinfo', [MarkInputController::class, 'getsubjectinfo']);
+    Route::get('/getgroupforexaminput', [MarkInputController::class, 'getgroupforexaminput']);
+    Route::post('/exam-management/Mark_input/store', [MarkInputController::class, 'store'])->name('markinput.store');
+    //mark update
+    Route::get('/exam-management/Mark_update', [MarkUpdateController::class, 'index'])->name('markupdate');
+    Route::get('/exam-management/Mark_update/query', [MarkUpdateController::class, 'search'])->name('markupdate.search');
+    Route::post('/exam-management/Mark_input/store', [MarkUpdateController::class, 'store'])->name('markupdate.update');
+    
 
     /////////////////////// Exam Management End//////////////////
 

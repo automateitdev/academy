@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
     {
         $userData = [
             [
-            'institute_id' => 'a0143',
+            'institute_id' => '0143',
             'institute_name' => 'Academy',
             'EIIN_number' => 'E1234',
             'institute_type' => 'govt.',

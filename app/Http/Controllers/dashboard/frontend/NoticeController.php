@@ -53,12 +53,20 @@ class NoticeController extends Controller
         $document->date = $request->date;
 
         if($request->hasFile('file')){
+            // $allowedfileExtension = ['pdf'];
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
-            // $file->move('notice/',$filename);
-            $filename = $file->storeAs('notice', $filename);
+            $file->move('notice/',$filename);
             $document->file = $filename;
+
+            // $check = in_array($extension, $allowedfileExtension);
+            // if ($check) {
+            //     $filename = $file->storeAs('notice', $filename);
+            //     $document->file = $filename;
+            // }
+            // $filename = $file->storeAs('notice', $filename);
+            
         }else{
             $document->file = '';
         }

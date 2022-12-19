@@ -421,7 +421,7 @@
         <p>{{$selectedNotice->description}}</p>
     </div>
     <div class="wrap mt-5 mb-5 text-center">
-        <embed src="{{asset('/notice/'.$selectedNotice->file.'#toolbar=0&navpanes=0&scrollbar=0')}}" type="application/pdf" class="" width="80%" height="600px" />
+        <embed src="{{asset('notice/'.$selectedNotice->file.'#toolbar=0&navpanes=0&scrollbar=0')}}" type="application/pdf" class="" width="80%" height="600px" />
     </div>
     @include('layouts.frontend.footer')
 

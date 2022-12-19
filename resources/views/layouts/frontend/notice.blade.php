@@ -53,8 +53,8 @@
                                         <ul>
                                             <li><a title="নোটিশ--অফিস-আদেশ" href="http://dshe.gov.bd/site/page/2b49f7f0-b527-4f55-b100-45e8eb59ebb6/%E0%A6%A8%E0%A7%8B%E0%A6%9F%E0%A6%BF%E0%A6%B6--%E0%A6%85%E0%A6%AB%E0%A6%BF%E0%A6%B8-%E0%A6%86%E0%A6%A6%E0%A7%87%E0%A6%B6/" target="_blank" rel="noopener noreferrer"><span>নোটিশ/অফিস আদেশ</span></a></li>
                                             <li><a title="প্রজ্ঞাপন/নীতিমালা/পরিপত্র/কাঠামো" href="http://dshe.gov.bd/site/page/043d81a3-a9d9-4a72-97d2-e3af5ff14c48/%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%9C%E0%A7%8D%E0%A6%9E%E0%A6%BE%E0%A6%AA%E0%A6%A8--%E0%A6%A8%E0%A7%80%E0%A6%A4%E0%A6%BF%E0%A6%AE%E0%A6%BE%E0%A6%B2%E0%A6%BE--%E0%A6%AA%E0%A6%B0%E0%A6%BF%E0%A6%AA%E0%A6%A4%E0%A7%8D%E0%A6%B0--%E0%A6%95%E0%A6%BE%E0%A6%A0%E0%A6%BE%E0%A6%AE%E0%A7%8B/" target="_blank" rel="noopener noreferrer"><span>প্রজ্ঞাপন/নীতিমালা/পরিপত্র/কাঠামো</span></a></li>
-                                            <li><a title="অধিদপ্তরের চুক্তিসমূহ/ অগ্রগতি" href="#" target="_blank" rel="noopener noreferrer">Tongi College APA 2020-2021</a></li>
-                                            <li><a title="অধিদপ্তরের চুক্তিসমূহ/ অগ্রগতি" href="#" target="_blank" rel="noopener noreferrer">Tongi College APA 2021-2022</a><span></span></li>
+                                            <li><a title="অধিদপ্তরের চুক্তিসমূহ/ অগ্রগতি" href="#" target="_blank" rel="noopener noreferrer">School/College APA 2020-2021</a></li>
+                                            <li><a title="অধিদপ্তরের চুক্তিসমূহ/ অগ্রগতি" href="#" target="_blank" rel="noopener noreferrer">School/College APA 2021-2022</a><span></span></li>
                                             <li><a title="আঞ্চলিক কার্যালয়ের চুক্তিসমূহ" href="https://dshe.portal.gov.bd/site/page/cd86a230-8dea-472f-998b-6e5109b1c9c8/" target="_blank" rel="noopener noreferrer"><span>আঞ্চলিক কার্যালয়ের চুক্তিসমূহ</span></a></li>
                                         </ul>
                                     </div>

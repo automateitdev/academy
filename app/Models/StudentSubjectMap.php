@@ -20,4 +20,22 @@ class StudentSubjectMap extends Model
         'marksmap',
         'examstartups_id'
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id', 'std_id');
+    }
+    public function subjectmap()
+    {
+        return $this->belongsTo(Subjectmap::class, 'subjectmap_id', 'id');
+    }
+    public function subjecttype()
+    {
+        return $this->belongsTo(Subjecttype::class, 'subject_type_id', 'id');
+    }
+    public function groupassign()
+    {
+        return $this->belongsTo(GroupAssign::class, 'group_id', 'group_id');
+    }
+    
 }

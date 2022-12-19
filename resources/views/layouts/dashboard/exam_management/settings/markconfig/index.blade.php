@@ -18,7 +18,7 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="markconfig-tab" data-bs-toggle="tab" data-bs-target="#markconfig" type="button" role="tab" aria-controls="markconfig" aria-selected="true">Mark Config</button>
-                        <button class="nav-link" id="markupdate-tab" data-bs-toggle="tab" data-bs-target="#markupdate" type="button" role="tab" aria-controls="markupdate" aria-selected="false">Mark Update</button>
+                        <button class="nav-link" id="markupdate-tab" data-bs-toggle="tab" data-bs-target="#markupdate" type="button" role="tab" aria-controls="markupdate" aria-selected="false">Mark Config Update</button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -49,11 +49,12 @@
                                 <div class="rkj mt-3">
                                     <form action="{{route('markconfig.search')}}" method="GET" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="institute_id" value="{{Auth::user()->institute_id}}">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Class</label>
-                                                    <select class="form-control single" name="class_id">
+                                                    <select class="form-control single subjectClass" name="class_id">
                                                         <option value="">Select a Class</option>
                                                         @foreach($startups as $item)
                                                         @if($item->startup_category_id == 4)
@@ -65,17 +66,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="group_id" class="form-label">Group</label>
-                                                    <select class="form-control single" name="group_id">
-                                                        <option value=" ">Choose One</option>
-                                                        @foreach($startups as $startup)
-                                                        @if($startup->startup_category_id == "5")
-                                                        <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                        @endif
-                                                        @endforeach
+                                                    <label for="" class="form-label">Group</label>
+                                                    <select class="form-control single subjectgroup" name="group_id">
+
                                                     </select>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -194,7 +191,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
-                                                <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" value="1" name="acceptance[]">
+                                                <input type="text" onkeypress="return /[0-9.]/i.test(event.key)" class="form-control" value="1" name="acceptance[]">
                                             </div>
                                         </div>
                                         <div class="col">

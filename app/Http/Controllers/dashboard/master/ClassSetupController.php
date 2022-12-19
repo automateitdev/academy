@@ -137,8 +137,6 @@ class ClassSetupController extends Controller
             
         }
         $groupdata = array_combine($groupassign_id, $groupname);
-        // $alldata = $data->id 
-        // $subName->startup_subcategory_name,
         return $groupdata;
     }
      

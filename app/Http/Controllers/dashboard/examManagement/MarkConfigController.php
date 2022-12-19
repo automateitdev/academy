@@ -10,6 +10,7 @@ use App\Models\Examcode;
 use App\Models\Examstartup;
 use App\Models\Subjectmap;
 use App\Models\Examconfig;
+use App\Models\GroupAssign;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -25,14 +26,15 @@ class MarkConfigController extends Controller
     {
         $users = User::where('institute_id', Auth::user()->institute_id)->get();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
-        // $examconfiges = Examconfig::where('institute_id', Auth::user()->institute_id)->get();
-        return view('layouts.dashboard.exam_management.settings.markconfig.index', compact('users', 'startups'));
+        $groupassigns = GroupAssign::where('institute_id', Auth::user()->institute_id)->get();
+        return view('layouts.dashboard.exam_management.settings.markconfig.index', compact('users', 'startups', 'groupassigns'));
     }
 
     public function search(Request $request)
     {
         $class_id = $request->class_id;
         $group_id = $request->group_id;
+       
         $academic_year_id = $request->academic_year_id;
         $examcodes = Examcode::where('class_id', $request->class_id)
             ->where('institute_id', Auth::user()->institute_id)
@@ -40,9 +42,9 @@ class MarkConfigController extends Controller
         $examstartups = Examstartup::where('class_id', $request->class_id)
             ->where('institute_id', Auth::user()->institute_id)
             ->get();
-        $subjectmaps = Subjectmap::where('class_id', $request->class_id)
+        $subjectmaps = Subjectmap::where('institute_id', $request->institute_id)
+            ->where('class_id', $request->class_id)
             ->where('group_id', $request->group_id)
-            ->where('institute_id', Auth::user()->institute_id)
             ->where('academic_year_id', $request->academic_year_id)
             ->get();
         // $user_id = User::select('id')->where('institute_id',Auth::user()->institute_id)->first();

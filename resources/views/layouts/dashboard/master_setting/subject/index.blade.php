@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="mb-25">
-                    <a href="#">Subject Config</a>
+                    <a href="{{route('subject.index')}}">Subject Config</a>
                     <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#subjectadd">+ Add New Subject</button>
                 </h2>
             </div>
@@ -119,7 +119,9 @@
                         <select name="type[]" id="" class="selectall">
                             <option value="">Choose Type</option>
                             @foreach($subjecttypes as $subjecttype)
+                            @if($subjecttype->id != 5)
                             <option value="{{$subjecttype->id}}">{{$subjecttype->name}}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>

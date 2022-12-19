@@ -11,8 +11,12 @@ use App\Models\Subject;
 use App\Models\Subjectmap;
 use App\Models\SectionAssign;
 use App\Models\Student;
+use App\Models\GroupAssign;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Traits\StudentTraits;
+use App\Models\StudentSubjectMap;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
@@ -36,12 +40,12 @@ class SubjectController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        $subname = strtolower($request->name);
-        $subjects = Subject::create(['name'=>$subname]);
+        $subname = ucfirst(strtolower($request->name));
+        $subjects = Subject::create(['name' => $subname]);
 
         return redirect(route('subject.index'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -69,25 +73,33 @@ class SubjectController extends Controller
             'serial' => 'required',
             'merge' => 'nullable',
         ]);
-        foreach($request->subject_id as $key=>$subject_id)
-        {
-            $input = new Subjectmap();
-            $input->institute_id = Auth::user()->institute_id;
-            $input->academic_year_id = $request->academic_year_id;
-            $input->class_id = $request->class_id;
-            $input->group_id = $request->group_id;
-            $input->subject_id = $subject_id;
-            $input->type = $request->type[$key];
-            $input->serial = $request->serial[$key];
-            $input->merge = $request->merge[$key];
-            
-            if($input->save())
-            {
-                $this->assign_subject(Auth::user()->institute_id, null, $request->class_id, $request->group_id, $request->academic_year_id);
+        
+        try {
+            foreach ($request->subject_id as $key => $subject_id) {
+                $input = new Subjectmap();
+                $input->institute_id = Auth::user()->institute_id;
+                $input->academic_year_id = $request->academic_year_id;
+                $input->class_id = $request->class_id;
+                $input->group_id = $request->group_id;
+                $input->subject_id = $subject_id;
+                $input->type = $request->type[$key];
+                $input->serial = $request->serial[$key];
+                $input->merge = $request->merge[$key];
+
+                if ($input->save()) {
+                    $this->assign_subject(Auth::user()->institute_id, null, $request->class_id, $request->group_id, $request->academic_year_id);
+                } else {
+                    return redirect(route('subject.index'))->with('error', 'Try Again Letter.');
+                }
             }
-            
+
+            return redirect(route('subject.index'))->with('message', 'Data Upload Successfully');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062) {
+                return redirect(route('subject.index'))->with('error', 'This Subject is already configured.');
+            }
         }
-        return redirect(route('subject.index'))->with('success', 'Subject Configure Success.');
     }
 
     /**
@@ -119,7 +131,7 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
 
     public function update(Request $request, $id)
     {
@@ -146,8 +158,10 @@ class SubjectController extends Controller
         $subjecttypes = Subjecttype::all();
         $subjects = Subject::all();
         $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
-        return view('layouts.dashboard.master_setting.subject.foursubject', 
-        compact('users', 'startups', 'subjecttypes', 'subjects', 'sectionAssignes'));
+        return view(
+            'layouts.dashboard.master_setting.subject.foursubject',
+            compact('users', 'startups', 'subjecttypes', 'subjects', 'sectionAssignes')
+        );
     }
     public function search(Request $request)
     {
@@ -160,22 +174,46 @@ class SubjectController extends Controller
         $users = User::all();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
-        $students = Student::where('section_id', $request->section_id)
-            ->where('academic_year_id', $request->academic_year_id)
+        $sectionId = SectionAssign::where('institute_id', Auth::user()->institute_id)
+            ->where('id', $request->section_id)
+            ->first();
+        $groupId = GroupAssign::where('institute_id', Auth::user()->institute_id)
             ->where('group_id', $request->group_id)
+            ->first();
+        $stdudentSubjectMap = StudentSubjectMap::where('class_id', $sectionId->id)
+            ->where('academic_year_id', $request->academic_year_id)
+            ->where('group_id', $groupId->group_id)
+            ->where('institute_id', Auth::user()->institute_id)
             ->paginate(50);
-        return view('layouts.dashboard.master_setting.subject.foursubject', compact('users', 'startups', 'sectionAssignes', 'students'));
+
+        return view('layouts.dashboard.master_setting.subject.foursubject', compact('users', 'startups', 'sectionAssignes', 'stdudentSubjectMap'));
     }
-    public function singleedit($id)
+    public function singleedit($student_id)
     {
         $users = User::all();
-        $students = Student::find($id);
-        return view('layouts.dashboard.master_setting.subject.singleupdate', compact('students', 'users'));
+        $subjecttypes = Subjecttype::all();
+        $stdSubMaps = StudentSubjectMap::where('student_id', $student_id)
+            ->where('institute_id', Auth::user()->institute_id)
+            ->get();
+        return view('layouts.dashboard.master_setting.subject.singleupdate', compact('stdSubMaps', 'users', 'subjecttypes'));
     }
-    public function multipleedit($id)
+
+    public function foursubjectupdate(Request $request)
+    {
+        // dd($request);
+
+        foreach ($request->id as $key => $id) {
+            DB::table('student_subject_maps')
+                ->where('id', $id)
+                ->update(["subject_type_id" => $request->subject_type_id[$key]]);
+        }
+        return redirect(route('fourthsubject.index'))->with('success', 'Data Update Successfully');
+    }
+
+    public function multipleedit($std_id)
     {
         $users = User::all();
-        $students = Student::find($id);
+        $students = Student::find($std_id);
         return view('layouts.dashboard.master_setting.subject.multipleupdate', compact('students', 'users'));
     }
 }

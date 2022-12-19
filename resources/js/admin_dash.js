@@ -504,18 +504,13 @@ $(document).ready(function () {
             },
             success: function (data) {
 
-                console.log("dd: " + data);
                 $('.subjectgroup').html(" ");
 
                 op += '<option value="0" selected disabled>Choose</option>';
                 for (var key in data) {
-                  console.log("key " + key + " has value " + data[key]);
                   op += '<option value="' + key + '">' + data[key] + '</option>';
 
                 }
-                
-              
-
                 $('.subjectgroup').append(op);
 
             },
@@ -525,3 +520,91 @@ $(document).ready(function () {
     });
 });
 // subject config
+// mark input
+$(document).ready(function () {
+    $(document).on('change', '.subjectClass', function () {
+        var class_id = $(this).val();
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getgroupforexaminput',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+
+                $('.subjectgroup').html(" ");
+
+                op += '<option value="0" selected disabled>Choose</option>';
+                for (var key in data) {
+                  op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('.subjectgroup').append(op);
+
+            },
+
+        });
+
+    });
+});
+$(document).ready(function () {
+    $(document).on('change', '.subjectClass', function () {
+        var class_id = $(this).val();
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getexamfromexamcreate',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+
+                $('.examnameid').html(" ");
+
+                op += '<option value="0" selected disabled>Choose</option>';
+                for (var key in data) {
+                //   console.log("key " + key + " has value " + data[key]);
+                  op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('.examnameid').append(op);
+
+            },
+
+        });
+
+    });
+});
+$(document).ready(function () {
+    $(document).on('change', '.subjectClass', function () {
+        var class_id = $(this).val();
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getsubjectinfo',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+
+                $('.subjectformarkinput').html(" ");
+
+                op += '<option value="0" selected disabled>Choose</option>';
+                for (var key in data) {
+                  console.log("key " + key + " has value " + data[key]);
+                  op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('.subjectformarkinput').append(op);
+
+            },
+
+        });
+
+    });
+});
+// mark input

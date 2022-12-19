@@ -120,7 +120,7 @@ class ExamStartupController extends Controller
         $grades = [];
         foreach ($request->examgrades_id as $examgrade_id) {
             $grades = array_combine($request->grade_key[$examgrade_id], $request->grade_value[$examgrade_id]);
-            // $grades = array_unique($grades);
+            
             $output = implode(', ', array_map(
                 function ($v, $k) {
                     return sprintf("%s:%s", $k, $v);
@@ -128,9 +128,7 @@ class ExamStartupController extends Controller
                 $grades,
                 array_keys($grades)
             ));
-            echo"<pre>";
-            var_dump($output);
-            echo"</pre>";
+            
             DB::table('examgrades')
                 ->where('id', $examgrade_id)
                 ->update(['grade' => $output]);

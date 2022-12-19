@@ -7,13 +7,33 @@
         <div class="row">
             <div class="col">
                 <h2 class="mb-25">
-                    <a href="#">4th Subject Config</a>
+                    <a href="{{route('fourthsubject.index')}}">4th Subject Config</a>
                     <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#subjectadd">+ Add New Subject</button> -->
                 </h2>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-md-10 ml-5">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+                @endif
+                @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-assign-tab" data-bs-toggle="tab" data-bs-target="#nav-assign" type="button" role="tab" aria-controls="nav-assign" aria-selected="true">Assign</button>
@@ -95,7 +115,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
 
-                                @if(isset($students))
+                                @if(isset($stdudentSubjectMap))
                                 <table class="table table-bordered" id="s_table">
                                     <thead>
                                         <tr>
@@ -103,29 +123,25 @@
                                             <th>Roll No.</th>
                                             <th>Name</th>
                                             <th>Group</th>
-                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($students as $student)
-                                        @if($student->institute_id == Auth::user()->institute_id)
+                                        @foreach($stdudentSubjectMap->unique('student_id') as $stdsubjmap)
                                         <tr>
-                                            <td>{{$student->std_id}}</td>
-                                            <td>{{$student->roll}}</td>
-                                            <td>{{$student->name}}</td>
-                                            <td>{{$student->group_id}}</td>
-                                            <td>{{$student->std_category_id}}</td>
+                                            <td>{{$stdsubjmap->student_id}}</td>
+                                            <td>{{$stdsubjmap->student->roll}}</td>
+                                            <td>{{$stdsubjmap->student->name}}</td>
+                                            <td>{{$stdsubjmap->groupassign->startup->startupsubcategory->startup_subcategory_name}}</td>
                                             <td>
-                                                <a href="{{route('fourthsubject.multiple.edit', $student->id)}}" class="btn btn-primary">Multiple</a>
-                                                <a href="{{route('fourthsubject.single.edit', $student->id)}}" class="btn btn-primary">Single</a>
+                                                <!-- <a href="{{route('fourthsubject.multiple.edit', $stdsubjmap->id)}}" class="btn btn-primary">Multiple</a> -->
+                                                <a href="{{route('fourthsubject.single.edit', $stdsubjmap->student_id)}}" class="btn btn-primary">Assign</a>
                                             </td>
                                         </tr>
-                                        @endif
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{$students->withQueryString()->links('pagination::bootstrap-4')}}
+                                {{$stdudentSubjectMap->withQueryString()->links('pagination::bootstrap-4')}}
                                 @else
                                 <p id="des">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
                                 @endif

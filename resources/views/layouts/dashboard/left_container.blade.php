@@ -216,7 +216,7 @@
                          </a>
                          <ul class="nav nav-treeview">
                              <li class="nav-item">
-                                 <a href="" class="nav-link active">
+                                 <a href="{{route('markinput')}}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                                      <p>Section Wise</p>
                                  </a>
@@ -229,6 +229,14 @@
                              <p>Mark Update</p>
                              <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
+                         <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                 <a href="{{route('markupdate')}}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Section Wise</p>
+                                 </a>
+                             </li>
+                         </ul>
                      </li>
                      <li class="nav-item">
                          <a href="#" class="nav-link active">
