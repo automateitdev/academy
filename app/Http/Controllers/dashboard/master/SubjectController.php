@@ -17,6 +17,7 @@ use App\Http\Traits\StudentTraits;
 use App\Models\StudentSubjectMap;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class SubjectController extends Controller
 {
@@ -108,9 +109,32 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $users = User::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $subjecttypes = Subjecttype::all();
+        $subjects = Subject::all();
+        return view('layouts.dashboard.master_setting.subject.show', compact('users', 'startups', 'subjecttypes', 'subjects'));
+    }
+
+    public function show_query(Request $request)
+    {
+        $users = User::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $subjecttypes = Subjecttype::all();
+        $subjects = Subject::all();
+        $this->validate($request, [
+            'academic_year_id' => 'required',
+            'class_id' => 'required',
+            'group_id' => 'required',
+        ]);
+        $data = Subjectmap::where('institute_id', Auth::user()->institute_id)
+                        ->where('class_id', $request->class_id)
+                        ->where('group_id', $request->group_id)
+                        ->where('academic_year_id', $request->academic_year_id)->get();
+
+        return view('layouts.dashboard.master_setting.subject.show', compact('users', 'startups', 'subjecttypes', 'subjects','data')); 
     }
 
     /**
@@ -165,6 +189,7 @@ class SubjectController extends Controller
     }
     public function search(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request, [
             'group_id' => 'required',
             'section_id' => 'required',
@@ -185,7 +210,7 @@ class SubjectController extends Controller
             ->where('group_id', $groupId->group_id)
             ->where('institute_id', Auth::user()->institute_id)
             ->paginate(50);
-
+        // dd($stdudentSubjectMap);
         return view('layouts.dashboard.master_setting.subject.foursubject', compact('users', 'startups', 'sectionAssignes', 'stdudentSubjectMap'));
     }
     public function singleedit($student_id)
@@ -216,4 +241,17 @@ class SubjectController extends Controller
         $students = Student::find($std_id);
         return view('layouts.dashboard.master_setting.subject.multipleupdate', compact('students', 'users'));
     }
+
+    public function subjectdetials($student_id)
+    {
+        $users = User::all();
+        $subjecttypes = Subjecttype::all();
+        $stdSubMaps = StudentSubjectMap::where('student_id', $student_id)
+            ->where('institute_id', Auth::user()->institute_id)
+            ->get();
+        
+        return view('layouts.dashboard.master_setting.subject.fourview', compact('stdSubMaps', 'users', 'subjecttypes'));
+  
+    }
+
 }

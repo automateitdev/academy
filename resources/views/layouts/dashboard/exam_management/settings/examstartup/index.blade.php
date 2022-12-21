@@ -49,7 +49,7 @@
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Exam</label>
                                                     <select class="form-control single" multiple="multiple" name="exam_id[]">
-                                                        <option value="">Select a Class</option>
+                                                        <option value="">Select Exam</option>
                                                         @foreach($startups as $item)
                                                             @if($item->startup_category_id == 11)
                                                                 <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>

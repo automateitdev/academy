@@ -15,14 +15,38 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
+            @php
+                            $active = false;
+                            $active_two = false;
+                            $active_tt = false;
+                            if(!empty(Session::get('navtab')) && Session::get('navtab') == "markconfig-tab" ){
+                            $active = true;
+
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "markupdate-tab"){
+                                $active_two = true;
+                            }
+
+                            if($active){
+                            $class_name = 'active';
+                            }
+                            else{
+                            $class_name = '';
+                            }
+                            if($active_two){
+                                $class_name_two = 'active';
+                            }
+                            else{
+                                $class_name_two = '';
+                            }
+                        @endphp
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="markconfig-tab" data-bs-toggle="tab" data-bs-target="#markconfig" type="button" role="tab" aria-controls="markconfig" aria-selected="true">Mark Config</button>
-                        <button class="nav-link" id="markupdate-tab" data-bs-toggle="tab" data-bs-target="#markupdate" type="button" role="tab" aria-controls="markupdate" aria-selected="false">Mark Config Update</button>
+                        <button class="nav-link {{$class_name}}" id="markconfig-tab" data-bs-toggle="tab" data-bs-target="#markconfig" type="button" role="tab" aria-controls="markconfig" aria-selected="true">Mark Config</button>
+                        <button class="nav-link {{$class_name_two}}" id="markupdate-tab" data-bs-toggle="tab" data-bs-target="#markupdate" type="button" role="tab" aria-controls="markupdate" aria-selected="false">Mark Config Update</button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="markconfig" role="tabpanel" aria-labelledby="markconfig-tab">
+                    <div class="tab-pane fade {{'show '.$class_name}}" id="markconfig" role="tabpanel" aria-labelledby="markconfig-tab">
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
@@ -49,6 +73,7 @@
                                 <div class="rkj mt-3">
                                     <form action="{{route('markconfig.search')}}" method="GET" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" value="markconfig-tab" name="nav_tab">
                                         <input type="hidden" name="institute_id" value="{{Auth::user()->institute_id}}">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -68,7 +93,7 @@
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Group</label>
                                                     <select class="form-control single subjectgroup" name="group_id">
-
+                                                        <option value="">Choose One</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -207,7 +232,7 @@
                         </div>
                         @endif
                     </div>
-                    <div class="tab-pane fade" id="markupdate" role="tabpanel" aria-labelledby="markupdate-tab">
+                    <div class="tab-pane fade {{'show '.$class_name_two}}" id="markupdate" role="tabpanel" aria-labelledby="markupdate-tab">
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
@@ -234,11 +259,12 @@
                                 <div class="rkj mt-3">
                                     <form action="{{route('markconfig.search')}}" method="GET" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" value="markupdate-tab" name="nav_tab">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Class</label>
-                                                    <select class="form-control single" name="class_id">
+                                                    <select class="form-control single subjectClass" name="class_id">
                                                         <option value="">Select a Class</option>
                                                         @foreach($startups as $item)
                                                         @if($item->startup_category_id == 4)
@@ -250,17 +276,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="group_id" class="form-label">Group</label>
-                                                    <select class="form-control single" name="group_id">
-                                                        <option value=" ">Choose One</option>
-                                                        @foreach($startups as $startup)
-                                                        @if($startup->startup_category_id == "5")
-                                                        <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                        @endif
-                                                        @endforeach
+                                                    <label for="" class="form-label">Group</label>
+                                                    <select class="form-control single subjectgroup" name="group_id">
+                                                        <option value="">Choose One</option>
                                                     </select>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">

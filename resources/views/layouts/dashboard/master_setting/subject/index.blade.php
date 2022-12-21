@@ -56,6 +56,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label">Group</label>
                                         <select class="form-control single subjectgroup" name="group_id">
+                                        <option value="">Choose One</option>
 
                                         </select>
                                     </div>

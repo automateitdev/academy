@@ -45,7 +45,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Class-Shift-Section</label>
-                                            <select class="form-control single subjectClass" name="class_id">
+                                            <select class="form-control single" id="subjectClass" name="class_id">
                                                 <option selected value="">Select a Class</option>
                                                 @foreach($sectionAssignes as $item)
                                                 @if($item->institute_id == Auth::user()->institute_id)
@@ -204,7 +204,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <button class="btn btn-primary mb-3" style="float: right;">Update</button>
+                    <button class="btn btn-primary mb-3" style="float: right;">Process</button>
                 </form>
             </div>
             <div class="col-md-1"></div>

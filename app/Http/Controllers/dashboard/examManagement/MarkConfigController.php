@@ -13,6 +13,7 @@ use App\Models\Examconfig;
 use App\Models\GroupAssign;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 class MarkConfigController extends Controller
@@ -32,6 +33,7 @@ class MarkConfigController extends Controller
 
     public function search(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $class_id = $request->class_id;
         $group_id = $request->group_id;
        
@@ -74,7 +76,6 @@ class MarkConfigController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $this->validate($request, [
             'subjectmap_id' => 'required',
             'examstartups_id' => 'required',
@@ -85,7 +86,6 @@ class MarkConfigController extends Controller
         ]);
 
         try {
-            // $user_id = User::select('id')->where('institute_id',Auth::user()->institute_id)->first();
             foreach ($request->examstartups_id as $examstartups_id) {
                 foreach ($request->subjectmap_id as $key => $subjectmap_id) {
 

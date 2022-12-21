@@ -164,7 +164,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">(Max 50 Student)</label>
+                                                <label for="" class="form-label"></label>
                                                 <input type="number" class="form-control" id="admitTo" name="admitTo">
                                             </div>
                                         </div>

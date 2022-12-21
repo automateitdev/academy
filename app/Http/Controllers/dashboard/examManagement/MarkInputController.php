@@ -83,14 +83,16 @@ class MarkInputController extends Controller
         $data_id = [];
         $data_name = [];
         $secId = SectionAssign::select('class_id')->where('id', $request->id)->first();
+        $examconfig = Examconfig::select('subjectmap_id')->where('class_id', $secId->class_id)->get();
+        foreach ($examconfig as $sbjmap_id) {
+            $data = Subjectmap::select('id', 'subject_id')->where('id', $sbjmap_id->subjectmap_id)->get();
 
-        $data = Subjectmap::select('id', 'subject_id')->where('class_id', $secId->class_id)->get();
-
-        foreach ($data as $d) {
-            array_push($data_id, $d->id);
-            $subjects = Subject::select('name')->where('id', $d->subject_id)->get();
-            foreach ($subjects as $subject) {
-                array_push($data_name, $subject->name);
+            foreach ($data as $d) {
+                array_push($data_id, $d->id);
+                $subjects = Subject::select('name')->where('id', $d->subject_id)->get();
+                foreach ($subjects as $subject) {
+                    array_push($data_name, $subject->name);
+                }
             }
         }
         $alldata = array_combine($data_id, $data_name);
@@ -140,7 +142,7 @@ class MarkInputController extends Controller
             ->where('examstartups_id', $request->examstartup_id)
             ->where('subjectmap_id', $request->subject_id)
             ->get();
-            
+
         return view(
             'layouts.dashboard.exam_management.mark_input.index',
             compact(
@@ -232,11 +234,10 @@ class MarkInputController extends Controller
                 $result['individual_marks'] = $marks;
                 $result['total_marks'] = $totalmark;
                 $individualResult[$key] = [];
-                
-                
+
+
                 array_push($individualResult[$key], $result);
                 $grade = [];
-                
             }
         } else {
             foreach ($request->subject as $key => $sub) {
@@ -255,17 +256,17 @@ class MarkInputController extends Controller
                 }
                 $totalmark = array_sum($marks);
 
-                    $convert_to_array = explode(',', $gradepoint->grade);
-                    for ($i = 0; $i < count($convert_to_array); $i++) {
-                        $key_value = explode(':', $convert_to_array[$i]);
-                        $end_array[$key_value[0]] = $key_value[1];
+                $convert_to_array = explode(',', $gradepoint->grade);
+                for ($i = 0; $i < count($convert_to_array); $i++) {
+                    $key_value = explode(':', $convert_to_array[$i]);
+                    $end_array[$key_value[0]] = $key_value[1];
+                }
+                foreach ($end_array as $gkey => $g_value) {
+                    $range = explode('-', $g_value);
+                    if ($totalmark >= $range[0] && $totalmark <= $range[1]) {
+                        $grade['grade'] = $gkey;
                     }
-                    foreach ($end_array as $gkey => $g_value) {
-                        $range = explode('-', $g_value);
-                        if ($totalmark >= $range[0] && $totalmark <= $range[1]) {
-                            $grade['grade'] = $gkey;
-                        }
-                    }
+                }
                 $result['grade'] = $grade;
                 $result['individual_marks'] = $marks;
                 $result['total_marks'] = $totalmark;
@@ -273,7 +274,7 @@ class MarkInputController extends Controller
                 array_push($individualResult[$key], $result);
             }
         }
-        foreach($individualResult as $individualR_key => $individualR_value){
+        foreach ($individualResult as $individualR_key => $individualR_value) {
             $input = StudentSubjectMap::updateOrCreate(
                 [
                     'institute_id' => Auth::user()->institute_id,

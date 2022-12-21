@@ -248,13 +248,6 @@
                      <li class="nav-item">
                          <a href="#" class="nav-link active">
                              <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Mark Process</p>
-                             <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
-                         </a>
-                     </li>
-                     <li class="nav-item">
-                         <a href="#" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                              <p>Result Process</p>
                              <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
@@ -265,6 +258,14 @@
                              <p>Reports</p>
                              <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
+                         <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                 <a href="{{route('tabulation')}}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Tabulation Sheet</p>
+                                 </a>
+                             </li>
+                         </ul>
                      </li>
                  </ul>
              </li>
@@ -607,10 +608,17 @@
                                      <p>Subject Configure</p>
                                  </a>
                              </li>
+                             
                              <li class="nav-item">
                                  <a href="{{ route('fourthsubject.index') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                                      <p>4th Subject Configure</p>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('subject.show') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Subject Show</p>
                                  </a>
                              </li>
                          </ul>
