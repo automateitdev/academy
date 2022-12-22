@@ -17,6 +17,8 @@ use App\Models\StudentSubjectMap;
 use App\Models\StartupSubcategory;
 use Illuminate\Support\Facades\Auth;
 
+set_time_limit(120);
+
 class TabulationController extends Controller
 {
     /**
@@ -74,36 +76,81 @@ class TabulationController extends Controller
             ->where('academic_year_id', $request->academic_year_id)
             ->where('examstartups_id', $request->examstartup_id)
             ->get();
-            
+
         $data = json_decode($data, true);
+
+        $stdID = [];
         foreach ($data as $key => $arr) {
-            foreach($examconfigs as $exConfig)
-            {
-                if($arr['subjectmap_id'] == $exConfig['subjectmap_id'] && $arr['examstartups_id'] == $exConfig['examstartups_id'])
-                {
-                    $examcode = Examcode::select('title')->where('id', $exConfig['examcode_id'])->first();
+
+            if (!in_array($arr['student_id'], $stdID)) {
+                array_push($stdID, $arr['student_id']);
+            }
+        }
+
+        foreach ($stdID as $stdKey => $std_value) {
+            foreach ($data as $arrKey => $array_value) {
+                if ($array_value['student_id'] == $std_value) {
+                    
+                    // foreach ($examconfigs as $exConfig) {
+
+                    //     $mark_array = json_decode($arr['marksmap'], true);
+                    //     foreach ($mark_array as $mark_key => $marks) {
+                    //         // $total += $marks['total_marks'];
+                    //         $finalmark = $marks['individual_marks'];
+                    //         foreach ($finalmark as $fkey => $fMark) {
+                    //             if ($fkey == $exConfig['examcode_id']) {
+                    //                 $examcode = Examcode::select('title')->where('id', $exConfig['examcode_id'])->first();
+                    //             }
+                    //         }
+                    //     }
+                    //     if ($arr['subjectmap_id'] == $exConfig['subjectmap_id'] && $arr['examstartups_id'] == $exConfig['examstartups_id']) {
+                    //         $examcode = Examcode::select('title')->where('id', $exConfig['examcode_id'])->first();
+                    //     }
+                    // }
+
+                    $marks_variable[$std_value]['marksmap'][] = $array_value['marksmap'];
+
+
+                    $total = 0;
+                    foreach ($marks_variable[$std_value]['marksmap'] as $marks_data) {
+                        $individual_sub =  json_decode($marks_data, true);
+                        foreach ($individual_sub as $subKey => $sub) {
+                            $total += $sub['total_marks'];
+                            // return $sub;
+                            foreach ($sub['individual_marks'] as $exam_code_key => $Submarks) {
+                                foreach ($examconfigs as $exConfig) {
+                                    if($exConfig['examcode_id'] == $exam_code_key && $exConfig['examstartups_id'] == $array_value['examstartups_id'])
+                                    {
+                                        $examcode = Examcode::select('title')->where('id', $exam_code_key)->first();
+                                        $subjectmaps = Subjectmap::select('subject_id')->where('id', $array_value['subjectmap_id'])->first();
+                                        $subject = Subject::select('name')->where('id', $subjectmaps->subject_id)->first();
+
+                                    }
+                                }
+                                $variable[$std_value][$subject->name][$examcode->title] = $Submarks;
+                                $variable[$std_value][$subject->name]['total'] = $sub['total_marks'];
+                            }
+                            foreach($sub['grade'] as $grade_key => $subGrade)
+                            {
+                                return 
+                                // if($subGrade != "F")
+                                // {
+
+                                // }
+                            }
+                            
+                        }
+                    }
+                    $variable[$std_value]['examName'] = $exam_name->startup_subcategory_name;
+                    $variable[$std_value]['grand_total'] = $total;
                 }
             }
-            $students = Student::select('name', 'roll')->where('institute_id', Auth::user()->institute_id)
-                            ->where('std_id',$arr['student_id'])->first();
-
-            $subjectmaps = Subjectmap::select('subject_id')->where('id', $arr['subjectmap_id'])->first();
-            $subject = Subject::select('name')->where('id', $subjectmaps->subject_id)->first();
-
-            $data[$key]['student_name'] = $students->name;
-            $data[$key]['student_roll'] = $students->roll;
-            $data[$key]['subject_name'] = $subject->name;
-            $data[$key]['exam_code_title'] = $examcode->title;
-            $data[$key]['exam_name'] = $exam_name->startup_subcategory_name;
-            $data[$key]['class_name'] = $class_name->startup_subcategory_name;
-            $data[$key]['section_name'] = $section_name->startup_subcategory_name;
-            $data[$key]['shift_name'] = $shift_name->startup_subcategory_name;
-            $data[$key]['academic_yr'] = $academic_yr->startup_subcategory_name;
-            $data[$key]['institute_name'] = $institute_name->institute_name;
-            $data[$key]['institute_add'] = $institute_add->address;
+            return $variable;
         }
+
+
         // $data = json_encode($data);
-        return response()->json($data);
+        // return response()->json($data);
     }
 
     /**
@@ -114,6 +161,43 @@ class TabulationController extends Controller
     public function create()
     {
         //
+        // $total = 0;
+        //             foreach ($examconfigs as $exConfig) {
+
+        //                 $mark_array = json_decode($arr['marksmap'], true);
+        //                 foreach ($mark_array as $mark_key => $marks) {
+        //                     $total += $marks['total_marks'];
+        //                     $finalmark = $marks['individual_marks'];
+        //                     foreach ($finalmark as $fkey => $fMark) {
+        //                         if ($fkey == $exConfig['examcode_id']) {
+        //                             $examcode = Examcode::select('title')->where('id', $exConfig['examcode_id'])->first();
+        //                         }
+        //                     }
+        //                 }
+        //                 if ($arr['subjectmap_id'] == $exConfig['subjectmap_id'] && $arr['examstartups_id'] == $exConfig['examstartups_id']) {
+        //                     $examcode = Examcode::select('title')->where('id', $exConfig['examcode_id'])->first();
+        //                 }
+        //             }
+        //             $students = Student::select('name', 'roll')->where('institute_id', Auth::user()->institute_id)
+        //                 ->where('std_id', $arr['student_id'])->first();
+
+        //             $subjectmaps = Subjectmap::select('subject_id')->where('id', $arr['subjectmap_id'])->first();
+        //             $subject = Subject::select('name')->where('id', $subjectmaps->subject_id)->first();
+
+        //             $data[$key][$examcode->title] = $fMark;
+        //             $data[$key]['subject_wise_mark'] = $marks['total_marks'];
+        //             $data[$key]['grand_total'] = $total;
+        //             $data[$key]['student_name'] = $students->name;
+        //             $data[$key]['student_roll'] = $students->roll;
+        //             $data[$key]['subject_name'] = $subject->name;
+        //             $data[$key]['exam_code_title'] = $examcode->title;
+        //             $data[$key]['exam_name'] = $exam_name->startup_subcategory_name;
+        //             $data[$key]['class_name'] = $class_name->startup_subcategory_name;
+        //             $data[$key]['section_name'] = $section_name->startup_subcategory_name;
+        //             $data[$key]['shift_name'] = $shift_name->startup_subcategory_name;
+        //             $data[$key]['academic_yr'] = $academic_yr->startup_subcategory_name;
+        //             $data[$key]['institute_name'] = $institute_name->institute_name;
+        //             $data[$key]['institute_add'] = $institute_add->address;
     }
 
     /**

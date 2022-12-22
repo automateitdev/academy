@@ -1,9 +1,10 @@
 {
     "/js/app.js": "/js/app.js?id=dd7df64d4ba2810304786e3e33e6466e",
     "/js/frontend.js": "/js/frontend.js?id=b8cf352afe74e32517c3e9c9d81f06cc",
-    "/js/admin_dash.js": "/js/admin_dash.js?id=22b9b5957b4d3a3a5e0a03ce6a37e3ec",
+    "/js/admin_dash.js": "/js/admin_dash.js?id=3c4d72968defcf95aacc28a08ba7ddbc",
     "/js/student.js": "/js/student.js?id=d1c7d3f8e19c6bcc478574b2e2fb0847",
     "/js/payment.js": "/js/payment.js?id=c143a51bd87f59325e9f3f9b51a0f418",
+    "/js/mark.js": "/js/mark.js?id=ac5942d2071f46e1e86c0aebb3f31b8a",
     "/css/school_dashboard.css": "/css/school_dashboard.css?id=abe2e99131bb091e61056ec6a863bf50",
     "/css/app.css": "/css/app.css?id=b1e160f742e0697632520da63aac5fcb",
     "/css/student.css": "/css/student.css?id=d1d8435390b721a91216799cebea5617",

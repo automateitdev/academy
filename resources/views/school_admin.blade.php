@@ -160,6 +160,7 @@
 
 <script src="{{ asset('js/student.js')}}"></script>
 <script src="{{ asset('js/admin_dash.js')}}"></script>
+<script src="{{ asset('js/mark.js')}}"></script>
   <script>  
       $(document).ready(function() {
         $('.single').select2();

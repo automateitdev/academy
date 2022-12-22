@@ -17,6 +17,7 @@ use App\Models\Student;
 use App\Models\Examgrade;
 use App\Models\StudentSubjectMap;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MarkInputController extends Controller
 {
@@ -57,26 +58,27 @@ class MarkInputController extends Controller
     }
     public function getexamfromexamcreate(Request $request)
     {
-        $startup_id = [];
-        $groupname = [];
-        $groupassign_id = [];
+        // $startup_id = [];
+        $getexamname = [];
+        $getexamID = [];
         $secId = SectionAssign::select('class_id')->where('id', $request->id)->first();
         $data = Examstartup::select('id', 'exam_id')->where('class_id', $secId->class_id)->get();
+        // return $data;
         foreach ($data as $d) {
             $startups = Startup::select('startup_subcategory_id')->where('id', $d->exam_id)->get();
-            array_push($groupassign_id, $d->id);
+            array_push($getexamID, $d->id);
             foreach ($startups as $startup) {
-                array_push($startup_id, $startup->startup_subcategory_id);
+                // array_push($startup_id, $startup->startup_subcategory_id);
                 $subName = StartupSubcategory::select('startup_subcategory_name')->where('id', $startup->startup_subcategory_id)->get();
                 foreach ($subName as $name) {
-                    array_push($groupname, $name->startup_subcategory_name);
+                    array_push($getexamname, $name->startup_subcategory_name);
                 }
             }
         }
-        $groupdata = array_combine($groupassign_id, $groupname);
+        // return $getexamID;
+        $groupdata = array_combine($getexamID, $getexamname);
         return $groupdata;
 
-        // return response()->json($data);
     }
     public function getsubjectinfo(Request $request)
     {
@@ -130,11 +132,13 @@ class MarkInputController extends Controller
             ->where('examstartups_id', $request->examstartup_id)
             ->where('subjectmap_id', $request->subject_id)
             ->get();
-        $students = Student::where('institute_id', Auth::user()->institute_id)
+        $students = DB::table('students')
+            ->where('institute_id', Auth::user()->institute_id)
             ->where('section_id', $secId->id)
             ->where('group_id', $grpId->group_id)
             ->where('academic_year_id', $request->academic_year_id)
             ->get();
+        // dd(DB::students);
         $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)
             ->where('class_id', $secId->class_id)
             ->where('group_id', $grpId->group_id)

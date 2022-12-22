@@ -12,9 +12,6 @@ use App\Models\Student;
 use App\Models\Basic;
 use App\Models\Signature;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isNan;
 
 class ExamCardController extends Controller
 {

@@ -152,7 +152,7 @@ class ApiController extends Controller
         $data = $request->data;
         $pdfname = $request->pdfname . '.pdf';
 
-        dd($request);
+        // dd($request);
 
         $pdf = Pdf::setOption([
             'dpi' => 150,

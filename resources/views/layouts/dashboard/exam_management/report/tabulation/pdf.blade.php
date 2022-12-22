@@ -7,9 +7,8 @@
 
 
 @php
-        dd($data);
+        var_dump($data);
     @endphp
-@foreach($data as $value)
     
 <div class="tabulation">
     <h3 class="text-center">School Name</h1>
@@ -75,4 +74,3 @@
             </tbody>
         </table>
 </div>
-@endforeach
