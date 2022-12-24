@@ -12,6 +12,8 @@ use App\Models\FeeMaping;
 use App\Models\FeeFineMaping;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class FeeMapingController extends Controller
 {
@@ -51,20 +53,8 @@ class FeeMapingController extends Controller
      */
     public function store(Request $request)
     { 
-        // foreach($request->feesubhead_id as $key => $feesubhead_id)
-        // {
-        //     $response = Feesubhead::where('id', $feesubhead_id)->update($request->only('fee_head_id'));
-        // }
-        // if($response){
-        //     foreach ($request->fund_id as $key => $fund_id) {
-        //         $response = Fund::where('id', $fund_id)->update($request->only('fee_head_id'));
-        //     }
-        // }
-
-        // if($response){
-        //     $response = Ledger::where('id', $request->ledger_id)->update($request->only('fee_head_id'));
-        // }
-        // $input
+        Session::put('navtab', $request->nav_tab);
+        
 
         foreach ($request->feesubhead_id as $key => $feesubhead_id) {
             $input = [ 
@@ -88,6 +78,8 @@ class FeeMapingController extends Controller
 
     public function fine_store(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
+
         // dd($request->all());
         $this->validate($request,[
             'institute_id' => 'required',

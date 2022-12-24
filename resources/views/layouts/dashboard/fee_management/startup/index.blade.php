@@ -14,21 +14,77 @@
                 <div class="row">
                     <div class="col-sm-10 col-md-10 offset-md-1">
                         <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-head-tab" data-bs-toggle="tab" data-bs-target="#nav-head" type="button" role="tab" aria-controls="nav-head" aria-selected="true">Fee Head</button>
-                                <button class="nav-link" id="nav-sub-head-tab" data-bs-toggle="tab" data-bs-target="#nav-sub-head" type="button" role="tab" aria-controls="nav-sub-head" aria-selected="false">Fee Sub Head</button>
-                                <button class="nav-link" id="nav-waiver-tab" data-bs-toggle="tab" data-bs-target="#nav-waiver" type="button" role="tab" aria-controls="nav-waiver" aria-selected="false">Fee Waiver</button>
+                        @php
+                            $active = false;
+                            $active_two = false;
+                            $active_tt = false;
+                            $active_ff = false;
+                            $active_rr = false;
+                            if(empty(Session::get('navtab')))
+                            {
+                                $active = true;
+                            }
+                            if(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-head-tab" ){
+                            $active = true;
 
-                                <button class="nav-link" id="nav-fund-tab" data-bs-toggle="tab" data-bs-target="#nav-fund" type="button" role="tab" aria-controls="nav-fund" aria-selected="false">Create Fund</button>
-                                <button class="nav-link" id="nav-ledger-tab" data-bs-toggle="tab" data-bs-target="#nav-ledger" type="button" role="tab" aria-controls="nav-ledger" aria-selected="false">Create Ledger</button>
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-sub-head-tab"){
+                                $active_two = true;
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-waiver-tab"){
+                                $active_tt = true;
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-fund-tab"){
+                                $active_ff = true;
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-ledger-tab"){
+                                $active_rr = true;
+                            }
+
+                            if($active){
+                            $class_name = 'active';
+                            }
+                            else{
+                            $class_name = '';
+                            }
+                            if($active_two){
+                                $class_name_two = 'active';
+                            }
+                            else{
+                                $class_name_two = '';
+                            }
+                            if($active_tt){
+                                $class_name_tt = 'active';
+                            }
+                            else{
+                                $class_name_tt = '';
+                            }
+                            if($active_tt){
+                                $class_name_ff = 'active';
+                            }
+                            else{
+                                $class_name_ff = '';
+                            }
+                            if($active_tt){
+                                $class_name_rr = 'active';
+                            }
+                            else{
+                                $class_name_rr = '';
+                            }
+                        @endphp
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link {{$class_name}}" id="nav-head-tab" data-bs-toggle="tab" data-bs-target="#nav-head" type="button" role="tab" aria-controls="nav-head" aria-selected="true">Fee Head</button>
+                                <button class="nav-link {{$class_name_two}}" id="nav-sub-head-tab" data-bs-toggle="tab" data-bs-target="#nav-sub-head" type="button" role="tab" aria-controls="nav-sub-head" aria-selected="false">Fee Sub Head</button>
+                                <button class="nav-link {{$class_name_tt}}" id="nav-waiver-tab" data-bs-toggle="tab" data-bs-target="#nav-waiver" type="button" role="tab" aria-controls="nav-waiver" aria-selected="false">Fee Waiver</button>
+
+                                <button class="nav-link {{$class_name_ff}}" id="nav-fund-tab" data-bs-toggle="tab" data-bs-target="#nav-fund" type="button" role="tab" aria-controls="nav-fund" aria-selected="false">Create Fund</button>
+                                <button class="nav-link {{$class_name_rr}}" id="nav-ledger-tab" data-bs-toggle="tab" data-bs-target="#nav-ledger" type="button" role="tab" aria-controls="nav-ledger" aria-selected="false">Create Ledger</button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-head" role="tabpanel" aria-labelledby="nav-head-tab">
+                            <div class="tab-pane fade {{'show '.$class_name}}" id="nav-head" role="tabpanel" aria-labelledby="nav-head-tab">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6">
                                         <form action="{{route('fee.startup.headstore')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                        <input type="hidden" value="nav-head-tab" name="nav_tab">
+
                                             <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
                                             <div class="mb-3">
                                                 <label for="feeHead" class="form-label">Add Fee Head</label>
@@ -86,11 +142,13 @@
                                 </div>
                             </div>
                             <!-- fee sub head -->
-                            <div class="tab-pane fade" id="nav-sub-head" role="tabpanel" aria-labelledby="nav-sub-head-tab">
+                            <div class="tab-pane fade {{'show '.$class_name_two}}" id="nav-sub-head" role="tabpanel" aria-labelledby="nav-sub-head-tab">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6">
                                         <form action="{{route('fee.startup.subheadstore')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                        <input type="hidden" value="nav-sub-head-tab" name="nav_tab">
+
                                             <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
                                             <div class="mb-3">
                                                 <label for="subhead_name" class="form-label">Add Fee Sub Head</label>
@@ -149,11 +207,13 @@
                             </div>
 
                             <!-- waiver -->
-                            <div class="tab-pane fade" id="nav-waiver" role="tabpanel" aria-labelledby="nav-waiver-tab">
+                            <div class="tab-pane fade {{'show '.$class_name_tt}}" id="nav-waiver" role="tabpanel" aria-labelledby="nav-waiver-tab">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6">
                                         <form action="{{route('fee.startup.waiverstore')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                        <input type="hidden" value="nav-waiver-tab" name="nav_tab">
+
                                             <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
                                             <div class="mb-3">
                                                 <label for="waiver_name" class="form-label">Add Waiver</label>
@@ -211,11 +271,13 @@
                                 </div>
                             </div>
                             <!-- fund -->
-                            <div class="tab-pane fade" id="nav-fund" role="tabpanel" aria-labelledby="nav-fund-tab">
+                            <div class="tab-pane fade {{'show '.$class_name_ff}}" id="nav-fund" role="tabpanel" aria-labelledby="nav-fund-tab">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6">
                                         <form action="{{route('fee.startup.fundstore')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                        <input type="hidden" value="nav-fund-tab" name="nav_tab">
+
                                             <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
                                             <div class="mb-3">
                                                 <label for="fund_name" class="form-label">Add Fund</label>
@@ -273,11 +335,13 @@
                                 </div>
                             </div>
                             <!-- Ledger -->
-                            <div class="tab-pane fade" id="nav-ledger" role="tabpanel" aria-labelledby="nav-ledger-tab">
+                            <div class="tab-pane fade {{'show '.$class_name_rr}}" id="nav-ledger" role="tabpanel" aria-labelledby="nav-ledger-tab">
                             <div class="row">
                                     <div class="col-sm-6 col-md-6">
                                         <form action="{{route('fee.startup.ledgerstore')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                        <input type="hidden" value="nav-ledger-tab" name="nav_tab">
+
                                             <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
                                             <!-- <input type="text" class="form-control insId" id="institute_id" value="0" name="fee_head_id"> -->
                                             <div class="row">
@@ -363,5 +427,7 @@
             </div>
         </div>
     </div>
-
+@php 
+Session::forget('navtab');
+@endphp
 @endsection

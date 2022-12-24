@@ -40,6 +40,10 @@
                             $active = false;
                             $active_two = false;
                             $active_tt = false;
+                            if(empty(Session::get('navtab')))
+                            {
+                                $active = true;
+                            }
                             if(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-assign-tab" ){
                             $active = true;
 
@@ -301,5 +305,7 @@
         </div>
     </div>
 </div>
-
+@php 
+Session::forget('navtab');
+@endphp
 @endsection

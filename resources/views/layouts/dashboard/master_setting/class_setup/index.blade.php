@@ -8,16 +8,46 @@
             <div class="duYtr">
                 <div class="col-sm-8 col-md-8 offset-sm-1 offset-md-1">
                     <nav>
+                    @php
+                     
+                            $active = false;
+                            $active_two = false;
+                            if(empty(Session::get('navtab')))
+                            {
+                                $active = true;
+                            }
+                            if(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-home-tab" ){
+                            $active = true;
+
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-profile-tab"){
+                                $active_two = true;
+                            }
+
+                            if($active){
+                            $class_name = 'active';
+                            }
+                            else{
+                            $class_name = '';
+                            }
+                            if($active_two){
+                                $class_name_two = 'active';
+                            }
+                            else{
+                                $class_name_two = '';
+                            }
+                        @endphp
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Section Assign</button>
-                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Group Assign</button>
+                            <button class="nav-link {{$class_name}}" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Section Assign</button>
+                            <button class="nav-link {{$class_name_two}}" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Group Assign</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <!-- section -->
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="tab-pane fade {{'show '.$class_name}}" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <form action="{{route('class.section_store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" value="nav-home-tab" name="nav_tab">
+
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="mb-3">
@@ -91,7 +121,7 @@
                                     @foreach($sectionassigns as $key=>$section)
                                     @if($section->institute_id == Auth::user()->institute_id)
                                     <tr>
-                                        <th scope="row">{{$key+1}}</th>
+                                        <th scope="row">{{$section->id}}</th>
                                         @foreach($startups as $item)
                                         @if($section->class_id == $item->id)
                                         @foreach($startupsubcategories as $i)
@@ -126,9 +156,11 @@
                             </table>
                         </div>
                         <!-- group start -->
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade {{'show '.$class_name_two}}" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <form action="{{route('class.group_store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" value="nav-profile-tab" name="nav_tab">
+
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="mb-3">
@@ -187,7 +219,7 @@
                                     @foreach($groupassigns as $key=>$group)
                                     @if($group->institute_id == Auth::user()->institute_id)
                                     <tr>
-                                        <th scope="row">{{$key+1}}</th>
+                                        <th scope="row">{{$group->id}}</th>
                                         @foreach($startups as $item)
                                         @if($group->class_id == $item->id)
                                         @foreach($startupsubcategories as $i)
@@ -236,5 +268,7 @@
         </div>
     </div>
 </div>
-
+@php 
+Session::forget('navtab');
+@endphp
 @endsection

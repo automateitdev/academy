@@ -15,30 +15,33 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-            @php
-                            $active = false;
-                            $active_two = false;
-                            $active_tt = false;
-                            if(!empty(Session::get('navtab')) && Session::get('navtab') == "markconfig-tab" ){
-                            $active = true;
+                @php
+                $active = false;
+                $active_two = false;
+                if(empty(Session::get('navtab')))
+                {
+                $active = true;
+                }
+                if(!empty(Session::get('navtab')) && Session::get('navtab') == "markconfig-tab" ){
+                $active = true;
 
-                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "markupdate-tab"){
-                                $active_two = true;
-                            }
+                }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "markupdate-tab"){
+                $active_two = true;
+                }
 
-                            if($active){
-                            $class_name = 'active';
-                            }
-                            else{
-                            $class_name = '';
-                            }
-                            if($active_two){
-                                $class_name_two = 'active';
-                            }
-                            else{
-                                $class_name_two = '';
-                            }
-                        @endphp
+                if($active){
+                $class_name = 'active';
+                }
+                else{
+                $class_name = '';
+                }
+                if($active_two){
+                $class_name_two = 'active';
+                }
+                else{
+                $class_name_two = '';
+                }
+                @endphp
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link {{$class_name}}" id="markconfig-tab" data-bs-toggle="tab" data-bs-target="#markconfig" type="button" role="tab" aria-controls="markconfig" aria-selected="true">Mark Config</button>
@@ -128,6 +131,7 @@
                         <div class="row">
                             <form action="{{route('markconfig.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" value="markconfig-tab" name="nav_tab">
 
                                 <input type="hidden" value="{{$class_id}}" name="class_id">
                                 <input type="hidden" value="{{$group_id}}" name="group_id">
@@ -282,7 +286,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -313,6 +317,7 @@
                         <div class="row">
                             <form action="{{route('markconfig.update')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" value="markupdate-tab" name="nav_tab">
 
                                 <input type="hidden" value="{{$class_id}}" name="class_id">
                                 <input type="hidden" value="{{$group_id}}" name="group_id">
@@ -413,5 +418,7 @@
         </div>
     </div>
 </div>
-
+@php 
+Session::forget('navtab');
+@endphp
 @endsection

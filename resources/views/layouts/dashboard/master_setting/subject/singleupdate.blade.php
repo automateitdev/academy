@@ -38,6 +38,7 @@
 
                 <form action="{{route('foursubjectupdate')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+
                     <div class="rkj">
                         <div class="row">
                             <div class="col">

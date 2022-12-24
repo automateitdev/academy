@@ -15,11 +15,14 @@ use App\Models\GlobalGrade;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ExamStartupController extends Controller
 {
     public function index()
     {
+        // Session::put('navtab', $request->nav_tab);
+
         $users = User::all();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $meritprocesses = Meritprocess::all();
@@ -35,6 +38,8 @@ class ExamStartupController extends Controller
 
     public function store(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
+
         $this->validate($request, [
             'class_id' => 'required',
             'exam_id' => 'required',
@@ -66,6 +71,8 @@ class ExamStartupController extends Controller
     public function examcode_store(Request $request)
     {
         // dd($request);
+        Session::put('navtab', $request->nav_tab);
+
         $this->validate($request, [
             'class_id' => 'required',
             'globalcode' => 'required'
@@ -85,6 +92,8 @@ class ExamStartupController extends Controller
     public function examcode_update(Request $request)
     {
         // dd($request);
+        Session::put('navtab', $request->nav_tab);
+
         $exampair =  array_combine($request->examcode_id, $request->title);
         foreach ($exampair as $key => $value) {
             DB::table('examcodes')
@@ -98,6 +107,8 @@ class ExamStartupController extends Controller
     // exam grade
     public function examgrade_store(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
+
         $grades = implode(',', $request->grade);
 
         $this->validate($request, [
@@ -116,6 +127,8 @@ class ExamStartupController extends Controller
 
     public function examgrade_update(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
+
         
         $grades = [];
         foreach ($request->examgrades_id as $examgrade_id) {

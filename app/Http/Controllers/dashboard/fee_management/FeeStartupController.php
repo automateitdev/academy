@@ -13,6 +13,7 @@ use App\Models\AccountGroup;
 use App\Models\Ledger;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class FeeStartupController extends Controller
 {
@@ -53,6 +54,7 @@ class FeeStartupController extends Controller
      */
     public function headstore(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request,[
             'institute_id' => 'required',
             'head_name' => 'required',
@@ -63,6 +65,7 @@ class FeeStartupController extends Controller
     }
     public function subheadstore(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request,[
             'institute_id' => 'required',
             'subhead_name' => 'required',
@@ -79,6 +82,7 @@ class FeeStartupController extends Controller
 
     public function waiverstore(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request,[
             'institute_id' => 'required',
             'waiver_name' => 'required',
@@ -89,6 +93,7 @@ class FeeStartupController extends Controller
     }
     public function fundstore(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request,[
             'institute_id' => 'required',
             'fund_name' => 'required',
@@ -111,6 +116,7 @@ class FeeStartupController extends Controller
 
     public function ledgerstore(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         // dd(Auth::user()->institute_id);
         $this->validate($request,[
             'institute_id' => 'required',

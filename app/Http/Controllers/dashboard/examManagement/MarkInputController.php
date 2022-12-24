@@ -137,6 +137,7 @@ class MarkInputController extends Controller
             ->where('section_id', $secId->id)
             ->where('group_id', $grpId->group_id)
             ->where('academic_year_id', $request->academic_year_id)
+            ->orderBy('roll', 'asc')
             ->get();
         // dd(DB::students);
         $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)

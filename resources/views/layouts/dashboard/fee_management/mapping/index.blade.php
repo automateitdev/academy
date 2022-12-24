@@ -16,13 +16,40 @@
                 <div class="col-sm-10 col-md-10 offset-md-1">
                     <div class="plJhy">
                         <nav>
+                        @php
+                            $active = false;
+                            $active_two = false;
+                            if(empty(Session::get('navtab')))
+                            {
+                                $active = true;
+                            }
+                            if(!empty(Session::get('navtab')) && Session::get('navtab') == "fee-mapping-tab" ){
+                            $active = true;
+
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "fine-mapping-tab"){
+                                $active_two = true;
+                            }
+
+                            if($active){
+                            $class_name = 'active';
+                            }
+                            else{
+                            $class_name = '';
+                            }
+                            if($active_two){
+                                $class_name_two = 'active';
+                            }
+                            else{
+                                $class_name_two = '';
+                            }
+                        @endphp
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="fee-mapping-tab" data-bs-toggle="tab" data-bs-target="#fee-mapping" type="button" role="tab" aria-controls="fee-mapping" aria-selected="true">Fee Mapping</button>
-                                <button class="nav-link" id="fine-mapping-tab" data-bs-toggle="tab" data-bs-target="#fine-mapping" type="button" role="tab" aria-controls="fine-mapping" aria-selected="false">Fine Mapping</button>
+                                <button class="nav-link {{$class_name}}" id="fee-mapping-tab" data-bs-toggle="tab" data-bs-target="#fee-mapping" type="button" role="tab" aria-controls="fee-mapping" aria-selected="true">Fee Mapping</button>
+                                <button class="nav-link {{$class_name_two}}" id="fine-mapping-tab" data-bs-toggle="tab" data-bs-target="#fine-mapping" type="button" role="tab" aria-controls="fine-mapping" aria-selected="false">Fine Mapping</button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="fee-mapping" role="tabpanel" aria-labelledby="fee-mapping-tab">
+                            <div class="tab-pane fade {{'show '.$class_name}}" id="fee-mapping" role="tabpanel" aria-labelledby="fee-mapping-tab">
                                 <div class="row">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -44,6 +71,7 @@
                                         <div class="wdfGh">
                                             <form action="{{route('fee.maping.store')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
+                                                <input type="hidden" value="fee-mapping-tab" name="nav_tab">
 
                                                         @php
                                                         $feesubheadsItem = \App\Models\Feesubhead::all();
@@ -147,13 +175,15 @@
                                 </div>
                             </div>
                             <!-- Fine -->
-                            <div class="tab-pane fade" id="fine-mapping" role="tabpanel" aria-labelledby="fine-mapping-tab">
+                            <div class="tab-pane fade {{'show '.$class_name_two}}" id="fine-mapping" role="tabpanel" aria-labelledby="fine-mapping-tab">
                                 <div class="row">
                                     <div class="col-sm-4 col-md-4">
                                         <h4>Fee Fine Map</h4>
                                         <div class="wdfGh">
                                             <form action="{{route('fine.maping.store')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
+                                                <input type="hidden" value="fine-mapping-tab" name="nav_tab">
+
                                                 <input type="text" class="form-control insId" id="institute_id" value="{{Auth::user()->institute_id}}" name="institute_id">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Fee Head</label>
@@ -247,5 +277,7 @@
             </div>
         </div>
     </div>
-
+@php 
+Session::forget('navtab');
+@endphp
 @endsection

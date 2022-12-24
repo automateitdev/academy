@@ -68,6 +68,25 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Group</label>
+                                            <select class="form-control single tabulesubjectgroup" name="group_id">
+                                                <option value="">Choose One</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Exam</label>
+                                        <select class="form-control single tabuleexamnameid" name="examstartup_id" id="">
+                                            <option value="">Choose One</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="academic_year_id" class="form-label">Academic Year</label>
                                         <select class="form-control single" name="academic_year_id">
@@ -82,20 +101,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Exam</label>
-                                        <select class="form-control single examnameid" name="examstartup_id" id="">
-                                            <option value="">Choose One</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="btn mt-4 btn-primary" id="tabulationGenerate">Get Info</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                    <button class="btn btn-success" disabled= true id="tabuleDownload">Download</button>
+                            <button class="btn mt-4 btn-primary" id="tabulationGenerate">Process</button>
+                                    <button class="btn btn-success mt-4" disabled= true id="tabuleDownload">Download</button>
                             </div>
                         </div>
                     </div>

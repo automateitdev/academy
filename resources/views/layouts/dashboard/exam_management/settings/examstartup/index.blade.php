@@ -15,15 +15,53 @@
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <nav>
+                @php
+                            
+                            $active = false;
+                            $active_two = false;
+                            $active_tt = false;
+                            
+                            if(empty(Session::get('navtab')))
+                            {
+                                $active = true;
+                            }
+                            if(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-examcreate-tab" ){
+                            $active = true;
+
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-examcode-tab"){
+                                $active_two = true;
+                            }elseif(!empty(Session::get('navtab')) && Session::get('navtab') == "nav-examgrade-tab"){
+                                $active_tt = true;
+                            }
+
+                            if($active){
+                            $class_name = 'active';
+                            }
+                            else{
+                            $class_name = '';
+                            }
+                            if($active_two){
+                                $class_name_two = 'active';
+                            }
+                            else{
+                                $class_name_two = '';
+                            }
+                            if($active_tt){
+                                $class_name_tt = 'active';
+                            }
+                            else{
+                                $class_name_tt = '';
+                            }
+                        @endphp
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-examcreate-tab" data-bs-toggle="tab" data-bs-target="#nav-examcreate" type="button" role="tab" aria-controls="nav-examcreate" aria-selected="false">Exam Create</button>
-                        <button class="nav-link" id="nav-examcode-tab" data-bs-toggle="tab" data-bs-target="#nav-examcode" type="button" role="tab" aria-controls="nav-examcode" aria-selected="true">Exam Code</button>
-                        <button class="nav-link" id="nav-examgrade-tab" data-bs-toggle="tab" data-bs-target="#nav-examgrade" type="button" role="tab" aria-controls="nav-examgrade" aria-selected="false">Exam Grade</button>
+                        <button class="nav-link {{$class_name}}" id="nav-examcreate-tab" data-bs-toggle="tab" data-bs-target="#nav-examcreate" type="button" role="tab" aria-controls="nav-examcreate" aria-selected="false">Exam Create</button>
+                        <button class="nav-link {{$class_name_two}}" id="nav-examcode-tab" data-bs-toggle="tab" data-bs-target="#nav-examcode" type="button" role="tab" aria-controls="nav-examcode" aria-selected="true">Exam Code</button>
+                        <button class="nav-link {{$class_name_tt}}" id="nav-examgrade-tab" data-bs-toggle="tab" data-bs-target="#nav-examgrade" type="button" role="tab" aria-controls="nav-examgrade" aria-selected="false">Exam Grade</button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <!-- exam create start -->
-                    <div class="tab-pane fade show active" id="nav-examcreate" role="tabpanel" aria-labelledby="nav-examcreate-tab">
+                    <div class="tab-pane fade {{'show '.$class_name}}" id="nav-examcreate" role="tabpanel" aria-labelledby="nav-examcreate-tab">
                         <div class="row">
                             <div class="col-md-7 offset-md-2">
 
@@ -31,6 +69,8 @@
                                     <p>Exam Assign Form</p>
                                     <form action="{{route('examstartup.store')}}" method="post" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" value="nav-examcreate-tab" name="nav_tab">
+                                         
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -85,7 +125,7 @@
                     <!-- exam create end -->
 
                     <!-- exam code start -->
-                    <div class="tab-pane fade" id="nav-examcode" role="tabpanel" aria-labelledby="nav-examcode-tab">
+                    <div class="tab-pane fade {{'show '.$class_name_two}}" id="nav-examcode" role="tabpanel" aria-labelledby="nav-examcode-tab">
                         <div class="row">
                             <div class="col-md-4">
                                 @if ($errors->any())
@@ -112,6 +152,8 @@
                                     <p>Exam Code Assign</p>
                                     <form action="{{route('examcode.store')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" value="nav-examcode-tab" name="nav_tab">
+
                                         <div class="row">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Class</label>
@@ -156,6 +198,8 @@
                                         <tbody>
                                             <form action="{{route('examcode.update')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
+                                        <input type="hidden" value="nav-examcode-tab" name="nav_tab">
+
                                                 @foreach($examcodes as $examcode)
                                                 <tr>
                                                     @foreach($startups as $item)
@@ -187,7 +231,7 @@
 
 
                     <!-- exam grade start -->
-                    <div class="tab-pane fade" id="nav-examgrade" role="tabpanel" aria-labelledby="nav-examgrade-tab">
+                    <div class="tab-pane fade {{'show '.$class_name_tt}}" id="nav-examgrade" role="tabpanel" aria-labelledby="nav-examgrade-tab">
                         <div class="row">
                             <div class="col-md-4">
                                 @if ($errors->any())
@@ -214,6 +258,7 @@
                                     <p>Exam Grade Assign</p>
                                     <form action="{{route('examgrade.store')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" value="nav-examgrade-tab" name="nav_tab">
                                         
                                         <div class="row">
                                             <div class="mb-3">
@@ -269,6 +314,7 @@
                                         <tbody>
                                             <form action="{{route('examgrade.update')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
+                                        <input type="hidden" value="nav-examgrade-tab" name="nav_tab">
                                                 
                                                 @foreach($examgrades as $examgrade)
                                                 <tr>
@@ -326,5 +372,7 @@
         </div>
     </div>
 </div>
-
+@php 
+Session::forget('navtab');
+@endphp
 @endsection

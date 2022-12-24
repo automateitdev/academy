@@ -10,6 +10,7 @@ use App\Models\GroupAssign;
 use App\Models\StartupCategory;
 use App\Models\StartupSubcategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Database\QueryException;
 
 class ClassSetupController extends Controller
@@ -47,6 +48,7 @@ class ClassSetupController extends Controller
      */
     public function section_store(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request, [
             'institute_id' => 'required',
             'class_id' => 'required',
@@ -59,6 +61,7 @@ class ClassSetupController extends Controller
     }
     public function group_store(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         $this->validate($request, [
             'institute_id' => 'required',
             'class_id' => 'required',

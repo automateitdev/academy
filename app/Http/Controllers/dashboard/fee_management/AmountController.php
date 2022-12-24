@@ -17,6 +17,8 @@ use App\Models\Feeamount;
 use App\Models\Feefineamount;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class AmountController extends Controller
 {
@@ -69,6 +71,7 @@ class AmountController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        Session::put('navtab', $request->nav_tab);
 
         $this->validate($request,[
             'institute_id'=> 'required',
@@ -101,6 +104,8 @@ class AmountController extends Controller
 
     public function fineStore(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
+
         // dd($request->class_id);
         $this->validate($request,[
             'institute_id'=> 'required', 
@@ -158,6 +163,8 @@ class AmountController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Session::put('navtab', $request->nav_tab);
+
         $this->validate($request,[
             'institute_id'=> 'required',
             'class_id'=> 'required',

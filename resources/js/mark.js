@@ -83,6 +83,7 @@ $(document).ready(function () {
         $(document).on('change', '#tabulationClass', function () {
             var class_id = $(this).val();
             var ot = " ";
+            var op = " ";
 
             $.ajax({
                 type: 'get',
@@ -92,7 +93,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
 
-                    $('.examnameid').html(" ");
+                    $('.tabuleexamnameid').html(" ");
 
                     ot += '<option value="0" selected disabled>Choose One</option>';
                     for (var key in data) {
@@ -100,15 +101,36 @@ $(document).ready(function () {
                         ot += '<option value="' + key + '">' + data[key] + '</option>';
 
                     }
-                    $('.examnameid').append(ot);
+                    $('.tabuleexamnameid').append(ot);
 
                 },
 
+            });
+            $.ajax({
+                type: 'get',
+                url: '/getgroupforexaminput',
+                data: {
+                    'id': class_id
+                },
+                success: function (data) {
+    
+                    $('.tabulesubjectgroup').html(" ");
+    
+                    op += '<option value="0" selected disabled>Choose One</option>';
+                    for (var key in data) {
+                        op += '<option value="' + key + '">' + data[key] + '</option>';
+    
+                    }
+                    $('.tabulesubjectgroup').append(op);
+    
+                },
+    
             });
 
         });
     });
     let tabulation_class_id;
+    let tabulation_group_id;
     let tabulation_academic_year_id;
     let tabulation_examstartup_id;
     let tabulfileName;
@@ -120,6 +142,7 @@ $(document).ready(function () {
         $(document).on('click', '#tabulationGenerate', function () {
             
             tabulation_class_id = $("select[name=class_id]").val();
+            tabulation_group_id = $("select[name=group_id]").val();
             tabulation_academic_year_id = $("select[name=academic_year_id]").val();
             tabulation_examstartup_id = $("select[name=examstartup_id]").val();
             tabulfileName = $("select[name=class_id] option:selected").text().trim();
@@ -130,6 +153,7 @@ $(document).ready(function () {
                 url: '/Tabulation_sheet_generate',
                 data: {
                     'class_id': tabulation_class_id,
+                    'group_id': tabulation_group_id,
                     'academic_year_id': tabulation_academic_year_id,
                     'examstartup_id': tabulation_examstartup_id,
                 },

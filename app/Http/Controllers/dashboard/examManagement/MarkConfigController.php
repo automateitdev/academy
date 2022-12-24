@@ -76,6 +76,8 @@ class MarkConfigController extends Controller
      */
     public function store(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
+
         $this->validate($request, [
             'subjectmap_id' => 'required',
             'examstartups_id' => 'required',
@@ -145,6 +147,7 @@ class MarkConfigController extends Controller
      */
     public function update(Request $request)
     {
+        Session::put('navtab', $request->nav_tab);
         
         $this->validate($request, [
 
