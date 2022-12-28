@@ -489,6 +489,35 @@ $('form').on('click', '.addmarkconfig', function () {
     $('.selectall').select2()
 
 });
+$(document).ready(function () {
+    $(document).on('change', '#configsubjectclass', function () {
+        
+        var class_id = $(this).val();
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getgroupfromgroupassign',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+
+                $('.subjectgroup').html(" ");
+
+                op += '<option value="0" selected disabled>Choose One</option>';
+                for (var key in data) {
+                    op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('.subjectgroup').append(op);
+
+            },
+
+        });
+
+    });
+});
 // mark config
 
 // subject config

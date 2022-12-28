@@ -1,7 +1,9 @@
 @extends('school_admin')
 
 @section('content')
-
+<div class="mainloader d-none" id="mainloader">
+    @include('layouts.loader.index')
+</div>
 <div id="tabulation">
     <div class="container">
         <div class="row">
@@ -101,8 +103,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                            <button class="btn mt-4 btn-primary" id="tabulationGenerate">Process</button>
-                                    <button class="btn btn-success mt-4" disabled= true id="tabuleDownload">Download</button>
+                                
+                                <button class="btn mt-4 btn-primary" id="Generatett">Process</button>
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-success mt-4" disabled= true id="tabuleDownload">Download</button>
                             </div>
                         </div>
                     </div>

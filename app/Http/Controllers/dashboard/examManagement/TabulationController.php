@@ -19,7 +19,7 @@ use App\Models\StudentSubjectMap;
 use App\Models\StartupSubcategory;
 use Illuminate\Support\Facades\Auth;
 
-set_time_limit(120);
+set_time_limit(240);
 
 class TabulationController extends Controller
 {
@@ -40,7 +40,7 @@ class TabulationController extends Controller
 
     public function processResult(Request $request)
     {
-       
+
         $group_assign_id = GroupAssign::select('id', 'group_id')
             ->where('id', $request->group_id)
             ->first();
@@ -57,7 +57,7 @@ class TabulationController extends Controller
         $section = Startup::select('startup_subcategory_id')->where('id', $section_id->section_id)->first();
         $section_name = StartupSubcategory::select('startup_subcategory_name')->where('id', $section->startup_subcategory_id)->first();
 
-        $examstartup_id = Examstartup::select('exam_id','merit_id')->where('id', $request->examstartup_id)->first();
+        $examstartup_id = Examstartup::select('exam_id', 'merit_id')->where('id', $request->examstartup_id)->first();
         $startup_subcategory = Startup::select('startup_subcategory_id')->where('id', $examstartup_id->exam_id)->first();
         $exam_name = StartupSubcategory::select('startup_subcategory_name')->where('id', $startup_subcategory->startup_subcategory_id)->first();
 
@@ -73,7 +73,7 @@ class TabulationController extends Controller
             ->where('academic_year_id', $request->academic_year_id)
             ->where('examstartups_id', $request->examstartup_id)
             ->get();
-
+        dd($data);
         $examconfigs = Examconfig::where('institute_id', Auth::user()->institute_id)
             ->where('class_id', $class_id->class_id)
             ->where('group_id', $group_assign_id->id)
@@ -86,22 +86,21 @@ class TabulationController extends Controller
             ->first();
 
         $total_student = Student::where('institute_id', Auth::user()->institute_id)
-                    ->where('section_id', $request->class_id)
-                    ->where('group_id', $group_assign_id->group_id)
-                    ->where('academic_year_id', $request->academic_year_id)
-                    ->count();
+            ->where('section_id', $request->class_id)
+            ->where('group_id', $group_assign_id->group_id)
+            ->where('academic_year_id', $request->academic_year_id)
+            ->count();
 
 
         $data = json_decode($data, true);
-
         $stdID = [];
         $total_pass = 0;
         $total_fail = 0;
+        $c = 0;
         $variable['subject_details'] = [];
         $tmp_var['tmp_subject_details'] = [];
         $gpa_array = [];
-        $max_total = 0;
-        $marit_position = 1;
+        $opt_gp = 0;
         foreach ($data as $key => $arr) {
 
             if (!in_array($arr['student_id'], $stdID)) {
@@ -110,10 +109,9 @@ class TabulationController extends Controller
         }
 
         foreach ($stdID as $stdKey => $std_value) {
-            $variable[$std_value]['pass'] = true;
+           
             foreach ($data as $arrKey => $array_value) {
                 if ($array_value['student_id'] == $std_value) {
-
                     $marks_variable[$std_value]['marksmap'][] = $array_value['marksmap'];
                     $total = 0;
                     $GP_total = 0;
@@ -121,99 +119,92 @@ class TabulationController extends Controller
                         $individual_sub =  json_decode($marks_data, true);
                         foreach ($individual_sub as $subKey => $sub) {
                             $total += $sub['total_marks'];
-                            
                             foreach ($sub['individual_marks'] as $exam_code_key => $Submarks) {
-                                
+
                                 foreach ($examconfigs as $exConfig) {
-                                    if($exConfig['examcode_id'] == $exam_code_key && $exConfig['examstartups_id'] == $array_value['examstartups_id'])
-                                    {
+                                    if ($exConfig['examcode_id'] == $exam_code_key && $exConfig['examstartups_id'] == $array_value['examstartups_id']) {
                                         // return $exConfig['subjectmap_id'];
                                         // $examcode = Examcode::select('title')->where('id', $exam_code_key)->first();
                                         $subjectmaps = Subjectmap::select('subject_id')->where('id', $array_value['subjectmap_id'])->first();
-                                        $subject = Subject::select('name','id')->where('id', $subjectmaps->subject_id)->first();
-                                         
-                                        if($exConfig['subjectmap_id'] == $array_value['subjectmap_id']){
+                                        $subject = Subject::select('name', 'id')->where('id', $subjectmaps->subject_id)->first();
+
+
+
+                                        if ($exConfig['subjectmap_id'] == $array_value['subjectmap_id']) {
                                             $variable[$std_value][$subject->name][$exConfig->examcode->title] = $Submarks;
                                             $variable[$std_value][$subject->name]['total'] = $sub['total_marks'];
                                             $variable[$std_value][$subject->name]['subject_id'] = $subject->id;
 
 
-                                            if(!in_array($subject->name, $tmp_var['tmp_subject_details'])){
+                                            if (!in_array($subject->name, $tmp_var['tmp_subject_details'])) {
                                                 $variable['subject_details'][$subject->name] = [];
                                                 array_push($tmp_var['tmp_subject_details'], $subject->name);
-                                            }else{
-                                                if(!in_array($exConfig->examcode->title, $variable['subject_details'][$subject->name])){
-                                                    
+                                            } else {
+                                                if (!in_array($exConfig->examcode->title, $variable['subject_details'][$subject->name])) {
                                                     array_push($variable['subject_details'][$subject->name], $exConfig->examcode->title);
                                                 }
                                             }
                                         }
-                                      
                                     }
-                                    
                                 }
-
-                                
                             }
-                            
+
+
 
                             foreach ($sub['grade'] as $grade_key => $subGrade) {
-                                
                                 $convert_to_array = explode(',', $examgrade->grade);
-                                for($i=0; $i < count($convert_to_array ); $i++) 
-                                {
-                                    $key_value=explode(':', $convert_to_array [$i]); 
-                                    $end_array[$key_value [0]]=$key_value [1]; 
+                                for ($i = 0; $i < count($convert_to_array); $i++) {
+                                    $key_value = explode(':', $convert_to_array[$i]);
+                                    $end_array[$key_value[0]] = $key_value[1];
                                 }
-                                $case = 0; 
-                               
-                              foreach($end_array as $gradekey => $gradevalue)
-                              {
-                                if(!in_array($gradekey, $gpa_array)){
-                                    array_push($gpa_array, $gradekey); 
-                                }
-                                $case++;
-                                if($subGrade == $gradekey)
-                                {
-                                    switch ($case) {
-                                        case 1:
-                                            $gp = 5.00;
-                                            break;
-                                        case 2:
-                                            $gp = 4.00;
-                                            break;
-                                        case 3:
-                                            $gp = 3.5;
-                                            break;
-                                        case 4:
-                                            $gp = 3.00;
-                                            break;
-                                        case 5:
-                                            $gp = 2.00;
-                                            break;
-                                        case 6:
-                                            $gp = 1.00;
-                                            break;
-                                        case 7:
-                                            $gp = 0;
-                                            break;
+                                $case = 0;
+                                foreach ($end_array as $gradekey => $gradevalue) {
+                                    if (!in_array($gradekey, $gpa_array)) {
+                                        array_push($gpa_array, $gradekey);
+                                    }
+                                    $case++;
+                                    if ($subGrade == $gradekey) {
+                                        switch ($case) {
+                                            case 1:
+                                                $gp = 5.00;
+                                                break;
+                                            case 2:
+                                                $gp = 4.00;
+                                                break;
+                                            case 3:
+                                                $gp = 3.5;
+                                                break;
+                                            case 4:
+                                                $gp = 3.00;
+                                                break;
+                                            case 5:
+                                                $gp = 2.00;
+                                                break;
+                                            case 6:
+                                                $gp = 1.00;
+                                                break;
+                                            case 7:
+                                                $gp = 0;
+                                                break;
+                                        }
                                     }
                                 }
-                                
-                              }
-                                $newGP = $gp;
-                                $variable[$std_value][$subject->name]['grade_point'] = $newGP;
+
+                                $new_gp = $gp;
+                                $variable[$std_value][$subject->name]['grade_point'] = $new_gp;
                                 $variable[$std_value][$subject->name]['letter_point'] = $sub['grade']['grade'];
-                                $GP_total += $newGP;
-                                // return $GP_total;
-                                
-                              if($variable[$std_value][$subject->name]['grade_point'] == 0)
-                              {
-                                $variable[$std_value]['pass'] = false;
-                              }
+                                $GP_total += $new_gp;
+                            }
+
+                            if ($array_value['subject_type_id'] == 5 || $array_value['subject_type_id'] == 4) {
+                                $variable[$std_value][$subject->name]['optional'] = true;
+                                $opt_gp = $gp;
+                                $variable[$std_value]['optional_gp'] = $opt_gp;
+                                $variable[$std_value]['optional_subject'] = $subject->name;
                             }
                         }
                     }
+                    
                     $students = Student::select('name', 'roll')->where('institute_id', Auth::user()->institute_id)
                         ->where('std_id', $array_value['student_id'])->first();
 
@@ -221,55 +212,103 @@ class TabulationController extends Controller
                     $variable[$std_value]['student_roll'] = $students->roll;
                     $variable[$std_value]['examName'] = $exam_name->startup_subcategory_name;
                     $variable[$std_value]['grand_total'] = $total;
+                    if (isset($variable[$std_value]['optional_gp'])) {
+                        $GP_total = $GP_total - $variable[$std_value]['optional_gp'];
+                        if ($variable[$std_value]['optional_gp'] > 2) {
+                            $GP_total = $GP_total + ($variable[$std_value]['optional_gp'] - 2);
+                        }
+                    }
                     $variable[$std_value]['gp_total'] = $GP_total;
-                    $variable[$std_value]['GPA'] = $GP_total / count($marks_variable[$std_value]['marksmap']);
+
+                    $totalSubjects = count($marks_variable[$std_value]['marksmap']);
+                    if ($array_value['subject_type_id'] == 5 || $array_value['subject_type_id'] == 4) {
+                        $totalSubjects--;
+                    }
+                    $variable[$std_value]['GP_total'] = $GP_total;
+                    $GPA_calc = $GP_total / $totalSubjects;
+                    if ($GPA_calc > 5) {
+                        $GPA_calc = 5.00;
+                    }
+                    $variable[$std_value]['GPA'] = round((float)$GPA_calc, 2);
                     $gp_range = ["5.00-5.00", "4.00-4.99", "3.50-3.99", "3.00-3.49", "2.00-2.99", "1.00-1.99", "0-0"];
                     $grade_points = array_combine($gpa_array, $gp_range);
                     // return $gpa_array;
-                    
-                        foreach($grade_points as $gradePoint_key => $grade_point)
-                        {
-                            $gradePoint_range = explode('-', $grade_point);
-                            if($variable[$std_value]['GPA'] >= $gradePoint_range[0] && $variable[$std_value]['GPA'] <= $gradePoint_range[1])
-                            {
-                                if($variable[$std_value]['pass'])
-                                {
-                                    $variable[$std_value]['letter_grade'] =  $gradePoint_key;
-                                    $variable[$std_value]['merit_pos'] =  "P";
-                                    
-                                }else{
-                                    $variable[$std_value]['letter_grade'] =  "F";
-                                    $variable[$std_value]['merit_pos'] =  "0";
-                                }
+
+                    foreach ($grade_points as $gradePoint_key => $grade_point) {
+                        $gradePoint_range = explode('-', $grade_point);
+                        if ($variable[$std_value]['GPA'] >= $gradePoint_range[0] && $variable[$std_value]['GPA'] <= $gradePoint_range[1]) {
+                            $variable[$std_value]['letter_grade'] =  $gradePoint_key;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        $students_ids = [];
+        foreach ($variable as $var_key => $var_value) {
+            if ($var_key !== "subject_details" && $var_key !== "common_detail") {
+                $variable[$var_key]['pass'] = true;
+                foreach ($var_value as $innerkey => $innervalue) {
+                    if (isset($innervalue['grade_point'])) {
+                        if ($innervalue['grade_point'] == 0) {
+                            if (!isset($innervalue['optional'])) {
+                                $variable[$var_key]['pass'] = false;
                             }
                         }
+                    }
+                }
+
+                if ($variable[$var_key]['pass'] == true) {
+                    $marks_array[$total_pass]['id'] = $var_key;
+                    $marks_array[$total_pass]['total'] = $variable[$var_key]['grand_total'];
+
+                    $merit_gpa_array[$total_pass]['id'] = $var_key;
+                    $merit_gpa_array[$total_pass]['gpa'] = $variable[$var_key]['GPA'];
+
+                    $marit_data['merit'][$total_pass]['std_id'] = $var_key;
+                    $marit_data['merit'][$total_pass]['total_marks'] = $variable[$var_key]['grand_total'];
+                    $marit_data['merit'][$total_pass]['avg_gp'] = $variable[$var_key]['GPA'];
+                    $total_pass++;
+                }
+
+                if ($variable[$var_key]['pass'] == false) {
+                    $variable[$var_key]['merit_pos'] = 0;
+                    $total_fail++;
+                    $variable[$var_key]['letter_grade'] = "F";
                 }
             }
-            if( $variable[$std_value]['pass'] == true)
-            {
-                if($examstartup_id->merit_id == "1" || $examstartup_id->merit_id == "2"){
-                                  
-                    $marit[$std_value] = $variable[$std_value]['grand_total'];
-                    
-                }elseif($examstartup_id->merit_id == "3" || $examstartup_id->merit_id == "4")
-                {
-        
+        }
+
+
+        if (isset($marks_array) && isset($merit_gpa_array)) {
+            if ($examstartup_id->merit_id == "1" || $examstartup_id->merit_id == "2") {
+                $sorted_totalmarks = [];
+                foreach ($marks_array as $sortkey => $row) {
+                    $sorted_totalmarks[$sortkey] = $row['total'];
                 }
-                $total_pass++;
-            }else{
-                $total_fail++;
+                array_multisort($sorted_totalmarks, SORT_DESC, $marks_array);
+                $position = 0;
+                foreach ($marks_array as $mark_key => $mark_value) {
+                    $position++;
+                    $variable[$mark_value['id']]['merit_pos'] = $position;
+                }
+            } else if ($examstartup_id->merit_id == "3" || $examstartup_id->merit_id == "4") {
+                $sorted_gradepoints = [];
+                foreach ($merit_gpa_array as $gpakey => $row) {
+                    $sorted_gradepoints[$gpakey] = $row['gpa'];
+                }
+                array_multisort($sorted_gradepoints, SORT_DESC, $merit_gpa_array);
+                // return $merit_gpa_array;
+                $position = 0;
+                foreach ($merit_gpa_array as $gpakey => $gpa_value) {
+                    $position++;
+                    $variable[$gpa_value['id']]['merit_pos'] = $position;
+                }
             }
-            
         }
-        
-        foreach($marit as $marit_key => $marit_value)
-        {   
-            $marit_id = array_keys($marit, max($marit));
-            $variable[$marit_id[0]]['merit_pos'] =  $marit_position++;
-            unset($marit[$marit_id[0]]);
-        }
-        
-        
+
         $participants =  count($stdID);
         $variable['common_detail']['exam_name'] = $exam_name->startup_subcategory_name;
         $variable['common_detail']['class_name'] = $class_name->startup_subcategory_name;
@@ -282,10 +321,15 @@ class TabulationController extends Controller
         $variable['common_detail']['participants'] = $participants;
         $variable['common_detail']['total_pass'] = $total_pass;
         $variable['common_detail']['total_fail'] = $total_fail;
-        $variable['common_detail']['pass_percentage'] = ($total_pass/$participants) * 100;
         
+        if($participants == 0){       
+          $variable['common_detail']['pass_percentage'] = 0;
+        }else{
+          $variable['common_detail']['pass_percentage'] = round((float)(($total_pass / $participants) * 100), 2);
+        }
 
-        // return $marit_id;
+        // return $merit_gpa_array;
+        // return $c;
         // return $variable;
 
 
@@ -396,3 +440,4 @@ class TabulationController extends Controller
         //
     }
 }
+

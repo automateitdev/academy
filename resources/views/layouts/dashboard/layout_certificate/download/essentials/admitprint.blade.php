@@ -23,7 +23,7 @@
             font-weight: bold;
         }
     @font-face {
-      font-family: "DejaVu Sans Mono";
+      font-family: "DejaVu Serif";
       font-style: normal;
       font-weight: normal;
       src: url('fonts/DejaVuSans.ttf') format('truetype');

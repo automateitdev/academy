@@ -68,6 +68,7 @@ class MarkUpdateController extends Controller
             ->where('section_id', $secId->id)
             ->where('group_id', $grpId->group_id)
             ->where('academic_year_id', $request->academic_year_id)
+            ->orderBy('roll', 'asc')
             ->get();
         $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)
             ->where('class_id', $secId->id)
@@ -113,6 +114,7 @@ class MarkUpdateController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $secId = SectionAssign::select('class_id', 'id')->where('id', $request->class_id)->first();
         $gradepoint = Examgrade::select('grade')->where('institute_id', Auth::user()->institute_id)
             ->where('class_id', $secId->class_id)

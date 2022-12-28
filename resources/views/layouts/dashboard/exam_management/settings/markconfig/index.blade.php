@@ -220,7 +220,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
-                                                <input type="text" onkeypress="return /[0-9.]/i.test(event.key)" class="form-control" value="1" name="acceptance[]">
+                                                <input type="text" onkeypress="return /[0-9.]/i.test(event.key)" class="form-control" name="acceptance[]" placeholder="1 as 100%">
                                             </div>
                                         </div>
                                         <div class="col">
@@ -268,7 +268,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Class</label>
-                                                    <select class="form-control single subjectClass" name="class_id">
+                                                    <select class="form-control single" id="configsubjectclass" name="class_id">
                                                         <option value="">Select a Class</option>
                                                         @foreach($startups as $item)
                                                         @if($item->startup_category_id == 4)
@@ -385,7 +385,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" value="{{$examconfige->acceptance}}" name="acceptance[]">
+                                            <input type="text" onkeypress="return /[0-9.]/i.test(event.key)" class="form-control" value="{{$examconfige->acceptance}}" name="acceptance[]">
                                         </div>
                                     </div>
                                     <div class="col">

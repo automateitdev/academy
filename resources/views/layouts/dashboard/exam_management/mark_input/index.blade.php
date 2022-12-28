@@ -169,27 +169,64 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($students as $student)
-                            <tr>
-                                <td>{{$student->std_id}}</td>
-                                <td>{{$student->roll}}</td>
-                                <td>{{$student->name}}</td>
-                                @foreach($examconfigs as $examconfig)
-                                    <td>
-                                        <input type="hidden" name="student_id[]" value="{{$student->std_id}}">
-                                        <input type="hidden" name="subjectmap_id" value="{{$subjectId->id}}">
-                                        <input type="hidden" name="examstartups_id" value="{{$examstartup_id}}">
-                                        <input type="hidden" name="academic_year_id" value="{{$academic_year_id}}">
-                                        <input type="hidden" name="class_id" value="{{$class_id}}">
-                                        <input type="hidden" name="group_id" value="{{$group_id}}">
+                            @foreach($std_subject_map as $stdSubjectMap)
+                                @foreach($students as $student)
+                                    @if($stdSubjectMap->student_id == $student->std_id && $stdSubjectMap->institute_id == Auth::user()->institute_id)
+                                        <tr>
+                                            <td>{{$stdSubjectMap->student_id}}</td>
+                                            <td>{{$student->roll}}</td>
+                                            <td>{{$student->name}}</td>
+                                                @php
+                                                    if(isset($stdSubjectMap->marksmap) && !empty($stdSubjectMap->marksmap)){
+                                                        
+                                                        $mark_array = json_decode($stdSubjectMap->marksmap, true);
+                                                        foreach($mark_array as $marks)
+                                                        {
+                                                            if(isset($marks) && !empty($marks)){
+                                                                
+                                                                $finalmark = $marks['individual_marks'];
+                                                            }
+                                                        }
+                                                    }else{
+                                                        $finalmark = [];
+                                                    }
 
-                                        <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"  name="subject[{{$student->std_id}}][{{$examconfig->examcode_id}}]">
-                                    </td>
+                                                    
+                                                @endphp
+                                            @foreach($examconfigs as $examconfig)
+                                                <td>
+                                                    <input type="hidden" name="student_id[]" value="{{$stdSubjectMap->student_id}}">
+                                                    <input type="hidden" name="subjectmap_id" value="{{$subjectId->id}}">
+                                                    <input type="hidden" name="examstartups_id" value="{{$examstartup_id}}">
+                                                    <input type="hidden" name="academic_year_id" value="{{$academic_year_id}}">
+                                                    <input type="hidden" name="class_id" value="{{$class_id}}">
+                                                    <input type="hidden" name="group_id" value="{{$group_id}}">
+                                                    @if(count($finalmark) == 0)
+                                                    <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"  name="subject[{{$student->std_id}}][{{$examconfig->examcode_id}}]">
+                                                    @endif
+                                                    @foreach($finalmark as $key=>$fMark)
+                                                   
+                                                           @if($key == $examconfig->examcode_id)
+
+                                                               <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)" value="{{$fMark}}"  name="subject[{{$stdSubjectMap->student_id}}][{{$examconfig->examcode_id}}]">
+                                                               @php 
+                                                                $finalmark[$key] = 0;
+                                                                @endphp
+                                                            @endif
+                                                            
+                                                    @endforeach
+
+                                                    <!-- <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)"  name="subject[{{$student->std_id}}][{{$examconfig->examcode_id}}]"> -->
+                                                </td>
+                                            @endforeach
+                                            
+                                        </tr>
+                                    @endif
                                 @endforeach
-                            </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    
                     <button class="btn btn-primary mb-3" style="float: right;">Save</button>
                 </form>
             </div>
@@ -200,3 +237,4 @@
 </div>
 
 @endsection
+

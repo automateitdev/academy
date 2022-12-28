@@ -38,6 +38,7 @@ class FeeCollectionController extends Controller
         $sectionAssignes = SectionAssign::all();
         $groupassigns = GroupAssign::all();
         $students = Student::where('section_id', $request->section_id)
+                    ->orderBy('roll', 'asc')
                     ->paginate(100);
         return view('layouts.dashboard.fee_management.feecollection.quick.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns','students'));
    

@@ -169,39 +169,58 @@
                             </tr>
                         </thead>
                         <tbody>
-                                @foreach($std_subject_map as $stdSubMap)
-                                
-                                <tr>
-                                    <td>{{ $stdSubMap->student_id}}</td>
-                                    <td>{{$stdSubMap->student->roll}}</td>
-                                    <td>{{$stdSubMap->student->name}}</td>
-                                    @foreach($examconfigs as $examconfig)
-                                        @php
-                                            $mark_array = json_decode($stdSubMap->marksmap, true);
-                                            foreach($mark_array as $marks)
-                                            {
-                                                $finalmark = $marks['individual_marks'];
-                                                
-                                            }
-                                        @endphp
-                                        <td>
-                                            <input type="hidden" name="student_id[]" value="{{$stdSubMap->student_id}}">
-                                            <input type="hidden" name="subjectmap_id" value="{{$subjectId->id}}">
-                                            <input type="hidden" name="examstartups_id" value="{{$examstartup_id}}">
-                                            <input type="hidden" name="academic_year_id" value="{{$academic_year_id}}">
-                                            <input type="hidden" name="class_id" value="{{$class_id}}">
-                                            <input type="hidden" name="group_id" value="{{$group_id}}">
-                                            @foreach($finalmark as $key=>$fMark)
-                                                
-                                            @if($key == $examconfig->examcode_id)
-                                           
-                                                <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)" value="{{$fMark}}"  name="subject[{{$stdSubMap->student_id}}][{{$examconfig->examcode_id}}]">
-                                            @endif
+                            
+                            @foreach($std_subject_map as $stdSubMap)
+                            
+                                @foreach($students as $student)
+                                    @if($stdSubMap->student_id == $student->std_id)
+
+                                        <tr>
+                                            <td>{{$stdSubMap->student_id}}</td>
+                                            <td>{{$student->roll}}</td>
+                                            <td>{{$student->name}}</td>
+                                                @php
+                                                    if(isset($stdSubMap->marksmap) && !empty($stdSubMap->marksmap)){
+                                                        
+                                                        $mark_array = json_decode($stdSubMap->marksmap, true);
+                                                        foreach($mark_array as $marks)
+                                                        {
+                                                            if(isset($marks) && !empty($marks)){
+                                                                
+                                                                $finalmark = $marks['individual_marks'];
+                                                            }
+                                                        }
+                                                    
+                                                    }
+                                                    
+                                                @endphp
+                                            @foreach($examconfigs as $examconfig)
+                                            
+                                                <td>
+                                                    <input type="hidden" name="student_id[]" value="{{$stdSubMap->student_id}}">
+                                                    <input type="hidden" name="subjectmap_id" value="{{$subjectId->id}}">
+                                                    <input type="hidden" name="examstartups_id" value="{{$examstartup_id}}">
+                                                    <input type="hidden" name="academic_year_id" value="{{$academic_year_id}}">
+                                                    <input type="hidden" name="class_id" value="{{$class_id}}">
+                                                    <input type="hidden" name="group_id" value="{{$group_id}}">
+                                                        
+                                                            @foreach($finalmark as $key=>$fMark)
+                                                           
+                                                                @if($key == $examconfig->examcode_id)
+                                                                    <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)" value="{{$fMark}}"  name="subject[{{$stdSubMap->student_id}}][{{$examconfig->examcode_id}}]">
+                                                                 @endif
+                                                            @endforeach
+                                                    
+                                                </td>
                                             @endforeach
-                                        </td>
-                                    @endforeach
-                                </tr>
+                                            @php
+                                                $finalmark = [];
+                                            @endphp
+                                        </tr>
+                                    @endif
+                                @endforeach
                             @endforeach
+                            
                         </tbody>
                     </table>
                     <button class="btn btn-primary mb-3" style="float: right;">Process</button>

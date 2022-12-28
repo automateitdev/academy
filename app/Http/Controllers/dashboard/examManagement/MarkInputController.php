@@ -85,7 +85,9 @@ class MarkInputController extends Controller
         $data_id = [];
         $data_name = [];
         $secId = SectionAssign::select('class_id')->where('id', $request->id)->first();
-        $examconfig = Examconfig::select('subjectmap_id')->where('class_id', $secId->class_id)->get();
+        // $grId = GroupAssign::where('class_id', $secId->class_id)
+        $examconfig = Examconfig::select('subjectmap_id')
+        ->where('class_id', $secId->class_id)->get();
         foreach ($examconfig as $sbjmap_id) {
             $data = Subjectmap::select('id', 'subject_id')->where('id', $sbjmap_id->subjectmap_id)->get();
 
@@ -139,15 +141,14 @@ class MarkInputController extends Controller
             ->where('academic_year_id', $request->academic_year_id)
             ->orderBy('roll', 'asc')
             ->get();
-        // dd(DB::students);
+        // dd($students);
         $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)
-            ->where('class_id', $secId->class_id)
+            ->where('class_id', $request->class_id)
             ->where('group_id', $grpId->group_id)
             ->where('academic_year_id', $academic_year_id)
-            ->where('examstartups_id', $request->examstartup_id)
             ->where('subjectmap_id', $request->subject_id)
             ->get();
-
+        //dd($std_subject_map);
         return view(
             'layouts.dashboard.exam_management.mark_input.index',
             compact(
@@ -185,8 +186,8 @@ class MarkInputController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->group_id);
-
+         //dd($request);
+        $grpId = GroupAssign::select('group_id', 'id')->where('id', $request->group_id)->first();
         $secId = SectionAssign::select('class_id', 'id')->where('id', $request->class_id)->first();
         $gradepoint = Examgrade::select('grade')->where('institute_id', Auth::user()->institute_id)
             ->where('class_id', $secId->class_id)
@@ -245,6 +246,11 @@ class MarkInputController extends Controller
                 $grade = [];
             }
         } else {
+            $total_exam_mark = [];
+            $temp_total_exam_mark = [];
+
+            $individual_input_mark = [];
+            $temp_individual_input_mark = [];
             foreach ($request->subject as $key => $sub) {
                 foreach ($sub as $subkey => $subvalue) {
                     $examconfig = Examconfig::where('institute_id', Auth::user()->institute_id)
@@ -256,10 +262,31 @@ class MarkInputController extends Controller
                         ->where('examcode_id', $subkey)
                         ->first();
 
-                    $individualMark = $subvalue * $examconfig->acceptance;
-                    $marks[$subkey] = round($individualMark);
+                    if($examconfig->acceptance >1 || $examconfig->acceptance < 0)
+                    {
+                        return redirect(route('markinput'))->with('error', 'Acceptance cannot be more than 1 and negative value');
+                    }else{
+                       
+                        $marks[$subkey] = round($subvalue);
+
+
+                        $mul_acceptance_examMark = $examconfig->total_marks * $examconfig->acceptance;
+                        array_push($temp_total_exam_mark,$mul_acceptance_examMark);
+
+                        $mul_individualMark = $subvalue * $examconfig->acceptance;
+                        array_push($temp_individual_input_mark,$mul_individualMark);
+
+                        array_push($total_exam_mark,$examconfig->total_marks);
+                        array_push($individual_input_mark, $marks[$subkey]);
+                    }
                 }
+                
                 $totalmark = array_sum($marks);
+                $mul_assigned_exam_mark = array_sum($temp_total_exam_mark);
+                $mul_obtained_exam_mark = array_sum($temp_individual_input_mark);
+
+                $obtained_mark_percentage = ($mul_obtained_exam_mark/$mul_assigned_exam_mark) * 100;
+                // dd($mul_assigned_exam_mark,$mul_obtained_exam_mark, $obtained_mark_percentage); 
 
                 $convert_to_array = explode(',', $gradepoint->grade);
                 for ($i = 0; $i < count($convert_to_array); $i++) {
@@ -268,10 +295,12 @@ class MarkInputController extends Controller
                 }
                 foreach ($end_array as $gkey => $g_value) {
                     $range = explode('-', $g_value);
-                    if ($totalmark >= $range[0] && $totalmark <= $range[1]) {
+                    //dd($obtained_mark_percentage);
+                    if ($obtained_mark_percentage >= $range[0] && $obtained_mark_percentage <= $range[1]) {
                         $grade['grade'] = $gkey;
                     }
                 }
+                //dd($grade);
                 $result['grade'] = $grade;
                 $result['individual_marks'] = $marks;
                 $result['total_marks'] = $totalmark;
@@ -279,7 +308,10 @@ class MarkInputController extends Controller
                 array_push($individualResult[$key], $result);
             }
         }
+        //dd($individualResult);
         foreach ($individualResult as $individualR_key => $individualR_value) {
+            $vv = json_encode($individualR_value);
+          
             $input = StudentSubjectMap::updateOrCreate(
                 [
                     'institute_id' => Auth::user()->institute_id,
@@ -288,8 +320,10 @@ class MarkInputController extends Controller
                     'subjectmap_id' => $request->subjectmap_id
                 ],
                 [
-                    'marksmap' => $individualR_value,
-                    'examstartups_id' => $request->examstartups_id,
+                    'class_id' => $request->class_id,
+                    'group_id' => $grpId->group_id,
+                    'marksmap' => $vv,
+                    'examstartups_id' => $request->examstartups_id
                 ]
             );
         }
