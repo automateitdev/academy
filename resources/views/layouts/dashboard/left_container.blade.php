@@ -265,6 +265,12 @@
                                      <p>Tabulation Sheet</p>
                                  </a>
                              </li>
+                             <li class="nav-item">
+                                 <a href="{{route('marksheet')}}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Mark Sheet</p>
+                                 </a>
+                             </li>
                          </ul>
                      </li>
                  </ul>

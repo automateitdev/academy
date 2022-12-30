@@ -226,3 +226,97 @@ $(document).ready(function () {
     });
 });
 // Tabulation sheet 
+
+//mark sheet
+$(document).ready(function () {
+
+    $(document).on('change', '#markhseetClass', function () {
+        var class_id = $(this).val();
+        var ot = " ";
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getexamfromexamcreate',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+
+                $('#msrkexamnameid').html(" ");
+
+                ot += '<option value="0" selected disabled>Choose One</option>';
+                for (var key in data) {
+                    //   console.log("key " + key + " has value " + data[key]);
+                    ot += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('#msrkexamnameid').append(ot);
+
+            },
+
+        });
+        $.ajax({
+            type: 'get',
+            url: '/getgroupforexaminput',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+
+                $('#amrkubjectgroup').html(" ");
+
+                op += '<option value="0" selected disabled>Choose One</option>';
+                for (var key in data) {
+                    op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('#amrkubjectgroup').append(op);
+
+            },
+
+        });
+
+    });
+});
+
+let markshee_class_id;
+let markshee_group_id;
+let markshee_academic_year_id;
+let markshee_examstartup_id;
+$(document).ready(function () {
+    $(document).on('click', '#marksheetGen', function () {
+        console.log("click click");
+        $('#mainloader').removeClass('d-none');
+        markshee_class_id = $("select[name=class_id]").val();
+        markshee_group_id = $("select[name=group_id]").val();
+        markshee_academic_year_id = $("select[name=academic_year_id]").val();
+        markshee_examstartup_id = $("select[name=examstartup_id]").val();
+        tabulfileName = $("select[name=class_id] option:selected").text().trim();
+
+
+        $.ajax({
+            type: 'get',
+            url: '/marksheet_sheet_generate',
+            data: {
+                'class_id': markshee_class_id,
+                'group_id': markshee_group_id,
+                'academic_year_id': markshee_academic_year_id,
+                'examstartup_id': markshee_examstartup_id,
+            },
+            success: function (data) {
+                console.log(data);
+                $('#mainloader').addClass('d-none');
+                marksheeData = data;
+                
+            },
+            
+            error: function () {
+                $('#mainloader').addClass('d-none');
+                alert("Something went wrong! Please try later.");
+            }
+
+        });
+    });
+});
+//mark sheet

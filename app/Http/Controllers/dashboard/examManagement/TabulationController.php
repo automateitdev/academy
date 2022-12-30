@@ -73,7 +73,7 @@ class TabulationController extends Controller
             ->where('academic_year_id', $request->academic_year_id)
             ->where('examstartups_id', $request->examstartup_id)
             ->get();
-        dd($data);
+        // dd(StudentSubjectMap);
         $examconfigs = Examconfig::where('institute_id', Auth::user()->institute_id)
             ->where('class_id', $class_id->class_id)
             ->where('group_id', $group_assign_id->id)

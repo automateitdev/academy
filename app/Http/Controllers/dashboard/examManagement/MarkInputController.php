@@ -246,12 +246,12 @@ class MarkInputController extends Controller
                 $grade = [];
             }
         } else {
-            $total_exam_mark = [];
-            $temp_total_exam_mark = [];
 
-            $individual_input_mark = [];
-            $temp_individual_input_mark = [];
             foreach ($request->subject as $key => $sub) {
+                $total_exam_mark = [];
+                $temp_total_exam_mark = [];
+                $individual_input_mark = [];
+                $temp_individual_input_mark = [];
                 foreach ($sub as $subkey => $subvalue) {
                     $examconfig = Examconfig::where('institute_id', Auth::user()->institute_id)
                         ->where('academic_year_id', $request->academic_year_id)
@@ -269,7 +269,6 @@ class MarkInputController extends Controller
                        
                         $marks[$subkey] = round($subvalue);
 
-
                         $mul_acceptance_examMark = $examconfig->total_marks * $examconfig->acceptance;
                         array_push($temp_total_exam_mark,$mul_acceptance_examMark);
 
@@ -282,6 +281,9 @@ class MarkInputController extends Controller
                 }
                 
                 $totalmark = array_sum($marks);
+
+               
+                
                 $mul_assigned_exam_mark = array_sum($temp_total_exam_mark);
                 $mul_obtained_exam_mark = array_sum($temp_individual_input_mark);
 
@@ -293,6 +295,8 @@ class MarkInputController extends Controller
                     $key_value = explode(':', $convert_to_array[$i]);
                     $end_array[$key_value[0]] = $key_value[1];
                 }
+
+                // dd($end_array);
                 foreach ($end_array as $gkey => $g_value) {
                     $range = explode('-', $g_value);
                     //dd($obtained_mark_percentage);
@@ -308,7 +312,8 @@ class MarkInputController extends Controller
                 array_push($individualResult[$key], $result);
             }
         }
-        //dd($individualResult);
+
+        
         foreach ($individualResult as $individualR_key => $individualR_value) {
             $vv = json_encode($individualR_value);
           

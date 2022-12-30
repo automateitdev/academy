@@ -91,19 +91,30 @@ class StudentAuthController extends Controller
         $invoice = strtoupper($invoice);
 
         $tableData = json_decode($request->tableData, true);
-
+        
         foreach ($tableData as $data) {
-
-            $invoice_assign = Payapply::where(
-                [
-                    ['student_id',  $std_id],
-                    ['institute_id', $ins_id],
-                    ['feehead_id', $data['feehead_id']],
-                    ['feesubhead_id', $data['feesubhead_id']]
-                ]
-            )->update(['invoice' => $invoice]);
+        
+            $check_invoice = Payapply:: where([
+                ['student_id',  $std_id],
+                ['institute_id', $ins_id],
+                ['feehead_id', $data['feehead_id']],
+                ['feesubhead_id', $data['feesubhead_id']]
+            ])->first();
+            
+            // dd($check_invoice);
+            
+            if(empty($check_invoice->invoice) && $check_invoice->payment_state != 200){
+                $invoice_assign = Payapply::where(
+                    [
+                        ['student_id',  $std_id],
+                        ['institute_id', $ins_id],
+                        ['feehead_id', $data['feehead_id']],
+                        ['feesubhead_id', $data['feesubhead_id']]
+                    ]
+                )->update(['invoice' => $invoice]);
+            }
         }
-        // dd($total_payable);
+        // dd($total_payable, $grandTotal);
         if ($grandTotal == $total_payable) {
             $amount = $total_payable;
         } else {

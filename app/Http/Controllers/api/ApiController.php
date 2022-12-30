@@ -45,7 +45,6 @@ class ApiController extends Controller
                     $headers = [
                         'Content-Type' => 'application/json',
                         'Authorization' => $auth
-
                     ];
 
                     $data = '{"session_Token": "' . $request->data['session_Token'] . '"}';

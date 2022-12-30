@@ -1,539 +1,88 @@
-{
-    "101": {
-      "pass": true,
-      "Bangla 1st": {
-        "Written": 55,
-        "total": 73,
-        "subject_id": 2,
-        "MCQ": 18,
-        "grade_point": 4,
-        "letter_point": "A"
-      },
-      "student_name": "Rahman",
-      "student_roll": 1,
-      "examName": "Final Exam",
-      "grand_total": 345,
-      "gp_total": 19.5,
-      "GPA": 3.9,
-      "English 1st": {
-        "Written": 44,
-        "total": 44,
-        "subject_id": 5,
-        "grade_point": 2,
-        "letter_point": "C"
-      },
-      "Physics": {
-        "Written": 34,
-        "total": 66,
-        "subject_id": 10,
-        "MCQ": 17,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 50,
-        "total": 82,
-        "subject_id": 12,
-        "MCQ": 17,
-        "grade_point": 5,
-        "letter_point": "A+",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 50,
-        "total": 80,
-        "subject_id": 13,
-        "MCQ": 30,
-        "grade_point": 5,
-        "letter_point": "A+"
-      }
-    },
-    "2210143": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 55,
-        "total": 84,
-        "subject_id": 2,
-        "MCQ": 29,
-        "grade_point": 5,
-        "letter_point": "A+"
-      },
-      "student_name": "MD. WALID SHEIKH",
-      "student_roll": 134,
-      "examName": "Final Exam",
-      "grand_total": 346,
-      "gp_total": 14,
-      "GPA": 2.8,
-      "English 1st": {
-        "Written": 70,
-        "total": 70,
-        "subject_id": 5,
-        "grade_point": 4,
-        "letter_point": "A"
-      },
-      "Physics": {
-        "Written": 19,
-        "total": 52,
-        "subject_id": 10,
-        "MCQ": 18,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 19,
-        "total": 52,
-        "subject_id": 12,
-        "MCQ": 18,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 70,
-        "total": 88,
-        "subject_id": 13,
-        "MCQ": 18,
-        "grade_point": 5,
-        "letter_point": "A+"
-      }
-    },
-    "2210144": {
-      "pass": true,
-      "Bangla 1st": {
-        "Written": 45,
-        "total": 70,
-        "subject_id": 2,
-        "MCQ": 25,
-        "grade_point": 4,
-        "letter_point": "A"
-      },
-      "student_name": "MD. MAFUJ",
-      "student_roll": 154,
-      "examName": "Final Exam",
-      "grand_total": 385,
-      "gp_total": 21.5,
-      "GPA": 4.3,
-      "English 1st": {
-        "Written": 95,
-        "total": 95,
-        "subject_id": 5,
-        "grade_point": 5,
-        "letter_point": "A+"
-      },
-      "Physics": {
-        "Written": 45,
-        "total": 85,
-        "subject_id": 10,
-        "MCQ": 25,
-        "grade_point": 5,
-        "letter_point": "A+",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 25,
-        "total": 65,
-        "subject_id": 12,
-        "MCQ": 25,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 45,
-        "total": 70,
-        "subject_id": 13,
-        "MCQ": 25,
-        "grade_point": 4,
-        "letter_point": "A"
-      }
-    },
-    "2210145": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 30,
-        "total": 42,
-        "subject_id": 2,
-        "MCQ": 12,
-        "grade_point": 0,
-        "letter_point": "F"
-      },
-      "student_name": "MD. NAHID",
-      "student_roll": 170,
-      "examName": "Final Exam",
-      "grand_total": 312,
-      "gp_total": 15.5,
-      "GPA": 3.1,
-      "English 1st": {
-        "Written": 60,
-        "total": 60,
-        "subject_id": 5,
-        "grade_point": 3.5,
-        "letter_point": "A-"
-      },
-      "Physics": {
-        "Written": 30,
-        "total": 65,
-        "subject_id": 10,
-        "MCQ": 20,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 30,
-        "total": 65,
-        "subject_id": 12,
-        "MCQ": 20,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 60,
-        "total": 80,
-        "subject_id": 13,
-        "MCQ": 20,
-        "grade_point": 5,
-        "letter_point": "A+"
-      }
-    },
-    "2210146": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 20,
-        "total": 38,
-        "subject_id": 2,
-        "MCQ": 18,
-        "grade_point": 0,
-        "letter_point": "F"
-      },
-      "student_name": "MD. MAHMUDUL ISLAM LIKHON",
-      "student_roll": 171,
-      "examName": "Final Exam",
-      "grand_total": 241,
-      "gp_total": 7,
-      "GPA": 1.4,
-      "English 1st": {
-        "Written": 33,
-        "total": 33,
-        "subject_id": 5,
-        "grade_point": 0,
-        "letter_point": "F"
-      },
-      "Physics": {
-        "Written": 33,
-        "total": 66,
-        "subject_id": 10,
-        "MCQ": 18,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 33,
-        "total": 66,
-        "subject_id": 12,
-        "MCQ": 18,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 20,
-        "total": 38,
-        "subject_id": 13,
-        "MCQ": 18,
-        "grade_point": 0,
-        "letter_point": "F"
-      }
-    },
-    "2210147": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 33,
-        "total": 55,
-        "subject_id": 2,
-        "MCQ": 22,
-        "grade_point": 3,
-        "letter_point": "B"
-      },
-      "student_name": "MD. NAIM SHEIKH",
-      "student_roll": 172,
-      "examName": "Final Exam",
-      "grand_total": 249,
-      "gp_total": 6.5,
-      "GPA": 1.3,
-      "English 1st": {
-        "Written": 29,
-        "total": 29,
-        "subject_id": 5,
-        "grade_point": 0,
-        "letter_point": "F"
-      },
-      "Physics": {
-        "Written": 29,
-        "total": 61,
-        "subject_id": 10,
-        "MCQ": 17,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 22,
-        "total": 54,
-        "subject_id": 12,
-        "MCQ": 17,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 33,
-        "total": 50,
-        "subject_id": 13,
-        "MCQ": 17,
-        "grade_point": 0,
-        "letter_point": "F"
-      }
-    },
-    "2210148": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 65,
-        "total": 95,
-        "subject_id": 2,
-        "MCQ": 30,
-        "grade_point": 5,
-        "letter_point": "A+"
-      },
-      "student_name": "MD. ATIK SHEIKH",
-      "student_roll": 179,
-      "examName": "Final Exam",
-      "grand_total": 393,
-      "gp_total": 10,
-      "GPA": 2,
-      "English 1st": {
-        "Written": 88,
-        "total": 88,
-        "subject_id": 5,
-        "grade_point": 5,
-        "letter_point": "A+"
-      },
-      "Physics": {
-        "Written": 49,
-        "total": 75,
-        "subject_id": 10,
-        "MCQ": 11,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 49,
-        "total": 75,
-        "subject_id": 12,
-        "MCQ": 11,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 49,
-        "total": 60,
-        "subject_id": 13,
-        "MCQ": 11,
-        "grade_point": 0,
-        "letter_point": "F"
-      }
-    },
-    "2210149": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 60,
-        "total": 90,
-        "subject_id": 2,
-        "MCQ": 30,
-        "grade_point": 5,
-        "letter_point": "A+"
-      },
-      "student_name": "MD. NIROB SHEIKH",
-      "student_roll": 190,
-      "examName": "Final Exam",
-      "grand_total": 371,
-      "gp_total": 16.5,
-      "GPA": 3.3,
-      "English 1st": {
-        "Written": 54,
-        "total": 54,
-        "subject_id": 5,
-        "grade_point": 3,
-        "letter_point": "B"
-      },
-      "Physics": {
-        "Written": 39,
-        "total": 62,
-        "subject_id": 10,
-        "MCQ": 12,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 11
-      },
-      "Biology": {
-        "Written": 39,
-        "total": 66,
-        "subject_id": 12,
-        "MCQ": 12,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 69,
-        "total": 99,
-        "subject_id": 13,
-        "MCQ": 30,
-        "grade_point": 5,
-        "letter_point": "A+"
-      }
-    },
-    "2210150": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 29,
-        "total": 59,
-        "subject_id": 2,
-        "MCQ": 30,
-        "grade_point": 0,
-        "letter_point": "F"
-      },
-      "student_name": "ASIM CHAKRAVORTY",
-      "student_roll": 193,
-      "examName": "Final Exam",
-      "grand_total": 328,
-      "gp_total": 14.5,
-      "GPA": 2.9,
-      "English 1st": {
-        "Written": 67,
-        "total": 67,
-        "subject_id": 5,
-        "grade_point": 3.5,
-        "letter_point": "A-"
-      },
-      "Physics": {
-        "Written": 38,
-        "total": 73,
-        "subject_id": 10,
-        "MCQ": 20,
-        "grade_point": 4,
-        "letter_point": "A",
-        "Practical": 15
-      },
-      "Biology": {
-        "Written": 29,
-        "total": 64,
-        "subject_id": 12,
-        "MCQ": 20,
-        "grade_point": 3.5,
-        "letter_point": "A-",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 45,
-        "total": 65,
-        "subject_id": 13,
-        "MCQ": 20,
-        "grade_point": 3.5,
-        "letter_point": "A-"
-      }
-    },
-    "2210151": {
-      "pass": false,
-      "Bangla 1st": {
-        "Written": 12,
-        "total": 42,
-        "subject_id": 2,
-        "MCQ": 30,
-        "grade_point": 0,
-        "letter_point": "F"
-      },
-      "student_name": "MD. SHISHIR HOSSAIN",
-      "student_roll": 195,
-      "examName": "Final Exam",
-      "grand_total": 277,
-      "gp_total": 9.5,
-      "GPA": 1.9,
-      "English 1st": {
-        "Written": 49,
-        "total": 49,
-        "subject_id": 5,
-        "grade_point": 2,
-        "letter_point": "C"
-      },
-      "Physics": {
-        "Written": 15,
-        "total": 46,
-        "subject_id": 10,
-        "MCQ": 19,
-        "grade_point": 0,
-        "letter_point": "F",
-        "Practical": 12
-      },
-      "Biology": {
-        "Written": 40,
-        "total": 74,
-        "subject_id": 12,
-        "MCQ": 19,
-        "grade_point": 4,
-        "letter_point": "A",
-        "Practical": 15
-      },
-      "Higher Math": {
-        "Written": 47,
-        "total": 66,
-        "subject_id": 13,
-        "MCQ": 19,
-        "grade_point": 3.5,
-        "letter_point": "A-"
-      }
-    },
-    "subject_details": {
-      "Bangla 1st": [
-        "MCQ",
-        "Written"
-      ],
-      "English 1st": [
-        "Written"
-      ],
-      "Physics": [
-        "MCQ",
-        "Written",
-        "Practical"
-      ],
-      "Biology": [
-        "MCQ",
-        "Written",
-        "Practical"
-      ],
-      "Higher Math": [
-        "MCQ",
-        "Written"
-      ]
-    },
-    "common_detail": {
-      "exam_name": "Final Exam",
-      "class_name": "Nine",
-      "section_name": "A",
-      "shift_name": "Morning",
-      "academic_yr": "2022",
-      "institute_name": "Academy",
-      "institute_add": "Rampura",
-      "total_student": 10,
-      "participants": 10,
-      "total_pass": 2,
-      "total_fail": 8,
-      "pass_percentage": 20
-    }
+29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Request: {
+  "data": {
+    "session_Token": "7deca8d284b56a70239c26ee82ddf1fba027a248830",
+    "TransactionId": "2212279000010584"
+  },
+  "Credentials": {
+    "userName": "AutoMateIT",
+    "password": "Au3t7o1M4asteIT!"
   }
+}
+29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Response{
+  "TransactionId": null,
+  "msg": "fail",
+  "status": "201"
+}
+29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.ProcThread - Request From DB: {“ApiAccessUserId”:”AutoMateIT”,
+  "AccessPassKey": "",
+  "AccessSessionKey": "0fcmSvZxWP5+ucI0vkbVqcMzJt0nR1RocTFFb2SiibcLJYKVK5lctaR8MbL2E97uw199Y2pAMY0rpBEbrhXZZUYbiyXISgpTxb550ZCPnwcgA0jlLTrtDJi3EUJ6Ljtj",
+“TransactionId":"2212279000010539",
+"TranDateTime": "\/Date(1672123407000)\/",
+“ENTRYDATE":"27Dec-2022",
+“RequestId":"9000010539",
+“RefTranNo":"AE22111126004221227063829",
+
+“RefTranDateTime":"2022-12-27",
+“TranAmount":4400,
+“PayAmount":4466,
+“PayMode":"M04","ContactName":"Ronak Das“,"ContactNo": "01557414824",
+“ClientTranTime":"",
+“Purpose":null,
+“ReturnUrl":null,
+“ReturnMethod":null,
+“CrAccount":"","CrAmount":"",
+“DataIndex":0,
+“PaymentOwner":"automateIt",
+“TranType":"","ChallanNo":"",
+“TranStatus":"P",
+“OTPVal":"",
+“smsFreq":0,
+“MaxTranLimit":0,
+“RespTranNo":"",
+“PayType":null,
+“ErrorStatus":null,
+“PaymentId":null,
+“TrxNumber":null,
+“AcCardId":"",
+“PaymentAmount":null,
+“PaymentStatus":null,
+“ClientIp":null,
+“MessageStatus":"",
+“SessionToken":"",
+“AlgoKey":"",
+“HashKey":null,
+“HashKeyExpireTime":"\/Date(1672301089994)\/",
+“PayerId":null,
+“Address":null,
+“RequestUrl":null,
+“ChallanStat":"N",
+“ReqFrom":null,
+“PaymentReqID":null,
+“id_token":"","refresh_token": "",
+  "Description": null,
+  "OrgiBrCode": "00018",
+  "ExecStatus": null,
+  "CustomStatus": "200",
+  "CustomMessage": null,
+  "StatusMsg": null,
+  "PortalStatus": null,
+  "CbsTranStatus": null,
+  "Vat": "2.87",
+  "Commission": "63.13",
+  "HASHKEY": "11117c7df9794d9fa3794f4dca7de64d33bc23c0576"
+}
+29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Request: {
+  "data": {
+    "session_Token": "11117c7df9794d9fa3794f4dca7de64d33bc23c0576",
+    "TransactionId": "2212279000010539"
+  },
+  "Credentials": {
+    "userName": "AutoMateIT",
+    "password": "Au3t7o1M4asteIT!"
+  }
+}
+29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Response{
+  "TransactionId": null,
+  "msg": "fail",
+  "status": "201"
+}
