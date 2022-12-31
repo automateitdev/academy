@@ -1,88 +1,126 @@
-29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Request: {
-  "data": {
-    "session_Token": "7deca8d284b56a70239c26ee82ddf1fba027a248830",
-    "TransactionId": "2212279000010584"
-  },
-  "Credentials": {
-    "userName": "AutoMateIT",
-    "password": "Au3t7o1M4asteIT!"
-  }
-}
-29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Response{
-  "TransactionId": null,
-  "msg": "fail",
-  "status": "201"
-}
-29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.ProcThread - Request From DB: {“ApiAccessUserId”:”AutoMateIT”,
-  "AccessPassKey": "",
-  "AccessSessionKey": "0fcmSvZxWP5+ucI0vkbVqcMzJt0nR1RocTFFb2SiibcLJYKVK5lctaR8MbL2E97uw199Y2pAMY0rpBEbrhXZZUYbiyXISgpTxb550ZCPnwcgA0jlLTrtDJi3EUJ6Ljtj",
-“TransactionId":"2212279000010539",
-"TranDateTime": "\/Date(1672123407000)\/",
-“ENTRYDATE":"27Dec-2022",
-“RequestId":"9000010539",
-“RefTranNo":"AE22111126004221227063829",
-
-“RefTranDateTime":"2022-12-27",
-“TranAmount":4400,
-“PayAmount":4466,
-“PayMode":"M04","ContactName":"Ronak Das“,"ContactNo": "01557414824",
-“ClientTranTime":"",
-“Purpose":null,
-“ReturnUrl":null,
-“ReturnMethod":null,
-“CrAccount":"","CrAmount":"",
-“DataIndex":0,
-“PaymentOwner":"automateIt",
-“TranType":"","ChallanNo":"",
-“TranStatus":"P",
-“OTPVal":"",
-“smsFreq":0,
-“MaxTranLimit":0,
-“RespTranNo":"",
-“PayType":null,
-“ErrorStatus":null,
-“PaymentId":null,
-“TrxNumber":null,
-“AcCardId":"",
-“PaymentAmount":null,
-“PaymentStatus":null,
-“ClientIp":null,
-“MessageStatus":"",
-“SessionToken":"",
-“AlgoKey":"",
-“HashKey":null,
-“HashKeyExpireTime":"\/Date(1672301089994)\/",
-“PayerId":null,
-“Address":null,
-“RequestUrl":null,
-“ChallanStat":"N",
-“ReqFrom":null,
-“PaymentReqID":null,
-“id_token":"","refresh_token": "",
-  "Description": null,
-  "OrgiBrCode": "00018",
-  "ExecStatus": null,
-  "CustomStatus": "200",
-  "CustomMessage": null,
-  "StatusMsg": null,
-  "PortalStatus": null,
-  "CbsTranStatus": null,
-  "Vat": "2.87",
-  "Commission": "63.13",
-  "HASHKEY": "11117c7df9794d9fa3794f4dca7de64d33bc23c0576"
-}
-29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Request: {
-  "data": {
-    "session_Token": "11117c7df9794d9fa3794f4dca7de64d33bc23c0576",
-    "TransactionId": "2212279000010539"
-  },
-  "Credentials": {
-    "userName": "AutoMateIT",
-    "password": "Au3t7o1M4asteIT!"
-  }
-}
-29-12-2022 2: 04: 50, INFO SPG_COUNTER.DAL.AutoMateService - AutoMate Response{
-  "TransactionId": null,
-  "msg": "fail",
-  "status": "201"
-}
+array:3 [▼
+  "subject_details" => array:8 [▶
+    "Bangla 1st" => array:1 [▶
+      0 => "WR"
+    ]
+    "Bangla 2nd" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+    "English 1st" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+    "English 2nd" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+    "Mathematics" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+    "Religion & Moral Education" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+    "BD & Global Studies" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+    "General Science" => array:2 [▶
+      0 => "WR"
+      1 => "MT"
+    ]
+  ]
+  2038220 => array:11 [▶
+    "subjects" => array:8 [▶
+      "Bangla 1st" => array:6 [▶
+        "MT" => 22
+        "total" => 77
+        "subject_id" => 2
+        "WR" => 55
+        "grade_point" => 4.0
+        "letter_point" => "A"
+      ]
+      "Bangla 2nd" => array:6 [▶
+        "MT" => 20
+        "total" => 53
+        "subject_id" => 3
+        "WR" => 33
+        "grade_point" => 3.0
+        "letter_point" => "B"
+      ]
+      "English 1st" => array:6 [▶
+        "MT" => 17
+        "total" => 72
+        "subject_id" => 5
+        "WR" => 55
+        "grade_point" => 4.0
+        "letter_point" => "A"
+      ]
+      "English 2nd" => array:6 [▶
+        "MT" => 19
+        "total" => 49
+        "subject_id" => 6
+        "WR" => 30
+        "grade_point" => 2.0
+        "letter_point" => "C"
+      ]
+      "Mathematics" => array:6 [▶
+        "MT" => 12
+        "total" => 54
+        "subject_id" => 14
+        "WR" => 42
+        "grade_point" => 3.0
+        "letter_point" => "B"
+      ]
+      "Religion & Moral Education" => array:6 [▶
+        "MT" => 17
+        "total" => 69
+        "subject_id" => 25
+        "WR" => 52
+        "grade_point" => 3.5
+        "letter_point" => "A-"
+      ]
+      "BD & Global Studies" => array:6 [▶
+        "MT" => 16
+        "total" => 52
+        "subject_id" => 24
+        "WR" => 36
+        "grade_point" => 3.0
+        "letter_point" => "B"
+      ]
+      "General Science" => array:6 [▶
+        "MT" => 23
+        "total" => 63
+        "subject_id" => 9
+        "WR" => 40
+        "grade_point" => 3.5
+        "letter_point" => "A-"
+      ]
+    ]
+    "student_name" => "Raihan Hosen Jihad"
+    "student_roll" => 19
+    "examName" => "Annual Exam"
+    "grand_total" => 489
+    "gp_total" => 26.0
+    "GP_total" => 26.0
+    "GPA" => 3.25
+    "letter_grade" => "B"
+    "pass" => true
+    "merit_pos" => 1
+  ]
+  "common_detail" => array:11 [▶
+    "exam_name" => "Annual Exam"
+    "class_name" => "Four"
+    "section_name" => "A"
+    "shift_name" => "Day"
+    "academic_yr" => "2022"
+    "institute_name" => "PRIME KINDER GARTEN"
+    "institute_add" => "Dalal Bazar"
+    "group_name" => "One"
+    "session_name" => "N/A"
+    "father_name" => "Habib Ullah"
+    "mother_name" => "Samsur Nahar"
+  ]
+]

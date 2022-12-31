@@ -331,7 +331,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Tabulation_sheet_generate', [TabulationController::class, 'processResult'])->name('tabulation.process');
     //mark sheet
     Route::get('/exam-management/Mark_sheet', [MarkSheetController::class, 'index'])->name('marksheet');
-    Route::get('/marksheet_sheet_generate', [MarkSheetController::class, 'processmarksheet'])->name('marksheet.process');
+    Route::get('/marksheet_query', [MarkSheetController::class, 'marksQuery'])->name('marksheet.query');
+    Route::post('/marksheet_sheet_generate', [MarkSheetController::class, 'processmarksheet'])->name('marksheet.process');
 
     
     /////////////////////// Exam Management End//////////////////
