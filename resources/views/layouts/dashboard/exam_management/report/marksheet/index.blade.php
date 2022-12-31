@@ -156,21 +156,18 @@
                                     @if ($stdSubjectMap->student_id == $student->std_id && $stdSubjectMap->institute_id == Auth::user()->institute_id)
 
                                         <tr>
-                                            <form action={{route('marksheet.process')}} method="POST">
-                                            @csrf
-                                                <input type="hidden" value="{{ $class_id }}" name="class_id">
-                                                <input type="hidden" value="{{ $group_id }}" name="group_id">
-                                                <input type="hidden" value="{{ $group_name }}" name="group_name">
-                                                <input type="hidden" value="{{ $session_name }}" name="session_name">
-                                                <input type="hidden" value="{{ $examstartup_id }}" name="examstartup_id">
-                                                <input type="hidden" value="{{ $academic_year_id }}" name="academic_year_id">
-                                                <input type="hidden" value="{{ $stdSubjectMap->student_id }}" name="std_id">
+                                                <input type="hidden" value="{{ $class_id }}" name="class_id" id="class_id">
+                                                <input type="hidden" value="{{ $group_id }}" name="group_id" id="group_id">
+                                                <input type="hidden" value="{{ $group_name }}" name="group_name" id="group_name">
+                                                <input type="hidden" value="{{ $session_name }}" name="session_name" id="session_name">
+                                                <input type="hidden" value="{{ $examstartup_id }}" name="examstartup_id" id="examstartup_id">
+                                                <input type="hidden" value="{{ $academic_year_id }}" name="academic_year_id" id="academic_year_id">
+                                                <input type="hidden" value="{{ $stdSubjectMap->student_id }}" name="std_id" id="std_id">
 
                                                 <td>{{ $stdSubjectMap->student_id }}</td>
                                                 <td>{{ $student->name }}</td>
                                                 <td>{{ $student->roll }}</td>
-                                                <td><button class="btn btn-sm btn-primary">Process</button></td>
-                                            </form>
+                                                <td><button class="btn btn-sm btn-primary markProcess" id={{$stdSubjectMap->student_id}}>Process</button> <button class="btn btn-sm btn-dark"  disabled="true" id="marksheet_{{$stdSubjectMap->student_id}}">Download</button></td>
                                         </tr>
                                     @endif
                                 @endforeach

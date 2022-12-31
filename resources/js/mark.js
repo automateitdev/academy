@@ -138,7 +138,6 @@ $(document).ready(function () {
         let _token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-
             type: 'post',
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -284,33 +283,50 @@ let markshee_class_id;
 let markshee_group_id;
 let markshee_academic_year_id;
 let markshee_examstartup_id;
+let markshee_group_name;
+let markshee_session_name;
+let markshee_std_id;
+let marksheeData;
+
+let downkeyId;
 $(document).ready(function () {
-    $(document).on('click', '#marksheetGen', function () {
+    $(document).on('click', '.markProcess', function (e) {
+        e.preventDefault();
+        let student_id = $(this).attr('id');
         console.log("click click");
-        $('#mainloader').removeClass('d-none');
-        markshee_class_id = $("select[name=class_id]").val();
-        markshee_group_id = $("select[name=group_id]").val();
-        markshee_academic_year_id = $("select[name=academic_year_id]").val();
-        markshee_examstartup_id = $("select[name=examstartup_id]").val();
-        tabulfileName = $("select[name=class_id] option:selected").text().trim();
+        // $('#mainloader').removeClass('d-none');
+        markshee_class_id = $("#class_id").val();
+        markshee_group_id = $("#group_id").val();
+        markshee_group_name = $("#group_name").val();
+        markshee_session_name = $("#session_name").val();
+        markshee_examstartup_id = $("#examstartup_id").val();
+        markshee_academic_year_id = $("#academic_year_id").val();
+        markshee_std_id = $("#std_id").val();
 
 
+        let _token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type: 'get',
             url: '/marksheet_sheet_generate',
             data: {
+                _token: _token,
                 'class_id': markshee_class_id,
                 'group_id': markshee_group_id,
-                'academic_year_id': markshee_academic_year_id,
+                'group_name': markshee_group_name,
+                'session_name': markshee_session_name,
                 'examstartup_id': markshee_examstartup_id,
+                'academic_year_id': markshee_academic_year_id,
+                'std_id': markshee_std_id,
             },
             success: function (data) {
-                console.log(data);
-                $('#mainloader').addClass('d-none');
                 marksheeData = data;
-                
+                downkeyId = "#marksheet_" + student_id;
+                console.log(downkeyId);
+                if (!isEmpty(marksheeData)) {
+                    $(downkeyId).attr('disabled', false);
+                }
+                // $('#mainloader').addClass('d-none');
             },
-            
             error: function () {
                 $('#mainloader').addClass('d-none');
                 alert("Something went wrong! Please try later.");
@@ -318,5 +334,46 @@ $(document).ready(function () {
 
         });
     });
+
+    $(document).on('click', downkeyId, function (ev) {
+        ev.preventDefault();
+
+        console.log(marksheeData)
+        let _token = $('meta[name="csrf-token"]').attr('content');
+        let marksheetpath = 'layouts.dashboard.exam_management.report.marksheet.marksheetpdf';
+        $.ajax({
+            type: 'post',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/api/pdfgenerate',
+            xhrFields: {
+                responseType: 'blob'
+            },
+
+            data: {
+                _token: _token,
+                'data': marksheeData,
+                'pdfname': markshee_std_id,
+                'path': marksheetpath,
+            },
+            success: function (datas) {
+                var blob = new Blob([datas], {
+                    type: 'contentType'
+                });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = markshee_std_id + '.pdf';
+                link.click();
+            },
+            error: function () {
+                $('#mainloader').addClass('d-none');
+                alert("Something went wrong! Please try later.");
+            }
+        });
+
+    });
 });
+
+
 //mark sheet

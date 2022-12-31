@@ -1,3 +1,10 @@
+@php
+    ini_set('memory_limit', '1024M');
+    $date = date('d/m/y');
+    $i = 0;
+    $variable = json_decode($data, true);
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
