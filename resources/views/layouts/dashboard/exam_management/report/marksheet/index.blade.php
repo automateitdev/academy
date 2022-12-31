@@ -115,12 +115,30 @@
             </div>
             <div class="col-md-1"></div>
         </div>
-        @if(isset($data) && !empty($data))
-            $data = json_decode($ata, true);
-       <div class="row">
-           @foreach($data as $dKey => $d_value)
-                {{$dKey}}
-           @endforeach
+        @if(isset($variable) && !empty($variable))
+       <div class="row mt-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Roll</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($variable as $key => $data)
+                    @if($key != 'subject_details' and $key != 'common_detail')
+                    <tr>
+                        <td>{{$key}}</td>
+                        <td>{{$data['student_name']}}</td>
+                        <td>{{$data['student_roll']}}</td>
+                        <td><button class="btn btn-primary">Download</button></td>
+                    </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
        </div>
        @endif
     </div>

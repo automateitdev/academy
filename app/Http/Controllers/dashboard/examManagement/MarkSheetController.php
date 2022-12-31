@@ -38,6 +38,62 @@ class MarkSheetController extends Controller
                 )
         );
     }
+    public function query(Request $request)
+    {
+        $this->validate($request, [
+            'class_id' => 'required',
+            'group_id' => 'required',
+            'academic_year_id' => 'required',
+            'examstartup_id' => 'required'
+        ]);
+
+        $examstartup_id = $request->examstartup_id;
+        $academic_year_id = $request->academic_year_id;
+        $class_id = $request->class_id;
+        $group_id = $request->group_id;
+        $secId = SectionAssign::select('class_id', 'id')->where('id', $request->class_id)->first();
+        $grpId = GroupAssign::select('group_id', 'id')->where('id', $request->group_id)->first();
+
+        $subjectId = Subjectmap::select('id', 'subject_id')->where('id', $request->subject_id)->first();
+        $subjectName = Subject::select('name')->where('id', $subjectId->subject_id)->first();
+        // dd($subjectId->id);
+        $users = User::where('institute_id', Auth::user()->institute_id)->get();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        
+        $students = Student::
+            where('institute_id', Auth::user()->institute_id)
+            ->where('section_id', $secId->id)
+            ->where('group_id', $grpId->group_id)
+            ->where('academic_year_id', $request->academic_year_id)
+            ->orderBy('roll', 'asc')
+            ->get();
+        // dd($students);
+        $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)
+            ->where('class_id', $request->class_id)
+            ->where('group_id', $grpId->group_id)
+            ->where('academic_year_id', $academic_year_id)
+            ->where('subjectmap_id', $request->subject_id)
+            ->get();
+        //dd($std_subject_map);
+        return view(
+            'layouts.dashboard.exam_management.mark_input.index',
+            compact(
+                'users',
+                'sectionAssignes',
+                'startups',
+                'examconfigs',
+                'students',
+                'subjectId',
+                'examstartup_id',
+                'academic_year_id',
+                'class_id',
+                'group_id',
+                'std_subject_map',
+                'subjectName'
+            )
+        );
+    }
 
     public function processmarksheet(Request $request)
     {
@@ -338,11 +394,15 @@ class MarkSheetController extends Controller
         // return $variable;
 
 
-        $data = json_encode($variable);
+        // $data = json_encode($variable);
+        // dd($data);
         return view('layouts.dashboard.exam_management.report.marksheet.index', 
-        compact('data','sectionAssignes',
-        'startups',
-        'users'));
+        compact(
+            'variable',
+            'sectionAssignes',
+            'startups',
+            'users'
+    ));
 
         // return response()->json($data);
     }
