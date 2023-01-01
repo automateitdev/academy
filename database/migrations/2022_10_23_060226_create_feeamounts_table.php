@@ -24,6 +24,7 @@ class CreateFeeamountsTable extends Migration
             $table->double('fineamount')->nullable();
             $table->bigInteger('fund_id');
             $table->double('fund_amount');
+            $table->bigInteger('academic_year_id');
             $table->timestamps();
         });
     }

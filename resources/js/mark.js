@@ -287,12 +287,11 @@ let markshee_group_name;
 let markshee_session_name;
 let markshee_std_id;
 let marksheeData;
-
-let downkeyId;
+let student_id
 $(document).ready(function () {
     $(document).on('click', '.markProcess', function (e) {
         e.preventDefault();
-        let student_id = $(this).attr('id');
+        student_id = $(this).attr('id');
         console.log("click click");
         // $('#mainloader').removeClass('d-none');
         markshee_class_id = $("#class_id").val();
@@ -320,60 +319,58 @@ $(document).ready(function () {
             },
             success: function (data) {
                 marksheeData = data;
-                downkeyId = "#marksheet_" + student_id;
+                let downkeyId = ".marksheet_" + student_id;
                 console.log(downkeyId);
                 if (!isEmpty(marksheeData)) {
                     $(downkeyId).attr('disabled', false);
                 }
-                // $('#mainloader').addClass('d-none');
-            },
-            error: function () {
-                $('#mainloader').addClass('d-none');
-                alert("Something went wrong! Please try later.");
-            }
+                $(document).on('click', downkeyId, function (ev) {
+                    ev.preventDefault
+                    let _token = $('meta[name="csrf-token"]').attr('content');
+                    let marksheetpath = 'layouts.dashboard.exam_management.report.marksheet.marksheetpdf';
+                    $.ajax({
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: '/api/pdfgenerate',
+                        xhrFields: {
+                            responseType: 'blob'
+                        },
 
-        });
-    });
-
-    $(document).on('click', downkeyId, function (ev) {
-        ev.preventDefault();
-
-        console.log(marksheeData)
-        let _token = $('meta[name="csrf-token"]').attr('content');
-        let marksheetpath = 'layouts.dashboard.exam_management.report.marksheet.marksheetpdf';
-        $.ajax({
-            type: 'post',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: '/api/pdfgenerate',
-            xhrFields: {
-                responseType: 'blob'
-            },
-
-            data: {
-                _token: _token,
-                'data': marksheeData,
-                'pdfname': markshee_std_id,
-                'path': marksheetpath,
-            },
-            success: function (datas) {
-                var blob = new Blob([datas], {
-                    type: 'contentType'
+                        data: {
+                            _token: _token,
+                            'data': marksheeData,
+                            'pdfname': markshee_std_id,
+                            'path': marksheetpath,
+                        },
+                        success: function (datas) {
+                            var blob = new Blob([datas], {
+                                type: 'contentType'
+                            });
+                            var link = document.createElement('a');
+                            link.href = window.URL.createObjectURL(blob);
+                            link.download = markshee_std_id + '.pdf';
+                            link.click();
+                        },
+                    });
                 });
-                var link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = markshee_std_id + '.pdf';
-                link.click();
             },
             error: function () {
                 $('#mainloader').addClass('d-none');
                 alert("Something went wrong! Please try later.");
             }
-        });
 
+        });
     });
 });
+
+
+
+
+
+
+
 
 
 //mark sheet

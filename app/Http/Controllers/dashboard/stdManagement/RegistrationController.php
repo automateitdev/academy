@@ -10,6 +10,8 @@ use App\Models\Gender;
 use App\Models\Religion;
 use App\Models\SectionAssign;
 use App\Models\User;
+use App\Models\StartupSubcategory;
+use App\Models\GroupAssign;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentImport;
 use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
@@ -45,6 +47,32 @@ class RegistrationController extends Controller
         return view('layouts.dashboard.std_management.registration.excel.index', compact('startups', 'genders', 'religions', 'sectionAssignes', 'users'));
     }
 
+    public function getgroupforenrollement(Request $request)
+    {
+       //return $request->id;
+        $startup_id = [];
+        $groupname = [];
+        $groupassign_id = [];
+        $class = SectionAssign::select('class_id')->where('id',$request->id)->first();
+        $data = GroupAssign::select('id', 'group_id')->where('class_id', $class->class_id)->get();
+        // return $data;
+        foreach($data as $d){
+            $startups = Startup::select('startup_subcategory_id')->where('id', $d->group_id)->get();
+            array_push($groupassign_id, $d->id);
+            foreach($startups as $startup)
+            {
+                array_push($startup_id,$startup->startup_subcategory_id);
+                $subName = StartupSubcategory::select('startup_subcategory_name')->where('id', $startup->startup_subcategory_id)->get();
+                foreach($subName as $name)
+                {
+                    array_push($groupname, $name->startup_subcategory_name);
+                }
+            }
+            
+        }
+        $groupdata = array_combine($groupassign_id, $groupname);
+        return $groupdata;
+    }
     /**
      * Show the form for creating a new resource.
      *

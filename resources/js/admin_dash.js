@@ -40,6 +40,38 @@ $(document).ready(function () {
 
     });
 });
+//enrollement
+$(document).ready(function () {
+    $(document).on('change', '#enrollClass', function () {
+        var class_id = $(this).val();
+        //console.log(class_id);
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getgroupforenrollement',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+                console.log(data);
+                $('#enrollgroup').html(" ");
+
+                op += '<option value="0" selected disabled>Choose One</option>';
+                for (var key in data) {
+                    console.log('<option value="' + key + '">' + data[key] + '</option>');
+                    op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('#enrollgroup').append(op);
+
+            },
+
+        });
+
+    });
+});
+//enrollement
 //startup end
 
 // ledger start
@@ -95,6 +127,36 @@ $(document).ready(function () {
                 }
 
                 $('.fund_of_amount>tbody').append(op);
+
+            },
+
+        });
+
+    });
+});
+$(document).ready(function () {
+    $(document).on('change', '#amountClass', function () {
+        var class_id = $(this).val();
+        //console.log(class_id);
+        var op = " ";
+
+        $.ajax({
+            type: 'get',
+            url: '/getGroupForAmount',
+            data: {
+                'id': class_id
+            },
+            success: function (data) {
+                console.log(data);
+                $('#amountGroup').html(" ");
+
+                op += '<option value="0" selected disabled>Choose One</option>';
+                for (var key in data) {
+                    console.log('<option value="' + key + '">' + data[key] + '</option>');
+                    op += '<option value="' + key + '">' + data[key] + '</option>';
+
+                }
+                $('#amountGroup').append(op);
 
             },
 

@@ -12,9 +12,11 @@ use App\Models\FeeMaping;
 use App\Models\FeeFineMaping;
 use App\Models\User;
 use App\Models\Startup;
+use App\Models\GroupAssign;
 use App\Models\StartupSubcategory;
 use App\Models\Feeamount;
 use App\Models\Feefineamount;
+use App\Models\SectionAssign;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -29,19 +31,20 @@ class AmountController extends Controller
      */
     public function index()
     {
-        $feeheads = FeeHead::all();
-        $feesubheads = Feesubhead::all();
-        $ledgers = Ledger::all();
-        $funds = Fund::all();
+        $feeheads = FeeHead::where('institute_id', Auth::user()->institute_id)->get();
+        $feesubheads = Feesubhead::where('institute_id', Auth::user()->institute_id)->get();
+        $ledgers = Ledger::where('institute_id', Auth::user()->institute_id)->get();
+        $funds = Fund::where('institute_id', Auth::user()->institute_id)->get();
         $users = User::all();
-        $feemappings = FeeMaping::all();
-        $feefinemappings = FeeFineMaping::all();
-        $startups = Startup::all();
+        $feemappings = FeeMaping::where('institute_id', Auth::user()->institute_id)->get();
+        $feefinemappings = FeeFineMaping::where('institute_id', Auth::user()->institute_id)->get();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $startupsubcategories = StartupSubcategory::all();
-        $feeamounts = Feeamount::all();
-        $feefinemaounts = Feefineamount::all();
+        $feeamounts = Feeamount::where('institute_id', Auth::user()->institute_id)->get();
+        $feefinemaounts = Feefineamount::where('institute_id', Auth::user()->institute_id)->get();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
         return view('layouts.dashboard.fee_management.amount.index',
-         compact('feeheads','feesubheads','ledgers','funds','users','feemappings','feefinemappings','startups','startupsubcategories','feeamounts','feefinemaounts'));
+         compact('feeheads','feesubheads','ledgers','funds','users','feemappings','feefinemappings','startups','startupsubcategories','feeamounts','feefinemaounts','sectionAssignes'));
     }
 
     /**
@@ -49,6 +52,33 @@ class AmountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getGroupForAmount(Request $request)
+    {
+        $startup_id = [];
+        $groupname = [];
+        $groupassign_id = [];
+        // $class = SectionAssign::select('class_id')->where('id',$request->id)->first();
+        $data = GroupAssign::select('id', 'group_id')->where('class_id', $request->id)->get();
+        // return $data;
+        foreach($data as $d){
+            $startups = Startup::select('id', 'startup_subcategory_id')->where('id', $d->group_id)->get();
+            
+            foreach($startups as $startup)
+            {
+                array_push($groupassign_id, $startup->id);
+                array_push($startup_id,$startup->startup_subcategory_id);
+                $subName = StartupSubcategory::select('startup_subcategory_name')->where('id', $startup->startup_subcategory_id)->get();
+                foreach($subName as $name)
+                {
+                    array_push($groupname, $name->startup_subcategory_name);
+                }
+            }
+            
+        }
+        $groupdata = array_combine($groupassign_id, $groupname);
+        return $groupdata;
+    }
+
     public function create()
     {
         //
@@ -83,6 +113,7 @@ class AmountController extends Controller
             'fineamount'=> 'nullable',
             'fund_id'=>'required',
             'fund_amount'=>'required',
+            'academic_year_id'=>'required'
         ]);
         foreach ($request->fund_amount as $key => $fund_amount) {
             
@@ -96,6 +127,7 @@ class AmountController extends Controller
             $input->fineamount = $request->fineamount;
             $input->fund_id = $request->fund_id[$key];
             $input->fund_amount = $fund_amount;
+            $input->academic_year_id = $request->academic_year_id;
             $input->save(); 
         }
         
@@ -175,6 +207,8 @@ class AmountController extends Controller
             'fineamount'=> 'nullable',
             'fund_id'=>'required',
             'fund_amount'=>'required',
+            'academic_year_id'=>'required'
+
         ]);
         foreach ($request->fund_amount as $key => $fund_amount) {
             
@@ -188,6 +222,7 @@ class AmountController extends Controller
             $input->fineamount = $request->fineamount;
             $input->fund_id = $request->fund_id[$key];
             $input->fund_amount = $fund_amount;
+            $input->academic_year_id = $request->academic_year_id;
             $input->save(); 
         }
         

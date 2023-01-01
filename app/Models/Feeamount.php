@@ -17,7 +17,8 @@ class Feeamount extends Model
         'feeamount',
         'fineamount',
         'fund_id',
-        'fund_amount'
+        'fund_amount',
+        'academic_year_id'
     ];
 
     public function feehead()

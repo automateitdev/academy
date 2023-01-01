@@ -221,13 +221,13 @@
                                     <tr>
                                         <th scope="row">{{$group->id}}</th>
                                         @foreach($startups as $item)
-                                        @if($group->class_id == $item->id)
-                                        @foreach($startupsubcategories as $i)
-                                        @if($item->startup_subcategory_id == $i->id)
-                                        <td>{{$i->startup_subcategory_name}}</td>
-                                        @endif
-                                        @endforeach
-                                        @endif
+                                            @if($group->class_id == $item->id)
+                                                @foreach($startupsubcategories as $i)
+                                                    @if($item->startup_subcategory_id == $i->id)
+                                                        <td>{{$i->startup_subcategory_name}}</td>
+                                                    @endif
+                                                @endforeach
+                                            @endif
                                         @endforeach
                                         @foreach($startups as $item)
                                         @if($group->group_id == $item->id)

@@ -16,32 +16,43 @@
     <style>
         table {
             border-collapse: collapse !important;
+            display: table;
         }
 
         @page {
             margin: 20px auto;
         }
-
+        
         * {
             font-family: DejaVu Serif;
-            font-size: .9rem;
+            font-size: .7rem;
+        }table tr>td{
+            color:black;
         }
+        .pagebreak{
+            page-break-inside: avoid; 
+        }
+    @font-face {
+      font-family: "DejaVu Serif";
+      font-style: normal;
+      font-weight: normal;
+      src: url('fonts/DejaVuSans.ttf') format('truetype');
+    }
     </style>
 </head>
 
-<body>
-    <div style="padding: 40px; margin: 20px; text-align: center; border: 6px dotted burlywood;">
+<div style="padding: 40px; margin: 20px; text-align: center; border: 6px dotted burlywood;">
         <h1 style="text-transform: capitalize; margin:0 auto"><b>{{$variable['common_detail']['institute_name']}}</b></h1>
         <p style="text-transform: capitalize; margin:0 auto; font-style: italic;">{{$variable['common_detail']['institute_add']}}</p>
 
-           <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/' .$variable['common_detail']['institute_logo']))) }}" style="position:absolute; width:200px; left:50%;  z-index:-1">
+           <img src="data:image/png;base64,{{ base64_encode(file_get_contents(storage_path('images/' .$variable['common_detail']['institute_logo']))) }}" style="display: block; margin: 10px auto; width:100px;">
 
 
         <!-- Mark range table -->
         <div style=" overflow: auto;">
             <h2 style="border-bottom: 4px solid lightblue; max-width: 300px; padding: 4px; margin: 0 auto;"><b>Progress
                     Report</b></h2>
-            <table style="border-collapse: collapse; display:block; float: right; clear:right" border="1"
+            <table style="border-collapse: collapse;  float: right; clear:right" border="1"
                 cellspacing="3">
                 <tbody>
                     <tr>
@@ -211,7 +222,7 @@
 
         <div style="text-align:left; margin: 20px 0;">
             <!-- result summary table -->
-            <table style="display: inline-block;  border-collapse: collapse;" border="1" cellpadding="5" cellspacing="5">
+            <table style=" border-collapse: collapse;" border="1" cellpadding="5" cellspacing="5">
                 <tbody>
                     <tr>
                         <th>Result Status</th>
@@ -235,7 +246,7 @@
             </table>
 
             <!-- Remarks Table -->
-            <table style="display: inline-block; margin:0 20px; border-collapse: collapse;" border="1">
+            <table style=" margin:0 20px; border-collapse: collapse;" border="1">
                 <tbody>
                     <tr>
                         <th>Moral and Behavior Evaluation</th>
@@ -279,6 +290,4 @@
                 Principal</p>
         </div>
     </div>
-</body>
 
-</html>

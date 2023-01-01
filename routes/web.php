@@ -220,7 +220,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/StudentManagement/enrollment/excel', [RegistrationController::class, 'excel_index'])->name('enrollment.excel.index');
     Route::post('/StudentManagement/enrollment/excel/store', [RegistrationController::class, 'excel_store'])->name('enrollment.excel.store');
     Route::get('/download/excel', [RegistrationController::class, 'download'])->name('excel.download');
-
+    Route::get('/getgroupforenrollement', [RegistrationController::class, 'getgroupforenrollement']);
     ///////////////////// Fees Management Start ///////////
 
     Route::get('/FeesManagement/startup/index', [FeeStartupController::class, 'index'])->name('fee.startup.index');
@@ -258,6 +258,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/FeesManagement/amount/fineamount/delete/{id}',[AmountController::class,'absentdestroy'])->name('fine.amount.delete');
 
     Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
+    Route::get('/getGroupForAmount', [AmountController::class, 'getGroupForAmount']);
+    
 
     //date config
     Route::get('/FeesManagement/datesetup/index', [DateSetupController::class, 'index'])->name('date.index');

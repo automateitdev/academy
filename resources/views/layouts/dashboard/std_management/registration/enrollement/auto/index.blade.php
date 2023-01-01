@@ -74,7 +74,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="section_id" class="form-label">Class-Shift-Section</label>
-                                            <select class="form-control single" name="section_id">
+                                            <select class="form-control single" id="enrollClass" name="section_id">
                                                 <option value=" ">Choose One</option>
                                                 @foreach($sectionAssignes as $item)
                                                     @if($item->institute_id == Auth::user()->institute_id)
@@ -118,15 +118,9 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="group_id" class="form-label">Group</label>
-                                            <select class="form-control single" name="group_id">
+                                            <select class="form-control single" id="enrollgroup" name="group_id">
                                                 <option value=" ">Choose One</option>
-                                                @foreach($startups as $startup)
-                                                    @if($startup->institute_id == Auth::user()->institute_id)
-                                                        @if($startup->startup_category_id == "5")
-                                                        <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                     </div>

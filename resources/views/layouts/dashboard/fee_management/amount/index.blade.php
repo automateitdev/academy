@@ -78,14 +78,12 @@
                                                 <div class="col-md-4">
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">Class</label>
-                                                        <select class="form-control" name="class_id">
+                                                        <select class="form-control single" id="amountClass" name="class_id">
                                                             <option value="">Select a Class</option>
                                                             @foreach($startups as $item)
-                                                            @if($item->institute_id == Auth::user()->institute_id)
-                                                            @if($item->startup_category_id == 4)
-                                                            <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
-                                                            @endif
-                                                            @endif
+                                                                @if($item->startup_category_id == 4)
+                                                                    <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -93,29 +91,21 @@
                                                 <div class="col-md-4">
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">Group</label>
-                                                        <select class="form-control" name="group_id">
+                                                        <select class="form-control single" id="amountGroup" name="group_id">
                                                             <option value="">Select a Group</option>
-                                                            @foreach($startups as $item)
-                                                            @if($item->institute_id == Auth::user()->institute_id)
-                                                            @if($item->startup_category_id == 5)
-                                                            <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
-                                                            @endif
-                                                            @endif
-                                                            @endforeach
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">Student Category</label>
-                                                        <select class="form-control" name="stdcategory_id">
+                                                        <select class="form-control single" name="stdcategory_id">
                                                             <option value="">Select a Group</option>
                                                             @foreach($startups as $item)
-                                                            @if($item->institute_id == Auth::user()->institute_id)
-                                                            @if($item->startup_category_id == 7)
-                                                            <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
-                                                            @endif
-                                                            @endif
+                                                                @if($item->startup_category_id == 7)
+                                                                <option value="{{$item->id}}">{{$item->startupsubcategory->startup_subcategory_name}}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -125,12 +115,10 @@
                                                 <div class="col-md-4">
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">Fee Head</label>
-                                                        <select class="form-control feehead_amount" name="feehead_id">
+                                                        <select class="form-control feehead_amount single" name="feehead_id">
                                                             <option value=" ">Choose One</option>
                                                             @foreach($feeheads as $item)
-                                                            @if($item->institute_id == Auth::user()->institute_id)
-                                                            <option value="{{$item->id}}">{{$item->head_name}}</option>
-                                                            @endif
+                                                                <option value="{{$item->id}}">{{$item->head_name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -145,6 +133,21 @@
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">Fine Amount</label>
                                                         <input type="text" onkeypress="return /[0-9]/i.test(event.key)" class="form-control" name="fineamount">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="mb-3">
+                                                        <label for="academic_year_id" class="form-label">Academic Year</label>
+                                                        <select class="form-control single" name="academic_year_id">
+                                                            <option value=" ">Choose One</option>
+                                                            @foreach($startups as $startup)
+                                                            @if($startup->startup_category_id == "1")
+                                                            <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                            @endif
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,8 +197,7 @@
                                         <tbody>
 
                                             @foreach($feeamounts as $item)
-                                            @if($item->institute_id == Auth::user()->institute_id)
-                                            <tr>
+                                                <tr>
                                                 @foreach($startups as $st)
                                                 @if($item->class_id == $st->id)
                                                 @foreach($startupsubcategories as $i)
@@ -205,52 +207,54 @@
                                                 @endforeach
                                                 @endif
                                                 @endforeach
-                                                @foreach($startups as $st)
-                                                @if($item->group_id == $st->id)
-                                                @foreach($startupsubcategories as $i)
-                                                @if($st->startup_subcategory_id == $i->id)
-                                                <td>{{$i->startup_subcategory_name}}</td>
-                                                @endif
-                                                @endforeach
-                                                @endif
-                                                @endforeach
-                                                @foreach($startups as $st)
-                                                @if($item->stdcategory_id == $st->id)
-                                                @foreach($startupsubcategories as $i)
-                                                @if($st->startup_subcategory_id == $i->id)
-                                                <td>{{$i->startup_subcategory_name}}</td>
-                                                @endif
-                                                @endforeach
-                                                @endif
-                                                @endforeach
-                                                <td>{{$item->feehead->head_name}}</td>
-                                                <td>{{$item->feeamount}}</td>
-                                                <td>{{$item->fineamount}}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feeAmountModal">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
-                                                        </svg>
-                                                    </button>
-                                                    <form method="POST" id="delete-form-{{$item->id}}" action="{{route('fee.amount.delete',$item->id)}}" style="display: none;">
-                                                        @csrf
-                                                        {{method_field('delete')}}
 
-                                                    </form>
-                                                    <button onclick="if(confirm('Are you sure, You want to delete this?')){
-                                                            event.preventDefault();
-                                                            document.getElementById('delete-form-{{$item->id}}').submit();
-                                                            }else{
-                                                            event.preventDefault();
-                                                            }
-                                                            " class="btn" href="">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                                        </svg>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            @endif
+                                                    @foreach($startups as $st)
+                                                        @if($item->group_id == $st->id)
+                                                            @foreach($startupsubcategories as $i)
+                                                                @if($st->startup_subcategory_id == $i->id)
+                                                                    <td>{{$i->startup_subcategory_name}}</td>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+
+                                                    @foreach($startups as $st)
+                                                        @if($item->stdcategory_id == $st->id)
+                                                            @foreach($startupsubcategories as $i)
+                                                                @if($st->startup_subcategory_id == $i->id)
+                                                                    <td>{{$i->startup_subcategory_name}}</td>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+
+                                                    <td>{{$item->feehead->head_name}}</td>
+                                                    <td>{{$item->feeamount}}</td>
+                                                    <td>{{$item->fineamount}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feeAmountModal">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                                                            </svg>
+                                                        </button>
+                                                        <form method="POST" id="delete-form-{{$item->id}}" action="{{route('fee.amount.delete',$item->id)}}" style="display: none;">
+                                                            @csrf
+                                                            {{method_field('delete')}}
+
+                                                        </form>
+                                                        <button onclick="if(confirm('Are you sure, You want to delete this?')){
+                                                                event.preventDefault();
+                                                                document.getElementById('delete-form-{{$item->id}}').submit();
+                                                                }else{
+                                                                event.preventDefault();
+                                                                }
+                                                                " class="btn" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
