@@ -9,7 +9,9 @@ use App\Models\SectionAssign;
 use App\Models\Startup;
 use App\Models\Student;
 use App\Models\GroupAssign;
+use App\Models\Payapply;
 use App\Models\Quickcollection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FeeCollectionController extends Controller
@@ -79,7 +81,8 @@ class FeeCollectionController extends Controller
     {
         $students = Student::find($id);
         $users = User::all();
-        return view('layouts.dashboard.fee_management.feecollection.quick.view', compact('students','users'));
+        $payapplies = Payapply::where('institute_id', Auth::user()->institute_id)->get();
+        return view('layouts.dashboard.fee_management.feecollection.quick.view', compact('students','users', 'payapplies'));
     }
 
     /**

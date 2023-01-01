@@ -292,15 +292,16 @@ $(document).ready(function () {
     $(document).on('click', '.markProcess', function (e) {
         e.preventDefault();
         student_id = $(this).attr('id');
-        console.log("click click");
+        console.log("clack");
+        console.log("student_id");
         // $('#mainloader').removeClass('d-none');
-        markshee_class_id = $("#class_id").val();
-        markshee_group_id = $("#group_id").val();
-        markshee_group_name = $("#group_name").val();
-        markshee_session_name = $("#session_name").val();
-        markshee_examstartup_id = $("#examstartup_id").val();
-        markshee_academic_year_id = $("#academic_year_id").val();
-        markshee_std_id = $("#std_id").val();
+        markshee_class_id = $("#class_id" + student_id).val();
+        markshee_group_id = $("#group_id" + student_id).val();
+        markshee_group_name = $("#group_name" + student_id).val();
+        markshee_session_name = $("#session_name" + student_id).val();
+        markshee_examstartup_id = $("#examstartup_id" + student_id).val();
+        markshee_academic_year_id = $("#academic_year_id" + student_id).val();
+        markshee_std_id = student_id;
 
 
         let _token = $('meta[name="csrf-token"]').attr('content');
@@ -318,9 +319,10 @@ $(document).ready(function () {
                 'std_id': markshee_std_id,
             },
             success: function (data) {
+                console.log(data);
                 marksheeData = data;
-                let downkeyId = ".marksheet_" + student_id;
-                console.log(downkeyId);
+                let downkeyId = "#marksheet_" + student_id;
+                console.log(downkeyId); 
                 if (!isEmpty(marksheeData)) {
                     $(downkeyId).attr('disabled', false);
                 }
@@ -374,3 +376,4 @@ $(document).ready(function () {
 
 
 //mark sheet
+

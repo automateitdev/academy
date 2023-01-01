@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Basic;
+use App\Models\Examcode;
 use App\Models\Startup;
 use App\Models\SectionAssign;
 use App\Models\Examstartup;
@@ -31,12 +32,13 @@ class MarkSheetController extends Controller
         $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $users = User::all();
-        return view('layouts.dashboard.exam_management.report.marksheet.index',
-                compact(
-                    'sectionAssignes',
-                    'startups',
-                    'users'
-                )
+        return view(
+            'layouts.dashboard.exam_management.report.marksheet.index',
+            compact(
+                'sectionAssignes',
+                'startups',
+                'users'
+            )
         );
     }
     public function marksQuery(Request $request)
@@ -47,10 +49,10 @@ class MarkSheetController extends Controller
             'academic_year_id' => 'required',
             'examstartup_id' => 'required'
         ]);
-       
 
 
-        
+
+
         $examstartup_id = $request->examstartup_id;
         $academic_year_id = $request->academic_year_id;
         $class_id = $request->class_id;
@@ -76,8 +78,7 @@ class MarkSheetController extends Controller
 
         $group_name = $group_name->startup_subcategory_name;
         $session_name = $session_name->startup_subcategory_name;
-        $students = Student::
-            where('institute_id', Auth::user()->institute_id)
+        $students = Student::where('institute_id', Auth::user()->institute_id)
             ->where('section_id', $secId->id)
             ->where('group_id', $grpId->group_id)
             ->where('academic_year_id', $request->academic_year_id)
@@ -92,7 +93,7 @@ class MarkSheetController extends Controller
             ->get();
 
 
-        
+
         return view(
             'layouts.dashboard.exam_management.report.marksheet.index',
             compact(
@@ -117,11 +118,11 @@ class MarkSheetController extends Controller
         $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $users = User::all();
-        
+
         $group_assign_id = GroupAssign::select('id', 'group_id')
             ->where('id', $request->group_id)
             ->first();
-        
+
         $class_id = SectionAssign::select('class_id')->where('id', $request->class_id)->first();
         $class = Startup::select('startup_subcategory_id')->where('id', $class_id->class_id)->first();
         $class_name = StartupSubcategory::select('startup_subcategory_name')->where('id', $class->startup_subcategory_id)->first();
@@ -177,103 +178,112 @@ class MarkSheetController extends Controller
         $tmp_var['tmp_subject_details'] = [];
         $gpa_array = [];
         $opt_gp = 0;
-
         foreach ($data as $arrKey => $array_value) {
             $marks_variable[$array_value->student_id]['marksmap'][] = $array_value['marksmap'];
-                    $total = 0;
-                    $GP_total = 0;
+            $total = 0;
+            $GP_total = 0;
+
             foreach ($marks_variable[$array_value->student_id]['marksmap'] as $marks_data) {
-                        $individual_sub =  json_decode($marks_data, true);
-                        foreach ($individual_sub as $subKey => $sub) {
-                            $total += $sub['total_marks'];
-                            foreach ($sub['individual_marks'] as $exam_code_key => $Submarks) {
+                $individual_sub =  json_decode($marks_data, true);
+                foreach ($individual_sub as $subKey => $sub) {
+                    $total += $sub['total_marks'];
+                    foreach ($sub['individual_marks'] as $exam_code_key => $Submarks) {
 
-                                foreach ($examconfigs as $exConfig) {
-                                    if ($exConfig['examcode_id'] == $exam_code_key && $exConfig['examstartups_id'] == $array_value['examstartups_id']) {
-                                        // return $exConfig['subjectmap_id'];
-                                        // $examcode = Examcode::select('title')->where('id', $exam_code_key)->first();
-                                        $subjectmaps = Subjectmap::select('subject_id')->where('id', $array_value['subjectmap_id'])->first();
-                                        $subject = Subject::select('name', 'id')->where('id', $subjectmaps->subject_id)->first();
-
+                        foreach ($examconfigs as $exConfig) {
+                            if ($exConfig['examcode_id'] == $exam_code_key && $exConfig['examstartups_id'] == $array_value['examstartups_id']) {
+                                // $exam_marks[$exConfig['subjectmap_id']][$exConfig->examcode->title] = $exConfig->total_marks;
+                                // return $exConfig['subjectmap_id'];
+                                // $exam_mark = Examcode::select('total_marks')->where('id', $exam_code_key)->first();
 
 
-                                        if ($exConfig['subjectmap_id'] == $array_value['subjectmap_id']) {
+                                $subjectmaps = Subjectmap::select('subject_id')->where('id', $array_value['subjectmap_id'])->first();
+                                $subject = Subject::select('name', 'id')->where('id', $subjectmaps->subject_id)->first();
+
+
+
+                                if ($exConfig['subjectmap_id'] == $array_value['subjectmap_id']) {
+
                                     $variable[$array_value->student_id]['subjects'][$subject->name][$exConfig->examcode->title] = $Submarks;
+
                                     $variable[$array_value->student_id]['subjects'][$subject->name]['total'] = $sub['total_marks'];
                                     $variable[$array_value->student_id]['subjects'][$subject->name]['subject_id'] = $subject->id;
 
-
-                                            if (!in_array($subject->name, $tmp_var['tmp_subject_details'])) {
-                                                $variable['subject_details'][$subject->name] = [];
-                                                array_push($tmp_var['tmp_subject_details'], $subject->name);
-                                            } else {
-                                                if (!in_array($exConfig->examcode->title, $variable['subject_details'][$subject->name])) {
-                                                    array_push($variable['subject_details'][$subject->name], $exConfig->examcode->title);
-                                                }
-                                            }
+                                    if (!in_array($subject->name, $tmp_var['tmp_subject_details'])) {
+                                        $variable['subject_details'][$subject->name] = [];
+                                        array_push($tmp_var['tmp_subject_details'], $subject->name);
+                                    } else {
+                                        if (!in_array($exConfig->examcode->title, $variable['subject_details'][$subject->name])) {
+                                            array_push($variable['subject_details'][$subject->name], $exConfig->examcode->title);
                                         }
                                     }
+                                    $calc_full['fullmarks'][$subject->name][$exConfig->examcode->title] = $exConfig->total_marks;
                                 }
-                            }
-
-
-
-                            foreach ($sub['grade'] as $grade_key => $subGrade) {
-                                $convert_to_array = explode(',', $examgrade->grade);
-                                for ($i = 0; $i < count($convert_to_array); $i++) {
-                                    $key_value = explode(':', $convert_to_array[$i]);
-                                    $end_array[$key_value[0]] = $key_value[1];
-                                }
-                                $case = 0;
-                                foreach ($end_array as $gradekey => $gradevalue) {
-                                    if (!in_array($gradekey, $gpa_array)) {
-                                        array_push($gpa_array, $gradekey);
-                                    }
-                                    $case++;
-                                    if ($subGrade == $gradekey) {
-                                        switch ($case) {
-                                            case 1:
-                                                $gp = 5.00;
-                                                break;
-                                            case 2:
-                                                $gp = 4.00;
-                                                break;
-                                            case 3:
-                                                $gp = 3.5;
-                                                break;
-                                            case 4:
-                                                $gp = 3.00;
-                                                break;
-                                            case 5:
-                                                $gp = 2.00;
-                                                break;
-                                            case 6:
-                                                $gp = 1.00;
-                                                break;
-                                            case 7:
-                                                $gp = 0;
-                                                break;
-                                        }
-                                    }
-                                }
-
-                                $new_gp = $gp;
-                        $variable[$array_value->student_id]['subjects'][$subject->name]['grade_point'] = $new_gp;
-                        $variable[$array_value->student_id]['subjects'][$subject->name]['letter_point'] = $sub['grade']['grade'];
-                                $GP_total += $new_gp;
-                            }
-
-                            if ($array_value['subject_type_id'] == 5 || $array_value['subject_type_id'] == 4) {
-                        $variable[$array_value->student_id]['subjects'][$subject->name]['optional'] = true;
-                                $opt_gp = $gp;
-                        $variable[$array_value->student_id]['optional_gp'] = $opt_gp;
-                        $variable[$array_value->student_id]['optional_subject'] = $subject->name;
                             }
                         }
                     }
-                    
-                    $students = Student::select('name', 'roll')->where('institute_id', Auth::user()->institute_id)
-                        ->where('std_id', $array_value['student_id'])->first();
+                    foreach ($calc_full['fullmarks'] as $key => $value) {
+                        $variable['subject_details'][$key]['fullmarks'] = array_sum($value);
+                    };
+                    // $subjectMark = array_sum($examTotal);
+                    // $variable['subject_details'][$subject->name]['fullmarks'] = $subjectMark;
+                    // unset($examtotal);
+
+                    foreach ($sub['grade'] as $grade_key => $subGrade) {
+                        $convert_to_array = explode(',', $examgrade->grade);
+                        for ($i = 0; $i < count($convert_to_array); $i++) {
+                            $key_value = explode(':', $convert_to_array[$i]);
+                            $end_array[$key_value[0]] = $key_value[1];
+                        }
+                        $case = 0;
+                        foreach ($end_array as $gradekey => $gradevalue) {
+                            if (!in_array($gradekey, $gpa_array)) {
+                                array_push($gpa_array, $gradekey);
+                            }
+                            $case++;
+                            if ($subGrade == $gradekey) {
+                                switch ($case) {
+                                    case 1:
+                                        $gp = 5.00;
+                                        break;
+                                    case 2:
+                                        $gp = 4.00;
+                                        break;
+                                    case 3:
+                                        $gp = 3.5;
+                                        break;
+                                    case 4:
+                                        $gp = 3.00;
+                                        break;
+                                    case 5:
+                                        $gp = 2.00;
+                                        break;
+                                    case 6:
+                                        $gp = 1.00;
+                                        break;
+                                    case 7:
+                                        $gp = 0;
+                                        break;
+                                }
+                            }
+                        }
+
+                        $new_gp = $gp;
+                        $variable[$array_value->student_id]['subjects'][$subject->name]['grade_point'] = $new_gp;
+                        $variable[$array_value->student_id]['subjects'][$subject->name]['letter_point'] = $sub['grade']['grade'];
+                        $GP_total += $new_gp;
+                    }
+
+                    if ($array_value['subject_type_id'] == 5 || $array_value['subject_type_id'] == 4) {
+                        $variable[$array_value->student_id]['subjects'][$subject->name]['optional'] = true;
+                        $opt_gp = $gp;
+                        $variable[$array_value->student_id]['optional_gp'] = $opt_gp;
+                        $variable[$array_value->student_id]['optional_subject'] = $subject->name;
+                    }
+                }
+            }
+
+            $students = Student::select('name', 'roll')->where('institute_id', Auth::user()->institute_id)
+                ->where('std_id', $array_value['student_id'])->first();
 
             $variable[$array_value->student_id]['student_name'] = $students->name;
             $variable[$array_value->student_id]['student_roll'] = $students->roll;
@@ -284,26 +294,26 @@ class MarkSheetController extends Controller
                 $variable[$array_value->student_id]['gpa_except_opt'] = $GP_total;
                 if ($variable[$array_value->student_id]['optional_gp'] > 2) {
                     $GP_total = $GP_total + ($variable[$array_value->student_id]['optional_gp'] - 2);
-                        }
-                    }
+                }
+            }
             $variable[$array_value->student_id]['gp_total'] = $GP_total;
 
             $totalSubjects = count($marks_variable[$array_value->student_id]['marksmap']);
-                    if ($array_value['subject_type_id'] == 5 || $array_value['subject_type_id'] == 4) {
-                        $totalSubjects--;
-                    }
+            if ($array_value['subject_type_id'] == 5 || $array_value['subject_type_id'] == 4) {
+                $totalSubjects--;
+            }
             $variable[$array_value->student_id]['GP_total'] = $GP_total;
-                    $GPA_calc = $GP_total / $totalSubjects;
-                    if ($GPA_calc > 5) {
-                        $GPA_calc = 5.00;
-                    }
+            $GPA_calc = $GP_total / $totalSubjects;
+            if ($GPA_calc > 5) {
+                $GPA_calc = 5.00;
+            }
             $variable[$array_value->student_id]['GPA'] = round((float)$GPA_calc, 2);
-                    $gp_range = ["5.00-5.00", "4.00-4.99", "3.50-3.99", "3.00-3.49", "2.00-2.99", "1.00-1.99", "0-0"];
-                    $grade_points = array_combine($gpa_array, $gp_range);
-                    // return $gpa_array;
+            $gp_range = ["5.00-5.00", "4.00-4.99", "3.50-3.99", "3.00-3.49", "2.00-2.99", "1.00-1.99", "0-0"];
+            $grade_points = array_combine($gpa_array, $gp_range);
+            // return $gpa_array;
 
-                    foreach ($grade_points as $gradePoint_key => $grade_point) {
-                        $gradePoint_range = explode('-', $grade_point);
+            foreach ($grade_points as $gradePoint_key => $grade_point) {
+                $gradePoint_range = explode('-', $grade_point);
                 if ($variable[$array_value->student_id]['GPA'] >= $gradePoint_range[0] && $variable[$array_value->student_id]['GPA'] <= $gradePoint_range[1]) {
                     $variable[$array_value->student_id]['letter_grade'] =  $gradePoint_key;
                 }
@@ -392,22 +402,19 @@ class MarkSheetController extends Controller
         $variable['common_detail']['institute_logo'] = $institute_logo->logo;
 
 
-
-        // dd($variable);
-
-
+        // return  $variable;
         $data = json_encode($variable);
         return response()->json($data);
 
         // return response(route('api.pdf'), $path, $data, $pdfname);
-    //     return view(
-    //         'layouts.dashboard.exam_management.report.marksheet.marksheetpdf', 
-    //     compact(
-    //         'variable',
-    //         'sectionAssignes',
-    //         'startups',
-    //         'users'
-    // ));
+        //     return view(
+        //         'layouts.dashboard.exam_management.report.marksheet.marksheetpdf', 
+        //     compact(
+        //         'variable',
+        //         'sectionAssignes',
+        //         'startups',
+        //         'users'
+        // ));
 
         // return response()->json($data);
     }
@@ -477,3 +484,4 @@ class MarkSheetController extends Controller
         //
     }
 }
+

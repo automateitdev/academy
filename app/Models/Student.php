@@ -26,6 +26,18 @@ class Student extends Model
         'mobile_no'
     ];
 
+    public function groupstartups()
+    {
+        return $this->belongsTo(Startup::class, 'group_id', 'id');
+    }
+    public function sectionstartups()
+    {
+        return $this->belongsTo(Startup::class, 'section_id', 'id');
+    }
+    public function std_cat_startups()
+    {
+        return $this->belongsTo(Startup::class, 'std_category_id', 'id');
+    }
     public function startupcategory()
     {
         return $this->belongsTo(StartupCategory::class);

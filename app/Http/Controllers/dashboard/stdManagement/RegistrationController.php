@@ -49,7 +49,6 @@ class RegistrationController extends Controller
 
     public function getgroupforenrollement(Request $request)
     {
-       //return $request->id;
         $startup_id = [];
         $groupname = [];
         $groupassign_id = [];
@@ -57,10 +56,11 @@ class RegistrationController extends Controller
         $data = GroupAssign::select('id', 'group_id')->where('class_id', $class->class_id)->get();
         // return $data;
         foreach($data as $d){
-            $startups = Startup::select('startup_subcategory_id')->where('id', $d->group_id)->get();
-            array_push($groupassign_id, $d->id);
+            $startups = Startup::select('id', 'startup_subcategory_id')->where('id', $d->group_id)->get();
+            
             foreach($startups as $startup)
             {
+                array_push($groupassign_id, $startup->id);
                 array_push($startup_id,$startup->startup_subcategory_id);
                 $subName = StartupSubcategory::select('startup_subcategory_name')->where('id', $startup->startup_subcategory_id)->get();
                 foreach($subName as $name)

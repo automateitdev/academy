@@ -17,19 +17,19 @@ trait StudentTraits
 
     public function assign_fee($student_id, $institute_id)
     {
-
+        
         $students = Student::where('std_id', $student_id)->where('institute_id', $institute_id)->first();
-
-        $datesetups = Datesetup::all();
-        $section_assigns = SectionAssign::all();
-        $feeamounts = Feeamount::all();
+        
+        $datesetups = Datesetup::where('institute_id', $institute_id)->get();
+        $section_assigns = SectionAssign::where('institute_id', $institute_id)->get();
+        $feeamounts = Feeamount::where('institute_id', $institute_id)->get();
 
         if ($students->std_id == $student_id && $students->institute_id == $institute_id) {
 
             foreach ($section_assigns as $section_assign) {
 
                 if ($students->section_id == $section_assign->id) {
-
+                    
                     foreach ($feeamounts as $feeamount) {
 
                         if (
@@ -61,7 +61,7 @@ trait StudentTraits
                                                 ['student_id', $student_id],
                                                 ['institute_id', $institute_id]
                                             ])->first();
-
+                                            // dd($waiver);
                                             if (empty($waiver)) {
                                                 $waiver_amount = 0;
                                                 $waiver_category = null;
@@ -104,7 +104,7 @@ trait StudentTraits
                                 ->where('class_id', $section_id->class_id)
                                 ->where('group_id', $group_id)->first();
             // foreach ($section_id as $class) {
-                // dd($class);
+                // dd($group_id);
                 $students = Student::where('std_id', $student_id)
                     ->where('institute_id', $institute_id)
                     ->where('section_id', $class_id)
@@ -112,7 +112,7 @@ trait StudentTraits
                     ->where('academic_year_id',$academic_year_id)
                     ->get();
             
-                // dd($students);
+                //  dd($groupassign_group_id->id);
                 foreach($students as $student)
                     {
                     $subjectmaps = Subjectmap::where([

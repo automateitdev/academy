@@ -23,37 +23,54 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-section" role="tabpanel" aria-labelledby="nav-section-tab">
                         <div class="row mt-2">
-                            <div class="col-md-4 offset-md-4">
+                            <div class="col-md-8 offset-md-2">
                                 <div class="rkj">
                                     <form action="{{route('quicksearch')}}" method="GET">
                                         @csrf
-                                        <div class="mb-3">
-                                            <label for="section_id" class="form-label">Section</label>
-                                            <select class="form-control single" name="section_id">
-                                                <option value=" " selected>Choose One</option>
-                                                @foreach($sectionAssignes as $item)
-                                                @if($item->institute_id == Auth::user()->institute_id)
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="section_id" class="form-label">Section</label>
+                                                    <select class="form-control single" name="section_id">
+                                                        <option value=" " selected>Choose One</option>
+                                                        @foreach($sectionAssignes as $item)
+                                                        @if($item->institute_id == Auth::user()->institute_id)
 
-                                                @php
-                                                $startup_data = $startups->where('id', $item->class_id);
-                                                $startup_data2 = $startups->where('id', $item->section_id);
-                                                $startup_data3 = $startups->where('id', $item->shift_id);
-                                                @endphp
-                                                @foreach($startup_data as $strData)
-                                                @foreach($startup_data2 as $strData2)
-                                                @foreach($startup_data3 as $strData3)
-                                                <option value="{{$item->id}}">
-                                                    {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
-                                                </option>
-                                                @endforeach
-                                                @endforeach
-                                                @endforeach
-                                                @endif
-                                                @endforeach
-                                            </select>
+                                                        @php
+                                                        $startup_data = $startups->where('id', $item->class_id);
+                                                        $startup_data2 = $startups->where('id', $item->section_id);
+                                                        $startup_data3 = $startups->where('id', $item->shift_id);
+                                                        @endphp
+                                                        @foreach($startup_data as $strData)
+                                                        @foreach($startup_data2 as $strData2)
+                                                        @foreach($startup_data3 as $strData3)
+                                                        <option value="{{$item->id}}">
+                                                            {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
+                                                        </option>
+                                                        @endforeach
+                                                        @endforeach
+                                                        @endforeach
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="academic_year_id" class="form-label">Academic Year</label>
+                                                    <select class="form-control single" name="academic_year_id">
+                                                        <option value=" ">Choose One</option>
+                                                        @foreach($startups as $startup)
+                                                        @if($startup->startup_category_id == "1")
+                                                        <option value="{{$startup->id}}">{{$startup->startupsubcategory->startup_subcategory_name}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="mb-3">
-                                            <button class="btn btn-primary">Search</button>
+                                            <button class="btn btn-primary right">Search</button>
                                         </div>
                                     </form>
                                 </div>
@@ -61,7 +78,6 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
-
                                 @if(isset($students))
                                 <table class="table table-bordered" id="s_table">
                                     <thead>

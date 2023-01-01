@@ -137,7 +137,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(document).on('change', '#amountClass', function () {
         var class_id = $(this).val();
-        //console.log(class_id);
         var op = " ";
 
         $.ajax({
