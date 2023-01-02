@@ -191,6 +191,7 @@
                                                 <th scope="col">Fee Head</th>
                                                 <th scope="col">Fee Amount</th>
                                                 <th scope="col">Fine Amount</th>
+                                                <th scope="col">Academic Year</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
@@ -231,6 +232,20 @@
                                                     <td>{{$item->feehead->head_name}}</td>
                                                     <td>{{$item->feeamount}}</td>
                                                     <td>{{$item->fineamount}}</td>
+
+                                                    @if(isset($item->academic_year_id))
+                                                        @foreach($startups as $st)
+                                                            @if($item->academic_year_id == $st->id)
+                                                                @foreach($startupsubcategories as $i)
+                                                                    @if($st->startup_subcategory_id == $i->id)
+                                                                        <td>{{$i->startup_subcategory_name}}</td>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        <td></td>
+                                                    @endif
                                                     <td>
                                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feeAmountModal">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">

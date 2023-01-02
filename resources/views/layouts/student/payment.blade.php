@@ -73,7 +73,7 @@ $tableData = [];
                 <input type="hidden" value="{{ $year }}" name="year">
                 <input type="hidden" id="grandTotal" name="grandTotal">
                 <input type="hidden" value="{{$tableData}}" name="tableData">
-                <button class="btn btn-success float-right">Pay Now</button>
+                <button class="btn mb-2 btn-success float-right">Pay Now</button>
             </form>
 
         </div>

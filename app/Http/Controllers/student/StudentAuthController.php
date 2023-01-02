@@ -86,9 +86,10 @@ class StudentAuthController extends Controller
         $year = $request->year;
         $day = $request->day;
         $now = Carbon::now();
+
         $unique_code = $now->format('ymdHis');
-        $invoice = 'AE' . $ins_id . substr($std_id, -4) . $unique_code;
-        $invoice = strtoupper($invoice);
+        $unique_invoice = 'AE' . $ins_id . substr($std_id, -4) . $unique_code;
+        $unique_invoice = strtoupper($unique_invoice);
 
         $tableData = json_decode($request->tableData, true);
         
@@ -101,9 +102,8 @@ class StudentAuthController extends Controller
                 ['feesubhead_id', $data['feesubhead_id']]
             ])->first();
             
-            // dd($check_invoice);
-            
             if(empty($check_invoice->invoice) && $check_invoice->payment_state != 200){
+                
                 $invoice_assign = Payapply::where(
                     [
                         ['student_id',  $std_id],
@@ -111,7 +111,10 @@ class StudentAuthController extends Controller
                         ['feehead_id', $data['feehead_id']],
                         ['feesubhead_id', $data['feesubhead_id']]
                     ]
-                )->update(['invoice' => $invoice]);
+                )->update(['invoice' => $unique_invoice]);
+                $invoice = $unique_invoice;
+            } else {
+                $invoice = $check_invoice->invoice;
             }
         }
         // dd($total_payable, $grandTotal);

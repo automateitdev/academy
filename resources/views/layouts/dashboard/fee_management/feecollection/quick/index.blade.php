@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="mb-25">
-                    <a href="#">Quick Collection</a>
+                    <a href="{{route('feecollection.index')}}">Quick Collection</a>
                     <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#basicsModal">+ Add Information</button> -->
                 </h2>
             </div>
@@ -34,23 +34,20 @@
                                                     <select class="form-control single" name="section_id">
                                                         <option value=" " selected>Choose One</option>
                                                         @foreach($sectionAssignes as $item)
-                                                        @if($item->institute_id == Auth::user()->institute_id)
-
-                                                        @php
-                                                        $startup_data = $startups->where('id', $item->class_id);
-                                                        $startup_data2 = $startups->where('id', $item->section_id);
-                                                        $startup_data3 = $startups->where('id', $item->shift_id);
-                                                        @endphp
-                                                        @foreach($startup_data as $strData)
-                                                        @foreach($startup_data2 as $strData2)
-                                                        @foreach($startup_data3 as $strData3)
-                                                        <option value="{{$item->id}}">
-                                                            {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
-                                                        </option>
-                                                        @endforeach
-                                                        @endforeach
-                                                        @endforeach
-                                                        @endif
+                                                            @php
+                                                            $startup_data = $startups->where('id', $item->class_id);
+                                                            $startup_data2 = $startups->where('id', $item->section_id);
+                                                            $startup_data3 = $startups->where('id', $item->shift_id);
+                                                            @endphp
+                                                            @foreach($startup_data as $strData)
+                                                                @foreach($startup_data2 as $strData2)
+                                                                    @foreach($startup_data3 as $strData3)
+                                                                        <option value="{{$item->id}}">
+                                                                            {{$strData->startupsubcategory->startup_subcategory_name}}-{{$strData2->startupsubcategory->startup_subcategory_name}}-{{$strData3->startupsubcategory->startup_subcategory_name}}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endforeach
+                                                            @endforeach
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -100,9 +97,7 @@
                                             <td>{{$student->group_id}}</td>
                                             <td>{{$student->std_category_id}}</td>
                                             <td>
-                                                <a href="{{route('feecollection.view', $student->id)}}" class="btn btn-primary">
-                                                    Process
-                                                </a>
+                                                <a href="{{route('feecollection.view', $student->id)}}" class="btn btn-primary">Process</a>
                                             </td>
                                         </tr>
                                         @endif
@@ -111,7 +106,7 @@
                                 </table>
                                 {{$students->withQueryString()->links('pagination::bootstrap-4')}}
                                 @else
-                                <p id="des">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
+                                <p id="des" class="mt-5">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
                                 @endif
                             </div>
                         </div>

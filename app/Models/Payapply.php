@@ -21,9 +21,14 @@ class Payapply extends Model
         'total_amount',
         'waiver_id',
         'waiver_amount',
-        'trx_id'
+        'trx_id',
+        'academic_year_id'
     ];
 
+    public function ye_startup()
+    {
+        return $this->belongsTo(Startup::class, 'academic_year_id', 'id');
+    }
     public function feehead()
     {
         return $this->belongsTo(FeeHead::class, 'feehead_id');

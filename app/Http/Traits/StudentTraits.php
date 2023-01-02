@@ -80,7 +80,8 @@ trait StudentTraits
                                                     'waiver_id' => $waiver_category,
                                                     'waiver_amount' => $waiver_amount,
                                                     'payable' => $feeamount->feeamount,
-                                                    'total_amount' => $total_amount
+                                                    'total_amount' => $total_amount,
+                                                    'academic_year_id' => $students->academic_year_id
                                                 ]
                                             );
                                         }

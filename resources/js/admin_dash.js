@@ -612,3 +612,26 @@ $(document).ready(function () {
 });
 // subject config
 
+// quick collection
+var quickCollectionTotal = 0;
+$("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked').each(function () {
+
+    // use the value of the input in the same row
+    quickCollectionTotal += +$(this).closest('tr').find('input[name^="quick_payTotal"]').val();
+
+});
+$("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
+$(document).on('change', '.payquickcheck', function () {
+    quickCollectionTotal = 0;
+
+// iterate through the "checked" checkboxes
+$("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked').each(function () {
+
+    // use the value of the input in the same row
+    quickCollectionTotal += +$(this).closest('tr').find('input[name^="quick_payTotal"]').val();
+
+});
+$("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
+
+});
+// quick collection
