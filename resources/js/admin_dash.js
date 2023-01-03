@@ -254,9 +254,8 @@ $(document).ready(function () {
 
 $(document).on('click', '#v-pills-payment-tab', function () {
 
+
     var grand = 0;
-
-
     $('.pay_total').each(function (index) {
         grand += parseInt($('.pay_total').eq(index).text());
 
@@ -552,7 +551,7 @@ $('form').on('click', '.addmarkconfig', function () {
 });
 $(document).ready(function () {
     $(document).on('change', '#configsubjectclass', function () {
-        
+
         var class_id = $(this).val();
         var op = " ";
 
@@ -615,23 +614,84 @@ $(document).ready(function () {
 // quick collection
 var quickCollectionTotal = 0;
 $("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked').each(function () {
-
     // use the value of the input in the same row
+    let rowIndex = $(this).val();
+    let amount_col_id = '#amount_' + rowIndex;
+    let amountDue_id = '#amountDue_' + rowIndex;
+    let totalPayable_id = '#totalPayable_' + rowIndex;
+    if ($(this).prop("checked")) {
+        $(amount_col_id).attr('disabled', false)
+        $(amountDue_id).attr('disabled', false)
+        $(totalPayable_id).attr('disabled', false)
+    } else {
+        $(amount_col_id).attr('disabled', true)
+        $(amountDue_id).attr('disabled', true)
+        $(totalPayable_id).attr('disabled', true)
+    }
     quickCollectionTotal += +$(this).closest('tr').find('input[name^="quick_payTotal"]').val();
 
+    let amountToPay = $(this).closest('tr').find('input[name^="quick_payTotal"]').val();
+    let amountTotal = $(this).closest('tr').find('input[name^="totalPayable"]').val()
+    let amountDue = amountTotal - amountToPay;
+
 });
+
+
+
 $("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
 $(document).on('change', '.payquickcheck', function () {
+    let rowIndex = $(this).val();
+    let amount_col_id = '#amount_' + rowIndex;
+    let amountDue_id = '#amountDue_' + rowIndex;
+    let totalPayable_id = '#totalPayable_' + rowIndex;
+    if ($(this).prop("checked")) {
+        $(amount_col_id).attr('disabled', false)
+        $(amountDue_id).attr('disabled', false)
+        $(totalPayable_id).attr('disabled', false)
+    } else {
+        $(amount_col_id).attr('disabled', true)
+        $(amountDue_id).attr('disabled', true)
+        $(totalPayable_id).attr('disabled', true)
+    }
     quickCollectionTotal = 0;
-
-// iterate through the "checked" checkboxes
-$("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked').each(function () {
-
-    // use the value of the input in the same row
-    quickCollectionTotal += +$(this).closest('tr').find('input[name^="quick_payTotal"]').val();
-
-});
-$("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
+    // iterate through the "checked" checkboxes
+    $("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked').each(function () {
+        // use the value of the input in the same row
+        quickCollectionTotal += +$(this).closest('tr').find('input[name^="quick_payTotal"]').val();
+    });
+    $("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
 
 });
+
+$(document).on('keyup', '.amount_to_pay', function () {
+
+    let amount_id = $(this).attr('id');
+    let rowIndex = parseInt(amount_id.replace(/[^0-9.]/g, ""));
+    // console.log(rowIndex);
+
+    let totalPayable_id = '#totalPayable_view_' + rowIndex;
+    let amountDue_id = '#amountDue_' + rowIndex;
+    let amountDue_view_id = '#amountDue_view_' + rowIndex;
+    // console.log(totalPayable);
+
+    let totalPayable = parseInt($(totalPayable_id).text());
+    let amountTopay = parseInt($(this).val());
+
+    if (amountTopay <= totalPayable) {
+        let amountDue = totalPayable - amountTopay;
+        $(amountDue_view_id).text(amountDue);
+        $(amountDue_id).val(amountDue);
+
+        quickCollectionTotal = 0;
+        // iterate through the "checked" checkboxes
+        $("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked').each(function () {
+            // use the value of the input in the same row
+            quickCollectionTotal += +$(this).closest('tr').find('input[name^="quick_payTotal"]').val();
+        });
+        $("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
+    }
+
+
+
+})
 // quick collection

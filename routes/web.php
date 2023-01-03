@@ -54,10 +54,10 @@ Route::get('/', [MainController::class, 'index'])->name('landingpage');
 
 Auth::routes();
 
-Route::get('/login', [AuthController::class,'index'])->name('login');
-Route::post('/login', [AuthController::class,'authenticate'])->name('login');
-Route::get('/login', [AuthController::class,'index'])->name('loginFail');
-Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('loginFail');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
@@ -158,7 +158,7 @@ Route::middleware(['auth'])->group(function () {
     //notice
     Route::get('/WebsiteManagement/notice', [NoticeController::class, 'index'])->name('notice.index');
     Route::post('/WebsiteManagement/notice/store', [NoticeController::class, 'store'])->name('notice.store');
-    Route::delete('/WebsiteManagement/notice/{id}',[NoticeController::class,'destroy'])->name('notice.delete');
+    Route::delete('/WebsiteManagement/notice/{id}', [NoticeController::class, 'destroy'])->name('notice.delete');
     //about institute
     Route::get('/WebsiteManagement/about_institute', [AboutInstituteController::class, 'index'])->name('aboutinstitute.index');
     Route::post('/WebsiteManagement/about_institute/store', [AboutInstituteController::class, 'store'])->name('aboutinstitute.store');
@@ -173,7 +173,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/MasterSetting/InstituteSetting/startup/store_cat', [StartupController::class, 'store_cat'])->name('startup.store_cat');
     Route::post('/MasterSetting/InstituteSetting/startup/store_subcat', [StartupController::class, 'store_subcat'])->name('startup.store_subcat');
     Route::post('/MasterSetting/InstituteSetting/startup/store', [StartupController::class, 'store'])->name('startup.store');
-    Route::delete('/MasterSetting/InstituteSetting/startup/delete/{id}',[StartupController::class,'destroy'])->name('startup.delete');
+    Route::delete('/MasterSetting/InstituteSetting/startup/delete/{id}', [StartupController::class, 'destroy'])->name('startup.delete');
     Route::get('/getStartupSubCat', [StartupController::class, 'getStartupSubCat']);
 
     //Basic setup
@@ -210,7 +210,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/MasterSetting/Subject_config/show/query', [SubjectController::class, 'show_query'])->name('subject.show_query');
     Route::get('/MasterSetting/4th_Subject_config/view/{student_id}', [SubjectController::class, 'subjectdetials'])->name('allsubject.view');
 
-   
+
 
     //master setting end
 
@@ -225,41 +225,41 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/FeesManagement/startup/index', [FeeStartupController::class, 'index'])->name('fee.startup.index');
     Route::post('/FeesManagement/startup/head/store', [FeeStartupController::class, 'headstore'])->name('fee.startup.headstore');
-    Route::delete('/FeesManagement/startup/head/{id}',[FeeStartupController::class,'destroy'])->name('fee.startup.headstore.delete');
+    Route::delete('/FeesManagement/startup/head/{id}', [FeeStartupController::class, 'destroy'])->name('fee.startup.headstore.delete');
 
     Route::post('/FeesManagement/startup/subhead/store', [FeeStartupController::class, 'subheadstore'])->name('fee.startup.subheadstore');
-    Route::delete('/FeesManagement/startup/subhead/{id}',[FeeStartupController::class,'subhead_destroy'])->name('fee.startup.subheadstore.delete');
+    Route::delete('/FeesManagement/startup/subhead/{id}', [FeeStartupController::class, 'subhead_destroy'])->name('fee.startup.subheadstore.delete');
 
     Route::post('/FeesManagement/startup/waiver/store', [FeeStartupController::class, 'waiverstore'])->name('fee.startup.waiverstore');
-    Route::delete('/FeesManagement/startup/waiver/{id}',[FeeStartupController::class,'waiver_destroy'])->name('fee.startup.waiverstore.delete');
+    Route::delete('/FeesManagement/startup/waiver/{id}', [FeeStartupController::class, 'waiver_destroy'])->name('fee.startup.waiverstore.delete');
 
     Route::post('/FeesManagement/startup/fund/store', [FeeStartupController::class, 'fundstore'])->name('fee.startup.fundstore');
-    Route::delete('/FeesManagement/startup/fund/{id}',[FeeStartupController::class,'fund_destroy'])->name('fee.startup.fundstore.delete');
+    Route::delete('/FeesManagement/startup/fund/{id}', [FeeStartupController::class, 'fund_destroy'])->name('fee.startup.fundstore.delete');
 
     Route::get('/getAccountCategory', [FeeStartupController::class, 'getAccountCategory']);
     Route::post('/FeesManagement/startup/ledger/store', [FeeStartupController::class, 'ledgerstore'])->name('fee.startup.ledgerstore');
-    Route::delete('/FeesManagement/startup/ledger/{id}',[FeeStartupController::class,'ledger_destroy'])->name('fee.startup.ledger.delete');
+    Route::delete('/FeesManagement/startup/ledger/{id}', [FeeStartupController::class, 'ledger_destroy'])->name('fee.startup.ledger.delete');
 
     //fee maping
     Route::get('/FeesManagement/mapping/index', [FeeMapingController::class, 'index'])->name('fee.maping.index');
     Route::post('/FeesManagement/mapping/store', [FeeMapingController::class, 'store'])->name('fee.maping.store');
     Route::post('/FeesManagement/mapping/fine/store', [FeeMapingController::class, 'fine_store'])->name('fine.maping.store');
-    Route::delete('/FeesManagement/mapping/fee/{id}',[FeeMapingController::class,'destroy'])->name('fee.maping.delete');
-    Route::delete('/FeesManagement/mapping/fine/{id}',[FeeMapingController::class,'fine_destroy'])->name('fine.maping.delete');
+    Route::delete('/FeesManagement/mapping/fee/{id}', [FeeMapingController::class, 'destroy'])->name('fee.maping.delete');
+    Route::delete('/FeesManagement/mapping/fine/{id}', [FeeMapingController::class, 'fine_destroy'])->name('fine.maping.delete');
 
     //fee amount
     Route::get('/FeesManagement/amount/index', [AmountController::class, 'index'])->name('amount.index');
     Route::post('/FeesManagement/amount/feeamount/store', [AmountController::class, 'store'])->name('fee.amount.store');
     Route::get('/FeesManagement/amount/feeamount/edit/{id}', [AmountController::class, 'edit'])->name('fee.amount.edit');
     Route::post('/FeesManagement/amount/feeamount/update', [AmountController::class, 'update'])->name('fee.amount.update');
-    Route::delete('/FeesManagement/amount/feeamount/{id}',[AmountController::class,'destroy'])->name('fee.amount.delete');
+    Route::delete('/FeesManagement/amount/feeamount/{id}', [AmountController::class, 'destroy'])->name('fee.amount.delete');
     Route::post('/FeesManagement/amount/fineamount/store', [AmountController::class, 'fineStore'])->name('fine.amount.store');
 
-    Route::delete('/FeesManagement/amount/fineamount/delete/{id}',[AmountController::class,'absentdestroy'])->name('fine.amount.delete');
+    Route::delete('/FeesManagement/amount/fineamount/delete/{id}', [AmountController::class, 'absentdestroy'])->name('fine.amount.delete');
 
     Route::get('/getFeeheadToFund', [AmountController::class, 'getFeeheadToFund']);
     Route::get('/getGroupForAmount', [AmountController::class, 'getGroupForAmount']);
-    
+
 
     //date config
     Route::get('/FeesManagement/datesetup/index', [DateSetupController::class, 'index'])->name('date.index');
@@ -278,7 +278,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/FeesManagement/feehead_remove/query', [RemoveController::class, 'feeheadsearch'])->name('feeheadsearch');
     Route::get('/FeesManagement/feehead_remove/details/{id}', [RemoveController::class, 'feeheadremove'])->name('feeheadremove');
     Route::post('/FeesManagement/feehead_remove/store', [RemoveController::class, 'feeheadstore'])->name('feeheadremove.store');
-   // sub head remove
+    // sub head remove
     Route::get('/FeesManagement/feesubhead_remove', [RemoveController::class, 'feesubheadindex'])->name('feesub.remove.index');
     Route::get('/FeesManagement/feesubhead_remove/query', [RemoveController::class, 'feesubheadsearch'])->name('feesubheadsearch');
     Route::get('/FeesManagement/feesubhead_remove/details/{id}', [RemoveController::class, 'feesubheadremove'])->name('feesubheadremove');
@@ -295,13 +295,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/FeesManagement/feecollection/quickcollection/index', [FeeCollectionController::class, 'index'])->name('feecollection.index');
     Route::get('/FeesManagement/feecollection/quickcollection/query', [FeeCollectionController::class, 'quicksearch'])->name('quicksearch');
     Route::get('/FeesManagement/feecollection/view/{id}', [FeeCollectionController::class, 'show'])->name('feecollection.view');
+    Route::post('/FeesManagement/feecollection/quickcollection/process', [FeeCollectionController::class, 'quickprocess'])->name('quickcollection.process');
     Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
     //report
     Route::get('/FeesManagement/report/ops-collection', [OpsController::class, 'index'])->name('ops.index');
     Route::post('/FeesManagement/report/ops-collection/query', [OpsController::class, 'search'])->name('ops.search');
     Route::get('/FeesManagement/report/ops-collection/{invoice}', [OpsController::class, 'show'])->name('ops.show');
     ////////////////////// Fees Management End ////////////
-   
+
 
     /////////////////////// Exam Management Start//////////////////
     Route::get('/exam-management/exam-startup', [ExamStartupController::class, 'index'])->name('examstartup');
@@ -336,7 +337,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/marksheet_query', [MarkSheetController::class, 'marksQuery'])->name('marksheet.query');
     Route::get('/marksheet_sheet_generate', [MarkSheetController::class, 'processmarksheet'])->name('marksheet.process');
 
-    
+
     /////////////////////// Exam Management End//////////////////
 
     /////////////////////// Layout & Certificate Start/////////////////
@@ -352,13 +353,13 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-    // ///////////////////// Student Portal Start////////////////////////////
-    Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
+// ///////////////////// Student Portal Start////////////////////////////
+Route::get('/Student_Portal', [StudentAuthController::class, 'index'])->name('student.auth.index');
 
-    Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
-    Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
-    Route::get('/confirmation',[StudentAuthController::class, 'confirmation'])->name('confirmation');
-    Route::get('/getDataForPaymentReport',[GeneralController::class, 'getReportData']);
+Route::post('/Student_Portal/payment', [StudentAuthController::class, 'authentication'])->name('student.auth.submit');
+Route::post('/makepayment', [StudentAuthController::class, 'makepayment'])->name('makepayment');
+Route::get('/confirmation', [StudentAuthController::class, 'confirmation'])->name('confirmation');
+Route::get('/getDataForPaymentReport', [GeneralController::class, 'getReportData']);
 
     
 
