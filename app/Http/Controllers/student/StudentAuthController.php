@@ -63,7 +63,7 @@ class StudentAuthController extends Controller
     public function makepayment(Request $request)
     {
 
-        $grandTotal = $request->grandTotal;
+        $grandTotal = $request->grandTotal + $request->paid;
         $std_id = $request->std_id;
         $ins_id = $request->ins_id;
         Session::put('ins_id', $ins_id);
@@ -74,9 +74,7 @@ class StudentAuthController extends Controller
         $total_payable = 0;
         $todate = \Carbon\Carbon::now();
         foreach ($payapplies as $payapplie) {
-            if($payapplie->payment_state == 400 || $payapplie->payment_state == 0 || $payapplie->payment_state == 201){
-
-            // if (!$payapplie->payment_state == 200 || !$payapplie->payment_state == 3) {
+            if($payapplie->payment_state == 400 || $payapplie->payment_state == 0 || $payapplie->payment_state == 201 || $payapplie->payment_state == 11){
                 if($todate->gte($payapplie->payable_date)){
                     $total_payable += $payapplie->total_amount;
                 }

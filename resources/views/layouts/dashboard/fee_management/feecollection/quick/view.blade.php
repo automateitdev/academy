@@ -105,10 +105,10 @@
 
                                 <label for="recievedPay" class="text-sm">Recieved By</label>
                                 <select name="quick_payRecieved" class="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">2</option>
+                                    <option value="1">Choose One</option>
+                                    @foreach($ledgers as $item)
+                                        <option value="{{$item->id}}">{{$item->ledger_name}}</option>
+                                    @endforeach
                                 </select>
 
                                 <br />

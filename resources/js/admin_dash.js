@@ -12,10 +12,9 @@ const {
 
 //startup start
 $(document).ready(function () {
-    $(document).on('change', '.startup_category', function () {
+    $(document).on('change', '#startup_category', function () {
         var startup_cat_id = $(this).val();
         console.log(startup_cat_id);
-        var div = $(this).parent().parent().parent();
         var op = " ";
 
         $.ajax({
@@ -25,14 +24,15 @@ $(document).ready(function () {
                 'id': startup_cat_id
             },
             success: function (data) {
-                console.log("dd: " + data);
-                op += '<option value="0" selected disabled>Choose</option>';
+                // console.log("dd: " + data);
+                $('#startup_subcategory').html(" ");
+
+                op += '<option value=" ">Choose One</option>';
                 for (var i = 0; i < data.length; i++) {
                     op += '<option value="' + data[i].id + '">' + data[i].startup_subcategory_name + '</option>';
                 }
 
-                div.find('.startup_subcategory').html(" ");
-                div.find('.startup_subcategory').append(op);
+                $('#startup_subcategory').append(op);
 
             },
 
@@ -640,6 +640,7 @@ $("table.quickTable").find('input[type="checkbox"][name^="quickCheck"]:checked')
 
 $("#quickCollectionTotal").text(quickCollectionTotal.toFixed(2));
 $(document).on('change', '.payquickcheck', function () {
+    console.log("check");
     let rowIndex = $(this).val();
     let amount_col_id = '#amount_' + rowIndex;
     let amountDue_id = '#amountDue_' + rowIndex;

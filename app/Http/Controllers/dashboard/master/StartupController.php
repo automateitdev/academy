@@ -79,7 +79,7 @@ class StartupController extends Controller
 
     public function getStartupSubCat(Request $request)
     {
-        $data = StartupSubcategory::select('startup_subcategory_name', 'id')->where('startup_category_id', $request->id)->take(100)->get();
+        $data = StartupSubcategory::select('startup_subcategory_name', 'id')->where('startup_category_id', $request->id)->get();
         return response()->json($data);
     }
     /**

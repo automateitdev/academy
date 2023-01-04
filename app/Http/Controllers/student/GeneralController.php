@@ -71,7 +71,9 @@ class GeneralController extends Controller
             $data[$key]['academic_yr_name'] = $academic_yr_name->startup_subcategory_name;
             $data[$key]['institute_name'] = $institute_name->institute_name;
             $data[$key]['institute_add'] = $institute_add->address;
-            $data[$key]['institute_logo'] = $institute_logo->logo;
+            if(isset($institute_logo->logo) && !empty($institute_logo->logo)){
+                $data[$key]['institute_logo'] = $institute_logo->logo;
+            }
             $data[$key]['total'] = $total;
             $data[$key]['amountInWords'] = $amountInWords;
         }

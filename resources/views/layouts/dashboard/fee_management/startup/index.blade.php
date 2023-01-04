@@ -55,13 +55,13 @@
                             else{
                                 $class_name_tt = '';
                             }
-                            if($active_tt){
+                            if($active_ff){
                                 $class_name_ff = 'active';
                             }
                             else{
                                 $class_name_ff = '';
                             }
-                            if($active_tt){
+                            if($active_rr){
                                 $class_name_rr = 'active';
                             }
                             else{
@@ -347,7 +347,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label for="" class="form-label">Account Category</label>
-                                                    <select class="form-control account_category" name="account_categor_id">
+                                                    <select class="form-control account_category single" name="account_categor_id">
                                                         <option value=" ">Choose One</option>
                                                         @foreach($accountcategories as $item)
                                                         <option value="{{$item->id}}">{{$item->account_category}}</option>
@@ -358,7 +358,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label for="fund_name" class="form-label">Account Group</label>
-                                                    <select class="form-control acount_group" name="account_subcat_id">
+                                                    <select class="form-control acount_group single" name="account_subcat_id">
                                                         <option value=" ">Choose One</option>
                                                     </select>
                                                 </div>

@@ -11,6 +11,9 @@ use App\Models\Student;
 use App\Models\GroupAssign;
 use App\Models\Payapply;
 use App\Models\Quickcollection;
+use App\Models\AccountCategory;
+use App\Models\AccountGroup;
+use App\Models\Ledger;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,9 +46,9 @@ class FeeCollectionController extends Controller
         ]);
         $academic_year_id = $request->academic_year_id;
         $users = User::all();
-        $startups = Startup::all();
-        $sectionAssignes = SectionAssign::all();
-        $groupassigns = GroupAssign::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        $groupassigns = GroupAssign::where('institute_id', Auth::user()->institute_id)->get();
         $students = Student::where('section_id', $request->section_id)
             ->where('academic_year_id', $request->academic_year_id)
             ->orderBy('roll', 'asc')
@@ -188,6 +191,9 @@ class FeeCollectionController extends Controller
     {
         $student = Student::find($id);
         $users = User::all();
+        $ledgers = Ledger::where('institute_id', Auth::user()->institute_id)
+                        ->whereIn('account_subcat_id', [1,2,3])
+                        ->get();
         $payapplies = Payapply::where('institute_id', Auth::user()->institute_id)
             ->where('student_id', $student->std_id)
             ->whereNotIn('payment_state', [200, 10, 3])
@@ -195,7 +201,13 @@ class FeeCollectionController extends Controller
             // ->where('payment_state', '!=', "10")
             ->get();
 
-        return view('layouts.dashboard.fee_management.feecollection.quick.view', compact('student', 'users', 'payapplies'));
+        return view('layouts.dashboard.fee_management.feecollection.quick.view', 
+                compact(
+                    'student',
+                    'users', 
+                    'payapplies',
+                    'ledgers'
+                ));
     }
 
     /**
