@@ -1,55 +1,124 @@
 <div class="report">
     <div class="container">
         <div class="table-responsive-md">
-            <table class="table table-bordered table-striped pay-table">
+            <table class="table table-bordered table-striped pay-table"
+                style="white-space: pre-line; vertical-align:middle">
                 <thead>
                     <tr>
                         <th>Payment Date</th>
                         <th>Invoice ID</th>
-                        <th>Fee Head</th>
                         <th>Amount</th>
+                        <th>Fee Head</th>
                         <th>Payment Status</th>
                         <th>Download</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php 
-                        $q_sum = [];
-                    @endphp
-                   @foreach($payapplies as $payapplie)
-                        @php 
-                            
-                            if(isset($payapplie->paid_amount) && !empty($payapplie->paid_amount))
-                            {
-                                $data = json_decode($payapplie->paid_amount, true);
-                                foreach($data as $key => $q_details)
-                                {
-                                    array_push($q_sum,$q_details["qc_amount"]);
-                                }
-                                $total = array_sum($q_sum);
-                            }
-                        var_dump($payapplie->invoice);
 
+                    {{-- @php
+                        echo '<pre>';
+                        var_dump($payapplies);
+                        echo '</pre>';
+                    @endphp --}}
+                    @foreach ($payapplies as $payapplie)
+                        @php
+                            if (isset($payapplie->paid_amount) && !empty($payapplie->paid_amount)) {
+                                if (empty($payapplie->invoice)) {
+                                    $data = json_decode($payapplie->paid_amount, true);
+                            
+                                    foreach ($data as $key => $q_details) {
+                                        isset($qc_invoices[$key]['qc_total_amount']) ? ($qc_invoices[$key]['qc_total_amount'] += $q_details['qc_amount']) : ($qc_invoices[$key]['qc_total_amount'] = $q_details['qc_amount']);
+                            
+                                        isset($qc_invoices[$key]['paid_at']) ? ($qc_invoices[$key]['paid_at'] = $q_details['qc_date']) : ($qc_invoices[$key]['paid_at'] = '');
+                            
+                                        isset($qc_invoices[$key]['headname']) ? ($qc_invoices[$key]['headname'] = $payapplie->feehead->head_name . ',') : ($qc_invoices[$key]['headname'] = '');
+                            
+                                        $qc_invoices[$key]['pay_id'][] = $payapplie->id;
+                                        $qc_invoices[$key]['pay_id']['qc_invo'] = $key;
+                                        $qc_invoices[$key]['headname'] .= $payapplie->feehead->head_name . ',';
+                                        $qc_invoices[$key]['paid_at'] = $q_details['qc_date'];
+                                    }
+                                }
+                            }
                         @endphp
-                        @if($payapplie->payment_state == 200 || $payapplie->payment_state == 10)
-                        
-                            <tr>
-                                <td>{{$payapplie->updated_at}}</td>
-                                <td>{{$payapplie->invoice}}</td>
-                                <td>{{$payapplie->feehead->head_name}}</td>
-                                @php 
+                        @if ($payapplie->payment_state == 200 || $payapplie->payment_state == 10 || $payapplie->payment_state == 11)
+                            {{-- <tr>
+                                <td>{{ $payapplie->updated_at }}</td>
+                                @php
+                                    $part_paid = json_decode($payapplie->paid_amount, true);
+                                    $qc_invoice_str = '';
+                                    $qc_amount_str = '';
+                                    $total = '';
+                                    foreach ($part_paid as $qc_invoice => $qc_details) {
+                                        $qc_invoice_str .= "\n" . $qc_invoice;
+                                        $qc_amount_str .= "\n" . $qc_details['qc_amount'];
+                                    }
+                                @endphp
+
+                                @if (!empty($payapplie->invoice))
+                                    $total = $payapplies->where('invoice', $payapplie->invoice)->sum('total_amount');
+                                @else
+                                @endif
+
+                                <td>{{ trim($qc_invoice_str . "\n" . $payapplie->invoice) }}</td>
+                                <td>{{ trim($qc_amount_str . "\n" . $total) }}</td>
+                                <td>{{ $payapplie->feehead->head_name }}</td>
+
+
+                                <td style="vertical-align: middle">Success</td>
+                                <td style="white-space: initial">
+                                    <button class="btn btn-success btn-sm" value="{{ $payapplie->invoice }}"
+                                        id="payreportpdfGenerate">
+                                        <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
+                                </td>
+                            </tr> --}}
+
+
+                            @if (!empty($payapplie->invoice))
+                                @php
                                     $total = $payapplies->where('invoice', $payapplie->invoice)->sum('total_amount');
                                 @endphp
-                                <td>{{$total}}</td>
-                                <td>Success</td>
-                                <td>
-                                    <button class="btn btn-success" value="{{$payapplie->invoice}}" id="payreportpdfGenerate">
-                                    <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
+                                <tr>
+                                    <td>{{ $payapplie->updated_at }}</td>
+                                    <td>{{ $payapplie->invoice }}</td>
+                                    {{-- <td>{{ $payapplie->feehead->head_name }}</td> --}}
+                                    <td>{{ $total }}</td>
+                                    <td style="vertical-align: middle">Success</td>
+                                    <td style="white-space: initial">
+                                        <button class="btn btn-success btn-sm" value="{{ $payapplie->invoice }}"
+                                            id="payreportpdfGenerate">
+                                            <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endif
+                    @endforeach
+
+
+                    @if (count($qc_invoices) > 0)
+                        @foreach ($qc_invoices as $qc_invo => $items)
+                            <tr>
+                                <td>{{ $payapplie->updated_at }}</td>
+                                <td>{{ $qc_invo }}</td>
+                                <td>{{ $qc_invoices[$qc_invo]['qc_total_amount'] }}</td>
+                                {{-- <td>{{ $qc_invoices[$qc_invo]['headname'] }}</td> --}}
+                                <td style="vertical-align: middle">Success</td>
+                                <td style="white-space: initial">
+                                    @php
+                                        $pay_ids = json_encode($qc_invoices[$qc_invo]['pay_id']);
+                                    @endphp
+                                    <button class="btn btn-success btn-sm" value="{{ $pay_ids }}"
+                                        id="payreportpdfGenerate">
+                                        <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
                                 </td>
                             </tr>
-                        
-                        @endif
-                   @endforeach
+                        @endforeach
+                    @endif
+                    {{-- @php
+                        echo '<pre>';
+                        var_dump($qc_invoices);
+                        echo '</pre>';
+                    @endphp --}}
                 </tbody>
             </table>
         </div>

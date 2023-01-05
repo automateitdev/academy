@@ -82,6 +82,9 @@ class FeeCollectionController extends Controller
             $unique_invoice = 'QC' . Auth::user()->institute_id . substr($request->student_id, -4) . $unique_code;
             $unique_invoice = strtoupper($unique_invoice);
 
+            // Carbon::createFromFormat('Y-m-d H:i:s', $request->qc_date)
+            //     ->format('m/d/Y');
+
             foreach ($request->quickCheck as $key => $payapplyId) {
                 $payappliesInfo =  Payapply::where('id', $payapplyId)->first();
                 $prev_paid = [];
@@ -192,8 +195,8 @@ class FeeCollectionController extends Controller
         $student = Student::find($id);
         $users = User::all();
         $ledgers = Ledger::where('institute_id', Auth::user()->institute_id)
-                        ->whereIn('account_subcat_id', [1,2,3])
-                        ->get();
+            ->whereIn('account_subcat_id', [1, 2, 3])
+            ->get();
         $payapplies = Payapply::where('institute_id', Auth::user()->institute_id)
             ->where('student_id', $student->std_id)
             ->whereNotIn('payment_state', [200, 10, 3])
@@ -201,13 +204,15 @@ class FeeCollectionController extends Controller
             // ->where('payment_state', '!=', "10")
             ->get();
 
-        return view('layouts.dashboard.fee_management.feecollection.quick.view', 
-                compact(
-                    'student',
-                    'users', 
-                    'payapplies',
-                    'ledgers'
-                ));
+        return view(
+            'layouts.dashboard.fee_management.feecollection.quick.view',
+            compact(
+                'student',
+                'users',
+                'payapplies',
+                'ledgers'
+            )
+        );
     }
 
     /**

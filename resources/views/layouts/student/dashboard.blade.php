@@ -48,7 +48,7 @@
                     </div>
                 @endif
                 <div class="col-md-12 pb-2">
-                    <div class="nav nav-pills m-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <div class="nav nav-pills m-3 text-sm" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <button class="nav-link std_tab active" id="v-pills-info-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-info" type="button" role="tab" aria-controls="v-pills-info"
                             aria-selected="true">Information</button>

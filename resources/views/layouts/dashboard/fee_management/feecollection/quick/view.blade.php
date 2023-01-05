@@ -78,6 +78,7 @@
                             </table>
                         </div>
                         <div class="col-md-4 px-3 py-2" style="border: 2px groove seagreen; border-radius:5px">
+
                             <form action="{{ route('quickcollection.process') }}" method="post">
                                 @csrf
 
@@ -100,14 +101,13 @@
 
                                 <label for="quickDate" class="text-sm">Pick a date</label>
                                 <input type="date" class="form-control" name="quickDate">
-
                                 <br />
 
                                 <label for="recievedPay" class="text-sm">Recieved By</label>
                                 <select name="quick_payRecieved" class="form-control">
                                     <option value="1">Choose One</option>
-                                    @foreach($ledgers as $item)
-                                        <option value="{{$item->id}}">{{$item->ledger_name}}</option>
+                                    @foreach ($ledgers as $item)
+                                        <option value="{{ $item->id }}">{{ $item->ledger_name }}</option>
                                     @endforeach
                                 </select>
 
