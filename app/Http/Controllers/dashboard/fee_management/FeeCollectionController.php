@@ -108,7 +108,8 @@ class FeeCollectionController extends Controller
                             $prev_paid[$unique_invoice]['qc_amount'] = $request->quick_payTotal[$key];
                             // array_push($prev_paid, $request->quick_payTotal[$key]);
                         } else {
-                            return redirect()->back()->with('error', 'Total Amount Mismatch on 1' . $payapplyId);
+                            return redirect()->back()->with('error', 'Total Amount Mismatch');
+                            // return redirect()->back()->with('error', 'Total Amount Mismatch For ' . $payapplyId);
                         }
                     } else {
 
@@ -117,7 +118,8 @@ class FeeCollectionController extends Controller
                         if ($payappliesInfo->total_amount == $total_amount) {
                             $prev_paid[$unique_invoice]['qc_amount'] = $request->quick_payTotal[$key];
                         } else {
-                            return redirect()->back()->with('error', 'Total Amount Mismatch on 2' . $payapplyId);
+                            return redirect()->back()->with('error', 'Total Amount Mismatch');
+                            // return redirect()->back()->with('error', 'Total Amount Mismatch On ' . $payapplyId);
                         }
                     }
 
@@ -145,16 +147,18 @@ class FeeCollectionController extends Controller
                             return redirect()->back()->with('error', 'Something went wrong, please try again later!');
                         }
                     } else {
-                        return redirect()->back()->with('error', 'Due Mismatch on' . $payapplyId);
+                        return redirect()->back()->with('error', 'Due Mismatch on');
+                        // return redirect()->back()->with('error', 'Due Mismatch on' . $payapplyId);
                     }
                 } else {
-                    return redirect()->back()->with('error', 'Total Amount Mismatch on' . $payapplyId);
+                    return redirect()->back()->with('error', 'Total Amount Mismatch on');
+                    // return redirect()->back()->with('error', 'Total Amount Mismatch on' . $payapplyId);
                 }
             }
             // success
             return redirect()->back()->with('message', 'Quick Collection Updated for Student ID:' . $request->student_id);
         } else {
-            return redirect()->back()->with('error', 'Unwanted Inputs detected');
+            return redirect()->back()->with('error', 'Unwanted Inputs Detected');
         }
     }
 

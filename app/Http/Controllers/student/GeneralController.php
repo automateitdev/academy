@@ -111,7 +111,7 @@ class GeneralController extends Controller
             $data = Payapply::join('fee_heads', 'fee_heads.id', '=', 'payapplies.feehead_id')
                 ->join('feesubheads', 'feesubheads.id', '=', 'payapplies.feesubhead_id')
                 ->where('payapplies.invoice', $request->payapplies_invoice)
-                ->get(['payapplies.student_id', 'payapplies.payable', 'payapplies.fine', 'payapplies.invoice', 'payapplies.waiver_amount', 'payapplies.total_amount', 'payapplies.updated_at', 'fee_heads.head_name', 'feesubheads.subhead_name']);
+                ->get(['payapplies.*', 'fee_heads.head_name', 'feesubheads.subhead_name']);
 
             $institute_name = User::select('institute_name')->where('institute_id', $institute_id->institute_id)->first();
 

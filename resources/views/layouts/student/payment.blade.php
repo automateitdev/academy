@@ -13,6 +13,7 @@
 <div class="payment">
     <div class="container">
         <div class="table-responsive-md">
+
             <table class="table table-bordered table-striped pay-table">
                 <thead>
                     <tr>
@@ -39,7 +40,10 @@
                                     <td>{{ $payapplie->fine }}</td>
                                     <td>{{ $payapplie->waiver_amount }}</td>
 
+
+
                                     @php
+                                        
                                         if (!empty($payapplie->paid_amount)) {
                                             $prev_paid = json_decode($payapplie->paid_amount, true);
                                             $paid = 0;
@@ -56,10 +60,10 @@
                                     @endphp
 
                                     <td style="vertical-align:middle">{{ $paid }}</td>
-                                    @if (!empty($payapplie->due_amount) || $payapplie->due_amount > 0)
+                                    @if (!empty($payapplie->due_amount) && $payapplie->due_amount > 0)
                                         <td class="pay_total">{{ $payapplie->due_amount }}</td>
                                     @else
-                                        <td class="pay_total"> 0 </td>
+                                        <td class="pay_total">{{ $payapplie->total_amount }}</td>
                                     @endif
                                 </tr>
                                 @php
@@ -99,7 +103,7 @@
                 <input type="hidden" value="{{ $year }}" name="year">
                 <input type="hidden" id="grandTotal" name="grandTotal">
                 <input type="hidden" value="{{ $tableData }}" name="tableData">
-                <input type="hidden" value="{{ $paid }}" name="paid">
+                <input type="hidden" value="{{ isset($paid) ? $paid : 0 }}" name="paid">
                 <button class="btn mb-2 btn-success float-right">Pay Now</button>
             </form>
 

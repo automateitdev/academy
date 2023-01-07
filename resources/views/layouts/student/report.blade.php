@@ -8,7 +8,6 @@
                         <th>Payment Date</th>
                         <th>Invoice ID</th>
                         <th>Amount</th>
-                        <th>Fee Head</th>
                         <th>Payment Status</th>
                         <th>Download</th>
                     </tr>
@@ -20,6 +19,10 @@
                         var_dump($payapplies);
                         echo '</pre>';
                     @endphp --}}
+
+                    @php
+                        $unique_invoices = [];
+                    @endphp
                     @foreach ($payapplies as $payapplie)
                         @php
                             if (isset($payapplie->paid_amount) && !empty($payapplie->paid_amount)) {
@@ -74,8 +77,9 @@
                             </tr> --}}
 
 
-                            @if (!empty($payapplie->invoice))
+                            @if (!empty($payapplie->invoice) && !in_array($payapplie->invoice, $unique_invoices))
                                 @php
+                                    array_push($unique_invoices, $payapplie->invoice);
                                     $total = $payapplies->where('invoice', $payapplie->invoice)->sum('total_amount');
                                 @endphp
                                 <tr>
@@ -95,24 +99,26 @@
                     @endforeach
 
 
-                    @if (count($qc_invoices) > 0)
-                        @foreach ($qc_invoices as $qc_invo => $items)
-                            <tr>
-                                <td>{{ $payapplie->updated_at }}</td>
-                                <td>{{ $qc_invo }}</td>
-                                <td>{{ $qc_invoices[$qc_invo]['qc_total_amount'] }}</td>
-                                {{-- <td>{{ $qc_invoices[$qc_invo]['headname'] }}</td> --}}
-                                <td style="vertical-align: middle">Success</td>
-                                <td style="white-space: initial">
-                                    @php
-                                        $pay_ids = json_encode($qc_invoices[$qc_invo]['pay_id']);
-                                    @endphp
-                                    <button class="btn btn-success btn-sm" value="{{ $pay_ids }}"
-                                        id="payreportpdfGenerate">
-                                        <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @if (isset($qc_invoices) && !empty($qc_invoices))
+                        @if (count($qc_invoices) > 0)
+                            @foreach ($qc_invoices as $qc_invo => $items)
+                                <tr>
+                                    <td>{{ $payapplie->updated_at }}</td>
+                                    <td>{{ $qc_invo }}</td>
+                                    <td>{{ $qc_invoices[$qc_invo]['qc_total_amount'] }}</td>
+                                    {{-- <td>{{ $qc_invoices[$qc_invo]['headname'] }}</td> --}}
+                                    <td style="vertical-align: middle">Success</td>
+                                    <td style="white-space: initial">
+                                        @php
+                                            $pay_ids = json_encode($qc_invoices[$qc_invo]['pay_id']);
+                                        @endphp
+                                        <button class="btn btn-success btn-sm" value="{{ $pay_ids }}"
+                                            id="payreportpdfGenerate">
+                                            <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     @endif
                     {{-- @php
                         echo '<pre>';
