@@ -26,7 +26,6 @@
                     @foreach ($payapplies as $payapplie)
                         @php
                             if (isset($payapplie->paid_amount) && !empty($payapplie->paid_amount)) {
-                                if (empty($payapplie->invoice)) {
                                     $data = json_decode($payapplie->paid_amount, true);
                             
                                     foreach ($data as $key => $q_details) {
@@ -41,42 +40,10 @@
                                         $qc_invoices[$key]['headname'] .= $payapplie->feehead->head_name . ',';
                                         $qc_invoices[$key]['paid_at'] = $q_details['qc_date'];
                                     }
-                                }
                             }
                         @endphp
-                        @if ($payapplie->payment_state == 200 || $payapplie->payment_state == 10 || $payapplie->payment_state == 11)
-                            {{-- <tr>
-                                <td>{{ $payapplie->updated_at }}</td>
-                                @php
-                                    $part_paid = json_decode($payapplie->paid_amount, true);
-                                    $qc_invoice_str = '';
-                                    $qc_amount_str = '';
-                                    $total = '';
-                                    foreach ($part_paid as $qc_invoice => $qc_details) {
-                                        $qc_invoice_str .= "\n" . $qc_invoice;
-                                        $qc_amount_str .= "\n" . $qc_details['qc_amount'];
-                                    }
-                                @endphp
-
-                                @if (!empty($payapplie->invoice))
-                                    $total = $payapplies->where('invoice', $payapplie->invoice)->sum('total_amount');
-                                @else
-                                @endif
-
-                                <td>{{ trim($qc_invoice_str . "\n" . $payapplie->invoice) }}</td>
-                                <td>{{ trim($qc_amount_str . "\n" . $total) }}</td>
-                                <td>{{ $payapplie->feehead->head_name }}</td>
-
-
-                                <td style="vertical-align: middle">Success</td>
-                                <td style="white-space: initial">
-                                    <button class="btn btn-success btn-sm" value="{{ $payapplie->invoice }}"
-                                        id="payreportpdfGenerate">
-                                        <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
-                                </td>
-                            </tr> --}}
-
-
+                        @if ($payapplie->payment_state == 200 || $payapplie->payment_state == 10)
+           
                             @if (!empty($payapplie->invoice) && !in_array($payapplie->invoice, $unique_invoices))
                                 @php
                                     array_push($unique_invoices, $payapplie->invoice);

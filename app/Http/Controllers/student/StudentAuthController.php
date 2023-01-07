@@ -72,6 +72,7 @@ class StudentAuthController extends Controller
         $payapplies = Payapply::where('student_id', $std_id)->where('institute_id', $ins_id)->get();
         $amount = 0;
         $total_payable = 0;
+        
         $todate = \Carbon\Carbon::now();
         foreach ($payapplies as $payapplie) {
             if($payapplie->payment_state == 400 || $payapplie->payment_state == 0 || $payapplie->payment_state == 201 || $payapplie->payment_state == 11){
@@ -240,13 +241,21 @@ class StudentAuthController extends Controller
         $input->comission = $result['Commission'];
         $input->scroll_no = $result['ScrollNo'];
         if ($input->save()) {
+
+            $finalDue = Payapply::select('due_amount')->where('invoice', $result['InvoiceNo']);
+            $updatedDue = $finalDue - $result['PayAmount'];
             $updateDetails = [
                 'payment_state' => $result['status'],
+                'due_amount' => $updatedDue,
                 'trx_id' => $result['TransactionId']
             ];
 
+            
+
+            
             $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
                 ->update($updateDetails);
+            
             if($result['status'] == 200){
                 return redirect(route('student.auth.index'))->with('message', 'Your payments successful.');
             }

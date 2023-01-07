@@ -81,7 +81,7 @@ class GeneralController extends Controller
                 }
 
                 $data[$key]['qc_invoice'] = $pay_id['qc_invo'];
-                $data[$key]['total_due'] = $total_due;
+                $data[$key]['total_due'] = $total_payable - $total_qc_paid;
                 $data[$key]['total_payable'] = $total_payable;
                 $data[$key]['roll'] = $roll->roll;
                 $data[$key]['name'] = $name->name;
@@ -149,12 +149,32 @@ class GeneralController extends Controller
             $data = json_decode($data, true);
             $total_payable = 0;
             $total_due = 0;
+            
+
             foreach ($data as $key => $arr) {
+                
                 $total_payable += $data[$key]['total_amount'];
                 $total_due += $data[$key]['due_amount'];
-
                 $data[$key]['total_due'] = $total_due;
-                $data[$key]['total_payable'] = $total_payable;
+
+                if(!empty($data[$key]['paid_amount'])){
+                    $total_qc_paid = 0;     
+                    $paidAmount = json_decode($data[$key]['paid_amount'], true);
+                    foreach ($paidAmount as $invoice => $perPay) {
+                        isset($data[$key]['qc_part_paid']) ? ($data[$key]['qc_part_paid'] += $perPay['qc_amount']) : ($data[$key]['qc_part_paid'] = $perPay['qc_amount']);
+                        $total_qc_paid += $data[$key]['qc_part_paid'];
+                    }
+                }
+                
+
+                if( isset($total_qc_paid) && !empty($total_qc_paid) && $total_qc_paid > 0){
+                    $data[$key]['total_payable'] = $total_payable - $total_qc_paid;
+                    $data[$key]['total_pre_paid'] = $total_qc_paid;
+                }else{
+                    $data[$key]['total_payable'] = $total_payable;
+                }
+
+
                 $data[$key]['roll'] = $roll->roll;
                 $data[$key]['name'] = $name->name;
                 $data[$key]['class_name'] = $class_name->startup_subcategory_name;
