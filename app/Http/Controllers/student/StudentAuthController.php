@@ -42,7 +42,7 @@ class StudentAuthController extends Controller
 
         $inst_id = User::where('institute_id',$ins_id)->first();
         if(!empty($inst_id)){
-            $payapplies = Payapply::where('student_id', $std_id)->where('institute_id', $ins_id)->get();
+            $payapplies = Payapply::where('student_id', $std_id)->where('institute_id', $ins_id)->orderBy('updated_at', 'DESC')->get();
             $student = Student::where('std_id', $std_id)->where('institute_id', $ins_id)->first(); // $student = null;
 
             // null->institute_id

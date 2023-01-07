@@ -49,16 +49,17 @@ $i = 0;
 $data = json_decode($data, true);
 foreach ($data as $key => $value) {
 if (empty($value['invoice'])) {
-$value['invoice'] = $value['qc_invoice'];
+    $value['invoice'] = $value['qc_invoice'];
 }
+
+isset($value['total_qc_paid']) ? $paidAmount = $value['total_qc_paid'] : $paidAmount = $value['total_payable'];
 $qrtext = "
 Student Name: {$value['name']}
 Student ID: {$value['student_id']}
 Invoice ID: {$value['invoice']}
-Total Paid Amount: {$value['total']}
+Paid Amount: {$paidAmount}
 Institute: {$value['institute_name']}
 ";
-break;
 }
 @endphp
 
@@ -261,7 +262,11 @@ break;
                 @php
                 $date = \Carbon\Carbon::parse($value['updated_at'])->toDateString();
                 @endphp
+                @if(isset($value['qc_date']) && !empty($value['qc_date']))
+                <td>{{$value['qc_date']}}</td>
+                @else
                 <td>{{ $date }}</td>
+                @endif
                 @php
                 break;
                 @endphp
@@ -292,14 +297,14 @@ break;
                 <td class="invtd" style="text-align:right">{{ $value['waiver_amount'] }}</td>
                 <td class="invtd" style="text-align: right;">{{ $value['fine'] }}</td>
 
-                @if(isset($value['qc_part_paid']))
-                <th class="invtd" style="text-align: right;">{{$value['qc_part_paid']}}</th>
-                @else
-                <th class="invtd" style="text-align: right;">0</th>
+                @if(isset($value['qc_prev_paid']))
+                    <td class="invtd" style="text-align: right;">{{$value['qc_prev_paid']}}</td>
+                    @elseif(isset($value['qc_part_paid']))
+                        <td class="invtd" style="text-align: right;">{{$value['qc_part_paid']}}</td>
+                    @else
+                        <td class="invtd" style="text-align: right;">0</td>
                 @endif
-
-
-                <td class=" invtd" style="text-align: right;">{{ $value['total_payable'] }}</td>
+                <td class=" invtd" style="text-align: right;">{{ $value['total_amount'] }}</td>
             </tr>
             @endforeach
             <tr class="invrow" style="margin-top: -10rem;">
@@ -324,7 +329,7 @@ break;
                 </td>
                 <td colspan="2" class="invtd" style="border: 1px solid black;text-align:right; font-weight:bold">
                     Total Paid</td>
-                <td style="text-align: right;border: 1px solid black; font-weight:bold">{{ $value['total_payable'] }}</td>
+                <td style="text-align: right;border: 1px solid black; font-weight:bold">{{ isset($value['total_qc_paid']) ? $value['total_qc_paid'] : $value['total_payable']  }}</td>
             </tr>
 
             <tr>

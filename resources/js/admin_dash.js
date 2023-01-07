@@ -354,6 +354,7 @@ $(document).on('keyup', '#admitTo', function () {
     // console.log(admitname);
     // $( "#myselect option:selected" ).text();
     pdfname = $("input[name=righ_title]").val();
+    // pdfname = 'payment_reciept';
 
     if (!isEmpty(lft) || !isEmpty(rgt)) {
         $.ajax({
@@ -432,6 +433,7 @@ let payreportpath = 'layouts/student/reportview';
 $(document).on('click', '#payreportpdfGenerate', function (e) {
     e.preventDefault();
     payapplies_invoice = $(this).val();
+    let pdf_invoice_name = $(this).data("target");
     let _token = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
 
@@ -466,7 +468,7 @@ $(document).on('click', '#payreportpdfGenerate', function (e) {
                     });
                     var link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
-                    link.download = payapplies_invoice.trim() + ".pdf";
+                    link.download = pdf_invoice_name.trim() + ".pdf";
                     link.click();
 
                 },

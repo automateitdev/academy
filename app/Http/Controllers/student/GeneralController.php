@@ -11,6 +11,7 @@ use App\Models\Payapply;
 use App\Models\Startup;
 use App\Models\SectionAssign;
 use App\Models\StartupSubcategory;
+use Illuminate\Support\Facades\Auth;
 use NumberFormatter;
 
 class GeneralController extends Controller
@@ -66,23 +67,34 @@ class GeneralController extends Controller
 
             $data = json_decode($data, true);
             $total_qc_paid = 0;
+            $total_prev_paid = 0;
             $total_payable = 0;
             $total_due = 0;
 
             foreach ($data as $key => $arr) {
                 $paidAmount = json_decode($data[$key]['paid_amount'], true);
+
+                $data[$key]['qc_prev_paid'] = 0;
+
                 foreach ($paidAmount as $invoice => $perPay) {
+                    
                     if ($invoice == $pay_id['qc_invo']) {
                         isset($data[$key]['qc_part_paid']) ? ($data[$key]['qc_part_paid'] += $perPay['qc_amount']) : ($data[$key]['qc_part_paid'] = $perPay['qc_amount']);
                         $total_qc_paid += $data[$key]['qc_part_paid'];
                         $total_payable += $data[$key]['total_amount'];
                         $total_due += $data[$key]['due_amount'];
+                        $data[$key]['qc_date'] = $perPay['qc_date'];
+                    } else {
+                        isset($data[$key]['qc_prev_paid']) ? ($data[$key]['qc_prev_paid'] += $perPay['qc_amount']) : ($data[$key]['qc_prev_paid'] = $perPay['qc_amount']);
+                        $total_prev_paid += $perPay['qc_amount'];
                     }
+                    
                 }
 
                 $data[$key]['qc_invoice'] = $pay_id['qc_invo'];
-                $data[$key]['total_due'] = $total_payable - $total_qc_paid;
-                $data[$key]['total_payable'] = $total_payable;
+                $data[$key]['total_payable'] = $total_payable - $total_prev_paid;
+                $data[$key]['total_qc_paid'] = $total_qc_paid;
+                $data[$key]['total_due'] = $total_payable - ($total_qc_paid + $total_prev_paid);
                 $data[$key]['roll'] = $roll->roll;
                 $data[$key]['name'] = $name->name;
                 $data[$key]['class_name'] = $class_name->startup_subcategory_name;
@@ -113,7 +125,7 @@ class GeneralController extends Controller
                 ->where('payapplies.invoice', $request->payapplies_invoice)
                 ->get(['payapplies.*', 'fee_heads.head_name', 'feesubheads.subhead_name']);
 
-            $institute_name = User::select('institute_name')->where('institute_id', $institute_id->institute_id)->first();
+            $institute_name = User::select('institute_name')->where('institute_id',  Auth::user()->institute_id)->first();
 
             $institute_add = User::select('address')->where('institute_id', $institute_id->institute_id)->first();
             $institute_logo = Basic::select('logo')->where('institute_id', $institute_id->institute_id)->first();
@@ -144,7 +156,7 @@ class GeneralController extends Controller
             $section_name = StartupSubcategory::select('startup_subcategory_name')->where('id', $section->startup_subcategory_id)->first();
 
             $total = Payapply::where('invoice', $request->payapplies_invoice)->sum('total_amount');
-            $amountInWords = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($total));
+
 
             $data = json_decode($data, true);
             $total_payable = 0;
@@ -157,19 +169,16 @@ class GeneralController extends Controller
                 $total_due += $data[$key]['due_amount'];
                 $data[$key]['total_due'] = $total_due;
 
-                if(!empty($data[$key]['paid_amount'])){
-                    $total_qc_paid = 0;     
+                if (!empty($data[$key]['paid_amount'])) {
                     $paidAmount = json_decode($data[$key]['paid_amount'], true);
                     foreach ($paidAmount as $invoice => $perPay) {
                         isset($data[$key]['qc_part_paid']) ? ($data[$key]['qc_part_paid'] += $perPay['qc_amount']) : ($data[$key]['qc_part_paid'] = $perPay['qc_amount']);
-                        $total_qc_paid += $data[$key]['qc_part_paid'];
                     }
                 }
-                
 
-                if( isset($total_qc_paid) && !empty($total_qc_paid) && $total_qc_paid > 0){
-                    $data[$key]['total_payable'] = $total_payable - $total_qc_paid;
-                    $data[$key]['total_pre_paid'] = $total_qc_paid;
+                if (isset($data[$key]['qc_part_paid']) && !empty($data[$key]['qc_part_paid']) && $data[$key]['qc_part_paid'] > 0) {
+                    $data[$key]['total_payable'] = $total_payable - $data[$key]['qc_part_paid'];
+                    $data[$key]['total_pre_paid'] = $data[$key]['qc_part_paid'];
                 }else{
                     $data[$key]['total_payable'] = $total_payable;
                 }
@@ -187,7 +196,9 @@ class GeneralController extends Controller
                 if (isset($institute_logo->logo) && !empty($institute_logo->logo)) {
                     $data[$key]['institute_logo'] = $institute_logo->logo;
                 }
+
                 $data[$key]['total'] = $total;
+                $amountInWords = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($data[$key]['total_payable']));
                 $data[$key]['amountInWords'] = $amountInWords;
             }
             $data = json_encode($data);

@@ -26,8 +26,9 @@
                     @foreach ($payapplies as $payapplie)
                         @php
                             if (isset($payapplie->paid_amount) && !empty($payapplie->paid_amount)) {
-                                    $data = json_decode($payapplie->paid_amount, true);
                             
+                                if($payapplie->payment_state == 10 || $payapplie->payment_state == 11){
+                                    $data = json_decode($payapplie->paid_amount, true);
                                     foreach ($data as $key => $q_details) {
                                         isset($qc_invoices[$key]['qc_total_amount']) ? ($qc_invoices[$key]['qc_total_amount'] += $q_details['qc_amount']) : ($qc_invoices[$key]['qc_total_amount'] = $q_details['qc_amount']);
                             
@@ -40,6 +41,7 @@
                                         $qc_invoices[$key]['headname'] .= $payapplie->feehead->head_name . ',';
                                         $qc_invoices[$key]['paid_at'] = $q_details['qc_date'];
                                     }
+                                }
                             }
                         @endphp
                         @if ($payapplie->payment_state == 200 || $payapplie->payment_state == 10)
@@ -50,13 +52,15 @@
                                     $total = $payapplies->where('invoice', $payapplie->invoice)->sum('total_amount');
                                 @endphp
                                 <tr>
-                                    <td>{{ $payapplie->updated_at }}</td>
-                                    <td>{{ $payapplie->invoice }}</td>
+                                    <td>{{$payapplie->updated_at->format('Y-m-d')}}</td>
+                                     <td>{{ $payapplie->invoice }}</td>
                                     {{-- <td>{{ $payapplie->feehead->head_name }}</td> --}}
                                     <td>{{ $total }}</td>
                                     <td style="vertical-align: middle">Success</td>
                                     <td style="white-space: initial">
-                                        <button class="btn btn-success btn-sm" value="{{ $payapplie->invoice }}"
+                                        <button class="btn btn-success btn-sm" 
+                                        data-target="{{ $payapplie->invoice }}"    
+                                        value="{{ $payapplie->invoice }}"
                                             id="payreportpdfGenerate">
                                             <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
                                     </td>
@@ -70,7 +74,7 @@
                         @if (count($qc_invoices) > 0)
                             @foreach ($qc_invoices as $qc_invo => $items)
                                 <tr>
-                                    <td>{{ $payapplie->updated_at }}</td>
+                                    <td>{{$qc_invoices[$qc_invo]['paid_at']}}</td>
                                     <td>{{ $qc_invo }}</td>
                                     <td>{{ $qc_invoices[$qc_invo]['qc_total_amount'] }}</td>
                                     {{-- <td>{{ $qc_invoices[$qc_invo]['headname'] }}</td> --}}
@@ -80,7 +84,8 @@
                                             $pay_ids = json_encode($qc_invoices[$qc_invo]['pay_id']);
                                         @endphp
                                         <button class="btn btn-success btn-sm" value="{{ $pay_ids }}"
-                                            id="payreportpdfGenerate">
+                                        data-target = {{$qc_invo}}    
+                                        id="payreportpdfGenerate">
                                             <i class="fa fa-file" aria-hidden="true"></i> Get Receipt</button>
                                     </td>
                                 </tr>
