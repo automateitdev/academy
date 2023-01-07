@@ -288,61 +288,78 @@
                  </a>
                  <ul class="nav nav-treeview">
                      <li class="nav-item">
-                         <a href="{{ route('fee.startup.index') }}" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Fee Startup</p>
-                             <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
-                         </a>
-                     </li>
-                     <li class="nav-item">
-                         <a href="{{ route('fee.maping.index') }}" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Fee Mapping</p>
-                             <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
-                         </a>
-                     </li>
-                     <li class="nav-item">
-                         <a href="{{ route('amount.index') }}" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Amount Set</p>
-                             <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
-                         </a>
-                     </li>
-                     <li class="nav-item">
-                         <a href="{{ route('date.index') }}" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Date Setup</p>
-                             <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
-                         </a>
-                     </li>
-                     <li class="nav-item">
-                         <a href="{{ route('waiver.index') }}" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Waiver Setup</p>
-                             <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
-                         </a>
-                     </li>
-                     <li class="nav-item">
                          <a href="#" class="nav-link active">
                              <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Fee Remove</p>
+                             <p>Settings</p>
                              <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
                          <ul class="nav nav-treeview">
                              <li class="nav-item">
-                                 <a href="{{ route('fee.remove.index') }}" class="nav-link active">
+                                 <a href="{{ route('fee.startup.index') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Fee Head</p>
+                                     <p>Fee Startup</p>
+                                     <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ route('feesub.remove.index') }}" class="nav-link active">
+                                 <a href="{{ route('fee.maping.index') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                                     <p>Fee Subhead</p>
+                                     <p>Fee Mapping</p>
+                                     <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('amount.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Amount Set</p>
+                                     <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('date.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Date Setup</p>
+                                     <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('waiver.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Waiver Setup</p>
+                                     <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="#" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Fee Remove</p>
+                                     <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
+                                 </a>
+                                 <ul class="nav nav-treeview">
+                                     <li class="nav-item">
+                                         <a href="{{ route('fee.remove.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Fee Head</p>
+                                         </a>
+                                     </li>
+                                     <li class="nav-item">
+                                         <a href="{{ route('feesub.remove.index') }}" class="nav-link active">
+                                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                             <p>Fee Subhead</p>
+                                         </a>
+                                     </li>
+                                 </ul>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="#" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Delete</p>
+                                     <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                                  </a>
                              </li>
                          </ul>
                      </li>
+
                      <li class="nav-item">
                          <a href="#" class="nav-link active">
                              <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
@@ -371,13 +388,7 @@
                              <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
                          </a>
                      </li>
-                     <li class="nav-item">
-                         <a href="#" class="nav-link active">
-                             <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
-                             <p>Delete</p>
-                             <!-- <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i> -->
-                         </a>
-                     </li>
+
                      <li class="nav-item">
                          <a href="#" class="nav-link active">
                              <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
@@ -614,7 +625,7 @@
                                      <p>Subject Configure</p>
                                  </a>
                              </li>
-                             
+
                              <li class="nav-item">
                                  <a href="{{ route('fourthsubject.index') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>

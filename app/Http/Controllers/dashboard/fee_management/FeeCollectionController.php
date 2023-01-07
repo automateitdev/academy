@@ -194,6 +194,8 @@ class FeeCollectionController extends Controller
     {
         $student = Student::find($id);
         $users = User::all();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $ledgers = Ledger::where('institute_id', Auth::user()->institute_id)
             ->whereIn('account_subcat_id', [1, 2, 3])
             ->get();
@@ -210,7 +212,9 @@ class FeeCollectionController extends Controller
                 'student',
                 'users',
                 'payapplies',
-                'ledgers'
+                'ledgers',
+                'sectionAssignes',
+                'startups'
             )
         );
     }
