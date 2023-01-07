@@ -50,7 +50,16 @@
                                     <tr>
                                         <td>Section</td>
                                         <td>:</td>
-                                        <td>{{ $student->sectionstartups->startupsubcategory->startup_subcategory_name }}
+                                        @foreach($sectionAssignes as $item)
+                                            @if($item->id == $student->section_id)
+                                                @foreach($startups as $startup)
+                                                    @if($startup->id == $item->class_id)
+                                                    <td>{{$startup->startupsubcategory->startup_subcategory_name}}</td>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                        <td>
                                         </td>
                                     </tr>
                                     <tr>
@@ -66,8 +75,7 @@
                                     <tr>
                                         <td>Category</td>
                                         <td>:</td>
-                                        <td>{{ $student->std_cat_startups->startupsubcategory->startup_subcategory_name }}
-                                        </td>
+                                        <td>{{ $student->std_cat_startups->startupsubcategory->startup_subcategory_name }}</td>
                                     </tr>
                                     <tr>
                                         <td>Mobile No.</td>
