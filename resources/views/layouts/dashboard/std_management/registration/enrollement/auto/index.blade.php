@@ -201,7 +201,7 @@
                                     <input type="text" class="form-control" name="mother_name[]" placeholder="mother_name">
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" name="mobile_no[]" placeholder="mobile_no">
+                                    <input type="text" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" class="form-control" name="mobile_no[]" placeholder="mobile_no">
                                 </div>
                             </div>
                         </div>

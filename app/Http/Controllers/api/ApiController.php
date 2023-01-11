@@ -83,13 +83,25 @@ class ApiController extends Controller
                             $input->comission = $result['Commission'];
                             $input->scroll_no = $result['ScrollNo'];
                             if ($input->save()) {
-                                $updateDetails = [
-                                    'payment_state' => $result['status'],
-                                    'trx_id' => $result['TransactionId']
-                                ];
+                                $finalDue = Payapply::select('due_amount')->where('invoice', $result['InvoiceNo'])->get();
+                                foreach ($finalDue  as $final_pay_due) {
+                                    //$updatedDue = $final_pay_due->due_amount - $result['PayAmount'];
+                                    if ($result['status'] == 200) {
+                                        $updateDetails = [
+                                            'due_amount' => 0
+                                        ];
+                                        $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
+                                            ->update($updateDetails);
+                                    }
+                                    $updateDetails = [
+                                        'payment_state' => $result['status'],
+                                        'trx_id' => $result['TransactionId']
+                                    ];
+                                    $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
+                                        ->update($updateDetails);
+                                }
 
-                                $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
-                                    ->update($updateDetails);
+
                                 if ($up_payapply) {
                                     $data = [
                                         "status" => "200",

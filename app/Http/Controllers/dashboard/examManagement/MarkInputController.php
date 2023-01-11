@@ -141,13 +141,26 @@ class MarkInputController extends Controller
             ->where('academic_year_id', $request->academic_year_id)
             ->orderBy('roll', 'asc')
             ->get();
-        // dd($students);
-        $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)
-            ->where('class_id', $request->class_id)
-            ->where('group_id', $grpId->group_id)
-            ->where('academic_year_id', $academic_year_id)
-            ->where('subjectmap_id', $request->subject_id)
-            ->get();
+        // $std_subject_map = StudentSubjectMap::where('institute_id', Auth::user()->institute_id)
+        //     ->where('class_id', $request->class_id)
+        //     ->where('group_id', $grpId->group_id)
+        //     ->where('academic_year_id', $academic_year_id)
+        //     ->where('subjectmap_id', $request->subject_id)
+        //     ->get();
+        $std_subject_map = DB::table('student_subject_maps as stdmaps')
+                
+                ->where('stdmaps.institute_id', Auth::user()->institute_id)
+                ->where('stdmaps.class_id', $request->class_id)
+                ->where('stdmaps.group_id', $grpId->group_id)
+                ->where('stdmaps.academic_year_id', $academic_year_id)
+                ->where('stdmaps.subjectmap_id', $request->subject_id)
+                // ->join('students as s', 's.institute_id', '=', 'stdmaps.institute_id')
+                ->join('students as s','s.std_id', '=', 'stdmaps.student_id')
+                ->where('s.section_id', $secId->id)
+                ->where('s.group_id', $grpId->group_id)
+                // ->distinct('stdmaps.student_id')
+                ->orderBy('s.roll', 'asc')
+                ->get();
         //dd($std_subject_map);
         return view(
             'layouts.dashboard.exam_management.mark_input.index',

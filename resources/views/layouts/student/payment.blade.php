@@ -8,6 +8,7 @@
     $grand = [];
     $tmp_data = [];
     $tableData = [];
+    $total_paid = 0;
 @endphp
 
 <div class="payment">
@@ -40,17 +41,17 @@
                                     <td>{{ $payapplie->fine }}</td>
                                     <td>{{ $payapplie->waiver_amount }}</td>
 
-
-
                                     @php
                                         
                                         if (!empty($payapplie->paid_amount)) {
                                             $prev_paid = json_decode($payapplie->paid_amount, true);
+                                           
                                             $paid = 0;
                                             foreach ($prev_paid as $qc_pay_info) {
                                                 foreach ($qc_pay_info as $key => $value) {
                                                     if ($key == 'qc_amount') {
                                                         $paid += $value;
+                                                        $total_paid += $value;
                                                     }
                                                 }
                                             }
@@ -101,9 +102,9 @@
                 <input type="hidden" value="{{ $student->std_id }}" name="std_id">
                 <input type="hidden" value="{{ $day }}" name="day">
                 <input type="hidden" value="{{ $year }}" name="year">
-                <input type="hidden" id="grandTotal" name="grandTotal">
+                <input type="hidden" id="grandTotal" name="grandTotal" value="grandTotal">
                 <input type="hidden" value="{{ $tableData }}" name="tableData">
-                <input type="hidden" value="{{ isset($paid) ? $paid : 0 }}" name="paid">
+                <input type="hidden" value="{{ isset($total_paid) ? $total_paid : 0 }}" name="total_paid">
                 <button class="btn mb-2 btn-success float-right">Pay Now</button>
             </form>
 

@@ -86,6 +86,26 @@
                              <p>Promotion</p>
                              <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
+                         <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                 <a href="{{ route('with_merit.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>With Merit Position</p>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('without_merit.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Without Merit Position</p>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('pushback.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Migration Pushback</p>
+                                 </a>
+                             </li>
+                         </ul>
                      </li>
                      <li class="nav-item">
                          <a href="#" class="nav-link active">
@@ -251,6 +271,14 @@
                              <p>Result Process</p>
                              <i class="right fas fa-angle-left" style="font-size:.875em; line-height:1.5em"></i>
                          </a>
+                         <ul class="nav nav-treeview">
+                             <li class="nav-item">
+                                 <a href="{{ route('merit_position.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Merit Position</p>
+                                 </a>
+                             </li>
+                         </ul>
                      </li>
                      <li class="nav-item">
                          <a href="#" class="nav-link active">
@@ -400,6 +428,12 @@
                                  <a href="{{ route('ops.index') }}" class="nav-link active">
                                      <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
                                      <p>OPS Collection</p>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a href="{{ route('hwrc.index') }}" class="nav-link active">
+                                     <i class="far fa-circle nav-icon" style="font-size:.875em"></i>
+                                     <p>Head Wise Collection</p>
                                  </a>
                              </li>
                          </ul>

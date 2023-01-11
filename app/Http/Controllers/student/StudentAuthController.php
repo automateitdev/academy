@@ -63,7 +63,7 @@ class StudentAuthController extends Controller
     public function makepayment(Request $request)
     {
 
-        $grandTotal = $request->grandTotal + $request->paid;
+        $grandTotal = $request->grandTotal + $request->total_paid;
         $std_id = $request->std_id;
         $ins_id = $request->ins_id;
         Session::put('ins_id', $ins_id);
@@ -118,7 +118,7 @@ class StudentAuthController extends Controller
         }
         // dd($total_payable, $grandTotal);
         if ($grandTotal == $total_payable) {
-            $amount = $total_payable;
+            $amount = $total_payable - $request->total_paid;
         } else {
             return redirect(route('student.auth.index'))->with('error', 'Something went wrong. Please, try again');
         }
@@ -242,19 +242,25 @@ class StudentAuthController extends Controller
         $input->scroll_no = $result['ScrollNo'];
         if ($input->save()) {
 
-            $finalDue = Payapply::select('due_amount')->where('invoice', $result['InvoiceNo']);
-            $updatedDue = $finalDue - $result['PayAmount'];
-            $updateDetails = [
-                'payment_state' => $result['status'],
-                'due_amount' => $updatedDue,
-                'trx_id' => $result['TransactionId']
-            ];
-
+            $finalDue = Payapply::select('due_amount')->where('invoice', $result['InvoiceNo'])->get();
+            foreach($finalDue  as $final_pay_due)
+            {
+                //$updatedDue = $final_pay_due->due_amount - $result['PayAmount'];
+                if($result['status'] == 200){
+                    $updateDetails = [
+                        'due_amount' => 0
+                    ];
+                    $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
+                    ->update($updateDetails);
+                }
+                    $updateDetails = [
+                        'payment_state' => $result['status'],
+                        'trx_id' => $result['TransactionId']
+                    ];
+                    $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
+                    ->update($updateDetails);
+            }
             
-
-            
-            $up_payapply = Payapply::where('invoice', $result['InvoiceNo'])
-                ->update($updateDetails);
             
             if($result['status'] == 200){
                 return redirect(route('student.auth.index'))->with('message', 'Your payments successful.');

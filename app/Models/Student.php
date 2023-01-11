@@ -46,6 +46,10 @@ class Student extends Model
     {
         return $this->belongsTo(StartupSubcategory::class);
     }
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class, 'gender_id', 'id');
+    }
     
     
 }

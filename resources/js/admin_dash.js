@@ -273,15 +273,16 @@ $(document).on('click', '#v-pills-payment-tab', function () {
 $(document).ready(function () {
     $(document).on('change', '.waiver_feehead', function () {
         var feehead_id = $(this).val();
-        var a = $(this).parent().parent();
+        var class_id = $("#waiver_std_id").val();
         $.ajax({
             type: 'get',
             url: '/getfeeheadForWaiver',
             data: {
-                'id': feehead_id
+                'id': feehead_id,
+                'class_id': class_id
             },
             success: function (data) {
-
+                console.log(data);
                 // a.find('#waiver_amount').val(data.feeamount);
                 if (isEmpty(data)) {
                     console.log("empty");
@@ -698,3 +699,14 @@ $(document).on('keyup', '.amount_to_pay', function () {
 
 })
 // quick collection
+
+//promotion
+
+$(document).ready(function() {
+    $('#checkall').click(function() {
+      var checked = $(this).prop('checked');
+      $('#checkboxes').find('input:checkbox').prop('checked', checked);
+    });
+  })
+
+//promotion

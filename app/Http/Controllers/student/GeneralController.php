@@ -125,7 +125,7 @@ class GeneralController extends Controller
                 ->where('payapplies.invoice', $request->payapplies_invoice)
                 ->get(['payapplies.*', 'fee_heads.head_name', 'feesubheads.subhead_name']);
 
-            $institute_name = User::select('institute_name')->where('institute_id',  Auth::user()->institute_id)->first();
+            $institute_name = User::select('institute_name')->where('institute_id',  $institute_id->institute_id)->first();
 
             $institute_add = User::select('address')->where('institute_id', $institute_id->institute_id)->first();
             $institute_logo = Basic::select('logo')->where('institute_id', $institute_id->institute_id)->first();

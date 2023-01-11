@@ -28,7 +28,7 @@ class OpsController extends Controller
         $startupsubcategories = StartupSubcategory::all();
         $sectionassigns = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
         $students = Student::where('institute_id', Auth::user()->institute_id)->get();
-        return view('layouts/dashboard/fee_management/report/ops', 
+        return view('layouts/dashboard/fee_management/report/ops/ops', 
             compact('users','students','sectionassigns', 'startups', 'startupsubcategories'));
     }
 
@@ -48,7 +48,7 @@ class OpsController extends Controller
         $payapplies = Payapply::where('updated_at', '>=', $from)
                     ->where('updated_at', '<=', $to)
                     ->get();
-        return view('layouts/dashboard/fee_management/report/ops', compact('users', 'payapplies','students','sectionassigns', 'startups', 'startupsubcategories'));
+        return view('layouts/dashboard/fee_management/report/ops/ops', compact('users', 'payapplies','students','sectionassigns', 'startups', 'startupsubcategories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -137,7 +137,7 @@ class OpsController extends Controller
             $data[$key]['amountInWords'] = $amountInWords;
         }
         $data = json_encode($data);
-        return view('layouts/dashboard/fee_management/report/opsview',compact('users', 'data'));
+        return view('layouts/dashboard/fee_management/report/ops/opsview',compact('users', 'data'));
     }
 
     /**

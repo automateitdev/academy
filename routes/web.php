@@ -43,11 +43,14 @@ use App\Http\Controllers\dashboard\examManagement\MarkConfigController;
 use App\Http\Controllers\dashboard\examManagement\MarkInputController;
 use App\Http\Controllers\dashboard\examManagement\MarkSheetController;
 use App\Http\Controllers\dashboard\examManagement\MarkUpdateController;
+use App\Http\Controllers\dashboard\examManagement\PositionController;
 use App\Http\Controllers\dashboard\examManagement\TabulationController;
+use App\Http\Controllers\dashboard\fee_management\HeadWiseReportController;
 use App\Http\Controllers\dashboard\fee_management\RemoveController;
 use App\Http\Controllers\dashboard\fee_management\OpsController;
 use App\Http\Controllers\dashboard\frontend\AboutInstituteController;
 use App\Http\Controllers\dashboard\master\SubjectController;
+use App\Http\Controllers\dashboard\stdManagement\PromotionController;
 use App\Http\Controllers\student\GeneralController;
 
 Route::get('/', [MainController::class, 'index'])->name('landingpage');
@@ -214,13 +217,27 @@ Route::middleware(['auth'])->group(function () {
 
     //master setting end
 
-    //student management
+    ///////////////////////Student Management Start ///////////////
+
+    //enrollment
     Route::get('/StudentManagement/enrollment/auto_id', [RegistrationController::class, 'index'])->name('enrollment.auto.index');
     Route::post('/StudentManagement/enrollment/auto_id/store', [RegistrationController::class, 'store'])->name('enrollment.auto.store');
     Route::get('/StudentManagement/enrollment/excel', [RegistrationController::class, 'excel_index'])->name('enrollment.excel.index');
     Route::post('/StudentManagement/enrollment/excel/store', [RegistrationController::class, 'excel_store'])->name('enrollment.excel.store');
     Route::get('/download/excel', [RegistrationController::class, 'download'])->name('excel.download');
     Route::get('/getgroupforenrollement', [RegistrationController::class, 'getgroupforenrollement']);
+
+    //promotion
+    Route::get('/StudentManagement/promotion/with_merit', [PromotionController::class, 'with_merit_index'])->name('with_merit.index');
+
+    Route::get('/StudentManagement/promotion/without_merit', [PromotionController::class, 'without_merit_index'])->name('without_merit.index');
+    Route::get('/StudentManagement/promotion/without_merit_query', [PromotionController::class, 'without_merit_search'])->name('without_merit.search');
+    Route::post('/StudentManagement/promotion/without_merit/post', [PromotionController::class, 'without_merit_post'])->name('without_merit.post');
+
+    Route::get('/StudentManagement/promotion/pushback', [PromotionController::class, 'pushback_index'])->name('pushback.index');
+
+    //////////////////////Student Management End //////////////
+
     ///////////////////// Fees Management Start ///////////
 
     Route::get('/FeesManagement/startup/index', [FeeStartupController::class, 'index'])->name('fee.startup.index');
@@ -301,6 +318,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/FeesManagement/report/ops-collection', [OpsController::class, 'index'])->name('ops.index');
     Route::post('/FeesManagement/report/ops-collection/query', [OpsController::class, 'search'])->name('ops.search');
     Route::get('/FeesManagement/report/ops-collection/{invoice}', [OpsController::class, 'show'])->name('ops.show');
+
+    Route::get('/FeesManagement/report/head-wise-collection', [HeadWiseReportController::class, 'index'])->name('hwrc.index');
+    Route::get('/FeesManagement/report/head-wise-collection/query', [HeadWiseReportController::class, 'search'])->name('hwrc.search');
+
     ////////////////////// Fees Management End ////////////
 
 
@@ -336,6 +357,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/exam-management/Mark_sheet', [MarkSheetController::class, 'index'])->name('marksheet');
     Route::get('/marksheet_query', [MarkSheetController::class, 'marksQuery'])->name('marksheet.query');
     Route::get('/marksheet_sheet_generate', [MarkSheetController::class, 'processmarksheet'])->name('marksheet.process');
+    //marit position
+    Route::get('/exam-management/result_process/merit_position', [PositionController::class, 'index'])->name('merit_position.index');
 
 
     /////////////////////// Exam Management End//////////////////

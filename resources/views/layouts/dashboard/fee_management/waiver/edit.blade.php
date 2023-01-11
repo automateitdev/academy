@@ -44,7 +44,8 @@
                     <div class="lkoi">
                         <div class="row">
                             <div class="col-md-5">
-                                <input type="text" class="insId" name="student_id" value="{{$students->std_id}}">
+                                <input type="hidden" name="student_id" value="{{$students->std_id}}">
+                                <input type="hidden" name="" id="waiver_std_id" value="{{$students->section_id}}">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Fee Head</label>
                                     <select class="form-control single waiver_feehead" name="feehead_id">

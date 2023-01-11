@@ -28,9 +28,9 @@ class WaiverController extends Controller
     public function index()
     {
         $users = User::all();
-        $startups = Startup::all();
-        $sectionAssignes = SectionAssign::all();
-        $groupassigns = GroupAssign::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        $groupassigns = GroupAssign::where('institute_id', Auth::user()->institute_id)->get();
         return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns'));
     }
 
@@ -48,9 +48,9 @@ class WaiverController extends Controller
             'stdcategory_id' => 'required',
         ]);
         $users = User::all();
-        $startups = Startup::all();
-        $sectionAssignes = SectionAssign::all();
-        $groupassigns = GroupAssign::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
+        $groupassigns = GroupAssign::where('institute_id', Auth::user()->institute_id)->get();
         $students = Student::where('section_id','LIKE','%'.$request->section_id.'%')
                     ->where('group_id','LIKE','%'.$request->group_id.'%')
                     ->where('academic_year_id','LIKE','%'.$request->academic_year_id.'%')
@@ -132,15 +132,21 @@ class WaiverController extends Controller
     {
         $students = Student::find($id);
         $users = User::all();
-        $startups = Startup::all();
-        $feeheads = FeeHead::all();
-        $waivers = Waiver::all();
+        $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
+        $feeheads = FeeHead::where('institute_id', Auth::user()->institute_id)->get();
+        $waivers = Waiver::where('institute_id', Auth::user()->institute_id)->get();
         return view('layouts.dashboard.fee_management.waiver.edit', compact('students', 'startups', 'users', 'feeheads', 'waivers'));
     }
 
     public function getfeeheadForWaiver(Request $request)
     {
-        $data = Feeamount::distinct()->select('feeamount')->where('feehead_id', $request->id)->get();
+        $class_id = SectionAssign::select("class_id")->where('id', $request->class_id)->first();
+        
+        $data = Feeamount::distinct()->select('feeamount')
+                        ->where('feehead_id', $request->id)
+                        ->where('class_id', $class_id->class_id)
+                        ->get();
+        // return $data;
         $alldata = $data->values();
         return response()->json($alldata);
     }
