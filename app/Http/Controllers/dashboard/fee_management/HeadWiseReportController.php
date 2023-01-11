@@ -36,7 +36,7 @@ class HeadWiseReportController extends Controller
         $to = $request->to;
         $startDate = Carbon::createFromFormat('Y-m-d', $request->from);
         $endDate = Carbon::createFromFormat('Y-m-d', $request->to);
-
+        
         if($request->class == 'cls')
         {
             $payapplies = Payapply::where('institute_id', Auth::user()->institute_id)
@@ -45,9 +45,10 @@ class HeadWiseReportController extends Controller
                             // ->where('updated_at', '>=', $startDate)
                             // ->where('updated_at', '<=', $endDate)
                             ->get();
-            $qc_data = [];
             foreach($payapplies as $payapplie)
             {
+                $qc_data = [];
+                $data = "";
                 $total_amount = 0;
 
                 if($payapplie->payment_state == 200 || $payapplie->payment_state == 10)
@@ -59,6 +60,7 @@ class HeadWiseReportController extends Controller
                                 ->groupBy(['class_id', 'feehead_id'])
                                 ->get();
                 }
+                
                 elseif($payapplie->payment_state == 11)
                 {
                     

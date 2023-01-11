@@ -707,6 +707,11 @@ $(document).ready(function() {
       var checked = $(this).prop('checked');
       $('#checkboxes').find('input:checkbox').prop('checked', checked);
     });
-  })
+})
 
+$(document).ready(function() {
+    $('.each_check').on('change', function(){
+        
+    });
+});
 //promotion

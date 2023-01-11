@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="mb-25">
-                    <a href="{{asset('hwrc.index')}}">Head Wise Collection</a>
+                    <a href="{{route('hwrc.index')}}">Head Wise Collection</a>
                     <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#basicsModal">+ Add Information</button> -->
                 </h2>
             </div>
@@ -66,9 +66,7 @@
                         </div>
                         <div class="col-md-3"></div>
                     </div>
-                    @php 
-                        dd($qc_data);
-                    @endphp
+                 
                 </div>
                 <div class="tab-pane fade" id="nav-monthwise" role="tabpanel" aria-labelledby="nav-monthwise-tab">...</div>
                 <div class="tab-pane fade" id="nav-yearwise" role="tabpanel" aria-labelledby="nav-yearwise-tab">...</div>

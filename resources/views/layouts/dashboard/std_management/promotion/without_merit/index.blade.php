@@ -95,7 +95,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                     <form action="{{route('without_merit.post')}}" method="POST">
-                        @csrf
+                                        @csrf
                                         <label for="academic_year_id" class="form-label">Academic Year</label>
                                         <select class="form-control single" name="academic_year_id">
                                             <option value=" ">Choose One</option>
@@ -194,20 +194,22 @@
                     <tbody id="checkboxes">
                         @foreach($students as $student)
                         <tr>
-                            <td><input type="checkbox" value="{{$student->std_id}}" name="std_details[]"></td>
+                            <td><input type="checkbox" id="{{$student->std_id}}" class="each_check" value="{{$student->std_id}}" name="std_details[]"></td>
                             <td>{{$student->std_id}}</td>
                             <td>{{$student->name}}</td>
                             <td>{{$student->gender->g_name}}</td>
                             <td>{{$student->groupstartups->startupsubcategory->startup_subcategory_name}}</td>
                             <td>{{$student->roll}}</td>
                             <td>
-                                <input type="text" class="form-control" onkeypress="return /[0-9]/i.test(event.key)" name="roll[]">
-                                <input type="hidden" name="std_category_id[]" value="{{$student->std_category_id}}">
-                                <input type="hidden" name="f_name[]" value="{{$student->father_name}}">
-                                <input type="hidden" name="m_name[]" value="{{$student->mother_name}}">
-                                <input type="hidden" name="religion_id[]" value="{{$student->religion_id}}">
-                                <input type="hidden" name="gender_id[]" value="{{$student->gender_id}}">
-                                <input type="hidden" name="mobile_no[]" value="{{$student->mobile_no}}">
+                                <input type="text" class="form-control promo_input" onkeypress="return /[0-9]/i.test(event.key)" name="roll[{{$student->std_id}}]">
+                                <input type="hidden" class="form-control promo_input" name="std_category_id[{{$student->std_id}}]" value="{{$student->std_category_id}}">
+                                <input type="hidden" class="form-control promo_input" name="father_name[{{$student->std_id}}]" value="{{$student->father_name}}">
+                                <input type="hidden" class="form-control promo_input" name="mother_name[{{$student->std_id}}]" value="{{$student->mother_name}}">
+                                <input type="hidden" class="form-control promo_input" name="religion_id[{{$student->std_id}}]" value="{{$student->religion_id}}">
+                                <input type="hidden" class="form-control promo_input" name="gender_id[{{$student->std_id}}]" value="{{$student->gender_id}}">
+                                <input type="hidden" class="form-control promo_input" name="mobile_no[{{$student->std_id}}]" value="{{$student->mobile_no}}">
+                                <input type="hidden" class="form-control promo_input" name="std_id[{{$student->std_id}}]" value="{{$student->std_id}}">
+                                <input type="hidden" class="form-control promo_input" name="name[{{$student->std_id}}]" value="{{$student->name}}">
                             </td>
                         </tr>
                         @endforeach

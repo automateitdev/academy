@@ -15,21 +15,20 @@ use App\Models\GroupAssign;
 trait StudentTraits
 {
 
-    public function assign_fee($student_id, $institute_id)
+    public function assign_fee($student_id, $institute_id ,$academic_year_id)
     {
         
-        $students = Student::where('std_id', $student_id)->where('institute_id', $institute_id)->first();
+        $students = Student::where('std_id', $student_id)->where('institute_id', $institute_id)
+                            ->where('academic_year_id', $academic_year_id)->first();
         
         $datesetups = Datesetup::where('institute_id', $institute_id)->get();
         $section_assigns = SectionAssign::where('institute_id', $institute_id)->get();
         $feeamounts = Feeamount::where('institute_id', $institute_id)->get();
 
         if ($students->std_id == $student_id && $students->institute_id == $institute_id) {
-
             foreach ($section_assigns as $section_assign) {
 
                 if ($students->section_id == $section_assign->id) {
-                    
                     foreach ($feeamounts as $feeamount) {
 
                         if (
@@ -37,14 +36,12 @@ trait StudentTraits
                             && $students->std_category_id == $feeamount->stdcategory_id
                             && $students->group_id == $feeamount->group_id
                         ) {
-
+                           
                             foreach ($datesetups as $datesetup) {
 
                                 if ($datesetup->class_id == $feeamount->class_id) {
-
-                                    if (
-                                        $students->academic_year_id == $datesetup->academic_year_id
-                                    ) {
+                                    if ($students->academic_year_id == $datesetup->academic_year_id) 
+                                    {
                                         if ($datesetup->feehead_id == $feeamount->feehead_id) {
 
                                             $today = \Carbon\Carbon::now();
@@ -61,7 +58,7 @@ trait StudentTraits
                                                 ['student_id', $student_id],
                                                 ['institute_id', $institute_id]
                                             ])->first();
-                                            // dd($waiver);
+                                            //  dd($waiver);
                                             if (empty($waiver)) {
                                                 $waiver_amount = 0;
                                                 $waiver_category = null;
@@ -69,9 +66,12 @@ trait StudentTraits
                                                 $waiver_amount = $waiver->amount;
                                                 $waiver_category = $waiver->waiver_category_id;
                                             }
+
                                             $total_amount = ($feeamount->feeamount + $fine) - $waiver_amount;
+                                            
                                             $payapply = Payapply::updateOrCreate(
-                                                ['class_id' => $datesetup->class_id, 'student_id' => $student_id, 'feehead_id' => $feeamount->feehead_id, 'feesubhead_id' => $datesetup->feesubhead_id],
+                                                ['class_id' => $students->section_id, 'student_id' => $student_id, 'feehead_id' => $feeamount->feehead_id,
+                                                 'feesubhead_id' => $datesetup->feesubhead_id, 'academic_year_id' => $students->academic_year_id],
                                                 [
                                                     'institute_id' => $institute_id,
                                                     'fine' => $fine,
@@ -80,10 +80,10 @@ trait StudentTraits
                                                     'waiver_id' => $waiver_category,
                                                     'waiver_amount' => $waiver_amount,
                                                     'payable' => $feeamount->feeamount,
-                                                    'total_amount' => $total_amount,
-                                                    'academic_year_id' => $students->academic_year_id
+                                                    'total_amount' => $total_amount
                                                 ]
                                             );
+                                            // dd($payapply);
                                         }
                                     }
                                 }

@@ -122,7 +122,7 @@ class RegistrationController extends Controller
                 $input->mobile_no = $request->mobile_no[$key];
 
                 if ($input->save()) {
-                    $this->assign_fee($request->std_id[$key], $request->institute_id);
+                    $this->assign_fee($request->std_id[$key], $request->institute_id, $request->academic_year_id);
                     $this->assign_subject($request->institute_id, $request->std_id[$key], $request->section_id, $request->group_id, $request->academic_year_id);
                 }
                 else{
@@ -166,7 +166,7 @@ class RegistrationController extends Controller
                     if ($key == 0) {
                         continue;
                     };
-                    $this->assign_fee($student[0], $request->institute_id);
+                    $this->assign_fee($student[0], $request->institute_id,$request->academic_year_id);
                     $this->assign_subject($request->institute_id, $student[0], $request->section_id, $request->group_id, $request->academic_year_id);
                 }
             }
