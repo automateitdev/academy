@@ -20,7 +20,10 @@ trait StudentTraits
         
         $students = Student::where('std_id', $student_id)->where('institute_id', $institute_id)
                             ->where('academic_year_id', $academic_year_id)->first();
-        
+        // $std_class_id = SectionAssign::select('class_id')
+        //                             ->where('institute_id', $institute_id)
+        //                             ->where('id', $students->section_id)
+        //                             ->first();
         $datesetups = Datesetup::where('institute_id', $institute_id)->get();
         $section_assigns = SectionAssign::where('institute_id', $institute_id)->get();
         $feeamounts = Feeamount::where('institute_id', $institute_id)->get();
@@ -70,7 +73,7 @@ trait StudentTraits
                                             $total_amount = ($feeamount->feeamount + $fine) - $waiver_amount;
                                             
                                             $payapply = Payapply::updateOrCreate(
-                                                ['class_id' => $students->section_id, 'student_id' => $student_id, 'feehead_id' => $feeamount->feehead_id,
+                                                ['class_id' => $datesetup->class_id, 'student_id' => $student_id, 'feehead_id' => $feeamount->feehead_id,
                                                  'feesubhead_id' => $datesetup->feesubhead_id, 'academic_year_id' => $students->academic_year_id],
                                                 [
                                                     'institute_id' => $institute_id,
@@ -83,7 +86,6 @@ trait StudentTraits
                                                     'total_amount' => $total_amount
                                                 ]
                                             );
-                                            // dd($payapply);
                                         }
                                     }
                                 }

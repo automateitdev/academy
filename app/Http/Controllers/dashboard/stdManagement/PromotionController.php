@@ -65,7 +65,7 @@ class PromotionController extends Controller
             'mother_name' => 'required',
             'mobile_no' => 'required',
         ]);
-
+        
         try {
             foreach ($request->std_details as $key => $std_id) {
                     

@@ -94,7 +94,7 @@ class DateSetupController extends Controller
                         $students = Student::where('section_id', $section->id)->get();
                         foreach($students as $student)
                         {
-                            $this->assign_fee($student->std_id, $student->institute_id);
+                            $this->assign_fee($student->std_id, $student->institute_id,$request->academic_year_id);
                         }
                     }
                 }

@@ -16,6 +16,7 @@ use App\Models\Waivermapping;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Traits\StudentTraits;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 
 class WaiverController extends Controller
 {
@@ -47,6 +48,9 @@ class WaiverController extends Controller
             'academic_year_id' => 'required',
             'stdcategory_id' => 'required',
         ]);
+        $academic_year_id = $request->academic_year_id;
+        Session::put('academic_year_id', $academic_year_id);
+
         $users = User::all();
         $startups = Startup::where('institute_id', Auth::user()->institute_id)->get();
         $sectionAssignes = SectionAssign::where('institute_id', Auth::user()->institute_id)->get();
@@ -56,7 +60,7 @@ class WaiverController extends Controller
                     ->where('academic_year_id','LIKE','%'.$request->academic_year_id.'%')
                     ->where('std_category_id','LIKE','%'.$request->stdcategory_id.'%')
                     ->paginate(100);
-        return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns','students'));
+        return view('layouts.dashboard.fee_management.waiver.index', compact('users', 'startups', 'sectionAssignes', 'groupassigns','students','academic_year_id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -83,7 +87,7 @@ class WaiverController extends Controller
             'waiver_category_id' => 'required',
             'amount' => 'required',
         ]);
-
+        $academic_year_id = Session::get('academic_year_id');
         try{
             $input = Waivermapping::updateOrCreate(
                 ['student_id' => $request->student_id, 'feehead_id' => $request->feehead_id, 'waiver_category_id' => $request->waiver_category_id ],
@@ -97,7 +101,7 @@ class WaiverController extends Controller
             );
                 if($input->save())
                 {
-                    $this->assign_fee($request->student_id,Auth::user()->institute_id);
+                    $this->assign_fee($request->student_id,Auth::user()->institute_id, $academic_year_id);
                 }
                 return redirect(route('waiver.index'))->with('message', 'Data Upload Successfully');
           }
