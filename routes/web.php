@@ -315,8 +315,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/FeesManagement/feecollection/quickcollection/process', [FeeCollectionController::class, 'quickprocess'])->name('quickcollection.process');
     Route::get('/getStudentdata', [FeeCollectionController::class, 'getStudentdata']);
     //report
+    Route::get('/FeesManagement/report/ops_collection_query/query', [OpsController::class, 'search'])->name('ops.search');
     Route::get('/FeesManagement/report/ops-collection', [OpsController::class, 'index'])->name('ops.index');
-    Route::post('/FeesManagement/report/ops-collection/query', [OpsController::class, 'search'])->name('ops.search');
     Route::get('/FeesManagement/report/ops-collection/{invoice}', [OpsController::class, 'show'])->name('ops.show');
 
     Route::get('/FeesManagement/report/head-wise-collection', [HeadWiseReportController::class, 'index'])->name('hwrc.index');

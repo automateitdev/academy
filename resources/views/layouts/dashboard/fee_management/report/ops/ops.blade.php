@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="mb-25">
-                    <a href="#">OPS Collection</a>
+                    <a href="{{route('ops.index')}}">OPS Collection</a>
                     <!-- <button type="button" class="btn btn-default btn-rounded print pull-right" data-bs-toggle="modal" data-bs-target="#basicsModal">+ Add Information</button> -->
                 </h2>
             </div>
@@ -16,7 +16,7 @@
             <div class="col-md-7 offset-md-2">
                 <div class="rkj">
                     <p>Search OPS Report</p>
-                    <form action="{{route('ops.search')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('ops.search')}}" method="get" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -53,7 +53,6 @@
                         </thead>
                         <tbody>
                             @foreach($payapplies->unique('invoice') as $payapplie)
-                            @if($payapplie->institute_id == Auth::user()->institute_id)
                             @if($payapplie->payment_state == 200)
                             <tr>
                                 <td>{{$payapplie->student_id}}</td>
@@ -92,11 +91,11 @@
                                 </td>
                             </tr>
                             @endif
-                            @endif
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                {{$payapplies->withQueryString()->links('pagination::bootstrap-4')}}
                 @else
                 <p id="des">No data is available! Please fillup all the required fields above and Click on "Search" button.</p>
                 @endif
